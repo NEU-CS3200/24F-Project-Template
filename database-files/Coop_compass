@@ -1,0 +1,216 @@
+CREATE DATABASE IF NOT EXISTS Coop_Compass;
+USE Coop_Compass;
+
+DROP TABLE IF EXISTS ReviewResource;
+DROP TABLE IF EXISTS Resource;
+DROP TABLE IF EXISTS FlaggedReview;
+DROP TABLE IF EXISTS Review;
+DROP TABLE IF EXISTS SentJobListing;
+DROP TABLE IF EXISTS FavoriteJobListings;
+DROP TABLE IF EXISTS JobListing;
+DROP TABLE IF EXISTS Company;
+DROP TABLE IF EXISTS Recruiter;
+DROP TABLE IF EXISTS Admin;
+DROP TABLE IF EXISTS Student;
+DROP TABLE IF EXISTS Advisor;
+
+CREATE TABLE IF NOT EXISTS Admin
+(
+    adminId     VARCHAR(255) PRIMARY KEY,
+    Name        VARCHAR(255) NOT NULL,
+    Email       VARCHAR(255) NOT NULL,
+    PhoneNumber BIGINT
+);
+
+
+CREATE TABLE IF NOT EXISTS Advisor
+(
+    advisorId   VARCHAR(255) PRIMARY KEY,
+    Name        VARCHAR(255) NOT NULL,
+    Email       VARCHAR(255) NOT NULL,
+    PhoneNumber BIGINT
+);
+
+
+CREATE TABLE IF NOT EXISTS Student
+(
+    studentId   VARCHAR(255) PRIMARY KEY,
+    advisorId   VARCHAR(255) REFERENCES Advisor (advisorId),
+    Name        VARCHAR(255) NOT NULL,
+    Email       VARCHAR(255) NOT NULL,
+    PhoneNumber BIGINT
+);
+
+
+CREATE TABLE IF NOT EXISTS Recruiter
+(
+    recruiterId VARCHAR(255) PRIMARY KEY,
+    Name        VARCHAR(255) NOT NULL,
+    Email       VARCHAR(255) NOT NULL,
+    PhoneNumber BIGINT
+);
+
+
+CREATE TABLE IF NOT EXISTS Company
+(
+    companyId      VARCHAR(255) PRIMARY KEY,
+    adminCreatedId VARCHAR(255) NOT NULL REFERENCES Admin (adminId),
+    Name           VARCHAR(255) NOT NULL,
+    Headline       VARCHAR(255),
+    Description    TEXT,
+    websiteLink    VARCHAR(255)
+);
+
+
+CREATE TABLE IF NOT EXISTS Resource
+(
+    resourceId VARCHAR(255) PRIMARY KEY,
+    studentId  VARCHAR(255) NOT NULL REFERENCES Student (studentId),
+    Name       VARCHAR(255) NOT NULL,
+    URL        VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS JobListing
+(
+    jobListingId VARCHAR(255) PRIMARY KEY,
+    recruiterId  VARCHAR(255) NOT NULL REFERENCES Recruiter (recruiterId),
+    companyId    VARCHAR(255) NOT NULL REFERENCES Company (companyId),
+    JobTitle     VARCHAR(255) NOT NULL,
+    Description  TEXT,
+    StartDate    DATE,
+    EndDate      DATE,
+    hourlyWage   INT,
+    Skills       TEXT,
+    Location     VARCHAR(255),
+    deleted      BOOLEAN DEFAULT false,
+    datePosted   TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS Review
+(
+    reviewId        VARCHAR(255) PRIMARY KEY,
+    jobListingId    VARCHAR(255) NOT NULL REFERENCES JobListing (jobListingId),
+    studentId       VARCHAR(255) NOT NULL REFERENCES Student (studentId),
+    Anonymous       BOOLEAN DEFAULT true,
+    Description     TEXT,
+    JobSatisfaction INT CHECK (JobSatisfaction BETWEEN 1 AND 5),
+    hourlyWage      INT,
+    deleted         BOOLEAN DEFAULT false,
+    datePosted      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS ReviewResource
+(
+    resourceId VARCHAR(255) NOT NULL REFERENCES Resource (resourceId),
+    reviewId   VARCHAR(255) NOT NULL REFERENCES Review (reviewId),
+    PRIMARY KEY (resourceId, reviewId)
+);
+
+
+CREATE TABLE IF NOT EXISTS FavoriteJobListings
+(
+    studentId    VARCHAR(255) NOT NULL REFERENCES Student (studentId),
+    jobListingId VARCHAR(255) NOT NULL REFERENCES JobListing (jobListingId),
+    PRIMARY KEY (studentId, jobListingId)
+);
+
+
+CREATE TABLE IF NOT EXISTS FlaggedReview
+(
+    flaggedReviewId VARCHAR(255) PRIMARY KEY,
+    reviewId        VARCHAR(255) NOT NULL REFERENCES Review (reviewId),
+    flaggedById     VARCHAR(255) NOT NULL REFERENCES Recruiter (recruiterId),
+    Reason          TEXT         NOT NULL,
+    DateFlagged     TIMESTAMP    NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS SentJobListing
+(
+    jobListingId     VARCHAR(255) NOT NULL REFERENCES JobListing (jobListingId),
+    studentId        VARCHAR(255) NOT NULL REFERENCES Student (studentId),
+    advisorCreatedId VARCHAR(255) NOT NULL REFERENCES Advisor (advisorId),
+    PRIMARY KEY (jobListingId, studentId, advisorCreatedId)
+);
+
+
+
+INSERT IGNORE INTO Admin (adminId, Name, Email, PhoneNumber)
+VALUES ('A1', 'John Doe', 'john.doe@example.com', 1234567890),
+       ('A2', 'Jane Smith', 'jane.smith@example.com', 2345678901),
+       ('A3', 'Alice Johnson', 'alice.johnson@example.com', 3456789012);
+
+
+INSERT IGNORE INTO Company (companyId, adminCreatedId, Name, Headline, Description, websiteLink)
+VALUES ('C1', 'A1', 'Tech Solutions', 'Innovative Tech', 'A leading tech company.', 'http://techsolutions.com'),
+       ('C2', 'A2', 'Health Corp', 'Healthcare for All', 'Healthcare provider.', 'http://healthcorp.com'),
+       ('C3', 'A3', 'Finance Group', 'Finance Experts', 'Financial services provider.', 'http://financegroup.com');
+
+
+INSERT IGNORE INTO Advisor (advisorId, Name, Email, PhoneNumber)
+VALUES ('Adv1', 'Charlie Brown', 'charlie.brown@example.com', 4567890123),
+       ('Adv2', 'Lucy Van Pelt', 'lucy.van@example.com', 5678901234),
+       ('Adv3', 'Linus Van Pelt', 'linus.van@example.com', 6789012345);
+
+
+INSERT IGNORE INTO Student (studentId, advisorId, Name, Email, PhoneNumber)
+VALUES ('S1', 'Adv1', 'Mike Ross', 'mike.ross@example.com', 7890123456),
+       ('S2', 'Adv2', 'Rachel Zane', 'rachel.zane@example.com', 8901234567),
+       ('S3', 'Adv3', 'Harvey Specter', 'harvey.specter@example.com', 9012345678);
+
+
+INSERT IGNORE INTO Resource (resourceId, studentId, Name, URL)
+VALUES ('R1', 'S1', 'Python Tutorial', 'http://pythontutorial.com'),
+       ('R2', 'S2', 'Data Analysis Guide', 'http://dataanalysis.com'),
+       ('R3', 'S3', 'Machine Learning Course', 'http://mlcourse.com');
+
+
+INSERT IGNORE INTO Recruiter (recruiterId, Name, Email, PhoneNumber)
+VALUES ('Rcrt1', 'Walter White', 'walter.white@example.com', 2345678901),
+       ('Rcrt2', 'Saul Goodman', 'saul.goodman@example.com', 3456789012),
+       ('Rcrt3', 'Gus Fring', 'gus.fring@example.com', 4567890123);
+
+
+INSERT IGNORE INTO JobListing (jobListingId, recruiterId, companyId, JobTitle, Description, StartDate, EndDate, hourlyWage,
+                        Skills, Location, deleted, datePosted)
+VALUES ('J1', 'Rcrt1', 'C1', 'Software Engineer', 'Develop software solutions.', '2024-01-15', '2024-07-15', 30,
+        'Python, SQL', 'Boston', false, '2024-01-01'),
+       ('J2', 'Rcrt2', 'C2', 'Data Analyst', 'Analyze data trends.', '2024-03-01', '2024-08-01', 25, 'R, Excel',
+        'New York', false, '2024-02-01'),
+       ('J3', 'Rcrt3', 'C3', 'Financial Advisor', 'Provide financial guidance.', '2024-04-01', '2024-10-01', 40,
+        'Finance, Communication', 'Chicago', false, '2024-03-01');
+
+
+INSERT IGNORE INTO Review (reviewId, jobListingId, studentId, Anonymous, Description, JobSatisfaction, hourlyWage, deleted,
+                    datePosted)
+VALUES ('Rev1', 'J1', 'S1', true, 'Great experience.', 5, 30, false, '2024-05-01'),
+       ('Rev2', 'J2', 'S2', false, 'Learned a lot.', 4, 25, false, '2024-06-01'),
+       ('Rev3', 'J3', 'S3', true, 'Good pay, challenging work.', 3, 40, false, '2024-07-01');
+
+
+INSERT IGNORE INTO ReviewResource (resourceId, reviewId)
+VALUES ('R1', 'Rev1'),
+       ('R2', 'Rev2'),
+       ('R3', 'Rev3');
+
+
+INSERT IGNORE INTO FavoriteJobListings (studentId, jobListingId)
+VALUES ('S1', 'J1'),
+       ('S2', 'J2'),
+       ('S3', 'J3');
+
+
+INSERT IGNORE INTO FlaggedReview (flaggedReviewId, reviewId, flaggedById, Reason, DateFlagged)
+VALUES ('FR1', 'Rev1', 'Rcrt1', 'Inappropriate language', '2024-05-15'),
+       ('FR2', 'Rev2', 'Rcrt2', 'Misleading content', '2024-06-15'),
+       ('FR3', 'Rev3', 'Rcrt3', 'False information', '2024-07-15');
+
+
+INSERT IGNORE INTO SentJobListing (jobListingId, studentId, advisorCreatedId)
+VALUES ('J1', 'S1', 'Adv1'),
+       ('J2', 'S2', 'Adv2'),
+       ('J3', 'S3', 'Adv3');
+
