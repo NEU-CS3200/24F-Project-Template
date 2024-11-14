@@ -2,6 +2,19 @@ DROP DATABASE IF EXISTS `coop_compass`;
 CREATE DATABASE IF NOT EXISTS `coop_compass`;
 USE `coop_compass`;
 
+DROP TABLE IF EXISTS `reviewResource`;
+DROP TABLE IF EXISTS `resource`;
+DROP TABLE IF EXISTS `flaggedReview`;
+DROP TABLE IF EXISTS `review`;
+DROP TABLE IF EXISTS `sentJobListing`;
+DROP TABLE IF EXISTS `favoriteJobListings`;
+DROP TABLE IF EXISTS `jobListing`;
+DROP TABLE IF EXISTS `company`;
+DROP TABLE IF EXISTS `recruiter`;
+DROP TABLE IF EXISTS `admin`;
+DROP TABLE IF EXISTS `student`;
+DROP TABLE IF EXISTS `advisor`;
+
 CREATE TABLE IF NOT EXISTS `admin`
 (
     `adminId`     VARCHAR(255) PRIMARY KEY,
