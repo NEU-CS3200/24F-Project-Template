@@ -111,11 +111,11 @@ CREATE TABLE IF NOT EXISTS `favoriteJobListings`
 
 CREATE TABLE IF NOT EXISTS `flaggedReview`
 (
-    `flaggedReviewId` VARCHAR(255) PRIMARY KEY,
     `reviewId`        VARCHAR(255) NOT NULL REFERENCES `review` (`reviewId`),
     `flaggedById`     VARCHAR(255) NOT NULL REFERENCES `recruiter` (`recruiterId`),
     `reason`          TEXT         NOT NULL,
-    `dateFlagged`     TIMESTAMP    NOT NULL
+    `dateFlagged`     TIMESTAMP    NOT NULL,
+    PRIMARY KEY (`reviewId`, `flaggedById`)
 );
 
 CREATE TABLE IF NOT EXISTS `sentJobListing`
@@ -182,10 +182,10 @@ VALUES ('S1', 'J1'),
        ('S2', 'J2'),
        ('S3', 'J3');
 
-INSERT IGNORE INTO `flaggedReview` (`flaggedReviewId`, `reviewId`, `flaggedById`, `reason`, `dateFlagged`)
-VALUES ('FR1', 'Rev1', 'Rcrt1', 'Inappropriate language', '2024-05-15'),
-       ('FR2', 'Rev2', 'Rcrt2', 'Misleading content', '2024-06-15'),
-       ('FR3', 'Rev3', 'Rcrt3', 'False information', '2024-07-15');
+INSERT IGNORE INTO `flaggedReview` (`reviewId`, `flaggedById`, `reason`, `dateFlagged`)
+VALUES ('Rev1', 'Rcrt1', 'Inappropriate language', '2024-05-15'),
+       ('Rev2', 'Rcrt2', 'Misleading content', '2024-06-15'),
+       ('Rev3', 'Rcrt3', 'False information', '2024-07-15');
 
 INSERT IGNORE INTO `sentJobListing` (`jobListingId`, `studentId`, `advisorCreatedId`)
 VALUES ('J1', 'S1', 'Adv1'),
