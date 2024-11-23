@@ -21,12 +21,8 @@ products = Blueprint('products', __name__)
 @products.route('/products', methods=['GET'])
 def get_products():
     query = '''
-        SELECT  id, 
-                product_code, 
-                product_name, 
-                list_price, 
-                category 
-        FROM products
+        SELECT jobTitle 
+        FROM jobListing
     '''
     
     # get a cursor object from the database

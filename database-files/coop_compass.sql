@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS `coop_compass`;
+DROP SCHEMA IF EXISTS `coop_compass` ;
 CREATE DATABASE IF NOT EXISTS `coop_compass`;
 USE `coop_compass`;
 
