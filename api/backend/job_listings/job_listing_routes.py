@@ -13,27 +13,10 @@ job_listings = Blueprint('job_listings', __name__)
 @job_listings.route('/job_listings', methods=['GET'])
 def get_all_job_listings():
     query = '''
-        SELECT jobTitle, description, startDate, endDate, hourlyWage, skills, location
-        FROM jobListing
+        SELECT J.jobListingId as 'Job Listing ID', J.jobTitle as 'Job Title', J.description as Description, J.startDate as 'Start Date', J.endDate as 'End Date', J.hourlyWage as 'Hourly Wage', J.skills as 'Skills', J.location as 'Location', C.name as Company, C.companyId as 'Company ID'
+        FROM jobListing J
+        JOIN company C ON J.companyId = C.companyId
         WHERE deleted = false
-    '''
-    
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    theData = cursor.fetchall()
-    response = make_response(jsonify(theData))
-    response.status_code = 200
-    return response
-
-#------------------------------------------------------------
-# Search for a job listing
-#------------------------------------------------------------
-@job_listings.route('/job_listings<search_param>', methods=['GET'])
-def search_job_listings(search_param):
-    query = f'''
-        SELECT jobTitle, description, startDate, endDate, hourlyWage, skills, location
-        FROM jobListing
-        WHERE jobTitle LIKE '%{search_param}%' AND deleted = false
     '''
     
     cursor = db.get_db().cursor()
@@ -85,7 +68,7 @@ def get_deleted_job_listings():
 @job_listings.route('/job_listing/<recruiter_id>', methods=['GET'])
 def get_job_listing_by_recruiter(recruiter_id):
     query = f'''
-        SELECT jobTitle, description, startDate, endDate, hourlyWage, skills, location
+        SELECT jobTitle as 'Job Title', description as Description, startDate as 'Start Date', endDate as 'End Date', hourlyWage as 'Hourly Wage', skills as 'Skills', location as 'Location'
         FROM jobListing
         WHERE recruiterId = {str(recruiter_id)} AND deleted = false
     '''
@@ -146,7 +129,7 @@ def toggle_delete_job_listing(job_listing_id):
 @job_listings.route('/companies', methods=['GET'])
 def get_all_companies():
     query = '''
-        SELECT name, headline, description, websiteLink
+        SELECT name as Name, headline as Headline, description as Description, websiteLink as 'Website Link', companyId as 'Company ID'
         FROM company
     '''
     

@@ -26,3 +26,22 @@ def get_recruiter_by_id(recruiter_id):
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
+
+#------------------------------------------------------------
+# Gets all the reviews for an advisors students
+#------------------------------------------------------------
+@management.route('/advisor/<advisor_id>', methods=['GET'])
+def get_students_reviews(advisor_id):
+    query = f'''
+        SELECT jobListingId, anonymous, description, jobSatisfaction, hourlyWage
+        FROM review
+        JOIN student ON review.studentId = student.studentId
+        WHERE advisorId = {str(advisor_id)} AND deleted = false
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response

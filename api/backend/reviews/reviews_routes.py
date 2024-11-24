@@ -13,7 +13,7 @@ reviews = Blueprint('reviews', __name__)
 @reviews.route('/reviews', methods=['GET'])
 def get_all_reviews():
     query = '''
-        SELECT jobListingId, anonymous, description, jobSatisfaction, hourlyWage
+        SELECT jobListingId as 'Job Listing ID', anonymous as Anonymous, description as Descriotion, jobSatisfaction as 'Job Satisfaction', hourlyWage as 'Hourly Wage'
         FROM review
         WHERE deleted = false
     '''
@@ -31,7 +31,7 @@ def get_all_reviews():
 @reviews.route('/reviews/<job_listing_id>', methods=['GET'])
 def get_reviews_by_job_listing(job_listing_id):
     query = f'''
-        SELECT jobListingId, anonymous, description, jobSatisfaction, hourlyWage
+        SELECT jobListingId as 'Job Listing ID', anonymous as Anonymous, description as Descriotion, jobSatisfaction as 'Job Satisfaction', hourlyWage as 'Hourly Wage'
         FROM review
         WHERE jobListingId = {str(job_listing_id)} AND deleted = false
     '''
@@ -49,7 +49,7 @@ def get_reviews_by_job_listing(job_listing_id):
 @reviews.route('/reviews/<student_id>', methods=['GET'])
 def get_reviews_by_student(student_id):
     query = f'''
-        SELECT jobListingId, anonymous, description, jobSatisfaction, hourlyWage
+        SELECT jobListingId as 'Job Listing ID', anonymous as Anonymous, description as Descriotion, jobSatisfaction as 'Job Satisfaction', hourlyWage as 'Hourly Wage'
         FROM review
         WHERE studentId = {str(student_id)} AND deleted = false
     '''
