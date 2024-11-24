@@ -34,44 +34,49 @@ SideBarLinks(show_home=True)
 
 # set the title of the page and provide a simple prompt. 
 logger.info("Loading the Home page of the app")
-st.title('CS 3200 Sample Semester Project App')
+st.title('Welcome To InsideView - An Inside View to Interviews!')
 st.write('\n\n')
-st.write('### HI! As which user would you like to log in?')
+st.write('### Hi! As which user would you like to log in?')
 
 # For each of the user personas for which we are implementing
 # functionality, we put a button on the screen that the user 
 # can click to MIMIC logging in as that mock user. 
 
-if st.button("Act as John, a Political Strategy Advisor", 
-            type = 'primary', 
-            use_container_width=True):
-    # when user clicks the button, they are now considered authenticated
-    st.session_state['authenticated'] = True
-    # we set the role of the current user
-    st.session_state['role'] = 'pol_strat_advisor'
-    # we add the first name of the user (so it can be displayed on 
-    # subsequent pages). 
-    st.session_state['first_name'] = 'John'
-    # finally, we ask streamlit to switch to another page, in this case, the 
-    # landing page for this particular user type
-    logger.info("Logging in as Political Strategy Advisor Persona")
-    st.switch_page('pages/00_Pol_Strat_Home.py')
+if st.button(" A Student Preparing for an Internship", 
+        type = 'primary', 
+        use_container_width=True):
+        # when user clicks the button, they are now considered authenticated
+        st.session_state['authenticated'] = True
+        # we set the role of the current user
+        st.session_state['role'] = 'student'
+        # we add the first name of the user (so it can be displayed on 
+        # subsequent pages). 
+        st.session_state['first_name'] = 'Alex'
+        # finally, we ask streamlit to switch to another page, in this case, the 
+        # landing page for this particular user type
+        logger.info("Logging in as Student Preparing for Internship")
+        st.switch_page('pages/00_student_home.py')
 
-if st.button('Act as Mohammad, an USAID worker', 
-            type = 'primary', 
-            use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'usaid_worker'
-    st.session_state['first_name'] = 'Mohammad'
-    st.switch_page('pages/10_USAID_Worker_Home.py')
+if st.button('A Career Advisor at the University', 
+        type = 'primary', 
+        use_container_width=True):
+        st.session_state['authenticated'] = True
+        st.session_state['role'] = 'advisor'
+        st.session_state['first_name'] = 'Ethan'
+        st.switch_page('pages/01_advisor_home.py')
 
-if st.button('Act as System Administrator', 
-            type = 'primary', 
-            use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/20_Admin_Home.py')
+if st.button('A Talent Recruiter at a Tech Company', 
+        type = 'primary', 
+        use_container_width=True):
+        st.session_state['authenticated'] = True
+        st.session_state['role'] = 'recruiter'
+        st.session_state['first_name'] = 'David'
+        st.switch_page('pages/02_recruiter_home.py')
 
-
-
+if st.button('A System Administrator for the Platform', 
+        type = 'primary', 
+        use_container_width=True):
+        st.session_state['authenticated'] = True
+        st.session_state['role'] = 'administrator'
+        st.session_state['first_name'] = 'Mecca'
+        st.switch_page('pages/03_admin_home.py')
