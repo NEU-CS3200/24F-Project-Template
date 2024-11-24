@@ -21,7 +21,7 @@ products = Blueprint('products', __name__)
 @products.route('/products', methods=['GET'])
 def get_products():
     query = '''
-        SELECT jobTitle 
+        SELECT jobTitle
         FROM jobListing
     '''
     

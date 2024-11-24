@@ -4,6 +4,11 @@ from backend.db_connection import db
 from backend.customers.customer_routes import customers
 from backend.products.products_routes import products
 from backend.simple.simple_routes import simple_routes
+from backend.job_listings.job_listing_routes import job_listings
+from backend.reviews.reviews_routes import reviews
+from api.backend.students.student_routes import students
+from api.backend.management.management_routes import management
+
 import os
 from dotenv import load_dotenv
 
@@ -42,7 +47,11 @@ def create_app():
     app.register_blueprint(simple_routes)
     app.register_blueprint(customers,   url_prefix='/c')
     app.register_blueprint(products,    url_prefix='/p')
-
+    app.register_blueprint(job_listings, url_prefix='/j')
+    app.register_blueprint(reviews,     url_prefix='/r')
+    app.register_blueprint(students,       url_prefix='/s')
+    app.register_blueprint(management,     url_prefix='/m')
+    
     # Don't forget to return the app object
     return app
 
