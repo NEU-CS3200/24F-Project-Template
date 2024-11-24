@@ -60,10 +60,11 @@ CREATE TABLE IF NOT EXISTS `company`
 
 CREATE TABLE IF NOT EXISTS `resource`
 (
-    `resourceId` VARCHAR(255) PRIMARY KEY,
-    `studentId`  VARCHAR(255) NOT NULL REFERENCES `student` (`studentId`),
-    `name`       VARCHAR(255) NOT NULL,
-    `URL`        VARCHAR(255) NOT NULL
+    `resourceId`  VARCHAR(255) PRIMARY KEY,
+    `studentId`   VARCHAR(255) NOT NULL REFERENCES `student` (`studentId`),
+    `name`        VARCHAR(255) NOT NULL,
+    `description` TEXT,
+    `URL`         VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `jobListing`
