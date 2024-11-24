@@ -26,6 +26,24 @@ def get_all_job_listings():
     return response
 
 #------------------------------------------------------------
+# Search for a job listing
+#------------------------------------------------------------
+@job_listings.route('/job_listings<search_param>', methods=['GET'])
+def search_job_listings(search_param):
+    query = f'''
+        SELECT jobTitle, description, startDate, endDate, hourlyWage, skills, location
+        FROM jobListing
+        WHERE jobTitle LIKE '%{search_param}%' AND deleted = false
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+#------------------------------------------------------------
 # Get all job listings for a company
 #------------------------------------------------------------
 @job_listings.route('/job_listing/<company_id>', methods=['GET'])
