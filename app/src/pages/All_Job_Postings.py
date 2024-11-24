@@ -55,6 +55,8 @@ if isinstance(job_listings, list):
                 if st.button(f"{num_reviews} {'Review' if num_reviews == 1 else 'Reviews'}",
                         key=f"reviews_button_{job['Job Listing ID']}",
                         type='secondary'):
+                    st.query_params.job_listing_id = job['Job Listing ID']
+                    st.session_state['job_listing_id'] = job['Job Listing ID']
                     st.switch_page('pages/Reviews_For_Job.py')
 
             st.write("**Description**")
