@@ -11,8 +11,8 @@ company_id = st.session_state.get('company_id', None)
 
 if (company_id):
     try: 
-        company = requests.get(f'http://api:4000/j/company/{company_id}').json()
         job_listings = requests.get(f'http://api:4000/j/job_listings/company/{company_id}').json()
+        logger.info(f"Job Listings: {job_listings}")
         reviews = requests.get('http://api:4000/r/reviews').json()
     except:
         st.write("**Important**: Could not connect to API.")
@@ -27,7 +27,7 @@ SideBarLinks()
 
 # Display
 if (company_id):
-    st.write(f"# Job Postings for {company['Name']}")
+    st.write(f"# Job Postings for {job_listings[0]['Company']}")
 else:
     st.write("# Job Postings")
 
