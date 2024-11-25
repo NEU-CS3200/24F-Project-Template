@@ -4,17 +4,9 @@ import streamlit as st
 import requests
 from streamlit_extras.app_logo import add_logo
 from modules.nav import SideBarLinks
-
-SideBarLinks()
-
-st.write("# Job Postings")
-
-# Search Bar
-text_input = st.text_input (
-    "Search for Jobs?", placeholder="Search here...", key="text_input"
-)
-
-job_listings = []
+from modules.filter_functions import filter_job_listings
+from components.job_listing import job_listing_component
+from components.search import search_input
 
 try: 
     job_listings = requests.get('http://api:4000/j/job_listings').json()
@@ -22,45 +14,23 @@ try:
 except:
     st.write("**Important**: Could not connect to API.")
 
+
+SideBarLinks()
+
+st.write("# Job Postings")
+
+text_input = search_input("Jobs")
+
 # Check if job_listings is valid
 if isinstance(job_listings, list):
 
-    # Filtering the job_listings if the user has entered a search value
-    if text_input:
-        filtered_job_listings = []
-        for job in job_listings:
-            if text_input.lower() in job['Job Title'].lower() or text_input.lower() in job['Company'].lower():
-                filtered_job_listings.append(job)
-        job_listings = filtered_job_listings
+    filtered_job_listings = filter_job_listings(job_listings, text_input)
 
     for job in job_listings:
         # number of reviews per job
         num_reviews = len([review for review in reviews if review['Job Listing ID'] == job['Job Listing ID']])
 
-        with st.expander(f"{job['Company']}: {job['Job Title']}"):
-            col1, col2 = st.columns(2)
-            with col1:
-                st.write("**Start Date**")
-                st.write(job.get('Start Date', 'N/A'))
-                st.write("**End Date**")
-                st.write(job.get('End Date', 'N/A'))
-                st.write("**Skills**")
-                st.write(job.get('Skills', 'N/A'))
-            with col2:
-                st.write("**Hourly Wage**")
-                st.write(f"${job.get('Hourly Wage', 'N/A')} per hour")
-                st.write("**Location**")
-                st.write(job.get('Location', 'N/A'))
-                st.write("**All Reviews**")
-                if st.button(f"{num_reviews} {'Review' if num_reviews == 1 else 'Reviews'}",
-                        key=f"reviews_button_{job['Job Listing ID']}",
-                        type='secondary'):
-                    st.query_params.job_listing_id = job['Job Listing ID']
-                    st.session_state['job_listing_id'] = job['Job Listing ID']
-                    st.switch_page('pages/Reviews_For_Job.py')
-
-            st.write("**Description**")
-            st.write(job.get('Description', 'N/A'))
+        job_listing_component(job, num_reviews)
 
 else:
     st.write("No job postings available.")
