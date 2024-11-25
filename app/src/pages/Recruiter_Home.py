@@ -17,7 +17,7 @@ st.write('### What would you like to do today?')
 if st.button('View all Companies', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/All_Companies.py')
+  st.switch_page('pages/Companies.py')
 
 if st.button('View all Job Postings', 
              type='primary',
