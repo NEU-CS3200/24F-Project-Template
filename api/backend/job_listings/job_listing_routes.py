@@ -46,26 +46,26 @@ def get_job_listing_by_company(job_listing_id):
     return response
 
 #------------------------------------------------------------
-# Get all deleted job_listings
+# Get all job listings for a company
 #------------------------------------------------------------
-@job_listings.route('/job_listings/deleted', methods=['GET'])
-def get_deleted_job_listings():
-    query = '''
-        SELECT jobTitle, description, startDate, endDate, hourlyWage, skills, location
-        FROM jobListing
-        WHERE deleted = true
+@job_listings.route('/job_listings/company/<company_id>', methods=['GET'])
+def get_job_listings_by_company(company_id):
+    query = f'''
+        SELECT J.jobListingId as 'Job Listing ID', J.jobTitle as 'Job Title', J.description as Description, J.startDate as 'Start Date', J.endDate as 'End Date', J.hourlyWage as 'Hourly Wage', J.skills as 'Skills', J.location as 'Location', C.name as Company, C.companyId as 'Company'
+        FROM jobListing J
+        JOIN company C ON J.companyId = C.companyId
+        WHERE C.companyId = '{str(company_id)}' AND deleted = false
     '''
-    
     cursor = db.get_db().cursor()
     cursor.execute(query)
-    theData = cursor.fetchall()
+    theData = cursor.fetchmany()
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
 
 
 #------------------------------------------------------------
-# Get job_listing by id
+# Toggle job_listing is deleted
 #------------------------------------------------------------
 @job_listings.route('/job_listing/<job_listing_id>', methods=['POST'])
 def toggle_delete_job_listing(job_listing_id):
@@ -120,6 +120,24 @@ def get_all_companies():
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+#------------------------------------------------------------
+# Get a single company
+#------------------------------------------------------------
+@job_listings.route('/company/<company_id>', methods=['GET'])
+def get_company_by_id(company_id):
+    query = f'''
+        SELECT name as Name, headline as Headline, description as Description, websiteLink as 'Website Link', companyId as 'Company ID'
+        FROM company
+        WHERE companyId = '{str(company_id)}'
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchone()
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response

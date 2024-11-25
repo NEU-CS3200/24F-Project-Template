@@ -51,6 +51,7 @@ if isinstance(companies, list):
                 if st.button(f"{num_job_listings} {'Listing' if num_job_listings == 1 else 'Listings'}",
                         key=f"listings_button_{company['Company ID']}",
                         type='secondary'):
+                    st.session_state['company_id'] = company['Company ID']
                     st.switch_page('pages/Jobs_For_Company.py')
 else:
     st.write("No companies available.")
