@@ -27,9 +27,10 @@ SideBarLinks()
 # displaying the reviews for the job listing
 if (job_listing_id):
     st.write(f"## Reviews for {job_listing['Job Title']} at {job_listing['Company']}")
-else:
+elif (student_id):
     st.write("## My Reviews")
-
+else:
+    st.write("## All Reviews")
 
 if isinstance(reviews, list):
     for review in reviews:
@@ -37,6 +38,3 @@ if isinstance(reviews, list):
 
 else:
     st.write("No reviews available.")
-
-
-

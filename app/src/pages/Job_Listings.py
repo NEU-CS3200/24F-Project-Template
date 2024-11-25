@@ -1,7 +1,7 @@
 import streamlit as st
 import logging
 logger = logging.getLogger(__name__)
-from components.search import search_input
+from components.search import search_bar
 import requests
 from modules.nav import SideBarLinks
 from components.job_listing import job_listing_component
@@ -26,12 +26,9 @@ else:
 SideBarLinks()
 
 # Display
-if (company_id):
-    st.write(f"# Job Postings for {job_listings[0]['Company']}")
-else:
-    st.write("# Job Postings")
+st.write(f"## Job Listings {' for ' + job_listings[0]['Company'] if company_id else ''}")
 
-text_input = search_input("Jobs")
+text_input = search_bar("Jobs")
 
 if isinstance(job_listings, list):
     # Filtering the job_listings if the user has entered a search value

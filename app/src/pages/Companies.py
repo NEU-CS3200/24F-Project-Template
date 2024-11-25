@@ -3,7 +3,7 @@ import logging
 logger = logging.getLogger(__name__)
 import requests
 from modules.nav import SideBarLinks
-from components.search import search_input
+from components.search import search_bar
 from components.company import company_component
 from modules.filter_functions import filter_companies
 
@@ -17,7 +17,7 @@ SideBarLinks()
 
 st.write("# Companies")
 
-text_input = search_input("Companies")
+text_input = search_bar("Companies")
 
 # Check if companies is valid
 if isinstance(companies, list):
