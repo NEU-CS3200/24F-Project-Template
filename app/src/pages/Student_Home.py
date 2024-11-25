@@ -1,7 +1,6 @@
+import streamlit as st
 import logging
 logger = logging.getLogger(__name__)
-
-import streamlit as st
 from modules.nav import SideBarLinks
 
 st.set_page_config(layout = 'wide')
@@ -22,9 +21,11 @@ if st.button('View all Companies',
 if st.button('View all Job Postings', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/All_Job_Postings.py')
+  st.session_state['company_id'] = False
+  st.switch_page('pages/Job_Listings.py')
 
 if st.button('View my Reviews', 
              type='primary',
              use_container_width=True):
+  st.session_state['student_id'] = 'S1'
   st.switch_page('pages/Reviews.py')

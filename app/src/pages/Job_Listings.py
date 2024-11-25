@@ -1,4 +1,3 @@
-from streamlit_extras.app_logo import add_logo
 import streamlit as st
 import logging
 logger = logging.getLogger(__name__)
@@ -10,17 +9,27 @@ from modules.filter_functions import filter_job_listings
 
 company_id = st.session_state.get('company_id', None)
 
-try: 
-    company = requests.get(f'http://api:4000/j/company/{company_id}').json()
-    job_listings = requests.get(f'http://api:4000/j/job_listings/company/{company_id}').json()
-    reviews = requests.get('http://api:4000/r/reviews').json()
-except:
-    st.write("**Important**: Could not connect to API.")
-    
+if (company_id):
+    try: 
+        company = requests.get(f'http://api:4000/j/company/{company_id}').json()
+        job_listings = requests.get(f'http://api:4000/j/job_listings/company/{company_id}').json()
+        reviews = requests.get('http://api:4000/r/reviews').json()
+    except:
+        st.write("**Important**: Could not connect to API.")
+else:
+    try: 
+        job_listings = requests.get('http://api:4000/j/job_listings').json()
+        reviews = requests.get('http://api:4000/r/reviews').json()
+    except:
+        st.write("**Important**: Could not connect to API.")
+
 SideBarLinks()
 
 # Display
-st.write(f"# Job Postings for {company['Name']}")
+if (company_id):
+    st.write(f"# Job Postings for {company['Name']}")
+else:
+    st.write("# Job Postings")
 
 text_input = search_input("Jobs")
 
