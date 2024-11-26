@@ -2,10 +2,8 @@ import streamlit as st
 import requests
 from modules.nav import SideBarLinks
 from utils.routes import get_reviews_by_student
-  # Importing the function
-
-# Base API URL
-BASE_API_URL = "http://api:4000"  # Assuming this works based on the given reference
+from utils.routes import get_all_companies
+from utils.routes import get_all_job_listings
 
 # Set page configuration
 st.set_page_config(
@@ -115,24 +113,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Function to fetch data from API
-def fetch_data(endpoint):
-    """Fetch data from API and handle errors."""
-    try:
-        response = requests.get(f"{BASE_API_URL}{endpoint}")
-        response.raise_for_status()
-        return response.json()
-    except requests.RequestException as e:
-        st.error(f"Error fetching data from {endpoint}: {e}")
-        return []
-
 # Fetch all data
-companies = fetch_data("/j/companies")[:10]  # Limit to 10 companies
-job_postings = fetch_data("/j/job_listings")[:10]  # Limit to 10 job postings
-
-# Fetch reviews using the custom function
-student_id = st.session_state.get("student_id", "100")  # Ensure student ID is set
-all_reviews = get_reviews_by_student(student_id)[:10]  # Fetch all reviews and limit to 10
+companies = get_all_companies()[:10]  
+job_postings = get_all_job_listings()[:10]
+student_id = st.session_state.get("student_id", "100")
+all_reviews = get_reviews_by_student(student_id)[:10]
 
 # Create a grid layout for the actions
 cols = st.columns(3, gap="large")

@@ -84,21 +84,3 @@ def get_all_companies():
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
-
-#------------------------------------------------------------
-# Get a single company
-#------------------------------------------------------------
-@job_listings.route('/company/<company_id>', methods=['GET'])
-def get_company_by_id(company_id):
-    query = f'''
-        SELECT name as Name, headline as Headline, description as Description, websiteLink as 'Website Link', companyId as 'Company ID'
-        FROM company
-        WHERE companyId = '{str(company_id)}'
-    '''
-    
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    theData = cursor.fetchone()
-    response = make_response(jsonify(theData))
-    response.status_code = 200
-    return response
