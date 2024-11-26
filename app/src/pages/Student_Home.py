@@ -1,10 +1,11 @@
 import streamlit as st
 import requests
 from modules.nav import SideBarLinks
+from utils.routes import get_reviews_by_student
+  # Importing the function
 
 # Base API URL
 BASE_API_URL = "http://api:4000"  # Assuming this works based on the given reference
-# Set page configuration
 
 # Set page configuration
 st.set_page_config(
@@ -126,10 +127,12 @@ def fetch_data(endpoint):
         return []
 
 # Fetch all data
-# Fetch all data
 companies = fetch_data("/j/companies")[:10]  # Limit to 10 companies
 job_postings = fetch_data("/j/job_listings")[:10]  # Limit to 10 job postings
-all_reviews = fetch_data("/r/reviews")[:10]# Use the /r prefix for the reviews endpoint
+
+# Fetch reviews using the custom function
+student_id = st.session_state.get("student_id", "100")  # Ensure student ID is set
+all_reviews = get_reviews_by_student(student_id)[:10]  # Fetch all reviews and limit to 10
 
 # Create a grid layout for the actions
 cols = st.columns(3, gap="large")
@@ -181,24 +184,19 @@ with cols[2]:
     st.markdown(
         """
         <div class="card">
-            <h3>View All Reviews</h3>
-            <p>See all reviews shared by students.</p>
+            <h3>View My Reviews</h3>
+            <p>See all of my reviews.</p>
         </div>
         """,
         unsafe_allow_html=True,
     )
-    
-    
+
     # Add "View My Reviews" button below
     if st.button("View My Reviews", use_container_width=True, key="my_reviews_button"):
         st.session_state['job_listing_id'] = False
         st.session_state['student_id'] = '100'
         st.switch_page("pages/Reviews.py")
 
-    # Button to navigate to all reviews
-    if st.button("View All Reviews", use_container_width=True):
-        st.switch_page("pages/Reviews.py")
-    
     # Preview section for reviews
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
