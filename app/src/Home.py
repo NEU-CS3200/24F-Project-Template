@@ -143,6 +143,7 @@ with cols[0]:
         st.session_state['authenticated'] = True
         st.session_state['role'] = 'student'
         st.session_state['first_name'] = 'Aaryan'
+        st.session_state['student_id'] = '100'
         st.switch_page("pages/Student_Home.py")
 
 with cols[1]:

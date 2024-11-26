@@ -6,10 +6,12 @@ from modules.nav import SideBarLinks
 from components.search import search_bar
 from components.company import company_component
 from modules.filter_functions import filter_companies
+from utils.routes import get_all_companies
+from utils.routes import get_all_job_listings
 
 try: 
-    companies = requests.get('http://api:4000/j/companies').json()
-    job_listings = requests.get('http://api:4000/j/job_listings').json()
+    companies = get_all_companies()
+    job_listings = get_all_job_listings()
 except:
     st.write("**Important**: Could not connect to API.")
 

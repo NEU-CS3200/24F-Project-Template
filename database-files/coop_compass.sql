@@ -152,6 +152,7 @@ insert into `advisor` (`advisorId`, `name`, `email`, `phoneNumber`) values
 ('10', 'Neall', 'ndeason9@mozilla.com', 7924372720);
 
 insert into `student` (`studentId`, `advisorId`, `name`, `email`, `phoneNumber`) values 
+('100', '1', 'Aaryan Jain', 'aaryanjain1203@gmail.com', 1234567890),
 ('101', '1', 'Alice Johnson', 'alice.johnson@example.com', 1234567890),
 ('102', '2', 'Bob Smith', 'bob.smith@example.com', 2345678901),
 ('103', '3', 'Charlie Brown', 'charlie.brown@example.com', 3456789012),

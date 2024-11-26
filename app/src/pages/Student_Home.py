@@ -79,5 +79,6 @@ if st.button('View all Job Postings',
 if st.button('View my Reviews', 
              type='primary',
              use_container_width=True):
-  st.session_state['student_id'] = 'S1'
+  st.session_state['job_listing_id'] = False
+  st.session_state['student_id'] = '100'
   st.switch_page('pages/Reviews.py')

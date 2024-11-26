@@ -6,22 +6,17 @@ import requests
 from modules.nav import SideBarLinks
 from components.job_listing import job_listing_component
 from modules.filter_functions import filter_job_listings
+from utils.routes import get_job_listings_by_company
+from utils.routes import get_all_job_listings
+from utils.routes import get_all_reviews
 
 company_id = st.session_state.get('company_id', None)
 
-if (company_id):
-    try: 
-        job_listings = requests.get(f'http://api:4000/j/job_listings/company/{company_id}').json()
-        logger.info(f"Job Listings: {job_listings}")
-        reviews = requests.get('http://api:4000/r/reviews').json()
-    except:
-        st.write("**Important**: Could not connect to API.")
-else:
-    try: 
-        job_listings = requests.get('http://api:4000/j/job_listings').json()
-        reviews = requests.get('http://api:4000/r/reviews').json()
-    except:
-        st.write("**Important**: Could not connect to API.")
+try: 
+    job_listings = get_job_listings_by_company(company_id) if company_id else get_all_job_listings()
+    reviews = get_all_reviews()
+except:
+    st.write("**Important**: Could not connect to API.")
 
 SideBarLinks()
 

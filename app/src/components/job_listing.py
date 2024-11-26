@@ -21,7 +21,6 @@ def job_listing_component(job, num_reviews):
                     type='secondary'):
                 st.query_params.job_listing_id = job['Job Listing ID']
                 st.session_state['job_listing_id'] = job['Job Listing ID']
-                st.session_state['student_id'] = False
                 st.switch_page('pages/Reviews.py')
 
         st.write("**Description**")
