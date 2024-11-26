@@ -70,6 +70,22 @@ def SideBarLinks():
                 color: #bb86fc !important; /* Purple text on hover */
                 background-color: #333333 !important; /* Light gray background on hover */
             }
+
+            /* Specific styling for Logout button */
+            section[data-testid="stSidebar"] div.stButton > button {
+                background-color: #0047AB !important; /* Dark blue background */
+                color: #ffffff !important; /* White text */
+                border-radius: 5px !important;
+                padding: 10px 15px !important;
+                font-size: 1rem !important;
+                border: none !important;
+            }
+
+            /* Hover effect for Logout button */
+            section[data-testid="stSidebar"] div.stButton > button:hover {
+                background-color: #003366 !important; /* Darker blue on hover */
+                color: #ffffff !important; /* White text on hover */
+            }
         </style>
         """,
         unsafe_allow_html=True,
