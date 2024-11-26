@@ -18,6 +18,17 @@ def fetch_data(endpoint):
         st.error(f"Error fetching data from {endpoint}: {e}")
         return []
 
+def create_data(endpoint, data):
+    """Create data in the API and handle errors."""
+    try:
+        response = requests.post(f"{BASE_API_URL}{endpoint}", json=data)
+        logging.info(f"Creating data in {BASE_API_URL}/{endpoint}")
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        st.error(f"Error creating data in {endpoint}: {e}")
+        return []
+
 #----------------- Companies -----------------#
 
 def get_all_companies():
@@ -45,3 +56,6 @@ def get_reviews_for_job_listing(job_listing_id):
 
 def get_reviews_by_student(student_id):
     return fetch_data(f'/r/reviews/student/{student_id}')
+
+def create_review(data):
+    return create_data('/r/reviews', data)

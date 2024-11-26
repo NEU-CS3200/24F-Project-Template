@@ -6,9 +6,9 @@ import requests
 from modules.nav import SideBarLinks
 from components.job_listing import job_listing_component
 from modules.filter_functions import filter_job_listings
-from utils.routes import get_job_listings_by_company
-from utils.routes import get_all_job_listings
-from utils.routes import get_all_reviews
+from utils.frontend_routes import get_job_listings_by_company
+from utils.frontend_routes import get_all_job_listings
+from utils.frontend_routes import get_all_reviews
 
 company_id = st.session_state.get('company_id', None)
 

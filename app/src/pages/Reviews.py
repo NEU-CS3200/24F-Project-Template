@@ -5,9 +5,9 @@ from modules.nav import SideBarLinks
 from components.review import review_component
 from utils.create_modals import toggle_modal
 from utils.create_modals import create_review_modal
-from utils.routes import get_job_listing_by_id
-from utils.routes import get_reviews_for_job_listing
-from utils.routes import get_reviews_by_student
+from utils.frontend_routes import get_job_listing_by_id
+from utils.frontend_routes import get_reviews_for_job_listing
+from utils.frontend_routes import get_reviews_by_student
 
 if "show_modal" not in st.session_state:
     st.session_state["show_modal"] = False

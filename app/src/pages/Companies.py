@@ -6,8 +6,8 @@ from modules.nav import SideBarLinks
 from components.search import search_bar
 from components.company import company_component
 from modules.filter_functions import filter_companies
-from utils.routes import get_all_companies
-from utils.routes import get_all_job_listings
+from utils.frontend_routes import get_all_companies
+from utils.frontend_routes import get_all_job_listings
 
 try: 
     companies = get_all_companies()

@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import logging
 logger = logging.getLogger(__name__)
+from utils.frontend_routes import create_review
 
 if "show_modal" not in st.session_state:
     st.session_state["show_modal"] = False
@@ -21,29 +22,30 @@ def create_review_modal(job_listing_id, student_id):
         with col1:
             submit = st.button("Submit Review")
         with col2:
-            cancel = st.button("Cancel", on_click=toggle_modal)
+            st.button("Cancel", on_click=toggle_modal)
         if submit:
             try:
-                logger.info(f"Student ID: {student_id}")
-                response = requests.post('http://api:4000/r/review', json={
+                payload = {
                     "description": description,
                     "jobSatisfaction": jobSatisfaction,
                     "hourlyWage": hourlyWage,
                     "anonymous": anonymous,
                     "jobListingId": job_listing_id,
                     "studentId": student_id,
-                    # TODO: Update reviewId to be dynamic
-                    "reviewId": '11100'
-                })
-                review = response.json()
-                st.write("Review submitted.")
-                toggle_modal()
+                }
+                response = create_review(payload)
+                response_data = response.json()
+                
+                if response.status_code == 200:
+                    toggle_modal()
+                    st.success("Review submitted.")
+                else:
+                    st.error("Failed to submit review.")
+                logger.info(f"Response: {response_data}")
             except Exception as e:
-                st.write(f"An unexpected error occurred: {e}")
+                st.error(f"An unexpected error occurred: {e}")
                 logger.error(f"Exception: {e}")
-        elif cancel:
-            toggle_modal()
-    
-    return review
+
+    return None
 
 

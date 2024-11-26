@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS `advisor`;
 
 CREATE TABLE IF NOT EXISTS `admin`
 (
-    `adminId`     VARCHAR(255) PRIMARY KEY,
+    `adminId`     VARCHAR(255) PRIMARY KEY DEFAULT (UUID()),
     `name`        VARCHAR(255) NOT NULL,
     `email`       VARCHAR(255) NOT NULL,
     `phoneNumber` BIGINT
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `admin`
 
 CREATE TABLE IF NOT EXISTS `advisor`
 (
-    `advisorId`   VARCHAR(255) PRIMARY KEY,
+    `advisorId`   VARCHAR(255) PRIMARY KEY DEFAULT (UUID()),
     `name`        VARCHAR(255) NOT NULL,
     `email`       VARCHAR(255) NOT NULL,
     `phoneNumber` BIGINT
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `advisor`
 
 CREATE TABLE IF NOT EXISTS `student`
 (
-    `studentId`   VARCHAR(255) PRIMARY KEY,
+    `studentId`   VARCHAR(255) PRIMARY KEY DEFAULT (UUID()),
     `advisorId`   VARCHAR(255) REFERENCES `advisor` (`advisorId`),
     `name`        VARCHAR(255) NOT NULL,
     `email`       VARCHAR(255) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `student`
 
 CREATE TABLE IF NOT EXISTS `recruiter`
 (
-    `recruiterId` VARCHAR(255) PRIMARY KEY,
+    `recruiterId` VARCHAR(255) PRIMARY KEY DEFAULT (UUID()),
     `name`        VARCHAR(255) NOT NULL,
     `email`       VARCHAR(255) NOT NULL,
     `phoneNumber` BIGINT
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `company`
 
 CREATE TABLE IF NOT EXISTS `resource`
 (
-    `resourceId`  VARCHAR(255) PRIMARY KEY,
+    `resourceId`  VARCHAR(255) PRIMARY KEY DEFAULT (UUID()),
     `studentId`   VARCHAR(255) NOT NULL REFERENCES `student` (`studentId`),
     `name`        VARCHAR(255) NOT NULL,
     `description` TEXT,
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `resource`
 
 CREATE TABLE IF NOT EXISTS `jobListing`
 (
-    `jobListingId` VARCHAR(255) PRIMARY KEY,
+    `jobListingId` VARCHAR(255) PRIMARY KEY DEFAULT (UUID()),
     `recruiterId`  VARCHAR(255) NOT NULL REFERENCES `recruiter` (`recruiterId`),
     `companyId`    VARCHAR(255) NOT NULL REFERENCES `company` (`companyId`),
     `jobTitle`     VARCHAR(255) NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `jobListing`
 
 CREATE TABLE IF NOT EXISTS `review`
 (
-    `reviewId`        VARCHAR(255) PRIMARY KEY,
+    `reviewId`        VARCHAR(255) PRIMARY KEY DEFAULT (UUID()),
     `jobListingId`    VARCHAR(255) NOT NULL REFERENCES `jobListing` (`jobListingId`),
     `studentId`       VARCHAR(255) NOT NULL REFERENCES `student` (`studentId`),
     `anonymous`       BOOLEAN DEFAULT true,

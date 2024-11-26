@@ -76,11 +76,10 @@ def add_review():
     anonymous = data['anonymous']
     jobListingId = data['jobListingId']
     studentId = data['studentId']
-    reviewId = data['reviewId']
     
     query = f'''
-        INSERT INTO review (description, jobSatisfaction, hourlyWage, anonymous, jobListingId, studentId, reviewId)
-        VALUES ('{description}', {jobSatisfaction}, '{hourlyWage}', {anonymous}, '{jobListingId}', '{studentId}', '{reviewId}')
+        INSERT INTO review (description, jobSatisfaction, hourlyWage, anonymous, jobListingId, studentId)
+        VALUES ('{description}', {jobSatisfaction}, '{hourlyWage}', {anonymous}, '{jobListingId}', '{studentId}')
     '''
     
     cursor = db.get_db().cursor()

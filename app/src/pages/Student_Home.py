@@ -1,9 +1,9 @@
 import streamlit as st
 import requests
 from modules.nav import SideBarLinks
-from utils.routes import get_reviews_by_student
-from utils.routes import get_all_companies
-from utils.routes import get_all_job_listings
+from utils.frontend_routes import get_reviews_by_student
+from utils.frontend_routes import get_all_companies
+from utils.frontend_routes import get_all_job_listings
 
 # Set page configuration
 st.set_page_config(
