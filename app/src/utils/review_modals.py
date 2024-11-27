@@ -27,6 +27,7 @@ def create_review_modal(job_listing_id, student_id):
             "jobListingId": job_listing_id,
             "studentId": student_id,
         }
+        logger.info(f"Payload: {payload}")
         create_review(payload)
         st.success("Review submitted.")
         st.session_state["create_modal"] = False

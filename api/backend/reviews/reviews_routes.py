@@ -31,10 +31,12 @@ def get_all_reviews():
 @reviews.route('/reviews/<job_listing_id>', methods=['GET'])
 def get_reviews_by_job_listing(job_listing_id):
     query = f'''
-        SELECT jobListingId as 'Job Listing ID', anonymous as Anonymous, description as Description, jobSatisfaction as 'Job Satisfaction', hourlyWage as 'Hourly Wage', S.name as 'Student Name'
-        FROM review
-        JOIN student S ON review.studentId = S.studentId
-        WHERE jobListingId = '{str(job_listing_id)}' AND deleted = false
+        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company
+        FROM review R
+        JOIN student S ON R.studentId = S.studentId
+        JOIN jobListing J ON R.jobListingId = J.jobListingId
+        JOIN company C ON J.companyId = C.companyId
+        WHERE R.jobListingId = '{str(job_listing_id)}' AND R.deleted = false
     '''
     
     cursor = db.get_db().cursor()
@@ -51,10 +53,12 @@ def get_reviews_by_job_listing(job_listing_id):
 @reviews.route('/reviews/student/<student_id>', methods=['GET'])
 def get_reviews_by_student(student_id):
     query = f'''
-        SELECT jobListingId as 'Job Listing ID', anonymous as Anonymous, description as Description, jobSatisfaction as 'Job Satisfaction', hourlyWage as 'Hourly Wage', S.name as 'Student Name'
-        FROM review
-        JOIN student S ON review.studentId = S.studentId
-        WHERE review.studentId = '{str(student_id)}' AND deleted = false
+        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company
+        FROM review R
+        JOIN student S ON R.studentId = S.studentId
+        JOIN jobListing J ON R.jobListingId = J.jobListingId
+        JOIN company C ON J.companyId = C.companyId
+        WHERE R.studentId = '{str(student_id)}' AND R.deleted = false
     '''
     
     cursor = db.get_db().cursor()
@@ -87,5 +91,49 @@ def add_review():
     db.get_db().commit()
     
     response = make_response(jsonify({"message": "Review added."}))
+    response.status_code = 200
+    return response
+
+#------------------------------------------------------------
+# Update a review
+#------------------------------------------------------------
+@reviews.route('/review', methods=['PUT'])
+def update_review():
+    data = request.json
+    reviewId = data['reviewId']
+    description = data['description']
+    jobSatisfaction = data['jobSatisfaction']
+    hourlyWage = data['hourlyWage']
+    
+    query = f'''
+        UPDATE review
+        SET description = '{description}', jobSatisfaction = {jobSatisfaction}, hourlyWage = '{hourlyWage}'
+        WHERE reviewId = '{reviewId}'
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    
+    response = make_response(jsonify({"message": "Review updated."}))
+    response.status_code = 200
+    return response
+
+#------------------------------------------------------------
+# Delete a review
+#------------------------------------------------------------
+@reviews.route('/review/<review_id>', methods=['PUT'])
+def delete_review(review_id):
+    query = f'''
+        UPDATE review
+        SET deleted = true
+        WHERE reviewId = '{review_id}'
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    
+    response = make_response(jsonify({"message": "Review deleted."}))
     response.status_code = 200
     return response

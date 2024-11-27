@@ -29,6 +29,28 @@ def create_data(endpoint, data):
         st.error(f"Error creating data in {endpoint}: {e}")
         return []
 
+def edit_data(endpoint, data):
+    """Edit data in the API and handle errors."""
+    try:
+        response = requests.put(f"{BASE_API_URL}{endpoint}", json=data)
+        logging.info(f"Editing data in {BASE_API_URL}/{endpoint}")
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        st.error(f"Error editing data in {endpoint}: {e}")
+        return []
+    
+def delete_data(endpoint):
+    """Delete data in the API and handle errors."""
+    try:
+        response = requests.put(f"{BASE_API_URL}{endpoint}")
+        logging.info(f"Deleting data in {BASE_API_URL}/{endpoint}")
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        st.error(f"Error deleting data in {endpoint}: {e}")
+        return []
+
 #----------------- Companies -----------------#
 
 def get_all_companies():
@@ -58,4 +80,10 @@ def get_reviews_by_student(student_id):
     return fetch_data(f'/r/reviews/student/{student_id}')
 
 def create_review(data):
-    return create_data('/r/reviews', data)
+    return create_data('/r/review', data)
+
+def edit_review(data):
+    return edit_data('/r/review', data)
+
+def delete_review(review_id):
+    return delete_data(f'/r/review/{review_id}')

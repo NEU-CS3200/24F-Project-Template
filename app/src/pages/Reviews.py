@@ -3,14 +3,14 @@ import logging
 logger = logging.getLogger(__name__)
 from modules.nav import SideBarLinks
 from components.review import review_component
-from utils.create_modals import toggle_modal
-from utils.create_modals import create_review_modal
+from utils.review_modals import create_review_modal
 from utils.frontend_routes import get_job_listing_by_id
 from utils.frontend_routes import get_reviews_for_job_listing
 from utils.frontend_routes import get_reviews_by_student
 
-if "show_modal" not in st.session_state:
-    st.session_state["show_modal"] = False
+# Initialize session state for modals
+if "create_modal" not in st.session_state:
+    st.session_state["create_modal"] = False
 
 job_listing_id = st.session_state.get('job_listing_id', None)
 student_id = st.session_state.get('student_id', None)
@@ -42,14 +42,15 @@ with col1:
 with col2:
     if job_listing_id:
         if st.button("Write a review"):
-            toggle_modal()
+            st.session_state["create_modal"] = True
 
 # Modal for writing a review
-if st.session_state["show_modal"]:
+if st.session_state["create_modal"]:
     create_review_modal(job_listing_id, student_id)
 
 if reviews:
+    my_reviews = not job_listing_id
     for review in reviews:
-        review_component(review)
+        review_component(review, my_reviews=my_reviews)
 else:
     st.write("No reviews available.")
