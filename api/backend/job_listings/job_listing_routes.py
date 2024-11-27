@@ -63,6 +63,29 @@ def get_job_listings_by_company(company_id):
     response.status_code = 200
     return response
 
+#------------------------------------------------------------
+# Create a job listing
+#------------------------------------------------------------
+@job_listings.route('/job_listing', methods=['POST'])
+def create_job_listing():
+    data = request.json
+    job_title = data['jobTitle']
+    description = data['description']
+    wage = data['wage']
+    company_id = data['companyId']
+    recruiter_id = data['recruiterId']
+    
+    query = f'''
+        INSERT INTO jobListing (jobTitle, description, hourlyWage, companyId, recruiterId)
+        VALUES ('{job_title}', '{description}', '{wage}', '{company_id}', '{recruiter_id}')
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    response = make_response(jsonify({"message": "Job Listing created"}))
+    response.status_code = 201
+    return response
 
 #------------------------------------------------------------
 # Companies Section

@@ -185,6 +185,7 @@ insert into `student` (`studentId`, `advisorId`, `name`, `email`, `phoneNumber`)
 ('130', '10', 'Derek Ramirez', 'derek.ramirez@example.com', 3304567890);
 
 insert into `recruiter` (`recruiterId`, `name`, `email`, `phoneNumber`) values 
+('0', 'Quandale', 'quandale@gmail.com', 1234567890),
 ('1', 'Emmaline', 'eklus0@shareasale.com', 9736374111),
 ('2', 'Fayina', 'fandrin1@businessinsider.com', 8536196206),
 ('3', 'Benedikta', 'blantaph2@cloudflare.com', 6132895977),

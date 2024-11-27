@@ -160,6 +160,7 @@ with cols[1]:
         st.session_state['authenticated'] = True
         st.session_state['role'] = 'recruiter'
         st.session_state['first_name'] = 'Quandale'
+        st.session_state['recruiter_id'] = '0'
         st.switch_page("pages/Recruiter_Home.py")
 
 cols = st.columns(2, gap="large")

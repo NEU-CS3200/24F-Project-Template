@@ -67,6 +67,8 @@ def get_job_listing_by_id(job_listing_id):
 def get_job_listings_by_company(company_id):
     return fetch_data(f'/j/job_listings/company/{company_id}')
 
+def create_job_listing(data):
+    return create_data('/j/job_listing', data)
 
 #----------------- Reviews -----------------#
 

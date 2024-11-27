@@ -9,8 +9,14 @@ from modules.filter_functions import filter_job_listings
 from utils.frontend_routes import get_job_listings_by_company
 from utils.frontend_routes import get_all_job_listings
 from utils.frontend_routes import get_all_reviews
+from utils.job_listing_modals import create_job_listing_modal
+
+# Initialize session state for modals
+if "create_modal" not in st.session_state:
+    st.session_state["create_modal"] = False
 
 company_id = st.session_state.get('company_id', None)
+recruiter_id = st.session_state.get('recruiter_id', None)
 
 try: 
     job_listings = get_job_listings_by_company(company_id) if company_id else get_all_job_listings()
@@ -20,8 +26,19 @@ except:
 
 SideBarLinks()
 
+col1, col2 = st.columns(2)
+
 # Display
-st.write(f"## Job Listings {' for ' + job_listings[0]['Company'] if company_id else ''}")
+with col1:
+    st.write(f"## Job Listings {' for ' + job_listings[0]['Company'] if company_id else ''}")
+with col2:
+    if recruiter_id:
+        if st.button("Create a new job listing"):
+            st.session_state["create_modal"] = True
+
+# Modal for writing a review
+if st.session_state["create_modal"]:
+    create_job_listing_modal(recruiter_id)
 
 text_input = search_bar("Jobs")
 

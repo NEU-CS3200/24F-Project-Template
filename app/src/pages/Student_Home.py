@@ -155,6 +155,7 @@ with cols[1]:
         unsafe_allow_html=True,
     )
     if st.button("View All Job Postings", use_container_width=True):
+        st.session_state['recruiter_id'] = False
         st.switch_page("pages/Job_Listings.py")
 
     st.markdown(
