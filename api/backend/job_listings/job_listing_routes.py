@@ -46,6 +46,25 @@ def get_job_listing_by_company(job_listing_id):
     return response
 
 #------------------------------------------------------------
+# Get all job listings for a recruiter
+#------------------------------------------------------------
+@job_listings.route('/job_listings/recruiter/<recruiter_id>', methods=['GET'])
+def get_job_listings_by_recruiter(recruiter_id):
+    query = f'''
+        SELECT J.jobListingId as 'Job Listing ID', J.jobTitle as 'Job Title', J.description as Description, J.startDate as 'Start Date', J.endDate as 'End Date', J.hourlyWage as 'Hourly Wage', J.skills as 'Skills', J.location as 'Location', C.name as Company, C.companyId as 'Company ID'
+        FROM jobListing J
+        JOIN company C ON J.companyId = C.companyId
+        WHERE J.recruiterId = '{str(recruiter_id)}' AND deleted = false
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+
+#------------------------------------------------------------
 # Get all job listings for a company
 #------------------------------------------------------------
 @job_listings.route('/job_listings/company/<company_id>', methods=['GET'])

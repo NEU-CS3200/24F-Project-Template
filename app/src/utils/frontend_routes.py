@@ -64,6 +64,9 @@ def get_all_job_listings():
 def get_job_listing_by_id(job_listing_id):
     return fetch_data(f'/j/job_listing/{job_listing_id}')
 
+def get_job_listings_by_recruiter(recruiter_id):
+    return fetch_data(f'/j/job_listings/recruiter/{recruiter_id}')
+
 def get_job_listings_by_company(company_id):
     return fetch_data(f'/j/job_listings/company/{company_id}')
 

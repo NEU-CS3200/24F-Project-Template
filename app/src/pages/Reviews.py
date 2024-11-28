@@ -14,7 +14,6 @@ if "create_modal" not in st.session_state:
 
 job_listing_id = st.session_state.get('job_listing_id', None)
 student_id = st.session_state.get('student_id', None)
-logger.info(f"Student ID: {student_id}")
 
 reviews = []
 if job_listing_id:

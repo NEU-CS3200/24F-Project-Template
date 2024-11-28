@@ -74,9 +74,12 @@ if st.button('View all Job Postings',
              type='primary',
              use_container_width=True):
   st.session_state['company_id'] = False
+  st.session_state['my_job_postings'] = False
   st.switch_page('pages/Job_Listings.py')
 
 if st.button('View my Job Postings', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.session_state['company_id'] = False
+  st.session_state['my_job_postings'] = True
+  st.switch_page('pages/Job_Listings.py')
