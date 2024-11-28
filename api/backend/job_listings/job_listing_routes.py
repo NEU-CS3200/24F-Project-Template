@@ -90,13 +90,17 @@ def create_job_listing():
     data = request.json
     job_title = data['jobTitle']
     description = data['description']
+    startDate = data['startDate']
+    endDate = data['endDate']
     wage = data['wage']
+    skills = data['skills']
+    location = data['location']
     company_id = data['companyId']
     recruiter_id = data['recruiterId']
     
     query = f'''
-        INSERT INTO jobListing (jobTitle, description, hourlyWage, companyId, recruiterId)
-        VALUES ('{job_title}', '{description}', '{wage}', '{company_id}', '{recruiter_id}')
+        INSERT INTO jobListing (jobTitle, description, startDate, endDate, hourlyWage, skills, location, companyId, recruiterId)
+        VALUES ('{job_title}', '{description}', '{startDate}', '{endDate}', '{wage}', '{skills}', '{location}', '{company_id}', '{recruiter_id}')
     '''
     
     cursor = db.get_db().cursor()
@@ -104,6 +108,52 @@ def create_job_listing():
     db.get_db().commit()
     response = make_response(jsonify({"message": "Job Listing created"}))
     response.status_code = 201
+    return response
+
+#------------------------------------------------------------
+# Update a job listing
+#------------------------------------------------------------
+@job_listings.route('/job_listing', methods=['PUT'])
+def update_job_listing():
+    data = request.json
+    job_listing_id = data['jobListingId']
+    job_title = data['jobTitle']
+    description = data['description']
+    startDate = data['startDate']
+    endDate = data['endDate']
+    hourlyWage = data['hourlyWage']
+    skills = data['skills']
+    location = data['location']
+    
+    query = f'''
+        UPDATE jobListing
+        SET jobTitle = '{job_title}', description = '{description}', hourlyWage = '{hourlyWage}', startDate = '{startDate}', endDate = '{endDate}', skills = '{skills}', location = '{location}'
+        WHERE jobListingId = '{str(job_listing_id)}'
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    response = make_response(jsonify({"message": "Job Listing updated"}))
+    response.status_code = 200
+    return response
+
+#------------------------------------------------------------
+# Delete a job listing
+#------------------------------------------------------------
+@job_listings.route('/job_listing/<job_listing_id>', methods=['PUT'])
+def delete_job_listing(job_listing_id):
+    query = f'''
+        UPDATE jobListing
+        SET deleted = true
+        WHERE jobListingId = '{str(job_listing_id)}'
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    response = make_response(jsonify({"message": "Job Listing deleted"}))
+    response.status_code = 200
     return response
 
 #------------------------------------------------------------

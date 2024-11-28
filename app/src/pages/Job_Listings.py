@@ -69,6 +69,6 @@ if isinstance(job_listings, list):
     for job in filtered_job_listings:
         num_reviews = len([review for review in reviews if review['Job Listing ID'] == job['Job Listing ID']])
 
-        job_listing_component(job, num_reviews)
+        job_listing_component(job, num_reviews, my_job_postings=my_job_postings)
 else:
     st.write("No job postings available.")

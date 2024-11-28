@@ -31,7 +31,7 @@ def create_review_modal(job_listing_id, student_id):
         create_review(payload)
         st.success("Review submitted.")
         st.session_state["create_modal"] = False
-\
+
 def edit_review_modal(review, edit_modal_key):
     st.write("### Edit Review")
     new_description = st.text_area("Description", value=review['Description'])

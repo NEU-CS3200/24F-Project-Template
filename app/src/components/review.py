@@ -31,7 +31,7 @@ def review_component(review, my_reviews=False):
                 if st.button("Delete review", key=f"delete_review_{review['Review ID']}"):
                     st.session_state[delete_modal_key] = True
 
-    # Delete confirmation modal
+    # Delete modal
     if st.session_state[delete_modal_key]:
         delete_review_modal(review, delete_modal_key)
 

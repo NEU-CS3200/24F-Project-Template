@@ -1,6 +1,16 @@
 import streamlit as st
+from utils.job_listing_modals import delete_job_listing_modal
+from utils.job_listing_modals import edit_job_listing_modal
 
-def job_listing_component(job, num_reviews):
+def job_listing_component(job, num_reviews, my_job_postings=False):
+    delete_modal_key = f"delete_modal_{job['Job Listing ID']}"
+    edit_modal_key = f"edit_modal_{job['Job Listing ID']}"
+
+    if delete_modal_key not in st.session_state:
+        st.session_state[delete_modal_key] = False
+    if edit_modal_key not in st.session_state:
+        st.session_state[edit_modal_key] = False
+
     with st.expander(f"{job['Company']}: {job['Job Title']}"):
         col1, col2 = st.columns(2)
         with col1:
@@ -22,6 +32,19 @@ def job_listing_component(job, num_reviews):
                 st.query_params.job_listing_id = job['Job Listing ID']
                 st.session_state['job_listing_id'] = job['Job Listing ID']
                 st.switch_page('pages/Reviews.py')
-
+            if my_job_postings:
+                if st.button("Edit Job Listing", key=f"edit_job_{job['Job Listing ID']}"):
+                    st.session_state[edit_modal_key] = True
+                if st.button("Delete Job Listing", key=f"delete_job_{job['Job Listing ID']}"):
+                    st.session_state[delete_modal_key] = True
         st.write("**Description**")
         st.write(job.get('Description', 'N/A'))
+
+    # Delete modal
+    if st.session_state[delete_modal_key]:
+        delete_job_listing_modal(job['Job Listing ID'], delete_modal_key)
+
+    # Edit modal
+    if st.session_state[edit_modal_key]:
+        edit_job_listing_modal(job, edit_modal_key)
+

@@ -73,6 +73,12 @@ def get_job_listings_by_company(company_id):
 def create_job_listing(data):
     return create_data('/j/job_listing', data)
 
+def edit_job_listing(data):
+    return edit_data('/j/job_listing', data)
+
+def delete_job_listing(job_listing_id):
+    return delete_data(f'/j/job_listing/{job_listing_id}')
+
 #----------------- Reviews -----------------#
 
 def get_all_reviews():
