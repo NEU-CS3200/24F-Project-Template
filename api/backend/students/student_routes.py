@@ -64,3 +64,22 @@ def get_resources_by_student(student_id):
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
+
+
+# Get all students that are associated with the advisor
+@students.route('/students/advisor/<advisor_id>', methods=['GET'])
+def get_students_for_advisor(advisor_id):
+    
+    # SQL query
+    query = f"""
+        SELECT student.studentId, student.name, student.email, student.phoneNumber
+        FROM student
+        INNER JOIN advisor ON student.advisorId = advisor.advisorId
+        WHERE advisor.advisorId = '{advisor_id}';
+    """
+    cursor = db.get_db().cursor()
+    cursor.execute(query, (advisor_id,))
+    students = cursor.fetchall()
+
+    return jsonify(students), 200
+

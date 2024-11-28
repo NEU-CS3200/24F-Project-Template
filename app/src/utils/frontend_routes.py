@@ -98,3 +98,8 @@ def edit_review(data):
 
 def delete_review(review_id):
     return delete_data(f'/r/review/{review_id}')
+
+#----------------- Advisors -----------------#
+
+def get_students_for_advisor(advisor_id):
+    return fetch_data(f'/students/advisor/{advisor_id}')
