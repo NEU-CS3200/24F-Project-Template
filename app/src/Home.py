@@ -42,6 +42,7 @@ st.write('### Hi! As which user would you like to log in?')
 # functionality, we put a button on the screen that the user 
 # can click to MIMIC logging in as that mock user. 
 
+# Everyone should work on their user from here. 
 if st.button(" A Student Preparing for an Internship", 
         type = 'primary', 
         use_container_width=True):
