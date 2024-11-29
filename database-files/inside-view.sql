@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS common_questions (
     PRIMARY KEY (id, company_name),
     CONSTRAINT FOREIGN KEY (company_name) REFERENCES companies (name)
             ON UPDATE cascade ON DELETE cascade
-)
+);
 
 CREATE TABLE IF NOT EXISTS company_contact (
     id int AUTO_INCREMENT,
