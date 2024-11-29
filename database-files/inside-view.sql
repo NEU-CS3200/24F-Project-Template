@@ -2,13 +2,13 @@ CREATE DATABASE insideView;
 
 USE insideView;
 
-CREATE TABLE colleges (
+CREATE TABLE IF NOT EXISTS colleges (
     id int AUTO_INCREMENT,
     name varchar(75),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE advisors (
+CREATE TABLE IF NOT EXISTS advisors (
     id int AUTO_INCREMENT,
     collegeId int NOT NULL,
     firstName varchar(50),
@@ -21,7 +21,7 @@ CREATE TABLE advisors (
             ON UPDATE cascade ON DELETE restrict
 );
 
-CREATE TABLE students (
+CREATE TABLE IF NOT EXISTS students (
     id int AUTO_INCREMENT,
     firstName varchar(50),
     middleName varchar(50),
@@ -42,13 +42,13 @@ CREATE TABLE students (
             ON UPDATE cascade ON DELETE restrict
 );
 
-CREATE TABLE skills (
+CREATE TABLE IF NOT EXISTS skills (
     id int AUTO_INCREMENT,
     skillName varchar(50),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE student_skills (
+CREATE TABLE IF NOT EXISTS student_skills (
     studentId int NOT NULL,
     skillId int NOT NULL,
     CONSTRAINT FOREIGN KEY (studentId) REFERENCES students (id)
@@ -57,13 +57,13 @@ CREATE TABLE student_skills (
             ON UPDATE cascade ON DELETE restrict
 );
 
-CREATE TABLE courses (
+CREATE TABLE IF NOT EXISTS courses (
     id int AUTO_INCREMENT,
     title varchar(75),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE student_courses (
+CREATE TABLE IF NOT EXISTS student_courses (
     studentId int NOT NULL,
     courseId int NOT NULL,
     CONSTRAINT FOREIGN KEY (studentId) REFERENCES students (id)
@@ -72,13 +72,13 @@ CREATE TABLE student_courses (
             ON UPDATE cascade ON DELETE restrict
 );
 
-CREATE TABLE degrees (
+CREATE TABLE IF NOT EXISTS degrees (
     id int AUTO_INCREMENT,
     name varchar(50),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE student_degrees (
+CREATE TABLE IF NOT EXISTS student_degrees (
     studentId int NOT NULL,
     degreeId int NOT NULL,
     CONSTRAINT FOREIGN KEY (studentId) REFERENCES students (id)
@@ -87,13 +87,22 @@ CREATE TABLE student_degrees (
             ON UPDATE cascade ON DELETE restrict
 );
 
-CREATE TABLE companies (
+CREATE TABLE IF NOT EXISTS companies (
     id int AUTO_INCREMENT,
     name varchar(75),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE company_contact (
+CREATE TABLE IF NOT EXISTS common_questions (
+    id INT AUTO_INCREMENT,
+    commonQuestion TEXT,
+    company_name varchar(75),
+    PRIMARY KEY (id, company_name),
+    CONSTRAINT FOREIGN KEY (company_name) REFERENCES companies (name)
+            ON UPDATE cascade ON DELETE cascade
+)
+
+CREATE TABLE IF NOT EXISTS company_contact (
     id int AUTO_INCREMENT,
     companyId int NOT NULL,
     firstName varchar(50),
@@ -107,7 +116,7 @@ CREATE TABLE company_contact (
             ON UPDATE cascade ON DELETE restrict
 );
 
-CREATE TABLE job_posting (
+CREATE TABLE IF NOT EXISTS job_posting (
     id int AUTO_INCREMENT,
     companyId int NOT NULL,
     contactId int NOT NULL,
@@ -122,7 +131,7 @@ CREATE TABLE job_posting (
                  ON UPDATE cascade ON DELETE restrict
 );
 
-CREATE TABLE job_degrees (
+CREATE TABLE IF NOT EXISTS job_degrees (
     jobId int NOT NULL,
     degreeId int NOT NULL,
     CONSTRAINT FOREIGN KEY (jobId) REFERENCES job_posting (id)
@@ -131,7 +140,7 @@ CREATE TABLE job_degrees (
             ON UPDATE cascade ON DELETE restrict
 );
 
-CREATE TABLE reviews (
+CREATE TABLE IF NOT EXISTS reviews (
     id int AUTO_INCREMENT,
     content text,
     title varchar(75),
@@ -146,7 +155,7 @@ CREATE TABLE reviews (
             ON UPDATE cascade ON DELETE cascade
 );
 
-CREATE TABLE review_courses (
+CREATE TABLE IF NOT EXISTS review_courses (
     reviewId int NOT NULL,
     courseId int NOT NULL,
     CONSTRAINT FOREIGN KEY (reviewId) REFERENCES reviews (id)
@@ -155,7 +164,7 @@ CREATE TABLE review_courses (
             ON UPDATE cascade ON DELETE restrict
 );
 
-CREATE TABLE job_application (
+CREATE TABLE IF NOT EXISTS job_application (
     jobId int NOT NULL,
     studentId int NOT NULL,
     CONSTRAINT FOREIGN KEY (jobId) REFERENCES job_posting (id)
@@ -164,7 +173,7 @@ CREATE TABLE job_application (
             ON UPDATE cascade ON DELETE restrict
 );
 
-CREATE TABLE announcements (
+CREATE TABLE IF NOT EXISTS announcements (
     id int AUTO_INCREMENT,
     authorId int NOT NULL,
     title varchar(75),
@@ -174,7 +183,7 @@ CREATE TABLE announcements (
            ON UPDATE cascade ON DELETE cascade
 );
 
-CREATE TABLE announcement_degrees (
+CREATE TABLE IF NOT EXISTS announcement_degrees (
     announcementId int NOT NULL,
     degreeId int NOT NULL,
     CONSTRAINT FOREIGN KEY (announcementId) REFERENCES announcements (id)
@@ -183,7 +192,7 @@ CREATE TABLE announcement_degrees (
             ON UPDATE cascade ON DELETE restrict
 );
 
-CREATE TABLE system_admins (
+CREATE TABLE IF NOT EXISTS system_admins (
     id int AUTO_INCREMENT,
     firstName varchar(50),
     middleName varchar(50),
@@ -236,6 +245,11 @@ INSERT INTO student_degrees (studentId, degreeId)
 
 INSERT INTO companies (name)
     VALUES ('Google'), ('Apple'), ('Facebook');
+
+INSERT INTO common_questions (commonQuestion, company_name)
+    VALUES ('Tell us about your experiences', 'Google'),
+           ('How would you design this basic application?', 'Apple'),
+           ('A problem arises in the workplace, how do you fix it?', 'Facebook');
 
 INSERT INTO company_contact (companyId, firstName, middleName, lastName, phone, email, dateOfBirth)
     VALUES (1, 'Jack', 'William', 'Daniels', '(321) 654-0987',
