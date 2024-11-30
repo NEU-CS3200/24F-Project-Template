@@ -96,9 +96,9 @@ CREATE TABLE IF NOT EXISTS companies (
 CREATE TABLE IF NOT EXISTS common_questions (
     id INT AUTO_INCREMENT,
     commonQuestion TEXT,
-    company_name varchar(75),
-    PRIMARY KEY (id, company_name),
-    CONSTRAINT FOREIGN KEY (company_name) REFERENCES companies (name)
+    company_id INT,
+    PRIMARY KEY (id, company_id),
+    CONSTRAINT FOREIGN KEY (company_id) REFERENCES companies (id)
             ON UPDATE cascade ON DELETE cascade
 );
 
@@ -246,10 +246,10 @@ INSERT INTO student_degrees (studentId, degreeId)
 INSERT INTO companies (name)
     VALUES ('Google'), ('Apple'), ('Facebook');
 
-INSERT INTO common_questions (commonQuestion, company_name)
-    VALUES ('Tell us about your experiences', 'Google'),
-           ('How would you design this basic application?', 'Apple'),
-           ('A problem arises in the workplace, how do you fix it?', 'Facebook');
+INSERT INTO common_questions (commonQuestion, company_id)
+    VALUES ('Tell us about your experiences', 1),
+           ('How would you design this basic application?', 2),
+           ('A problem arises in the workplace, how do you fix it?', 3);
 
 INSERT INTO company_contact (companyId, firstName, middleName, lastName, phone, email, dateOfBirth)
     VALUES (1, 'Jack', 'William', 'Daniels', '(321) 654-0987',
