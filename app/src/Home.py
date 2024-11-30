@@ -42,7 +42,7 @@ st.write('### HI! As which user would you like to log in?')
 # functionality, we put a button on the screen that the user 
 # can click to MIMIC logging in as that mock user. 
 
-if st.button("Act as John, a Political Strategy Advisor", 
+if st.button("Act as System Administrator - Michael Ortega", 
             type = 'primary', 
             use_container_width=True):
     # when user clicks the button, they are now considered authenticated
@@ -55,29 +55,29 @@ if st.button("Act as John, a Political Strategy Advisor",
     # finally, we ask streamlit to switch to another page, in this case, the 
     # landing page for this particular user type
     logger.info("Logging in as Political Strategy Advisor Persona")
-    st.switch_page('pages/00_Pol_Strat_Home.py')
+    st.switch_page('pages/00_Tech_Support_Analyst_Home.py')
 
-if st.button('Act as Mohammad, an USAID worker', 
+if st.button('Act as Co-op Advisor - Jessica Doofenshmirtz', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'usaid_worker'
-    st.session_state['first_name'] = 'Mohammad'
-    st.switch_page('pages/10_USAID_Worker_Home.py')
+    st.session_state['first_name'] = 'Jessica'
+    st.switch_page('pages/10_Co-op_Advisor_Home.py')
 
-if st.button('Act as System Administrator', 
+if st.button('Act as Student - Kevin Chen', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/20_Admin_Home.py')
+    st.switch_page('pages/20_Student_Kevin_Chen_Home.py')
 
-if st.button('Some text', 
+if st.button('Act as Student - Sarah Lopez', 
             type = 'secondary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'Professor'
-    st.switch_page('pages/20_Admin_Home.py')
+    st.session_state['role'] = 'Student'
+    st.switch_page('pages/40_Student_Sarah_Home.py')
         
 
