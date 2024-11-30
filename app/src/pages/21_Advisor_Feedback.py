@@ -8,7 +8,7 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('App Administration Page')
+st.title('Advisor Feedback Page')
 
 st.write('\n\n')
 st.write('## Model 1 Maintenance')
