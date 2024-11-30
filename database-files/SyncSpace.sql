@@ -183,3 +183,31 @@ CREATE TABLE IF NOT EXISTS SystemHealth (
     MetricType VARCHAR(50),
     FOREIGN KEY (LogID) REFERENCES SystemLog(LogID)
 );
+
+-- 1.4 
+UPDATE Ticket
+SET Priority = 'Critical'
+WHERE TicketID = 1;
+
+-- 2.5 
+UPDATE Task
+SET Status = 'Completed'
+WHERE TaskID = 5;
+
+-- 3.2 
+INSERT INTO Student (Name, Major, Location, HousingStatus, Budget, Cleanliness, Lifestyle, CommuteTime, Interests)
+VALUES (
+    'Kevin Chen',
+    'Data Science and Business',
+    'San Jose, California',
+    'Searching',
+    1200.00,
+    'Very Clean',
+    'Quiet',
+    30,
+    'Hiking, Basketball, Technology'
+);
+
+-- 4.3 
+INSERT INTO Housing (Style, Availability, Location)
+VALUES ('Apartment', 'Available', 'New York City');

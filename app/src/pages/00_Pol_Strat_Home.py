@@ -13,6 +13,7 @@ st.title(f"Welcome Political Strategist, {st.session_state['first_name']}.")
 st.write('')
 st.write('')
 st.write('### What would you like to do today?')
+st.write('### Test')
 
 if st.button('View World Bank Data Visualization', 
              type='primary',

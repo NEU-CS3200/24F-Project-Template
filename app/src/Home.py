@@ -73,14 +73,6 @@ if st.button('Act as System Administrator',
     st.session_state['first_name'] = 'SysAdmin'
     st.switch_page('pages/20_Admin_Home.py')
 
-<<<<<<< HEAD
-if st.button('Some Text On the Button', 
-             type = 'primary',
-             user_container_width=True):
-        st.session_state['authenticated'] = True
-        st.session_state['role'] = 'Professor'
-        st.switch_page('pages/20_Admin_Home.py')
-=======
 if st.button('Some text', 
             type = 'secondary', 
             use_container_width=True):
@@ -89,4 +81,3 @@ if st.button('Some text',
     st.switch_page('pages/20_Admin_Home.py')
         
 
->>>>>>> b35959ad8fee36da0e1c20675f46a401a6c40432
