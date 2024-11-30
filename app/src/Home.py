@@ -71,7 +71,7 @@ if st.button('Act as Student - Kevin Chen',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/20_Student_Kevin_Chen_Home.py')
+    st.switch_page('pages/20_Student_Kevin_Home.py')
 
 if st.button('Act as Student - Sarah Lopez', 
             type = 'secondary', 
