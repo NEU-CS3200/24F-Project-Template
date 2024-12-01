@@ -150,7 +150,7 @@ DROP TABLE IF EXISTS SystemHealth;
 CREATE TABLE IF NOT EXISTS SystemHealth (
     SystemHealthID INT AUTO_INCREMENT PRIMARY KEY,
     LogID INT,
-    Timestamp TIMESTAMP,
+    Timestamp DATETIME,
     Status VARCHAR(50),
     MetricType VARCHAR(50),
     FOREIGN KEY (LogID) REFERENCES SystemLog(LogID)
