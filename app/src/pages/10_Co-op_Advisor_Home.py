@@ -2,95 +2,90 @@ import logging
 logger = logging.getLogger(__name__)
 
 import streamlit as st
-import pandas as pd
-from st_aggrid import AgGrid, GridOptionsBuilder
-import sqlite3
 from modules.nav import SideBarLinks
+import sqlite3
+import pandas as pd
 
-# Check if user is logged in
-if 'logged_in' not in st.session_state or not st.session_state['logged_in']:
-    st.error("Please login to access this page")
-    st.stop()
-
-# Page config
+# Set Streamlit page configuration
 st.set_page_config(layout="wide")
 
-# Show appropriate sidebar links for the role of the currently logged in user
+# Add navigation sidebar
 SideBarLinks()
 
-# Title and welcome message
-st.title(f"Welcome Co-op Advisor, {st.session_state['first_name']}.")
-st.write('')
+# Page title and welcome message
+st.title('Co-op Advisor Home Page')
+st.write(f"Welcome, {st.session_state.get('first_name', 'Advisor')}!")
+
 st.write('')
 st.write('### What would you like to do today?')
 
-# Create top row of metric cards with some padding
-st.write('')
+# Create top row of metric cards
 col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
 
-
 with col1:
-    st.button("🔔 NOTIFICATION\n9 Unread Notifications", 
-              key="notification_btn",
-              on_click=lambda: st.switch_page("pages/11_Notification.py"))
+    if st.button("🔔 NOTIFICATION\n9 Unread Notifications", key="notification_btn"):
+        st.write("Redirecting to Notifications...")
 
 with col2:
-    st.button("📝 FORMS\n4 Student Forms Update",
-              key="forms_btn",
-              on_click=lambda: st.switch_page("pages/12_Form.py"))
+    if st.button("📝 FORMS\n4 Student Forms Update", key="forms_btn"):
+        st.write("Redirecting to Forms...")
 
 with col3:
-    st.button("🏠 HOUSING\n6 Students Waiting",
-              key="housing_btn",
-              on_click=lambda: st.switch_page("pages/13_Housing.py"))
+    if st.button("🏠 HOUSING\n6 Students Waiting", key="housing_btn"):
+        st.write("Redirecting to Housing...")
 
 with col4:
-    st.button("➕ CREATE NEW\nCase",
-              key="create_btn")
+    if st.button("➕ CREATE NEW\nCase", key="create_btn"):
+        st.write("Redirecting to Create New Case...")
 
 # Database connection and student data retrieval
 @st.cache_data
 def load_student_data():
-    conn = sqlite3.connect('ScyncSpace-data.sql')
-    query = """
-    SELECT 
-        student_id,
-        first_name || ' ' || last_name as student_name,
-        location as co_op_location,
-        company_name,
-        start_date
-    FROM students
-    ORDER BY start_date DESC
-    """
-    df = pd.read_sql_query(query, conn)
-    conn.close()
-    return df
+    try:
+        # Connect to SQLite database (using .db extension)
+        conn = sqlite3.connect('database-files/SyncSpace.db')
+        query = """
+        SELECT 
+            StudentID AS student_id,
+            Name AS student_name,
+            Location AS co_op_location,
+            Company AS company_name,
+            Major AS major
+        FROM Student
+        ORDER BY student_id ASC
+        """
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        return df
+    except sqlite3.Error as e:
+        st.error(f"Database error: {e}")
+        st.info("Please ensure the database is properly initialized")
+        return pd.DataFrame()
 
 # Load student data
 df = load_student_data()
 
-# Replace the grid configuration and display code with this:
+# Display the student list
 st.subheader(f"Student List ({len(df)})")
 
 # Add a search box
-search = st.text_input("Search students", "")
+search = st.text_input("Search students by name, location, or company", "")
 
-# Filter dataframe based on search term
+# Filter the DataFrame based on search input
 if search:
-    df = df[
-        df.apply(lambda row: search.lower() in str(row).lower(), axis=1)
-    ]
+    df = df[df.apply(lambda row: search.lower() in str(row).lower(), axis=1)]
 
-# Display the dataframe with built-in Streamlit functionality
+# Display the DataFrame with Streamlit's built-in table display
 st.dataframe(
     df,
-    hide_index=True,
+    use_container_width=True,
     column_config={
-        "student_id": None,  # Hide the student_id column
+        "student_id": "Student ID",
         "student_name": "Name",
         "co_op_location": "Co-op Location",
         "company_name": "Company",
-        "start_date": "Start Date"
-    },
-    use_container_width=True
+        "major": "Major"
+    }
 )
+
+
