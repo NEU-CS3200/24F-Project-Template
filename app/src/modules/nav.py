@@ -48,7 +48,7 @@ def ClassificationNav():
     )
 
 
-#### ------------------------ System Admin Role ------------------------
+#### ------------------------ Student Housing/Carpool Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Student_Kevin_Home.py", label="Student - Kevin Chen", icon="🖥️")
     st.sidebar.page_link(
