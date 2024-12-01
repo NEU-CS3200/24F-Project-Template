@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS Chat (
     ChatID INT AUTO_INCREMENT PRIMARY KEY,
     StudentID INT,
     Content TEXT,
-    Time TIMESTAMP,
+    Time DATETIME,
     SupportStaffID INT,
     FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
     FOREIGN KEY (SupportStaffID) REFERENCES User(UserID)
