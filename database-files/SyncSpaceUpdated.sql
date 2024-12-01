@@ -20,18 +20,6 @@ CREATE TABLE IF NOT EXISTS Housing (
     Location VARCHAR(100)
 );
 
--- Create table for Ticket (needed before SystemHealth and SystemLog)
-DROP TABLE IF EXISTS Ticket;
-CREATE TABLE IF NOT EXISTS Ticket (
-    TicketID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT,
-    IssueType VARCHAR(50),
-    Status VARCHAR(50),
-    Priority VARCHAR(50),
-    ReceivedDate DATE,
-    ResolvedDate DATE
-);
-
 -- Create table for User
 DROP TABLE IF EXISTS User;
 CREATE TABLE IF NOT EXISTS User (
@@ -43,17 +31,17 @@ CREATE TABLE IF NOT EXISTS User (
     PermissionsLevel VARCHAR(50)
 );
 
--- Create table for Chat
-DROP TABLE IF EXISTS Chat;
-CREATE TABLE IF NOT EXISTS Chat (
-    ChatID INT AUTO_INCREMENT PRIMARY KEY,
-    SenderID INT,
-    ReceiverID INT,
-    Content TEXT,
-    Time TIMESTAMP,
-    SupportStaffID INT,
-    FOREIGN KEY (SenderID) REFERENCES User(UserID),
-    FOREIGN KEY (ReceiverID) REFERENCES User(UserID)
+-- Create table for Ticket (needed before SystemHealth and SystemLog)
+DROP TABLE IF EXISTS Ticket;
+CREATE TABLE IF NOT EXISTS Ticket (
+    TicketID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT,
+    IssueType VARCHAR(50),
+    Status VARCHAR(50),
+    Priority VARCHAR(50),
+    ReceivedDate DATE,
+    ResolvedDate DATE,
+    FOREIGN KEY (UserID) REFERENCES User(UserID)
 );
 
 -- Create table for Student
@@ -78,9 +66,21 @@ CREATE TABLE IF NOT EXISTS Student (
     GroupID INT,
     FeedbackID INT,
     ChatID INT,
-    BrowseTo VARCHAR(100),
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID),
     FOREIGN KEY (HousingID) REFERENCES Housing(HousingID)
+);
+
+-- Create table for Chat
+DROP TABLE IF EXISTS Chat;
+CREATE TABLE IF NOT EXISTS Chat (
+    ChatID INT AUTO_INCREMENT PRIMARY KEY,
+    StudentID INT,
+    Content TEXT,
+    Time TIMESTAMP,
+    SupportStaffID INT,
+    FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+    FOREIGN KEY (SupportStaffID) REFERENCES User(UserID)
+
 );
 
 -- Create table for Events
@@ -93,10 +93,6 @@ CREATE TABLE IF NOT EXISTS Events (
     Description TEXT,
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
 );
-
--- Add foreign key to User table now that Chat is created
-ALTER TABLE User
-ADD FOREIGN KEY (ChatID) REFERENCES Chat(ChatID);
 
 -- Create table for Feedback
 DROP TABLE IF EXISTS Feedback;
@@ -135,7 +131,7 @@ CREATE TABLE IF NOT EXISTS Task (
     DueDate DATE,
     Status VARCHAR(50),
     AdvisorID INT,
-    FOREIGN KEY (AssignedTo) REFERENCES User(UserID),
+    FOREIGN KEY (AssignedTo) REFERENCES Student(StudentID),
     FOREIGN KEY (AdvisorID) REFERENCES Advisor(AdvisorID)
 );
 
