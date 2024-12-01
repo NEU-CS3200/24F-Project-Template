@@ -21,12 +21,14 @@ tech_support_analyst = Blueprint('tech_support_analyst', __name__)
 @tech_support_analyst.route('/tickets', methods=['GET'])
 def get_tickets():
     query = '''
-        SELECT  id, 
-                product_code, 
-                product_name, 
-                list_price, 
-                category 
-        FROM products
+        SELECT  TicketID, 
+                UserID, 
+                IssueType, 
+                Status, 
+                Priority,
+                ReceivedDate,
+                ResolvedDate 
+        FROM ticket
     '''
     
     # get a cursor object from the database
