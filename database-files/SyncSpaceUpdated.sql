@@ -158,6 +158,8 @@ CREATE TABLE IF NOT EXISTS SystemHealth (
     FOREIGN KEY (LogID) REFERENCES SystemLog(LogID)
 );
 
+-- NOTE - need to add in data for our personas
+
 -- 1.4 
 UPDATE Ticket
 SET Priority = 'Critical'

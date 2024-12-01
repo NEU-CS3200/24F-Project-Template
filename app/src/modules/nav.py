@@ -11,7 +11,7 @@ def HomeNav():
 
 
 def AboutPageNav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+    st.sidebar.page_link("pages/50_About.py", label="About", icon="🧠")
 
 
 #### ------------------------ Examples for Role of pol_strat_advisor ------------------------
@@ -48,7 +48,7 @@ def ClassificationNav():
     )
 
 
-#### ------------------------ System Admin Role ------------------------
+#### ------------------------ Student Housing/Carpool Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Student_Kevin_Home.py", label="Student - Kevin Chen", icon="🖥️")
     st.sidebar.page_link(
