@@ -151,8 +151,8 @@ def add_new_chats():
 
     #extracting the variable
     name = the_data['product_name']
-    description = the_data['product_description']
-    price = the_data['product_price']
+    content = the_data['chat_content']
+    time = the_data['chat_time']
     category = the_data['product_category']
     
     query = f'''
@@ -160,7 +160,7 @@ def add_new_chats():
                               description,
                               category, 
                               list_price)
-        VALUES ('{name}', '{description}', '{category}', {str(price)})
+        VALUES ('{name}', '{content}', '{category}', {str(time)})
     '''
     # TODO: Make sure the version of the query above works properly
     # Constructing the query
@@ -176,7 +176,7 @@ def add_new_chats():
     cursor.execute(query)
     db.get_db().commit()
     
-    response = make_response("Successfully added product")
+    response = make_response("Successfully initiated chat")
     response.status_code = 200
     return response
 
