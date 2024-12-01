@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS Student (
     Bio TEXT,
     CommunityID INT,
     HousingID INT,
+    AdvisorID INT,
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID),
     FOREIGN KEY (HousingID) REFERENCES Housing(HousingID)
 );
