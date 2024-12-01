@@ -115,6 +115,7 @@ CREATE TABLE IF NOT EXISTS Advisor (
 -- Add foreign key to Feedback for Advisor after Advisor is created
 ALTER TABLE Feedback
 ADD FOREIGN KEY (AdvisorID) REFERENCES Advisor(AdvisorID);
+-- Add foreign key to Student for Advisor after Advisor is created
 
 ALTER TABLE Student
 ADD FOREIGN KEY (AdvisorID) REFERENCES Advisor(AdvisorID);
