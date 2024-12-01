@@ -18,12 +18,22 @@ st.title("Choose an available company below to view job postings and reviews.")
 # call the api to display all reviews for that company
 companies = requests.get('http://api:4000/co/companies').json()
 company_names = [company['name'] for company in companies]
+
 st.markdown("### **Select a company**")
-selected_company = st.selectbox("", company_names)
+selected_company = st.selectbox("Select a company", company_names, key="selected_company")
+
+if "last_selected_company" not in st.session_state:
+    st.session_state["last_selected_company"] = None
+
+if st.session_state["last_selected_company"] != selected_company:
+    st.session_state["selected_job_id"] = None
+    st.session_state["show_add_review_form"] = False
+    st.session_state["last_selected_company"] = selected_company
 
 col1, col2 = st.columns(2)
 
 selected_job_id = st.session_state.get("selected_job_id", None)
+show_add_review_form = st.session_state.get("show_add_review_form", False)
 
 with col1:
     if selected_company:
@@ -58,25 +68,68 @@ with col1:
                 st.session_state["selected_job_id"] = job_posting['id']
                 st.session_state["selected_job_name"] = job_posting['name']
 
+            if st.button('Add Review'):
+                st.session_state["selected_job_id"] = job_posting['id']
+                st.session_state["selected_job_name"] = job_posting['name']
+                st.session_state["show_add_review_form"] = True
+
+            if st.button("Delete Posting"):
+                response = requests.delete(f"http://api:4000/jp/jobPostings/{job_posting['id']}")
+                if response.status_code == 200:
+                    st.success("Job posting deleted successfully.")
+                else:
+                    st.error("Failed to delete job posting.")
+
             st.write('---')
 
-# with col2:
-#     if selected_job_id:
-#         reviews_response = requests.get(f"http://api:4000/jp/jobPostings/{selected_job_id}")
+with col2:
+    if selected_job_id:
+        reviews_response = requests.get(f"http://api:4000/jp/jobPostings/reviews/{selected_job_id}")
 
-#         if reviews_response.status_code == 200:
-#             reviews = reviews_response.json()
-#             st.subheader(f"Reviews for {st.session_state['selected_job_name']}:")
+        if reviews_response.status_code == 200:
+            reviews = reviews_response.json()
+            if reviews:
+                for review in reviews:
+                    st.write(f"Author: {review['firstName']}, {review['lastName']}")
+                    st.write(f"Title: {review['title']}")
+                    st.write(f"Rating: {review['rating']}/5")
+                    st.write(f"Description: {review['content']}")
+                    st.write(f"Date: {review['datePosted']}")
+                    st.write('---')
+                
+            else:
+                st.info(f"No reviews available for {st.session_state['selected_job_name']}.")
+        else:
+            st.error("Failed to load reviews.")
 
-#             if reviews:
-#                 # Display the reviews
-#                 for review in reviews:
-#                     st.write(f"Reviewer: {review['reviewer_name']}")
-#                     st.write(f"Rating: {review['rating']}/5")
-#                     st.write(f"Review: {review['content']}")
-#                     st.write(f"Date: {review['date']}")
-#                     st.write('---')
-#             else:
-#                 st.info("No reviews available for this job posting.")
-#         else:
-#             st.error("Failed to load reviews.")
+    if show_add_review_form:
+        st.subheader(f"Add a review for {st.session_state['selected_job_name']}")
+
+        with st.form(key='addReviewForm', clear_on_submit=True):
+            first_name = st.text_input("First Name", "")
+            last_name = st.text_input("Last Name", "")
+            title = st.text_input("Enter Title", "")
+            rating = st.slider("Rating", 1, 5, 5)
+            description = st.text_area("Enter Review")
+            submit_button = st.form_submit_button("Submit")
+
+            if submit_button:
+                if not first_name or not last_name or not title or not description:
+                    st.error("All fields must be filled out!")
+                else:
+                    review_payload = {
+                        "firstName": first_name,
+                        "lastName": last_name,
+                        "title": title,
+                        "rating": rating,
+                        "content": description,
+                        "jobPostingId": st.session_state["selected_job_id"],
+                    }
+
+                    response = requests.post("http://api:4000/jp/jobPostings/reviews", json=review_payload)
+                    if response.status_code == 201:
+                        st.success("Review added successfully!")
+                        st.session_state["show_add_review_form"] = False
+                        st.experimental_rerun()
+                    else:
+                        st.error("Failed to add review. Please try again.")

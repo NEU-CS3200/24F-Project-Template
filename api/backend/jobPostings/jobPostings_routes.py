@@ -18,7 +18,7 @@ jobPostings = Blueprint('jobPostings', __name__)
 def get_jobPostings(company_id):
 
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT jp.name, jp.description, jp.location, jp.datePosted, cc.firstName, cc.lastName, cc.email, cc.phone
+    cursor.execute('''SELECT jp.id, jp.name, jp.description, jp.location, jp.datePosted, cc.firstName, cc.lastName, cc.email, cc.phone
                       FROM job_posting jp
                       JOIN company_contact cc ON jp.contactId = cc.id
                       WHERE jp.companyId = %s''', (company_id,))
@@ -26,5 +26,29 @@ def get_jobPostings(company_id):
     theData = cursor.fetchall()
     
     the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
+@jobPostings.route('/jobPostings/reviews/<selected_job_id>', methods=['GET'])
+def get_reviews(selected_job_id):
+    cursor = db.get_db().cursor()
+    cursor.execute('''SELECT r.content, r.title, r.rating, r.datePosted, s.firstName, s.lastName
+                      FROM reviews r
+                      JOIN students s ON r.studentId = s.id
+                      WHERE jobId = %s''', (selected_job_id,))
+
+    theData = cursor.fetchall()
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
+@jobPostings.route('/jobPostings/<job_posting_id>', methods=['DELETE'])
+def delete_jobPosting(job_posting_id):
+    cursor = db.get_db().cursor()
+    cursor.execute('''DELETE FROM job_posting WHERE id = %s''', (job_posting_id,))
+    db.get_db().commit()
+
+    the_response = make_response(jsonify('Job Posting Deleted'))
     the_response.status_code = 200
     return the_response
