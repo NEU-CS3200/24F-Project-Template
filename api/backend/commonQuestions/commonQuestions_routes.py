@@ -77,9 +77,10 @@ def delete_commonQuestion(question_id):
 def search_commonQuestions(keyphrase):
 
     cursor = db.get_db().cursor()
+    
+    # Necessary due to errors with "Unknown columns _____ in 'where clause'"
     escaped_keyphrase = pymysql.converters.escape_string(keyphrase)
 
-    # Construct the query using the escaped keyphrase
     query = f'''SELECT id, commonQuestion FROM common_questions
                 WHERE commonQuestion LIKE '%{escaped_keyphrase}%';'''
 
@@ -87,7 +88,7 @@ def search_commonQuestions(keyphrase):
     print(f"Constructed Query: {query}")
     cursor.execute(query)
     theData = cursor.fetchall()
-    
+
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response

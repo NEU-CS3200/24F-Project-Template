@@ -41,14 +41,14 @@ with col1:
             all_questions = []
 
         st.subheader(f"Common Questions for {company_name}:")
-        keyphrase = st.text_input("Filter questions by keyword:")
+        keyphrase = st.text_input("Filter questions by keyphrase:")
 
         if keyphrase.strip():
             filtered_response = requests.get(f"http://api:4000/cq/getQuestionsByKeyphrase/{keyphrase.strip()}")
             if filtered_response.status_code == 200:
                 questions = filtered_response.json()
                 if not questions:
-                    st.info("No questions match the given keyword.")
+                    st.info("No questions match the given keyphrase.")
             else:
                 st.error(f"Failed to filter questions: {filtered_response.text}")
                 questions = []
@@ -85,7 +85,6 @@ with col1:
                         st.success("Question deleted successfully!")
                     else:
                         st.error(f"Failed to delete question: {delete_response.text}")
-
 
 # Add a question to the company
 with col2:
