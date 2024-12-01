@@ -13,13 +13,13 @@ from backend.db_connection import db
 #------------------------------------------------------------
 # Create a new Blueprint object, which is a collection of 
 # routes.
-products = Blueprint('products', __name__)
+tech_support_analyst = Blueprint('tech_support_analyst', __name__)
 
 #------------------------------------------------------------
 # Get all the products from the database, package them up,
 # and return them to the client
-@products.route('/products', methods=['GET'])
-def get_products():
+@tech_support_analyst.route('/tickets', methods=['GET'])
+def get_tickets():
     query = '''
         SELECT  id, 
                 product_code, 
@@ -53,7 +53,7 @@ def get_products():
 # notice that the route takes <id> and then you see id
 # as a parameter to the function.  This is one way to send 
 # parameterized information into the route handler.
-@products.route('/product/<id>', methods=['GET'])
+@tech_support_analyst.route('/product/<id>', methods=['GET'])
 def get_product_detail (id):
 
     query = f'''SELECT id, 
@@ -139,8 +139,8 @@ def get_10_most_expensive_products():
 # This is a POST route to add a new product.
 # Remember, we are using POST routes to create new entries
 # in the database. 
-@products.route('/product', methods=['POST'])
-def add_new_product():
+@tech_support_analyst.route('/chats', methods=['POST'])
+def add_new_chats():
     
     # In a POST request, there is a 
     # collecting data from the request object 
@@ -198,12 +198,12 @@ def get_all_categories():
     return response
 
 # ------------------------------------------------------------
-# This is a stubbed route to update a product in the catalog
+# This is a stubbed route to update a log in the catalog
 # The SQL query would be an UPDATE. 
-@products.route('/product', methods = ['PUT'])
-def update_product():
-    product_info = request.json
-    current_app.logger.info(product_info)
+@tech_support_analyst.route('/logs/{user_id}', methods = ['PUT'])
+def update_logs():
+    logs_info = request.json
+    current_app.logger.info(logs_info)
 
     return "Success"
 

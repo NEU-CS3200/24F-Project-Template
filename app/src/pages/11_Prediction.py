@@ -11,6 +11,7 @@ st.set_page_config(layout = 'wide')
 SideBarLinks()
 
 st.title('Prediction with Regression')
+st.write('test')
 
 # create a 2 column layout
 col1, col2 = st.columns(2)
