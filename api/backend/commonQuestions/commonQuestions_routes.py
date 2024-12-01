@@ -8,6 +8,7 @@ from flask import jsonify
 from flask import make_response
 from flask import current_app
 from backend.db_connection import db
+import pymysql
 
 #------------------------------------------------------------
 # Create a new Blueprint object, which is a collection of 
@@ -57,5 +58,36 @@ def update_commonQuestion(question_id):
     db.get_db().commit()
     
     the_response = make_response(jsonify('Common Question Updated'))
+    the_response.status_code = 200
+    return the_response
+
+@commonQuestions.route('/deleteQuestion/<question_id>', methods=['DELETE'])
+def delete_commonQuestion(question_id):
+    cursor = db.get_db().cursor()
+
+    cursor.execute('''DELETE FROM common_questions WHERE id = {0}'''.format(question_id))
+
+    db.get_db().commit()
+    
+    the_response = make_response(jsonify('Common Question Deleted'))
+    the_response.status_code = 200
+    return the_response
+
+@commonQuestions.route('/getQuestionsByKeyphrase/<keyphrase>', methods=['GET'])
+def search_commonQuestions(keyphrase):
+
+    cursor = db.get_db().cursor()
+    escaped_keyphrase = pymysql.converters.escape_string(keyphrase)
+
+    # Construct the query using the escaped keyphrase
+    query = f'''SELECT id, commonQuestion FROM common_questions
+                WHERE commonQuestion LIKE '%{escaped_keyphrase}%';'''
+
+    print(f"Received keyphrase: {keyphrase}")
+    print(f"Constructed Query: {query}")
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    
+    the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response

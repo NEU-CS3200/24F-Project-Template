@@ -9,6 +9,9 @@ st.set_page_config(layout = 'wide')
 # Show appropriate sidebar links for the role of the currently logged in user
 SideBarLinks()
 
+if st.button("Back", key="back_button"):
+    st.switch_page('pages/00_student_home.py')
+
 st.title("Choose an available company below to view their common interview questions.")
 
 # Display all companies, and whichever one they choose, 
@@ -29,33 +32,60 @@ with col1:
                 company_name = company['name']
                 break
 
-        company_common_questions = requests.get(f"http://api:4000/cq/commonQuestions/{company_id}")
+        all_questions_response = requests.get(f"http://api:4000/cq/commonQuestions/{company_id}")
+        if all_questions_response.status_code == 200:
+            all_questions = all_questions_response.json()
+            all_questions.reverse()
+        else:
+            st.error("Failed to load questions.")
+            all_questions = []
 
-        # Display newest questions first    
-        questions = company_common_questions.json()
-        questions.reverse()
         st.subheader(f"Common Questions for {company_name}:")
+        keyphrase = st.text_input("Filter questions by keyword:")
 
+        if keyphrase.strip():
+            filtered_response = requests.get(f"http://api:4000/cq/getQuestionsByKeyphrase/{keyphrase.strip()}")
+            if filtered_response.status_code == 200:
+                questions = filtered_response.json()
+                if not questions:
+                    st.info("No questions match the given keyword.")
+            else:
+                st.error(f"Failed to filter questions: {filtered_response.text}")
+                questions = []
+        else:
+            questions = all_questions
+
+        # Display the questions
         for question in questions:
             question_id = question['id']
             question_text = question['commonQuestion']
 
-            editable_question = st.text_input("See something wrong? Edit here", question_text, key=f"edit_{question_id}")
+            col_edit, col_delete = st.columns([4, 1])  # Two columns for edit and delete buttons
 
-            if st.button(f"Save Edits", key=f"save_{question_id}"):
-                if editable_question.strip() == "":
-                    st.error("Please enter some text")
-                else:
-                    payload = {'edited_question': editable_question}
-                    update_response = requests.put(
-                        f"http://api:4000/cq/updateQuestion/{question_id}",
-                        json=payload
-                    )
-
-                    if update_response.status_code == 200:
-                        st.success("Question updated successfully!")
+            with col_edit:
+                editable_question = st.text_input("See something wrong? Edit here", question_text, key=f"edit_{question_id}")
+                if st.button("Save Edits", key=f"save_{question_id}"):
+                    if editable_question.strip() == "":
+                        st.error("Please enter some text")
                     else:
-                        st.error(f"Failed to update question: {update_response.text}")
+                        payload = {'edited_question': editable_question}
+                        update_response = requests.put(
+                            f"http://api:4000/cq/updateQuestion/{question_id}",
+                            json=payload
+                        )
+                        if update_response.status_code == 200:
+                            st.success("Question updated successfully!")
+                        else:
+                            st.error(f"Failed to update question: {update_response.text}")
+
+            with col_delete:
+                if st.button("Delete", key=f"delete_{question_id}"):
+                    delete_response = requests.delete(f"http://api:4000/cq/deleteQuestion/{question_id}")
+                    if delete_response.status_code == 200:
+                        st.success("Question deleted successfully!")
+                    else:
+                        st.error(f"Failed to delete question: {delete_response.text}")
+
 
 # Add a question to the company
 with col2:
