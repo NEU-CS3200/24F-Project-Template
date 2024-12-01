@@ -109,11 +109,13 @@ CREATE TABLE IF NOT EXISTS Advisor (
     Email VARCHAR(100),
     Department VARCHAR(100),
     StudentID INT,
-    FOREIGN KEY (StudentID) REFERENCES Student(StudentID)
 );
 
 -- Add foreign key to Feedback for Advisor after Advisor is created
 ALTER TABLE Feedback
+ADD FOREIGN KEY (AdvisorID) REFERENCES Advisor(AdvisorID);
+
+ALTER TABLE Student
 ADD FOREIGN KEY (AdvisorID) REFERENCES Advisor(AdvisorID);
 
 -- Create table for Task

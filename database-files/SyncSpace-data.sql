@@ -396,6 +396,16 @@ insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, 
 insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (50, 'I appreciate your assistance!', '2024-03-05', '2', 95, 10);
 
 -- Advisor
+insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (1, 'Georgine McCard', 'gmccard0@nps.gov', 'Khoury College', 8);
+insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (2, 'Babbette Marle', 'bmarle1@bbc.co.uk', 'College of Engineering', 50);
+insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (3, 'Lena Graver', 'lgraver2@creativecommons.org', 'D''Amore Mc-Kim', 99);
+insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (4, 'Kevina Garden', 'kgarden3@sina.com.cn', 'College of Science', 38);
+insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (5, 'Cathryn Tatershall', 'ctatershall4@free.fr', 'Bouve College', 14);
+insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (6, 'Domingo Stanlick', 'dstanlick5@arstechnica.com', 'College of Science', 77);
+insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (7, 'Joyous Ferby', 'jferby6@yahoo.com', 'Khoury College', 91);
+insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (8, 'Thibaut Biles', 'tbiles7@4shared.com', 'College of Engineering', 17);
+insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (9, 'Tana Roblou', 'troblou8@cargocollective.com', 'D''Amore Mc-Kim', 26);
+insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (10, 'Sheridan Gunny', 'sgunny9@arizona.edu', 'College of Science', 65);
 
 -- Task
 
