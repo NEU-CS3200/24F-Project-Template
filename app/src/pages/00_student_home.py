@@ -17,7 +17,7 @@ st.write('### What would you like to do today?')
 if st.button('View Common Interview Questions', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/21_ML_Model_Mgmt.py')
+  st.switch_page('pages/00_common_questions.py')
 
 if st.button('View Company Reviews (Or add your own!)', 
              type='primary',
