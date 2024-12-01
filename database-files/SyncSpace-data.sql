@@ -408,6 +408,56 @@ insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (9, '
 insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (10, 'Sheridan Gunny', 'sgunny9@arizona.edu', 'College of Science', 65);
 
 -- Task
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Khoury College', '2024-02-27', 22, '2024-08-03', 'In Progress', 6);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Engineering', '2024-05-09', 89, '2024-03-09', 'In Progress', 10);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('D''Amore Mc-Kim', '2024-07-08', 37, '2024-05-01', 'Completed', 8);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-11-26', 55, '2024-02-20', 'Completed', 1);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Bouve College', '2024-06-02', 50, '2024-04-09', 'Received', 9);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-05-03', 50, '2024-11-24', 'Completed', 4);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Khoury College', '2024-09-07', 69, '2024-08-22', 'Completed', 6);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Engineering', '2024-03-25', 84, '2024-06-23', 'In Progress', 6);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('D''Amore Mc-Kim', '2024-05-26', 86, '2024-08-25', 'Received', 10);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2023-12-04', 65, '2024-11-30', 'Completed', 10);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Bouve College', '2024-03-26', 26, '2024-04-04', 'Received', 2);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-05-14', 12, '2024-10-24', 'In Progress', 1);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Khoury College', '2024-03-05', 73, '2024-01-06', 'Completed', 7);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Engineering', '2024-04-18', 82, '2024-08-28', 'Received', 2);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('D''Amore Mc-Kim', '2024-11-27', 53, '2024-08-26', 'Received', 1);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-09-25', 96, '2024-11-30', 'Received', 1);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Bouve College', '2024-07-05', 81, '2024-01-27', 'In Progress', 7);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-09-16', 50, '2023-12-15', 'In Progress', 5);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Khoury College', '2024-10-18', 80, '2024-04-15', 'Received', 6);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Engineering', '2024-09-21', 69, '2024-04-27', 'Completed', 3);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('D''Amore Mc-Kim', '2024-02-21', 26, '2024-07-21', 'Completed', 6);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-10-24', 69, '2024-09-30', 'Received', 4);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Bouve College', '2024-07-20', 15, '2024-02-28', 'Received', 6);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-11-03', 44, '2024-04-28', 'Completed', 5);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Khoury College', '2024-03-04', 32, '2024-02-14', 'Received', 1);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Engineering', '2024-03-02', 44, '2024-06-16', 'In Progress', 6);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('D''Amore Mc-Kim', '2024-04-01', 2, '2024-02-22', 'Received', 6);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-06-06', 14, '2023-12-14', 'In Progress', 7);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Bouve College', '2023-12-19', 24, '2024-04-14', 'Received', 5);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-01-28', 40, '2023-12-20', 'Completed', 2);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Khoury College', '2024-07-16', 51, '2024-02-29', 'Received', 9);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Engineering', '2024-10-16', 34, '2024-07-31', 'In Progress', 9);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('D''Amore Mc-Kim', '2024-05-27', 89, '2024-10-10', 'Received', 8);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-09-26', 13, '2024-09-23', 'Received', 5);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Bouve College', '2023-12-21', 47, '2024-11-20', 'Completed', 5);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-06-05', 40, '2024-02-04', 'In Progress', 10);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Khoury College', '2024-10-07', 35, '2024-03-11', 'Completed', 1);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Engineering', '2024-04-08', 23, '2024-03-18', 'Completed', 1);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('D''Amore Mc-Kim', '2024-03-26', 36, '2024-05-10', 'Completed', 4);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-07-14', 68, '2024-10-09', 'In Progress', 5);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Bouve College', '2024-09-03', 94, '2024-06-20', 'In Progress', 7);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-04-11', 23, '2024-02-11', 'In Progress', 9);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Khoury College', '2023-12-10', 86, '2024-05-04', 'Received', 8);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Engineering', '2024-11-08', 77, '2024-10-07', 'Completed', 4);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('D''Amore Mc-Kim', '2023-12-07', 11, '2024-02-15', 'In Progress', 1);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-04-07', 73, '2024-04-16', 'In Progress', 3);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Bouve College', '2024-08-28', 3, '2024-04-05', 'Received', 3);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Science', '2024-07-28', 16, '2024-01-17', 'Completed', 3);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Khoury College', '2024-02-21', 73, '2024-11-12', 'Completed', 1);
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Engineering', '2024-08-21', 40, '2024-09-04', 'Completed', 6);
 
 -- SystemLog
 
