@@ -137,7 +137,7 @@ DROP TABLE IF EXISTS SystemLog;
 CREATE TABLE IF NOT EXISTS SystemLog (
     LogID INT AUTO_INCREMENT PRIMARY KEY,
     TicketID INT,
-    Timestamp TIMESTAMP,
+    Timestamp DATETIME,
     Activity TEXT,
     MetricType VARCHAR(50),
     Privacy VARCHAR(50),
