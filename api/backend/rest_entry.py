@@ -6,7 +6,7 @@ from backend.products.products_routes import products
 from backend.simple.simple_routes import simple_routes
 from backend.companies.company_routes import companies
 from backend.commonQuestions.commonQuestions_routes import commonQuestions
-from backend.reviews.reviews_routes import reviews
+from backend.jobPostings.jobPostings_routes import jobPostings
 import os
 from dotenv import load_dotenv
 
@@ -47,7 +47,7 @@ def create_app():
     app.register_blueprint(products,    url_prefix='/p') # delete 
     app.register_blueprint(companies,   url_prefix='/co')
     app.register_blueprint(commonQuestions, url_prefix='/cq')
-    app.register_blueprint(reviews, url_prefix='/re')
+    app.register_blueprint(jobPostings, url_prefix='/jp')
 
     # Don't forget to return the app object
     return app
