@@ -59,12 +59,9 @@ CREATE TABLE IF NOT EXISTS Student (
     Lifestyle VARCHAR(50),
     CommuteTime INT,
     CommuteDays INT,
-    Interests TEXT,
+    Bio TEXT,
     CommunityID INT,
     HousingID INT,
-    GroupID INT,
-    FeedbackID INT,
-    ChatID INT,
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID),
     FOREIGN KEY (HousingID) REFERENCES Housing(HousingID)
 );
@@ -79,7 +76,6 @@ CREATE TABLE IF NOT EXISTS Chat (
     SupportStaffID INT,
     FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
     FOREIGN KEY (SupportStaffID) REFERENCES User(UserID)
-
 );
 
 -- Create table for Events
