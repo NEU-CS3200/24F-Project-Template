@@ -72,14 +72,15 @@ def get_students_for_advisor(advisor_id):
     
     # SQL query
     query = f"""
-        SELECT student.studentId, student.name, student.email, student.phoneNumber
-        FROM student
-        INNER JOIN advisor ON student.advisorId = advisor.advisorId
-        WHERE advisor.advisorId = '{advisor_id}';
+        SELECT s.studentId as 'StudentID', s.name as 'StudentName', s.email as 'StudentEmail', s.phoneNumber as 'StudentPhoneNumber'
+        FROM student s
+        INNER JOIN advisor ON s.advisorId = advisor.advisorId
+        WHERE advisor.advisorId = {str(advisor_id)};
     """
     cursor = db.get_db().cursor()
-    cursor.execute(query, (advisor_id,))
-    students = cursor.fetchall()
-
-    return jsonify(students), 200
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
 

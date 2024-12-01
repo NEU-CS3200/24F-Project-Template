@@ -102,4 +102,4 @@ def delete_review(review_id):
 #----------------- Advisors -----------------#
 
 def get_students_for_advisor(advisor_id):
-    return fetch_data(f'/students/advisor/{advisor_id}')
+    return fetch_data(f'/s/students/advisor/{advisor_id}')
