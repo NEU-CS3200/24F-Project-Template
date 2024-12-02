@@ -105,4 +105,6 @@ CREATE TABLE related_coursework
   PRIMARY KEY (applicationId, name),
   CONSTRAINT fk_08 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
+CREATE TABLE notable_skills
+(
 
