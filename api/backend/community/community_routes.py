@@ -7,7 +7,7 @@ from backend.db_connection import db
 
 commmunity = Blueprint('community', __name__)
 
-@community.route('/community/<community_id>/housing', methods=['GET'])
+@community.route('/community/<communityid>/housing', methods=['GET'])
 # route for retrieving carpools for the students in the same community
 def community_housing():
     query = '''

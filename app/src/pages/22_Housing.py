@@ -14,23 +14,14 @@ st.write('\n\n')
 st.write('## Model 1 Maintenance')
 st.write("Test")
 
-data = {} 
-try:
-  data = requests.get('http://api:4000/api/community/<community_id>/housing').json()
-except:
-  st.write("**Important**: Could not connect to sample api, so using dummy data.")
-  data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
-
-st.dataframe(data)
-
 # Set the backend API URL
-API_URL = "http://<your_backend_url>/community/{community_id}/housing"
+API_URL = "http://localhost:4000/c/community/{communityid}/housing"
 
 # Streamlit App Layout
 st.title("Community Housing Details")
 
 # User Input: Community ID
-community_id = st.text_input("Enter Community ID:", placeholder="e.g., 123")
+communityid = st.text_input("Enter Community ID:", placeholder="e.g., 123")
 
 # Fetch Data on Button Click
 if st.button("Get Housing Details"):
@@ -39,7 +30,7 @@ if st.button("Get Housing Details"):
     else:
         try:
             # Make GET request to the backend
-            response = requests.get(API_URL.format(community_id=community_id))
+            response = requests.get(API_URL.format(communityid=communityid))
 
             # Check for successful response
             if response.status_code == 200:
