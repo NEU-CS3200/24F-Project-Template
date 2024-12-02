@@ -14,17 +14,17 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button('View Student Reviews', 
+if st.button('View Student Feedback', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_student_reviews.py')
+  st.switch_page('pages/02_student_feedback.py')
 
-if st.button('View Company Reviews (Or add your own!)', 
+if st.button('View and Compare Intern Qualifications', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/00_company_reviews.py')
+  st.switch_page('pages/02_intern_qualifications.py')
 
-if st.button('View and Filter Most Popular Companies', 
+if st.button('View Position Application Statistics', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/00_popular_companies.py')
+  st.switch_page('pages/02_position_statistics.py')
