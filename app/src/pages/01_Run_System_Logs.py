@@ -16,7 +16,7 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('Carpool Search')
+st.title('Access System Logs')
 
 st.write('\n\n')
 st.write('## test')
