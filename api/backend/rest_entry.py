@@ -5,6 +5,7 @@ from backend.simple.simple_routes import simple_routes
 import os
 from dotenv import load_dotenv
 
+from backend.students.student_routes import students
 
 def create_app():
     app = Flask(__name__)
