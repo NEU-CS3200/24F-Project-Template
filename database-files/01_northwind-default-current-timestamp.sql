@@ -131,5 +131,13 @@ CREATE TABLE work_experience
   CONSTRAINT fk_13 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+CREATE TABLE company_user_bookmark
+( 
+  companyID int, 
+  userId int, 
+  
+)
+
+
 
 
