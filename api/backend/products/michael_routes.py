@@ -110,9 +110,7 @@ def add_new_chats():
     response.status_code = 200
     return response
 
-# ------------------------------------------------------------
-# This is a stubbed route to update a log in the catalog
-# The SQL query would be an UPDATE. 
+# Mark a ticket as completed or update its status
 @tech_support_analyst.route('/logs/{user_id}', methods = ['PUT'])
 def update_logs():
     logs_info = request.json
@@ -121,8 +119,8 @@ def update_logs():
     current_app.logger.info(f"Updating logs for user {user_id}: {logs_info}")
     return {"message": "Logs updated successfully"}, 200
 
-# -------------------------------------------------------------
-# This is for archiving completed tickets.
+
+# Archive completed tickets
 @tech_support_analyst.route('/tickets/<int:ticket_id>', methods=['DELETE'])
 def archive_ticket(ticket_id):
     ticket = TicketModel.query.filter_by(id=ticket_id, status="completed").first()
