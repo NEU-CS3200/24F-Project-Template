@@ -30,5 +30,6 @@ CREATE TABLE users
   PRIMARY KEY(id),
   UNIQUE INDEX uq_idx_mobile (mobile),
   UNIQUE INDEX uq_idx_email (email),
+  CONSTRAINT fk_01 FOREIGN KEY (advisorId) REFERENCES users (id) ON UPDATE CASCADE, 
   
 )
