@@ -90,14 +90,6 @@ def add_new_tickets():
                               list_price)
         VALUES ('{name}', '{content}', '{category}', {str(time)})
     '''
-    # TODO: Make sure the version of the query above works properly
-    # Constructing the query
-    # query = 'insert into products (product_name, description, category, list_price) values ("'
-    # query += name + '", "'
-    # query += description + '", "'
-    # query += category + '", '
-    # query += str(price) + ')'
-    current_app.logger.info(query)
 
     # executing and committing the insert statement 
     cursor = db.get_db().cursor()
@@ -116,6 +108,22 @@ def update_tickets():
         return {"error": "Invalid JSON payload"}, 400
     current_app.logger.info(f"Updating logs for user {user_id}: {logs_info}")
     return {"message": "Logs updated successfully"}, 200
+
+@tech_support_analyst.route('/tickets', methods = ['PUT'])
+def update_tickets():
+    current_app.logger.info('PUT /community route')
+    cust_info = request.json
+    cust_id = cust_info['id']
+    first = cust_info['first_name']
+    last = cust_info['last_name']
+    company = cust_info['company']
+
+    query = 'UPDATE customers SET first_name = %s, last_name = %s, company = %s where id = %s'
+    data = (first, last, company, cust_id)
+    cursor = db.get_db().cursor()
+    r = cursor.execute(query, data)
+    db.get_db().commit()
+    return 'profile updated!'
 
 
 # Archive completed tickets
