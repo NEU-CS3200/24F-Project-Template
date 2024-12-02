@@ -126,8 +126,10 @@ CREATE TABLE work_experience
 (
   positionId int, 
   userId int, 
-  
-)
+  PRIMARY KEY (positionId, userId),
+  CONSTRAINT fk_12 FOREIGN KEY (positionId) REFERENCES positions (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_13 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
 
 
 
