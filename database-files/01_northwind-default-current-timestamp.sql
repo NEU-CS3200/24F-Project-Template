@@ -46,7 +46,7 @@ CREATE TABLE user_reference
   referral text,
   userId int,
   registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,.
-  PRIMARY KEY(name, userId),
+  PRIMARY KEY(userId),
   UNIQUE INDEX uq_idx_mobile (mobile),
   UNIQUE INDEX uq_idx_email (email),
   CONSTRAINT fk_03 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE
@@ -67,4 +67,7 @@ CREATE TABLE ticket
   CONSTRAINT fk_05 FOREIGN KEY (helperId) REFERENCES users (id) ON UPDATE CASCADE
 );
 
+CREATE TABLE positions
+(
+  
 )
