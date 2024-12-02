@@ -16,7 +16,7 @@ st.write("Test")
 
 data = {} 
 try:
-  data = requests.get('http://api:4000/data').json()
+  data = requests.get('http://api:4000/api/community').json()
 except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
