@@ -42,7 +42,6 @@ with col4:
 # Database connection and student data retrieval
 @st.cache_data
 def load_student_data():
-<<<<<<< HEAD
     try:
         # Connect to MySQL database
         conn = mysql.connector.connect(
@@ -77,22 +76,6 @@ def load_student_data():
     finally:
         if 'conn' in locals() and conn.is_connected():
             conn.close()
-=======
-    conn = sqlite3.connect('SyncSpace-data.sql')
-    query = """
-    SELECT 
-        student_id,
-        first_name || ' ' || last_name as student_name,
-        location as co_op_location,
-        company_name,
-        start_date
-    FROM students
-    ORDER BY start_date DESC
-    """
-    df = pd.read_sql_query(query, conn)
-    conn.close()
-    return df
->>>>>>> 659f53a03b13feaff878f3e3cc8e442f81a925f2
 
 # Load student data
 df = load_student_data()
