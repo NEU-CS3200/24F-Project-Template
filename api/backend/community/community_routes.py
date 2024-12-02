@@ -11,7 +11,7 @@ commmunity = Blueprint('community', __name__)
 # route for retrieving carpools for the students in the same community
 def community_housing():
     query = '''
-
+    SELECT 
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -21,9 +21,9 @@ def community_housing():
     response.status_code = 200
     return response
 
-@community.route('/community/<community_id>/housing-resources', methods=['GET'])
+@community.route('/community/<community_id>/carpool', methods=['GET'])
 # route for retrieving carpools for the students in the same community
-def community_housing_resources():
+def community_housing():
     query = '''
 
     '''
@@ -35,10 +35,10 @@ def community_housing_resources():
     response.status_code = 200
     return response
 
-@community.route('/community', methods=['PUT'])
+@community.route('/community/<community_id>/housing', methods=['PUT'])
 # route to update student profiles -- CODE NOT UPDATED YET
 def update_profile():
-    current_app.logger.info('PUT /community route')
+    current_app.logger.info('PUT /community/<community_id>/housing route')
     cust_info = request.json
     cust_id = cust_info['id']
     first = cust_info['first_name']
