@@ -76,7 +76,7 @@ def add_new_tickets():
     the_data = request.json
     current_app.logger.info(the_data)
 
-    #extracting the variable
+    # Extracting the variables
     ticket_id = the_data['TicketID']
     timestamp = the_data['Timestamp']
     activity = the_data['Activity']
@@ -90,11 +90,12 @@ def add_new_tickets():
     '''
     data = (ticket_id, timestamp, activity, metric_type, privacy, security)
 
-    # executing and committing the insert statement 
+    # Executing and committing the insert statement 
     cursor = db.get_db().cursor()
     cursor.execute(query, data)
     db.get_db().commit()
     
+    # Building a response
     response = make_response("Ticket successfully created!")
     response.status_code = 200
     return response
