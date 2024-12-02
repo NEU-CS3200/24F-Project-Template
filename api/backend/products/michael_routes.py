@@ -32,12 +32,10 @@ def get_SystemLog():
 @tech_support_analyst.route('/SystemHealth', methods=['GET'])
 def get_SystemHealth():
     query = '''
-        SELECT  TicketID, 
+        SELECT  LogID, 
                 Timestamp, 
-                Activity, 
-                MetricType, 
-                Privacy,
-                Security 
+                Status, 
+                MetricType
         FROM SystemLog
     '''
     
