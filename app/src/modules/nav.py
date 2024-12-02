@@ -14,7 +14,7 @@ def AboutPageNav():
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
+#### ------------------------ Co-op Advisor Role ------------------------
 def CoopAdvisorAdvHomeNav():
     st.sidebar.page_link(
         "pages/00_Co-op_Advisor_Home.py", label="Co-op Advisor Home", icon="👤"
@@ -31,7 +31,7 @@ def MapDemoNav():
     st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
 
 
-## ------------------------ Examples for Role of usaid_worker ------------------------
+#### ------------------------ Emplyer Role ------------------------
 def ApiTestNav():
     st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
 
@@ -46,6 +46,8 @@ def ClassificationNav():
     st.sidebar.page_link(
         "pages/13_Classification.py", label="Classification Demo", icon="🌺"
     )
+
+#### ------------------------ Co-op Advisor Role ------------------------
 
 
 #### ------------------------ System Admin Role ------------------------
