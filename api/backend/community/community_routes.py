@@ -78,8 +78,22 @@ def community_housing():
     response.status_code = 200
     return response
 
+@community.route('/community/<community_id>/housing-resources', methods=['GET'])
+# route for retrieving carpools for the students in the same community
+def community_housing_resources():
+    query = '''
+
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
 @community.route('/community', methods=['PUT'])
-# route to update student profiles
+# route to update student profiles -- CODE NOT UPDATED YET
 def update_profile():
     current_app.logger.info('PUT /community route')
     cust_info = request.json
