@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Student (
     CarpoolStatus VARCHAR(50),
     Budget DECIMAL(10, 2),
     LeaseDuration VARCHAR(50),
-    Cleanliness VARCHAR(50),
+    Cleanliness INT,
     Lifestyle VARCHAR(50),
     CommuteTime INT,
     CommuteDays INT,
