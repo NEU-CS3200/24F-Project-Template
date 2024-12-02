@@ -63,20 +63,9 @@ CREATE TABLE IF NOT EXISTS Student (
     CommunityID INT,
     HousingID INT,
     AdvisorID INT,
+    Reminder INT,
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID),
     FOREIGN KEY (HousingID) REFERENCES Housing(HousingID)
-);
-
--- Create table for Chat
-DROP TABLE IF EXISTS Chat;
-CREATE TABLE IF NOT EXISTS Chat (
-    ChatID INT AUTO_INCREMENT PRIMARY KEY,
-    StudentID INT,
-    Content TEXT,
-    Time DATETIME,
-    SupportStaffID INT,
-    FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
-    FOREIGN KEY (SupportStaffID) REFERENCES User(UserID)
 );
 
 -- Create table for Events
