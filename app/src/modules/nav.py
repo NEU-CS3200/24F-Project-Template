@@ -14,8 +14,8 @@ def AboutPageNav():
     st.sidebar.page_link("pages/50_About.py", label="About", icon="🧠")
 
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
-def PolStratAdvHomeNav():
+#### ------------------------ Role of Technical Support Analyst ------------------------
+def TechSupportAnalystHomeNav():
     st.sidebar.page_link(
         "pages/00_Tech_Support_Analyst_Home.py", label="Tech Support Analyst Home", icon="👤"
     )
