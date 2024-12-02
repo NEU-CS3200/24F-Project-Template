@@ -14,6 +14,7 @@ def community_housing():
     SELECT s.Name, s.Major, s.Company, s.Location, s.HousingStatus, s.Budget, s.LeaseDuration, s.Cleanliness, s.LifeStyle, s.Bio, s.CommunityID
     FROM Student s
     JOIN Community c ON s.CommunityID=c.CommunityID
+    WHERE s.CommunityID = %s;
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
