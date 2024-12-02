@@ -11,4 +11,4 @@ VALUES
 -- Insert into users
 INSERT INTO users (name, firstName, middleName, lastName, mobile, email, passwordHash, profile, companyId, lastLogin)
 VALUES
-    
+    ('John Doe',
