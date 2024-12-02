@@ -14,6 +14,11 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
+if st.button('View or Edit Company Positions', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/02_company_positions.py')
+
 if st.button('View Student Feedback', 
              type='primary',
              use_container_width=True):
@@ -23,8 +28,3 @@ if st.button('View and Compare Intern Qualifications',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/02_intern_qualifications.py')
-
-if st.button('View Position Application Statistics', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/02_position_statistics.py')
