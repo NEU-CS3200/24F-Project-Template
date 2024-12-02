@@ -17,4 +17,6 @@ CREATE TABLE users
   middleName varchar(50),
   lastName varchar(50),
   mobile varchar(50),
+  email varchar(15),
+  
 )
