@@ -66,8 +66,12 @@ if st.button('Act as Mohammad, an USAID worker',
     st.switch_page('pages/10_USAID_Worker_Home.py')
 
 if st.button('Act as Mark, a Northeastern Student',
-
-)
+            type = 'primary', 
+            use_container_width=True):
+    st.session_state['authenticated'] = True
+    st.session_state['role'] = 'student'
+    st.session_state['first_name'] = 'Mark'
+    st.switch_page('pages/31_Student_Home.py')
 
 if st.button('Act as System Administrator', 
             type = 'primary', 
