@@ -22,5 +22,5 @@ CREATE TABLE users
   profile text,
   advisorId int, 
   companyId int,
-  
+  lastLogin DATETIME, 
 )
