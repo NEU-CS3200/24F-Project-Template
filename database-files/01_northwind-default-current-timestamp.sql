@@ -11,4 +11,8 @@ CREATE TABLE companies
 );
 
 CREATE TABLE users
-()
+(
+  name varchar(150),
+  firstName varchar(50),
+  
+)
