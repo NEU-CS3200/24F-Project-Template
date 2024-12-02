@@ -51,7 +51,7 @@ with col4:
 # Database connection and student data retrieval
 @st.cache_data
 def load_student_data():
-    conn = sqlite3.connect('ScyncSpace-data.sql')
+    conn = sqlite3.connect('SyncSpace-data.sql')
     query = """
     SELECT 
         student_id,
