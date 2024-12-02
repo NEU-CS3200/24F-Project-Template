@@ -17,7 +17,7 @@ def AboutPageNav():
 #### ------------------------ Co-op Advisor Role ------------------------
 def CoopAdvisorAdvHomeNav():
     st.sidebar.page_link(
-        "pages/00_Co-op_Advisor_Home.py", label="Co-op Advisor Home", icon="👤"
+        "pages/00_Coop_Advisor_Home.py", label="Co-op Advisor Home", icon="👤"
     )
 
 
@@ -83,8 +83,8 @@ def SideBarLinks(show_home=False):
     if st.session_state["authenticated"]:
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state["role"] == "co-op_advisor":
-            Co-opAdvisorHomeNav()
+        if st.session_state["role"] == "coop_advisor":
+            CoopAdvisorAdvHomeNav()
             WorldBankVizNav()
             MapDemoNav()
 
