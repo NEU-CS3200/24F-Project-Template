@@ -21,9 +21,9 @@ def CoopAdvisorAdvHomeNav():
     )
 
 
-def WorldBankVizNav():
+def StudentSearchNav():
     st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
+        "pages/01_Student_Search.py", label="Student Search", icon="🧑‍🎓"
     )
 
 
