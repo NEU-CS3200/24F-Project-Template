@@ -3,8 +3,9 @@ logger = logging.getLogger(__name__)
 
 import streamlit as st
 from modules.nav import SideBarLinks
-import sqlite3
+import mysql.connector
 import pandas as pd
+from mysql.connector import Error
 
 # Set Streamlit page configuration
 st.set_page_config(layout="wide")
@@ -42,8 +43,36 @@ with col4:
 @st.cache_data
 def load_student_data():
     try:
-        # Connect to SQLite database (using .db extension)
-        conn = sqlite3.connect('database-files/SyncSpace.db')
+        # Connect to MySQL database
+        conn = mysql.connector.connect(
+            host='db',
+            user='root',
+            password='password123',
+            database='SyncSpace',
+            port=3306
+        )
+        
+        if conn.is_connected():
+            st.write("Successfully connected to MySQL!")
+            cursor = conn.cursor()
+            
+            # Check if Student table exists
+            cursor.execute("SHOW TABLES")
+            tables = cursor.fetchall()
+            st.write("Available tables:")
+            for table in tables:
+                st.write(f"- {table[0]}")
+                
+            # Check Student table structure
+            try:
+                cursor.execute("DESCRIBE Student")
+                st.write("\nStudent table structure:")
+                columns = cursor.fetchall()
+                for col in columns:
+                    st.write(f"- {col[0]}: {col[1]}")
+            except Error as e:
+                st.error("Couldn't get Student table structure. Table might not exist.")
+        
         query = """
         SELECT 
             StudentID AS student_id,
@@ -54,13 +83,34 @@ def load_student_data():
         FROM Student
         ORDER BY student_id ASC
         """
+        
         df = pd.read_sql_query(query, conn)
-        conn.close()
+        st.write(f"\nFound {len(df)} students in database")
+        
+        # If table exists but no data, show sample query
+        if len(df) == 0:
+            cursor.execute("SELECT COUNT(*) FROM Student")
+            count = cursor.fetchone()[0]
+            st.write(f"Total rows in Student table: {count}")
+            
+            # Show a sample of raw data if any exists
+            cursor.execute("SELECT * FROM Student LIMIT 5")
+            sample = cursor.fetchall()
+            if sample:
+                st.write("\nSample data from Student table:")
+                for row in sample:
+                    st.write(row)
+        
         return df
-    except sqlite3.Error as e:
+        
+    except Error as e:
         st.error(f"Database error: {e}")
-        st.info("Please ensure the database is properly initialized")
+        st.write(f"\nFull error: {str(e)}")
         return pd.DataFrame()
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            conn.close()
+            st.write("MySQL connection closed")
 
 # Load student data
 df = load_student_data()
