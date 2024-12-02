@@ -111,20 +111,53 @@ def update_tickets():
 
 @tech_support_analyst.route('/tickets', methods = ['PUT'])
 def update_tickets():
-    current_app.logger.info('PUT /community route')
-    cust_info = request.json
-    cust_id = cust_info['id']
-    first = cust_info['first_name']
-    last = cust_info['last_name']
-    company = cust_info['company']
+    current_app.logger.info('PUT /tickets route')
+    ticket_info = request.json
+    ticket_id = ticket_info['TicketID']
+    timestamp = ticket_info.get('Timestamp')
+    activity = ticket_info.get('Activity')
+    metric_type = ticket_info.get('MetricType')
+    privacy = ticket_info.get('Privacy')
+    security = ticket_info.get('Security')
 
-    query = 'UPDATE customers SET first_name = %s, last_name = %s, company = %s where id = %s'
-    data = (first, last, company, cust_id)
+    # Build the SQL query dynamically
+    update_fields = []
+    params = []
+    if timestamp:
+        update_fields.append("Timestamp = %s")
+        params.append(timestamp)
+    if activity:
+        update_fields.append("Activity = %s")
+        params.append(activity)
+    if metric_type:
+        update_fields.append("MetricType = %s")
+        params.append(metric_type)
+    if privacy:
+        update_fields.append("Privacy = %s")
+        params.append(privacy)
+    if security:
+        update_fields.append("Security = %s")
+        params.append(security)
+
+    if not update_fields:
+        return 'No valid fields to update', 400
+
+    # Add TicketID to parameters
+    params.append(ticket_id)
+
+    # Prepare the SQL query
+    query = f'UPDATE tickets SET {", ".join(update_fields)} WHERE TicketID = %s'
+
+    # Execute the query
     cursor = db.get_db().cursor()
-    r = cursor.execute(query, data)
+    cursor.execute(query, params)
     db.get_db().commit()
-    return 'profile updated!'
 
+    # Check if the update was successful
+    if cursor.rowcount == 0:
+        return 'No ticket found with the given TicketID', 404
+
+    return 'Ticket updated successfully!'
 
 # Archive completed tickets
 @tech_support_analyst.route('/tickets/<int:ticket_id>', methods=['DELETE'])
