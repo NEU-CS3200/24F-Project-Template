@@ -23,6 +23,9 @@ CREATE TABLE users
   advisorId int, 
   companyId int,
   lastLogin DATETIME, 
-  active boolena DEFAULT 1,
+  active boolean DEFAULT 1,
+  registeredAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, 
+  updatedAt datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
+  id int AUTO_INCREMENT,
   
 )
