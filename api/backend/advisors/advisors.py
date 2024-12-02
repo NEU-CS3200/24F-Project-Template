@@ -1,8 +1,12 @@
-from flask import Blueprint
-from flask import request
-from flask import jsonify
-from flask import make_response
-from flask import current_app
+from flask import (
+    Blueprint,
+    request,
+    jsonify,
+    make_response,
+    current_app,
+    redirect,
+    url_for,
+)
 from backend.db_connection import db
 from backend._ml_models.model01 import predict
 
