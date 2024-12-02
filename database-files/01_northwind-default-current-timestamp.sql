@@ -44,4 +44,5 @@ CREATE TABLE user_reference
   mobile varchar(15),
   email varchar(75),
   referral text,
+  userId int,
 )
