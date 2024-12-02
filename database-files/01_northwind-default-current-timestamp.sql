@@ -18,5 +18,6 @@ CREATE TABLE users
   lastName varchar(50),
   mobile varchar(50),
   email varchar(15),
+  passwordHash varchar(128) NOT NULL, 
   
 )
