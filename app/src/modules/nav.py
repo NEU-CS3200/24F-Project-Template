@@ -23,12 +23,12 @@ def TechSupportAnalystHomeNav():
 
 def SystemLogsNav():
     st.sidebar.page_link(
-        "pages/01_Run_System_Logs.py", label="System Logs", icon="🏦"
+        "pages/01_Run_System_Logs.py", label="System Logs", icon="⚙️"
     )
 
 
 def TicketOverviewNav():
-    st.sidebar.page_link("pages/02_Ticket_Overview.py", label="Ticket Overview", icon="🗺️")
+    st.sidebar.page_link("pages/02_Ticket_Overview.py", label="Ticket Overview", icon="🎫")
 
 
 ## ------------------------ Examples for Role of usaid_worker ------------------------
