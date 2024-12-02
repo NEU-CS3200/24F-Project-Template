@@ -8,10 +8,6 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.set_page_config(layout = 'wide')
-
-SideBarLinks()
-
 st.title('Access System Logs')
 
 st.write('\n\n')
