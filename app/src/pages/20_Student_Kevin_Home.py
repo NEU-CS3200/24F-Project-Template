@@ -18,3 +18,11 @@ if st.button('View Advisor Feedback',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/21_Advisor_Feedback.py')
+
+if st.button('Access Housing Search', type=primary, use_container_width=True):
+
+    st.switch_page('pages/22_Housing.py')
+
+if st.buttton('Access Carpool Search', type=primary, use_container_width=True):
+    st.switch_page('pages/23_Carpool.py')
+
