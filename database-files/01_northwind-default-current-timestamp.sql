@@ -119,6 +119,8 @@ CREATE TABLE work_experience
   applicationId int,
   name varchar(30),
   summary text,
-)
+  PRIMARY KEY (applicationId, name),
+  CONSTRAINT fk_10 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
 
 
