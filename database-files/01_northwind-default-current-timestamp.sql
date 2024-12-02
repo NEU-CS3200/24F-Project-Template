@@ -135,7 +135,11 @@ CREATE TABLE company_user_bookmark
 ( 
   companyID int, 
   userId int, 
-  
+  PRIMARY KEY (companyId, userId),
+  CONSTRAINT fk_18 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_19 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
 )
 
 
