@@ -23,4 +23,6 @@ CREATE TABLE users
   advisorId int, 
   companyId int,
   lastLogin DATETIME, 
+  active boolena DEFAULT 1,
+  
 )
