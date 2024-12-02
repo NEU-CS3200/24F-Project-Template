@@ -42,4 +42,6 @@ CREATE TABLE user_reference
   middleName varchar(50),
   lastName varchar(50),
   mobile varchar(15),
+  email varchar(75),
+  referral text,
 )
