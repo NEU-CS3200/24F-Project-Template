@@ -12,38 +12,33 @@ def get_all_students():
         
         # Let's check if the Student table exists and has data
         cursor = connection.cursor()
-        cursor.execute("SELECT COUNT(*) FROM Student")
-        count = cursor.fetchone()[0]
-        print(f"Number of students in database: {count}")
+        print("Created cursor")
         
-        if count == 0:
-            print("No students found in database")
-            return jsonify([]), 200
-            
-        # Now execute the main query
         query = '''
         SELECT 
-            StudentID AS student_id,
-            Name AS student_name,
-            Location AS co_op_location,
-            Company AS company_name,
-            Major AS major
+            StudentID as student_id,
+            Name as student_name,
+            Location as co_op_location,
+            Company as company_name,
+            Major as major
         FROM Student
-        ORDER BY student_id ASC
+        ORDER BY StudentID ASC
         '''
         print(f"Executing query: {query}")
         cursor.execute(query)
         
-        # Get column names and data
-        columns = [column[0] for column in cursor.description]
+        # Get column names from cursor description
+        columns = [desc[0] for desc in cursor.description]
+        
+        # Convert results to list of dictionaries
         results = []
         for row in cursor.fetchall():
             results.append(dict(zip(columns, row)))
-        
-        print(f"Query returned {len(results)} results")
-        if len(results) > 0:
-            print("Sample first row:", results[0])
             
+        print(f"Query returned {len(results)} results")
+        if results:
+            print("Sample first row:", results[0])
+        
         cursor.close()
         return jsonify(results), 200
         
@@ -55,7 +50,8 @@ def get_all_students():
         print("Traceback:", traceback.format_exc())
         return jsonify({
             "error": error_msg,
-            "type": type(e).__name__
+            "type": type(e).__name__,
+            "traceback": traceback.format_exc()
         }), 500
 
 @students.route('/students/<student_id>/reminders', methods=['GET'])
