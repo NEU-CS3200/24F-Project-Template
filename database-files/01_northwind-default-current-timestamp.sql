@@ -79,4 +79,10 @@ CREATE TABLE positions
   filled boolean DEFAULT 0,
   expectedSalary int,
   viewedAt datetime,
-)
+  updatedAt datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  id int AUTO_INCREMENT,
+  PRIMARY KEY(id),
+  CONSTRAINT fk_11 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE
+);
+CREATE TABLE applications
+(
