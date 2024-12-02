@@ -114,4 +114,46 @@ CREATE TABLE notable_skills
   CONSTRAINT fk_09 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+CREATE TABLE work_experience 
+(
+  applicationId int,
+  name varchar(30),
+  summary text,
+  PRIMARY KEY (applicationId, name),
+  CONSTRAINT fk_10 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+  CREATE TABLE position_user_bookmark
+(
+  positionId int, 
+  userId int, 
+  PRIMARY KEY (positionId, userId),
+  CONSTRAINT fk_12 FOREIGN KEY (positionId) REFERENCES positions (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_13 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
 
+CREATE TABLE company_user_bookmark
+( 
+  companyID int, 
+  userId int, 
+  PRIMARY KEY (companyId, userId),
+  CONSTRAINT fk_18 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_19 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE application_bookmark
+(
+  applicationId int,
+  userId int,
+  PRIMARY KEY (applicationId, userId),
+  CONSTRAINT fk_14 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_15 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE offer_list
+(
+  positionId int,
+  userId int,
+  PRIMARY KEY (positionId, userId),
+  CONSTRAINT fk_20 FOREIGN KEY (positionId) REFERENCES positions (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_21 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
