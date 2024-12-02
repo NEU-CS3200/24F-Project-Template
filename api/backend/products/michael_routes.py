@@ -8,6 +8,27 @@ from backend.db_connection import db
 
 tech_support_analyst = Blueprint('tech_support_analyst', __name__)
 
+# View real-time diagnostics on app performance 
+@tech_support_analyst.route('/SystemLog', methods=['GET'])
+def get_systemlog():
+    query = '''
+        SELECT  TicketID, 
+                UserID, 
+                IssueType, 
+                Status, 
+                Priority,
+                ReceivedDate,
+                ResolvedDate 
+        FROM ticket
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
 # View all tickets and their statuses
 @tech_support_analyst.route('/tickets', methods=['GET'])
 def get_tickets():
