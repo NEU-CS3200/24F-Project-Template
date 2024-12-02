@@ -29,5 +29,6 @@ CREATE TABLE users
   id int AUTO_INCREMENT,
   PRIMARY KEY(id),
   UNIQUE INDEX uq_idx_mobile (mobile),
+  UNIQUE INDEX uq_idx_email (email),
   
 )
