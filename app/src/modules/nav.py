@@ -52,11 +52,8 @@ def ClassificationNav():
 def KevinPageNav():
     st.sidebar.page_link("pages/20_Student_Kevin_Home.py", label="Student Home", icon="👤")
     st.sidebar.page_link("pages/21_Advisor_Feedback.py", label="Advisor Feedback", icon="🏢")
-    st.sidebar.page_link("pages/22_Housing.py", label="Housing Search")
-    st.sidebar.page_link("pages/23_Carpool.py", label="Carpool Search")
-
-#def HousingNav():
-   # st.sidebar.page_link("pages/20_Student_Kevin_Home.py", label =)
+    st.sidebar.page_link("pages/22_Housing.py", label="Housing Search", icon=🏘️)
+    st.sidebar.page_link("pages/23_Carpool.py", label="Carpool Search", icon=🚗)
 
 
 # --------------------------------Links Function -----------------------------------------------
