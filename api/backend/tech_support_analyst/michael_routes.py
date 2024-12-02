@@ -103,14 +103,6 @@ def add_new_tickets():
 # Mark a ticket as completed or update its status
 @tech_support_analyst.route('/tickets', methods = ['PUT'])
 def update_tickets():
-    logs_info = request.json
-    if not logs_info:
-        return {"error": "Invalid JSON payload"}, 400
-    current_app.logger.info(f"Updating logs for user {user_id}: {logs_info}")
-    return {"message": "Logs updated successfully"}, 200
-
-@tech_support_analyst.route('/tickets', methods = ['PUT'])
-def update_tickets():
     current_app.logger.info('PUT /tickets route')
     ticket_info = request.json
     ticket_id = ticket_info['TicketID']
