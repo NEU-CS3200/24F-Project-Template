@@ -7,3 +7,5 @@ VALUES
     ('Innovate Inc'),
     ('Healthify Solutions'),
     ('EduVenture');
+
+-- Insert into users
