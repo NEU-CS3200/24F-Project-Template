@@ -58,6 +58,11 @@ def PositionOpeningSearchNav():
         "pages/32_Position_Opening_Search.py", label="Position Openings", icon="🔎"
     )
 
+def EmployerSearchNav():
+    st.sidebar.page_link(
+        "pages/33_Employer_Search.py", label="Employers", icon="🕴️"
+    )
+
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
