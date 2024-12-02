@@ -69,5 +69,8 @@ CREATE TABLE ticket
 
 CREATE TABLE positions
 (
-  
+  registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  companyId int,
+  applicantQuestions text,
+
 )
