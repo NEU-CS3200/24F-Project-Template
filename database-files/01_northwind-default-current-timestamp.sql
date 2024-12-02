@@ -19,5 +19,5 @@ CREATE TABLE users
   mobile varchar(50),
   email varchar(15),
   passwordHash varchar(128) NOT NULL, 
-  
+  profile text, 
 )
