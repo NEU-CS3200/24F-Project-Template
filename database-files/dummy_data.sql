@@ -5,3 +5,4 @@ INSERT INTO companies (name)
 VALUES
     ('TechCorp'),
     ('Innovate Inc'),
+    ('Healthify Solutions'),
