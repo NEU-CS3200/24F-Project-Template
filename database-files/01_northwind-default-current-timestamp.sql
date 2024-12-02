@@ -72,5 +72,46 @@ CREATE TABLE positions
   registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
   companyId int,
   applicantQuestions text,
+  summary text,
+  country varchar(15),
+  city varchar(15),
+  address varchar(60),
+  filled boolean DEFAULT 0,
+  expectedSalary int,
+  viewedAt datetime,
+  updatedAt datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  id int AUTO_INCREMENT,
+  PRIMARY KEY(id),
+  CONSTRAINT fk_11 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE
+);
+CREATE TABLE applications
+(
+  registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  questionResponse text,
+  summary text,
+  GPA decimal(3,2),
+  submittedAt datetime,
+  accepted boolean DEFAULT 0,
+  viewedAt datetime,
+  updatedAt datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  id int AUTO_INCREMENT,
+  PRIMARY KEY(id)
+);
+CREATE TABLE related_coursework
+(
+  applicationId int,
+  name varchar(30),
+  summary text,
+  PRIMARY KEY (applicationId, name),
+  CONSTRAINT fk_08 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+CREATE TABLE notable_skills
+(
+  applicationId int,
+  name varchar(30),
+  summary text,
+  PRIMARY KEY (applicationId, name),
+  CONSTRAINT fk_09 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
 
-)
+
