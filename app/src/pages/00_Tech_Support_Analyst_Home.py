@@ -27,4 +27,4 @@ if st.button('View Ticket Overview',
 if st.button('Access System Health Dashboard', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/04_Access_System_Health_Dashboard.py')
