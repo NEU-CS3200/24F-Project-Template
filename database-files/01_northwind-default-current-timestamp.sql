@@ -51,3 +51,8 @@ CREATE TABLE user_reference
   UNIQUE INDEX uq_idx_email (email),
   CONSTRAINT fk_03 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE
 );
+
+CREATE TABLE ticket
+(
+
+)
