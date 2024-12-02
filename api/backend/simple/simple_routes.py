@@ -24,23 +24,3 @@ def welcome():
     response = make_response(welcome_message)
     response.status_code = 200
     return response
-
-
-# ------------------------------------------------------------
-@simple_routes.route("/niceMesage", methods=["GET"])
-def affirmation():
-    message = """
-    <H1>Think about it...</H1>
-    <br />
-    You only need to be 1% better today than you were yesterday!
-    """
-    response = make_response(message)
-    response.status_code = 200
-    return response
-
-
-# ------------------------------------------------------------
-# Demonstrates how to redirect from one route to another.
-@simple_routes.route("/message")
-def mesage():
-    return redirect(url_for(affirmation))
