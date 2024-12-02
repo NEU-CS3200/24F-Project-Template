@@ -99,5 +99,8 @@ CREATE TABLE applications
 );
 CREATE TABLE related_coursework
 (
+  applicationId int,
+  name varchar(30),
+  summary text,
 
 
