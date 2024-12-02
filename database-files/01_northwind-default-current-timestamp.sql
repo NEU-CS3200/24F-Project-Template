@@ -21,4 +21,6 @@ CREATE TABLE users
   passwordHash varchar(128) NOT NULL, 
   profile text,
   advisorId int, 
+  companyId int,
+  
 )
