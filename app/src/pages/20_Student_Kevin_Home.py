@@ -17,7 +17,7 @@ st.write('### What would you like to do today?')
 if st.button('View Advisor Feedback', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/21_Advisor_Feedback.py')
+  st.switch_page('pages/21_Advisor_Rec.py')
 
 if st.button('Access Housing Search', 
              type='primary', 
