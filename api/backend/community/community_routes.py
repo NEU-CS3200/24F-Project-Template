@@ -11,7 +11,9 @@ commmunity = Blueprint('community', __name__)
 # route for retrieving carpools for the students in the same community
 def community_housing():
     query = '''
-    SELECT 
+    SELECT s.Name, s.Major, s.Company, s.Location, s.HousingStatus, s.Budget, s.LeaseDuration, s.Cleanliness, s.LifeStyle, s.Bio, s.CommunityID
+    FROM Student s
+    JOIN Community c ON s.CommunityID=c.CommunityID
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
