@@ -114,4 +114,11 @@ CREATE TABLE notable_skills
   CONSTRAINT fk_09 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+CREATE TABLE work_experience 
+(
+  applicationId int,
+  name varchar(30),
+  summary text,
+)
+
 
