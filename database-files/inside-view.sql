@@ -202,6 +202,16 @@ CREATE TABLE IF NOT EXISTS system_admins (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS job_views ( 
+    id INT AUTO_INCREMENT, 
+    jobId INT NOT NULL, 
+    viewDate DATETIME DEFAULT CURRENT_TIMESTAMP, 
+    PRIMARY KEY (id), 
+    CONSTRAINT FOREIGN KEY (jobId) REFERENCES job_posting (id) 
+    ON UPDATE CASCADE ON DELETE CASCADE
+); 
+
+
 INSERT INTO colleges (name)
     VALUES ('Northeastern University'), ('Stanford University'), ('Boston College');
 
@@ -294,3 +304,6 @@ INSERT INTO system_admins (firstName, middleName, lastName, phone, email)
             'fredthatcher@gmail.com'),
            ('Jack', 'Brady', 'White', '(869) 347-2397',
             'jackwhite@gmail.com');
+
+INSERT INTO job_views (jobId)
+    VALUES (1), (2), (3);
