@@ -47,4 +47,5 @@ CREATE TABLE user_reference
   userId int,
   registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,.
   PRIMARY KEY(name, userId),
+  UNIQUE INDEX uq_idx_mobile (mobile),
 )
