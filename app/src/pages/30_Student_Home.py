@@ -16,14 +16,14 @@ st.write('### What would you like to do today?')
 if st.button('Positon Opening Search', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/32_Position_Opening_Search.py')
+  st.switch_page('pages/31_Position_Opening_Search.py')
 
 if st.button('Employer Search', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/33_Employer_Search.py')
+  st.switch_page('pages/32_Employer_Search.py')
 
 if st.button("Application Editor",
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/34_Application_Editor.py')
+  st.switch_page('pages/33_Application_Editor.py')

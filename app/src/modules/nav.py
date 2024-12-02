@@ -50,22 +50,22 @@ def ClassificationNav():
 #### ------------------------ Student Role ------------------------
 def StudentAdvHomeNav():
     st.sidebar.page_link(
-        "pages/31_Student_Home.py", label="Student Home", icon="🧑‍🎓"
+        "pages/30_Student_Home.py", label="Student Home", icon="🧑‍🎓"
     )
 
 def PositionOpeningSearchNav():
     st.sidebar.page_link(
-        "pages/32_Position_Opening_Search.py", label="Position Openings", icon="🔎"
+        "pages/31_Position_Opening_Search.py", label="Position Openings", icon="🔎"
     )
 
 def EmployerSearchNav():
     st.sidebar.page_link(
-        "pages/33_Employer_Search.py", label="Employers", icon="🕴️"
+        "pages/32_Employer_Search.py", label="Employers", icon="🕴️"
     )
 
 def ApplicationEditorNav():
     st.sidebar.page_link( 
-        "pages/34_Application_Editor.py", label="Applications", icon="📝"
+        "pages/33_Application_Editor.py", label="Applications", icon="📝"
     )
 
 #### ------------------------ System Admin Role ------------------------
