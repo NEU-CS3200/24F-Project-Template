@@ -28,5 +28,6 @@ CREATE TABLE users
   updatedAt datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
   id int AUTO_INCREMENT,
   PRIMARY KEY(id),
+  UNIQUE INDEX uq_idx_mobile (mobile),
   
 )
