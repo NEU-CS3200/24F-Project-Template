@@ -140,6 +140,9 @@ CREATE TABLE company_user_bookmark
   CONSTRAINT fk_19 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+CREATE TABLE application_bookmark
+(
+  
 )
 
 
