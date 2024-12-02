@@ -25,10 +25,18 @@ def get_all_students():
         for row in cursor.fetchall():
             results.append(dict(zip(columns, row)))
         
+        # Add debug logging
+        print(f"Query results: {results}")
+        
         return jsonify(results), 200
         
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        # Enhanced error logging
+        print(f"Database error: {str(e)}")
+        return jsonify({
+            "error": str(e),
+            "type": type(e).__name__
+        }), 500
 
 @students.route('/students/<student_id>/reminders', methods=['GET'])
 def get_student_reminders(student_id):

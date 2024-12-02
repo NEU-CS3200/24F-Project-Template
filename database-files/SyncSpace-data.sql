@@ -1,412 +1,776 @@
 USE SyncSpace;
 
--- CityCommunity Data
-insert into CityCommunity (CommunityID, Location) values (1, 'San Francisco');
-insert into CityCommunity (CommunityID, Location) values (2, 'San Jose');
-insert into CityCommunity (CommunityID, Location) values (3, 'Los Angeles');
-insert into CityCommunity (CommunityID, Location) values (4, 'London');
-insert into CityCommunity (CommunityID, Location) values (5, 'Boston');
-insert into CityCommunity (CommunityID, Location) values (6, 'New York City');
-insert into CityCommunity (CommunityID, Location) values (7, 'Chicago');
-insert into CityCommunity (CommunityID, Location) values (8, 'Seattle');
-insert into CityCommunity (CommunityID, Location) values (9, 'D.C.');
-insert into CityCommunity (CommunityID, Location) values (10, 'Atlanta');
+-- 1. CityCommunity Data (no dependencies)
+insert into CityCommunity (Location) values ('San Francisco');
+insert into CityCommunity (Location) values ('San Jose');
+insert into CityCommunity (Location) values ('Los Angeles');
+insert into CityCommunity (Location) values ('London');
+insert into CityCommunity (Location) values ('Boston');
+insert into CityCommunity (Location) values ('New York City');
+insert into CityCommunity (Location) values ('Chicago');
+insert into CityCommunity (Location) values ('Seattle');
+insert into CityCommunity (Location) values ('D.C.');
+insert into CityCommunity (Location) values ('Atlanta');
 
+-- 2. Housing Data (depends on CityCommunity)
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Dormitory', 'San Francisco', 1);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Apartment', 'San Jose', 2);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Fraternity/Sorority House', 'Los Angeles', 3);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Off-Campus House', 'London', 4);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Townhouse', 'Boston', 5);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Co-op Housing', 'New York City', 6);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Tiny House', 'Chicago', 7);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Loft', 'Seattle', 8);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Studio Apartment', 'D.C.', 9);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Shared Room', 'San Francisco', 10);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Dormitory', 'San Jose', 11);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Apartment', 'Los Angeles', 12);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Fraternity/Sorority House', 'London', 13);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Off-Campus House', 'Boston', 14);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Townhouse', 'New York City', 15);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Co-op Housing', 'Chicago', 16);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Tiny House', 'Seattle', 17);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Loft', 'D.C.', 18);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Studio Apartment', 'San Francisco', 19);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Shared Room', 'San Jose', 20);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Dormitory', 'Los Angeles', 21);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Apartment', 'London', 22);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Fraternity/Sorority House', 'Boston', 23);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Off-Campus House', 'New York City', 24);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Townhouse', 'Chicago', 25);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Co-op Housing', 'Seattle', 26);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Tiny House', 'D.C.', 27);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Loft', 'San Francisco', 28);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Studio Apartment', 'San Jose', 29);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Shared Room', 'Los Angeles', 30);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Dormitory', 'London', 31);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Apartment', 'Boston', 32);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Fraternity/Sorority House', 'New York City', 33);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Off-Campus House', 'Chicago', 34);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Townhouse', 'Seattle', 35);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Co-op Housing', 'D.C.', 36);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Tiny House', 'San Francisco', 37);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Loft', 'San Jose', 38);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Studio Apartment', 'Los Angeles', 39);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Shared Room', 'London', 40);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Dormitory', 'Boston', 41);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Apartment', 'New York City', 42);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Fraternity/Sorority House', 'Chicago', 43);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Off-Campus House', 'Seattle', 44);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Townhouse', 'D.C.', 45);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Co-op Housing', 'San Francisco', 46);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Tiny House', 'San Jose', 47);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Pending approval', 'Loft', 'Los Angeles', 48);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Vacant', 'Studio Apartment', 'London', 49);
+insert into Housing (Availability, Style, Location, CommunityID) values ('Occupied', 'Shared Room', 'Boston', 50);
 
--- Housing Data
-insert into Housing (HousingID, Availability, Style, Location) values (1, 'Vacant', 'Dormitory', 'San Francisco');
-insert into Housing (HousingID, Availability, Style, Location) values (2, 'Occupied', 'Apartment', 'San Jose');
-insert into Housing (HousingID, Availability, Style, Location) values (3, 'Pending approval', 'Fraternity/Sorority House', 'Los Angeles');
-insert into Housing (HousingID, Availability, Style, Location) values (4, 'Vacant', 'Off-Campus House', 'London');
-insert into Housing (HousingID, Availability, Style, Location) values (5, 'Occupied', 'Townhouse', 'Boston');
-insert into Housing (HousingID, Availability, Style, Location) values (6, 'Pending approval', 'Co-op Housing', 'New York City');
-insert into Housing (HousingID, Availability, Style, Location) values (7, 'Vacant', 'Tiny House', 'Chicago');
-insert into Housing (HousingID, Availability, Style, Location) values (8, 'Occupied', 'Loft', 'Seattle');
-insert into Housing (HousingID, Availability, Style, Location) values (9, 'Pending approval', 'Studio Apartment', 'D.C.');
-insert into Housing (HousingID, Availability, Style, Location) values (10, 'Vacant', 'Shared Room', 'San Francisco');
-insert into Housing (HousingID, Availability, Style, Location) values (11, 'Occupied', 'Dormitory', 'San Jose');
-insert into Housing (HousingID, Availability, Style, Location) values (12, 'Pending approval', 'Apartment', 'Los Angeles');
-insert into Housing (HousingID, Availability, Style, Location) values (13, 'Vacant', 'Fraternity/Sorority House', 'London');
-insert into Housing (HousingID, Availability, Style, Location) values (14, 'Occupied', 'Off-Campus House', 'Boston');
-insert into Housing (HousingID, Availability, Style, Location) values (15, 'Pending approval', 'Townhouse', 'New York City');
-insert into Housing (HousingID, Availability, Style, Location) values (16, 'Vacant', 'Co-op Housing', 'Chicago');
-insert into Housing (HousingID, Availability, Style, Location) values (17, 'Occupied', 'Tiny House', 'Seattle');
-insert into Housing (HousingID, Availability, Style, Location) values (18, 'Pending approval', 'Loft', 'D.C.');
-insert into Housing (HousingID, Availability, Style, Location) values (19, 'Vacant', 'Studio Apartment', 'San Francisco');
-insert into Housing (HousingID, Availability, Style, Location) values (20, 'Occupied', 'Shared Room', 'San Jose');
-insert into Housing (HousingID, Availability, Style, Location) values (21, 'Pending approval', 'Dormitory', 'Los Angeles');
-insert into Housing (HousingID, Availability, Style, Location) values (22, 'Vacant', 'Apartment', 'London');
-insert into Housing (HousingID, Availability, Style, Location) values (23, 'Occupied', 'Fraternity/Sorority House', 'Boston');
-insert into Housing (HousingID, Availability, Style, Location) values (24, 'Pending approval', 'Off-Campus House', 'New York City');
-insert into Housing (HousingID, Availability, Style, Location) values (25, 'Vacant', 'Townhouse', 'Chicago');
-insert into Housing (HousingID, Availability, Style, Location) values (26, 'Occupied', 'Co-op Housing', 'Seattle');
-insert into Housing (HousingID, Availability, Style, Location) values (27, 'Pending approval', 'Tiny House', 'D.C.');
-insert into Housing (HousingID, Availability, Style, Location) values (28, 'Vacant', 'Loft', 'San Francisco');
-insert into Housing (HousingID, Availability, Style, Location) values (29, 'Occupied', 'Studio Apartment', 'San Jose');
-insert into Housing (HousingID, Availability, Style, Location) values (30, 'Pending approval', 'Shared Room', 'Los Angeles');
-insert into Housing (HousingID, Availability, Style, Location) values (31, 'Vacant', 'Dormitory', 'London');
-insert into Housing (HousingID, Availability, Style, Location) values (32, 'Occupied', 'Apartment', 'Boston');
-insert into Housing (HousingID, Availability, Style, Location) values (33, 'Pending approval', 'Fraternity/Sorority House', 'New York City');
-insert into Housing (HousingID, Availability, Style, Location) values (34, 'Vacant', 'Off-Campus House', 'Chicago');
-insert into Housing (HousingID, Availability, Style, Location) values (35, 'Occupied', 'Townhouse', 'Seattle');
-insert into Housing (HousingID, Availability, Style, Location) values (36, 'Pending approval', 'Co-op Housing', 'D.C.');
-insert into Housing (HousingID, Availability, Style, Location) values (37, 'Vacant', 'Tiny House', 'San Francisco');
-insert into Housing (HousingID, Availability, Style, Location) values (38, 'Occupied', 'Loft', 'San Jose');
-insert into Housing (HousingID, Availability, Style, Location) values (39, 'Pending approval', 'Studio Apartment', 'Los Angeles');
-insert into Housing (HousingID, Availability, Style, Location) values (40, 'Vacant', 'Shared Room', 'London');
-insert into Housing (HousingID, Availability, Style, Location) values (41, 'Occupied', 'Dormitory', 'Boston');
-insert into Housing (HousingID, Availability, Style, Location) values (42, 'Pending approval', 'Apartment', 'New York City');
-insert into Housing (HousingID, Availability, Style, Location) values (43, 'Vacant', 'Fraternity/Sorority House', 'Chicago');
-insert into Housing (HousingID, Availability, Style, Location) values (44, 'Occupied', 'Off-Campus House', 'Seattle');
-insert into Housing (HousingID, Availability, Style, Location) values (45, 'Pending approval', 'Townhouse', 'D.C.');
-insert into Housing (HousingID, Availability, Style, Location) values (46, 'Vacant', 'Co-op Housing', 'San Francisco');
-insert into Housing (HousingID, Availability, Style, Location) values (47, 'Occupied', 'Tiny House', 'San Jose');
-insert into Housing (HousingID, Availability, Style, Location) values (48, 'Pending approval', 'Loft', 'Los Angeles');
-insert into Housing (HousingID, Availability, Style, Location) values (49, 'Vacant', 'Studio Apartment', 'London');
-insert into Housing (HousingID, Availability, Style, Location) values (50, 'Occupied', 'Shared Room', 'Boston');
+-- 3. User Data (no dependencies)
+insert into User (Name, Email, Role, PermissionsLevel) values ('Michael Ortega', 'miortega@wikispaces.com', 'System Administrator', 'admin');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Mira Lynock', 'mlynock1@webnode.com', 'IT Administrator', 'admin');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Caro Molnar', 'cmolnar2@digg.com', 'IT Administrator', 'limited');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Christos Boulsher', 'cboulsher3@admin.ch', 'System Administrator', 'guest');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Jess Leneve', 'jleneve4@archive.org', 'IT Administrator', 'user');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Jordan Harfoot', 'jharfoot5@1688.com', 'IT Administrator', 'admin');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Yorke Leyzell', 'yleyzell6@cmu.edu', 'Network Administrator', 'guest');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Sigrid Kigelman', 'skigelman7@washington.edu', 'System Administrator', 'user');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Feodora Blackaller', 'fblackaller8@usnews.com', 'Network Administrator', 'user');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Ambrose Jeandon', 'ajeandon9@unicef.org', 'Network Administrator', 'guest');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Spence Chastey', 'schasteya@china.com.cn', 'System Administrator', 'admin');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Eartha Colqueran', 'ecolqueranb@apple.com', 'System Administrator', 'admin');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Kinna Woolsey', 'kwoolseyc@homestead.com', 'IT Administrator', 'moderator');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Nathan Tolworthie', 'ntolworthied@spotify.com', 'System Administrator', 'admin');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Diane Cancellieri', 'dcancellierie@qq.com', 'Network Administrator', 'limited');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Horatio Purdon', 'hpurdonf@histats.com', 'IT Administrator', 'guest');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Elvin Danes', 'edanesg@japanpost.jp', 'Network Administrator', 'moderator');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Dori Callow', 'dcallowh@mac.com', 'IT Administrator', 'user');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Ediva Malter', 'emalteri@craigslist.org', 'IT Administrator', 'admin');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Lyn Paskerful', 'lpaskerfulj@yellowpages.com', 'System Administrator', 'admin');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Arleta Clayden', 'aclaydenk@discovery.com', 'System Administrator', 'guest');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Marietta Ropars', 'mroparsl@purevolume.com', 'Network Administrator', 'moderator');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Brade O''Rodane', 'borodanem@sohu.com', 'Network Administrator', 'admin');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Cammy Crichmere', 'ccrichmeren@mediafire.com', 'Network Administrator', 'user');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Elwira Szymanzyk', 'eszymanzyko@noaa.gov', 'System Administrator', 'limited');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Lorenzo Duerdin', 'lduerdinp@java.com', 'System Administrator', 'moderator');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Austin Latchmore', 'alatchmoreq@pen.io', 'IT Administrator', 'user');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Park Brettell', 'pbrettellr@reddit.com', 'Network Administrator', 'guest');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Bess MacMichael', 'bmacmichaels@spotify.com', 'System Administrator', 'user');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Pedro Gatherer', 'pgatherert@vkontakte.ru', 'IT Administrator', 'user');
+insert into User (Name, Email, Role, PermissionsLevel) values ('Thaddus Pettiford', 'bpettiford@cargocollective.com', 'Business', 'hasCar', 2500, '4 months', 'Disorganized', 'Active', 55, 7, 'Comic book store owner selling rare and collectible comics', 1, null, 10);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Aprilette Kidd', 'akidd@cargocollective.com', 'Computer Science', 'notInterested', 2000, '6 months', 'Disorganized', 'Extroverted', 75, 6, 'Chess master competing in international tournaments and championships', 2, null, 8);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Simone Fishbourne', 'sfishbourne@cargocollective.com', 'Art', 'complete', 1600, '6 months', 'Disorganized', 'Adventurous', 30, 7, 'Music aficionado attending concerts and music festivals', 5, null, 5);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Jonis MacAlaster', 'jmacalaster@cargocollective.com', 'Finance', 'hasCar', 170, '6 months', 'Messy', 'Quiet', 40, 3, 'Yoga studio owner providing classes in relaxation and mindfulness', 2, null, 8);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Collette Lazenby', 'clazenby@cargocollective.com', 'Finance', 'hasCar', 3000, '4 months', 'Cluttered', 'Quiet', 15, 4, 'Firefighter captain leading a team in emergency response and rescue', 10, null, 6);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Conn Dullard', 'cdullard@cargocollective.com', 'Business', 'searchingForCarpool', 2500, '6 months', 'Moderate', 'Adventurous', 55, 7, 'Cycling coach developing training programs for cyclists', 9, null, 1);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Everard Benedito', 'ebenedito@cargocollective.com', 'Computer Science', 'complete', 1600, '6 months', 'Messy', 'Outdoorsy', 20, 1, 'Dance choreographer creating routines for performances', 7, null, 9);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Roman Wais', 'rwais@cargocollective.com', 'Law', 'hasCar', 1350, '1 year', 'Very Clean', 'Introverted', 5, 5, 'Loves hiking and exploring nature trails', 3, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Wynne Codrington', 'wcodrington@cargocollective.com', 'Art', 'notInterested', 1200, '4 months', 'Messy', 'Social', 60, 3, 'Hiking tour guide leading groups on scenic hikes and treks', 9, null, 1);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Paten Paskell', 'ppaskell@cargocollective.com', 'Art', 'hasCar', 1800, '1 year', 'Cluttered', 'Extroverted', 30, 7, 'Fashion designer creating unique clothing and accessories', 8, null, 5);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Dewey Tubby', 'dtubby@cargocollective.com', 'Mathematics', 'hasCar', 170, '6 months', 'Cluttered', 'Active', 45, 5, 'Antique enthusiast scouring flea markets for hidden treasures', 10, null, 7);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Banky Tapenden', 'btapenden@cargocollective.com', 'Computer Science', 'complete', 1800, '6 months', 'Messy', 'Active', 45, 6, 'Motorcycle rider exploring scenic routes on two wheels', 4, null, 4);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Worden Gansbuhler', 'wgansbuhler@cargocollective.com', 'Biology', 'searchingForCarpool', 1900, '1 year', 'Cluttered', 'Introverted', 15, 6, 'Travel blogger sharing adventures and tips with readers', 8, null, 8);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Barbara Brenneke', 'bbrenneke@cargocollective.com', 'Computer Science', 'complete', 1200, '6 months', 'Clean', 'Active', 5, 6, 'Dedicated yogi practicing mindfulness and meditation', 8, null, 8);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Kimbra Absolon', 'kabsolon@cargocollective.com', 'Mathematics', 'notInterested', 1350, '1 year', 'Moderate', 'Active', 75, 5, 'Environmental advocate promoting conservation and eco-friendly practices', 9, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Jayson Eitter', 'jeitter@cargocollective.com', 'Business', 'hasCar', 1150, '6 months', 'Moderate', 'Adventurous', 15, 4, 'Astrologer providing readings and insights based on celestial movements', 3, null, 7);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Leonie McGenn', 'lmcgenn@cargocollective.com', 'Finance', 'complete', 170, '1 year', 'Moderate', 'Social', 25, 1, 'Comic book collector preserving rare editions and memorabilia', 2, null, 3);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Andriette Playhill', 'aplayhill@cargocollective.com', 'Art', 'complete', 1150, '4 months', 'Messy', 'Outdoorsy', 35, 5, 'Antique dealer specializing in unique and valuable antiques', 9, null, 8);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Deena Peirce', 'dpeirce@cargocollective.com', 'Physics', 'hasCar', 1600, '4 months', 'Messy', 'Outdoorsy', 45, 2, 'Vintage car collector restoring classic automobiles', 10, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Worthy Schreurs', 'wschreurs@cargocollective.com', 'Chemistry', 'notInterested', 1000, '4 months', 'Clean', 'Extroverted', 10, 3, 'Foodie exploring different cuisines and restaurants', 2, null, 4);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Gabriel Dedrick', 'gdedrick@cargocollective.com', 'Business', 'searchingForCarpool', 3000, '1 year', 'Moderate', 'Quiet', 20, 6, 'Dance choreographer creating routines for performances', 4, null, 9);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Dixie Delgardo', 'ddelgardo@cargocollective.com', 'Computer Science', 'notInterested', 2000, '6 months', 'Clean', 'Introverted', 40, 1, 'Crafting enthusiast creating handmade gifts and decorations', 6, null, 8);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Amargo Weatherill', 'aweatherill@cargocollective.com', 'Finance', 'searchingForCarpool', 1150, '6 months', 'Moderate', 'Adventurous', 10, 3, 'Antique dealer specializing in unique and valuable antiques', 2, null, 5);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Jack Amos', 'jamos@cargocollective.com', 'Finance', 'complete', 1900, '1 year', 'Clean', 'Quiet', 60, 7, 'Scuba diver exploring underwater ecosystems and marine life', 9, null, 9);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Alis Trimbey', 'atrimbey@cargocollective.com', 'Law', 'searchingForCarpool', 1000, '6 months', 'Cluttered', 'Quiet', 25, 1, 'Hiking guide leading groups on challenging mountain trails', 5, null, 6);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Kacey Outram', 'koutram@cargocollective.com', 'Computer Science', 'complete', 1000, '6 months', 'Disorganized', 'Outdoorsy', 35, 6, 'Devoted animal lover volunteering at shelters', 8, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Maddie Rodda', 'mrodda@cargocollective.com', 'Mathematics', 'searchingForCarpool', 1350, '6 months', 'Disorganized', 'Extroverted', 35, 1, 'Dedicated yogi practicing mindfulness and meditation', 7, null, 7);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Vivianna Propper', 'vpropper@cargocollective.com', 'Computer Science', 'searchingForRoommates', 170, '4 months', 'Messy', 'Introverted', 35, 6, 'Marathon runner training for long-distance races', 4, null, 7);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Hebert Jurries', 'hjurries@cargocollective.com', 'Physics', 'searchingForCarpool', 1200, '4 months', 'Moderate', 'Extroverted', 15, 7, 'Photography teacher instructing students on composition and lighting', 6, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Dorothee Tomaini', 'dtomaini@cargocollective.com', 'Biology', 'notInterested', 1000, '1 year', 'Disorganized', 'Introverted', 45, 5, 'Book publisher releasing new titles and bestsellers', 1, null, 5);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Kaiser Chitter', 'kchitter@cargocollective.com', 'Physics', 'complete', 1800, '1 year', 'Messy', 'Extroverted', 10, 1, 'Surfing school owner offering lessons and rentals for surfers', 1, null, 3);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Jerry Himsworth', 'jhimsworth@cargocollective.com', 'Mathematics', 'notInterested', 3000, '6 months', 'Very Clean', 'Quiet', 5, 1, 'Rock climbing coach training climbers on techniques and safety', 2, null, 5);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Delcina Lies', 'dlies@cargocollective.com', 'Psychology', 'hasCar', 1150, '4 months', 'Clean', 'Extroverted', 30, 3, 'Passionate about cooking and trying new recipes', 6, null, 7);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Britni Cowden', 'bcowden@cargocollective.com', 'Finance', 'searchingForCarpool', 1200, '6 months', 'Very Clean', 'Social', 20, 7, 'Birdwatching guide leading tours to spot rare and exotic birds', 2, null, 4);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Reinald Swancock', 'rswancock@cargocollective.com', 'Finance', 'hasCar', 1600, '6 months', 'Clean', 'Outdoorsy', 30, 3, 'Gardening expert cultivating a lush and vibrant garden', 8, null, 3);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Adel Gatsby', 'agatsby@cargocollective.com', 'Business', 'searchingForRoommates', 2500, '6 months', 'Very Clean', 'Outdoorsy', 40, 7, 'Sports journalist reporting on games and athletes', 4, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Stace Muffett', 'smuffett@cargocollective.com', 'Psychology', 'searchingForCarpool', 3000, '4 months', 'Very Clean', 'Extroverted', 15, 4, 'Dance studio owner providing classes in various dance styles', 3, null, 10);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Ardelis Benoey', 'abenoey@cargocollective.com', 'Art', 'complete', 1150, '4 months', 'Disorganized', 'Quiet', 5, 1, 'Dance enthusiast taking classes in various styles', 10, null, 4);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Allan Ivoshin', 'aivoshin@cargocollective.com', 'Computer Science', 'notInterested', 1800, '6 months', 'Cluttered', 'Outdoorsy', 10, 2, 'Dedicated yogi practicing mindfulness and meditation', 4, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Brandea Blance', 'bblance@cargocollective.com', 'Finance', 'notInterested', 1200, '6 months', 'Disorganized', 'Outdoorsy', 60, 2, 'Motorcycle racer competing in races and rallies', 3, null, 10);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Charil Staresmeare', 'cstaresmeare@cargocollective.com', 'Biology', 'notInterested', 1600, '4 months', 'Moderate', 'Active', 35, 3, 'Birdwatcher spotting rare species in their natural habitats', 5, null, 10);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Fleming Wardlow', 'fwardlow@cargocollective.com', 'Physics', 'complete', 1900, '6 months', 'Disorganized', 'Social', 5, 4, 'Fitness instructor leading group exercise classes', 2, null, 5);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Marillin Peasnone', 'mpeasnone@cargocollective.com', 'Computer Science', 'searchingForCarpool', 1200, '4 months', 'Disorganized', 'Social', 40, 1, 'Travel blogger sharing adventures and tips with readers', 7, null, 7);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Fidel Dootson', 'fdootson@cargocollective.com', 'Mathematics', 'notInterested', 2000, '6 months', 'Disorganized', 'Introverted', 45, 1, 'Tech geek experimenting with the latest gadgets and software', 9, null, 8);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Arturo Gerling', 'agerling@cargocollective.com', 'Physics', 'notInterested', 3000, '1 year', 'Very Clean', 'Introverted', 30, 1, 'Dance choreographer creating routines for performances', 1, null, 3);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Leopold Tremble', 'ltremble@cargocollective.com', 'Chemistry', 'notInterested', 2500, '4 months', 'Messy', 'Outdoorsy', 10, 6, 'Sailing captain leading sailing expeditions and charters', 3, null, 8);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Channa Pitrelli', 'cpitrelli@cargocollective.com', 'Art', 'complete', 170, '6 months', 'Cluttered', 'Quiet', 75, 4, 'Art collector acquiring works from emerging and established artists', 4, null, 6);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Rochella Ranns', 'rranns@cargocollective.com', 'Chemistry', 'complete', 2000, '4 months', 'Messy', 'Introverted', 75, 3, 'Tech geek experimenting with the latest gadgets and software', 7, null, 4);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Fae Maffione', 'fmaffione@cargocollective.com', 'Computer Science', 'complete', 1150, '6 months', 'Cluttered', 'Quiet', 55, 5, 'Vintage car restorer refurbishing classic vehicles to their former glory', 9, null, 1);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Nealson Coundley', 'ncoundley@cargocollective.com', 'Art', 'hasCar', 2000, '1 year', 'Very Clean', 'Adventurous', 30, 7, 'History buff visiting museums and historical sites', 1, null, 10);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Jaimie Tappin', 'jtappin@cargocollective.com', 'Biology', 'searchingForCarpool', 2000, '4 months', 'Clean', 'Social', 45, 7, 'Thrives on adrenaline with extreme sports like skydiving and bungee jumping', 3, null, 10);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Susanna Pykerman', 'spykerman@cargocollective.com', 'Law', 'complete', 2000, '6 months', 'Clean', 'Adventurous', 30, 3, 'Avid collector of vintage vinyl records', 7, null, 7);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Leda Standish-Brooks', 'lstandishbrooks@cargocollective.com', 'Law', 'hasCar', 2500, '1 year', 'Messy', 'Introverted', 60, 1, 'Sports fan cheering for their favorite teams at games', 9, null, 10);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Alfredo Verling', 'averling@cargocollective.com', 'Physics', 'notInterested', 1200, '4 months', 'Very Clean', 'Social', 55, 7, 'Photography teacher instructing students on composition and lighting', 6, null, 3);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Kristina Orteu', 'korte@cargocollective.com', 'Chemistry', 'complete', 1600, '4 months', 'Moderate', 'Introverted', 15, 5, 'Crafting enthusiast creating handmade gifts and decorations', 3, null, 3);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Darcee Itzkowicz', 'ditzkowicz@cargocollective.com', 'Chemistry', 'hasCar', 170, '6 months', 'Very Clean', 'Introverted', 5, 2, 'Chess master competing in international tournaments and championships', 10, null, 10);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Brigg Braidley', 'bbraidley@cargocollective.com', 'Biology', 'searchingForCarpool', 1600, '4 months', 'Very Clean', 'Introverted', 55, 1, 'Environmental advocate promoting conservation and eco-friendly practices', 7, null, 8);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Jade Waplington', 'jwaplington@cargocollective.com', 'Finance', 'hasCar', 2500, '4 months', 'Very Clean', 'Introverted', 30, 6, 'Environmental advocate promoting conservation and eco-friendly practices', 4, null, 9);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Claire Mallender', 'cmallender@cargocollective.com', 'Biology', 'complete', 1200, '6 months', 'Disorganized', 'Active', 10, 6, 'Vintage car restorer refurbishing classic vehicles to their former glory', 1, null, 10);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Wileen Loveman', 'wloveman@cargocollective.com', 'Biology', 'complete', 3000, '4 months', 'Very Clean', 'Social', 20, 6, 'History professor researching and teaching historical events', 2, null, 1);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Shannon Eagar', 'seagar@cargocollective.com', 'Chemistry', 'complete', 1000, '1 year', 'Cluttered', 'Adventurous', 30, 2, 'Sailing captain leading sailing expeditions and charters', 8, null, 1);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Nikita Ferronet', 'nferonet@cargocollective.com', 'Computer Science', 'complete', 2000, '6 months', 'Clean', 'Social', 5, 1, 'Vintage car collector restoring classic automobiles', 3, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Quinn Corner', 'qcorner@cargocollective.com', 'Biology', 'complete', 1800, '1 year', 'Cluttered', 'Active', 20, 1, 'Gaming streamer broadcasting gameplay and interacting with viewers', 3, null, 9);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Hewie Speek', 'hspeek@cargocollective.com', 'Art', 'complete', 2000, '1 year', 'Moderate', 'Adventurous', 75, 1, 'Antique dealer specializing in unique and valuable antiques', 5, null, 6);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Ronica Maplethorp', 'rmaplethorp@cargocollective.com', 'Law', 'searchingForRoommates', 1800, '4 months', 'Cluttered', 'Social', 10, 2, 'Travel blogger sharing adventures and tips with readers', 10, null, 7);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Blair Shedden', 'bshedden@cargocollective.com', 'Physics', 'searchingForCarpool', 2000, '6 months', 'Disorganized', 'Extroverted', 25, 4, 'Tech geek experimenting with the latest gadgets and software', 7, null, 4);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Nolly Petry', 'npetry@cargocollective.com', 'Law', 'complete', 1000, '6 months', 'Disorganized', 'Social', 55, 5, 'Fashion designer creating unique clothing and accessories', 5, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Flemming Gatecliffe', 'fgatecliffe@cargocollective.com', 'Computer Science', 'notInterested', 170, '1 year', 'Cluttered', 'Introverted', 75, 2, 'Tech entrepreneur developing innovative solutions and products', 9, null, 7);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Prince Stickells', 'pstickells@cargocollective.com', 'Finance', 'hasCar', 2500, '4 months', 'Cluttered', 'Social', 30, 1, 'Dance choreographer creating routines for performances', 9, null, 5);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Moselle Huddy', 'mhuudy@cargocollective.com', 'Biology', 'searchingForHousing', 1350, '4 months', 'Disorganized', 'Social', 5, 2, 'Thrives on adrenaline with extreme sports like skydiving and bungee jumping', 4, null, 10);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Fraser Crippill', 'fcrippill@cargocollective.com', 'Physics', 'notInterested', 1900, '1 year', 'Disorganized', 'Extroverted', 15, 2, 'Environmental advocate promoting conservation and eco-friendly practices', 10, null, 3);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Jenda Wrinch', 'jwrinch@cargocollective.com', 'Psychology', 'complete', 1000, '6 months', 'Very Clean', 'Outdoorsy', 35, 1, 'Gardening expert cultivating a lush and vibrant garden', 9, null, 4);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Corliss Lavallie', 'clavallie@cargocollective.com', 'Chemistry', 'hasCar', 2500, '6 months', 'Clean', 'Social', 55, 2, 'History buff visiting museums and historical sites', 1, null, 6);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Ivonne Wickrath', 'iwickrath@cargocollective.com', 'Art', 'complete', 3000, '4 months', 'Moderate', 'Quiet', 75, 7, 'Keen gardener growing a variety of fruits and vegetables', 7, null, 6);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Pearline Grumell', 'pgrumell@cargocollective.com', 'Chemistry', 'complete', 3000, '6 months', 'Messy', 'Social', 30, 1, 'Gamer immersing themselves in virtual worlds and online competitions', 5, null, 1);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Susannah Raddan', 'sraddan@cargocollective.com', 'Art', 'hasCar', 1800, '4 months', 'Clean', 'Adventurous', 75, 5, 'Book publisher releasing new titles and bestsellers', 5, null, 3);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Delila Coulbeck', 'doulbeck@cargocollective.com', 'Psychology', 'complete', 2500, '4 months', 'Cluttered', 'Active', 45, 2, 'Wine connoisseur tasting and collecting fine wines', 2, null, 4);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Berton Harmeston', 'bharmeston@cargocollective.com', 'Biology', 'hasCar', 1000, '1 year', 'Moderate', 'Quiet', 60, 1, 'Vintage car collector restoring classic automobiles', 8, null, 8);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Donalt Gunning', 'dgunning@cargocollective.com', 'Finance', 'notInterested', 1200, '4 months', 'Clean', 'Quiet', 30, 2, 'Astrologer providing readings and insights based on celestial movements', 9, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Tymon Neilus', 'tneilus@cargocollective.com', 'Biology', 'complete', 1600, '4 months', 'Cluttered', 'Quiet', 30, 7, 'Soccer coach training players on skills and strategies for the game', 9, null, 6);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Leoine Oswell', 'loswell@cargocollective.com', 'Art', 'complete', 1150, '1 year', 'Messy', 'Social', 45, 5, 'Antique enthusiast scouring flea markets for hidden treasures', 9, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Gerry Gatecliff', 'ggatecliff@cargocollective.com', 'Finance', 'searchingForCarpool', 1600, '1 year', 'Clean', 'Outdoorsy', 45, 6, 'Sports commentator providing analysis and commentary on games', 9, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Marissa Broun', 'mbroun@cargocollective.com', 'Finance', 'complete', 3000, '1 year', 'Cluttered', 'Extroverted', 45, 1, 'Obsessed with DIY home improvement projects', 6, null, 8);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Letty Mewton', 'lmeeton@cargocollective.com', 'Physics', 'complete', 1150, '4 months', 'Moderate', 'Quiet', 45, 5, 'Music festival organizer planning and coordinating live music events', 9, null, 7);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Arthur Gave', 'agave@cargocollective.com', 'Business', 'notInterested', 2500, '6 months', 'Disorganized', 'Extroverted', 40, 3, 'Fitness influencer inspiring followers with workout routines and tips', 3, null, 3);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Joleen Satterly', 'jsatterly@cargocollective.com', 'Physics', 'searchingForHousing', 1600, '6 months', 'Moderate', 'Adventurous', 75, 4, 'Rock climbing coach training climbers on techniques and safety', 9, null, 2);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Wheeler Martynka', 'wmartynka@cargocollective.com', 'Business', 'searchingForCarpool', 1350, '6 months', 'Disorganized', 'Adventurous', 10, 5, 'Rock climbing coach training climbers on techniques and safety', 5, null, 4);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Marys Hannaby', 'mhanaby@cargocollective.com', 'Art', 'searchingForHousing', 170, '1 year', 'Cluttered', 'Active', 30, 6, 'Surfing enthusiast catching waves at the beach', 10, null, 4);
+insert into User (Name, Email, Role, PermissionsLevel) values ('Ariel Gabotti', 'agabotti@cargocollective.com', 'Biology', 'complete', 3000, '1 year', 'Moderate', 'Introverted', 60, 6, 'Soccer coach training players on skills and strategies for the game', 1, null, 9);
 
--- User data
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (1, 'Michael Ortega', 'miortega@wikispaces.com', 'System Administrator', 'admin');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (2, 'Mira Lynock', 'mlynock1@webnode.com', 'IT Administrator', 'admin');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (3, 'Caro Molnar', 'cmolnar2@digg.com', 'IT Administrator', 'limited');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (4, 'Christos Boulsher', 'cboulsher3@admin.ch', 'System Administrator', 'guest');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (5, 'Jess Leneve', 'jleneve4@archive.org', 'IT Administrator', 'user');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (6, 'Jordan Harfoot', 'jharfoot5@1688.com', 'IT Administrator', 'admin');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (7, 'Yorke Leyzell', 'yleyzell6@cmu.edu', 'Network Administrator', 'guest');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (8, 'Sigrid Kigelman', 'skigelman7@washington.edu', 'System Administrator', 'user');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (9, 'Feodora Blackaller', 'fblackaller8@usnews.com', 'Network Administrator', 'user');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (10, 'Ambrose Jeandon', 'ajeandon9@unicef.org', 'Network Administrator', 'guest');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (11, 'Spence Chastey', 'schasteya@china.com.cn', 'System Administrator', 'admin');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (12, 'Eartha Colqueran', 'ecolqueranb@apple.com', 'System Administrator', 'admin');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (13, 'Kinna Woolsey', 'kwoolseyc@homestead.com', 'IT Administrator', 'moderator');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (14, 'Nathan Tolworthie', 'ntolworthied@spotify.com', 'System Administrator', 'admin');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (15, 'Diane Cancellieri', 'dcancellierie@qq.com', 'Network Administrator', 'limited');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (16, 'Horatio Purdon', 'hpurdonf@histats.com', 'IT Administrator', 'guest');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (17, 'Elvin Danes', 'edanesg@japanpost.jp', 'Network Administrator', 'moderator');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (18, 'Dori Callow', 'dcallowh@mac.com', 'IT Administrator', 'user');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (19, 'Ediva Malter', 'emalteri@craigslist.org', 'IT Administrator', 'admin');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (20, 'Lyn Paskerful', 'lpaskerfulj@yellowpages.com', 'System Administrator', 'admin');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (21, 'Arleta Clayden', 'aclaydenk@discovery.com', 'System Administrator', 'guest');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (22, 'Marietta Ropars', 'mroparsl@purevolume.com', 'Network Administrator', 'moderator');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (23, 'Brade O''Rodane', 'borodanem@sohu.com', 'Network Administrator', 'admin');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (24, 'Cammy Crichmere', 'ccrichmeren@mediafire.com', 'Network Administrator', 'user');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (25, 'Elwira Szymanzyk', 'eszymanzyko@noaa.gov', 'System Administrator', 'limited');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (26, 'Lorenzo Duerdin', 'lduerdinp@java.com', 'System Administrator', 'moderator');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (27, 'Austin Latchmore', 'alatchmoreq@pen.io', 'IT Administrator', 'user');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (28, 'Park Brettell', 'pbrettellr@reddit.com', 'Network Administrator', 'guest');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (29, 'Bess MacMichael', 'bmacmichaels@spotify.com', 'System Administrator', 'user');
-insert into User (UserID, Name, Email, Role, PermissionsLevel) values (30, 'Pedro Gatherer', 'pgatherert@vkontakte.ru', 'IT Administrator', 'user');
+-- 4. Advisor Data (no dependencies)
+insert into Advisor (Name, Email, Department) values ('John Smith', 'jsmith@university.edu', 'Computer Science');
+insert into Advisor (Name, Email, Department) values ('Sarah Johnson', 'sjohnson@university.edu', 'Engineering');
+insert into Advisor (Name, Email, Department) values ('Jessica Doofenshmirtz', 'gmccard0@nps.gov', 'Khoury College', 8);
+insert into Advisor (Name, Email, Department, StudentID) values ('Babbette Marle', 'bmarle1@bbc.co.uk', 'College of Engineering', 50);
+insert into Advisor (Name, Email, Department, StudentID) values ('Lena Graver', 'lgraver2@creativecommons.org', 'D''Amore Mc-Kim', 99);
+insert into Advisor (Name, Email, Department, StudentID) values ('Kevina Garden', 'kgarden3@sina.com.cn', 'College of Science', 38);
+insert into Advisor (Name, Email, Department, StudentID) values ('Cathryn Tatershall', 'ctatershall4@free.fr', 'Bouve College', 14);
+insert into Advisor (Name, Email, Department, StudentID) values ('Domingo Stanlick', 'dstanlick5@arstechnica.com', 'College of Science', 77);
+insert into Advisor (Name, Email, Department, StudentID) values ('Joyous Ferby', 'jferby6@yahoo.com', 'Khoury College', 91);
+insert into Advisor (Name, Email, Department, StudentID) values ('Thibaut Biles', 'tbiles7@4shared.com', 'College of Engineering', 17);
+insert into Advisor (Name, Email, Department, StudentID) values ('Tana Roblou', 'troblou8@cargocollective.com', 'D''Amore Mc-Kim', 26);
+insert into Advisor (Name, Email, Department, StudentID) values ('Sheridan Gunny', 'sgunny9@arizona.edu', 'College of Science', 65);
 
--- Ticket
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (1, 1, 'search function not working', 'completed', 'Medium', '2024-04-05', '2024-02-04');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (2, 2, 'payment processing error', 'completed', 'Medium', '2024-10-02', '2024-05-15');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (3, 3, 'video playback issue', 'cancelled', 'Low', '2024-05-21', '2024-06-08');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (4, 4, 'page not loading', 'cancelled', 'High', '2024-05-30', '2024-03-22');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (5, 5, 'broken link', 'cancelled', 'High', '2023-12-26', '2024-11-23');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (6, 6, 'payment processing error', 'pending', 'High', '2024-02-12', '2024-01-19');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (7, 7, 'missing images', 'pending', 'Low', '2024-07-18', '2024-06-13');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (8, 8, 'incorrect password', 'pending', 'Medium', '2024-07-29', '2024-01-02');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (9, 9, 'login error', 'completed', 'Medium', '2024-02-22', '2024-09-28');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (10, 10, 'page not loading', 'pending', 'High', '2024-07-24', '2024-05-24');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (11, 11, 'search function not working', 'pending', 'High', '2024-01-25', '2024-07-07');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (12, 12, 'payment processing error', 'cancelled', 'Low', '2024-05-25', '2024-05-22');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (13, 13, 'formatting problem', 'pending', 'Low', '2024-01-12', '2024-09-08');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (14, 14, 'missing images', 'cancelled', 'Low', '2024-01-12', '2024-01-18');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (15, 15, 'search function not working', 'cancelled', 'Medium', '2024-01-03', '2024-05-23');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (16, 16, 'slow performance', 'completed', 'Low', '2024-02-16', '2024-09-30');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (17, 17, 'slow performance', 'pending', 'High', '2024-03-27', '2024-07-02');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (18, 18, 'payment processing error', 'pending', 'Medium', '2024-08-14', '2024-10-16');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (19, 19, 'payment processing error', 'pending', 'Medium', '2024-08-20', '2024-10-06');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (20, 20, 'missing images', 'pending', 'High', '2024-08-12', '2024-11-14');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (21, 21, 'broken link', 'pending', 'Medium', '2024-01-15', '2024-04-20');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (22, 22, 'payment processing error', 'pending', 'Low', '2023-12-09', '2024-01-23');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (23, 23, 'search function not working', 'completed', 'Medium', '2024-02-05', '2024-02-18');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (24, 24, 'formatting problem', 'completed', 'Low', '2024-04-06', '2024-08-09');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (25, 25, 'video playback issue', 'pending', 'High', '2024-08-22', '2024-08-19');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (26, 26, 'search function not working', 'pending', 'Medium', '2024-07-19', '2024-09-25');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (27, 27, 'broken link', 'cancelled', 'High', '2024-05-20', '2024-01-22');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (28, 28, 'broken link', 'cancelled', 'High', '2024-07-23', '2023-12-03');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (29, 29, 'broken link', 'pending', 'Low', '2024-10-16', '2024-07-15');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (30, 30, 'login error', 'completed', 'Low', '2024-07-08', '2024-03-14');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (31, 31, 'formatting problem', 'cancelled', 'High', '2024-11-02', '2024-02-13');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (32, 32, 'incorrect password', 'cancelled', 'Medium', '2024-05-02', '2024-01-02');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (33, 33, 'missing images', 'completed', 'Low', '2024-03-28', '2024-03-10');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (34, 34, 'slow performance', 'completed', 'High', '2024-07-04', '2024-03-22');
-insert into Ticket (TicketID, UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (35, 35, 'formatting problem', 'completed', 'Medium', '2024-03-20', '2024-06-02');
+-- 5. Student Data (depends on CityCommunity, Housing, and Advisor)
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Leland Izaks', 'Computer Science', 'Eire', 'San Jose', 'Searching for Housing', 
+    'Not Interested', 1350, '1 year', 'Cluttered', 'Social', 15, 1, 
+    'Gamer immersing themselves in virtual worlds and online competitions', 1, 1, 1);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Demetris Dury', 'Computer Science', 'Photospace', 'San Jose', 'Searching for Roommates', 
+    'Searching for Carpool', 1800, '4 months', 'Moderate', 'Active', 75, 2, 
+    'Music festival organizer planning and coordinating live music events', 2, 2, 2);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Zelig Matuszinski', 'Physics', 'Podcat', 'London', 'Not Interested', 
+    'Not Interested', 3000, '4 months', 'Moderate', 'Quiet', 55, 1, 
+    'Wine connoisseur tasting and collecting fine wines', 3, 3, 3);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Lonni Duke', 'Business', 'Jabbercube', 'Boston', 'Searching for Housing', 
+    'Not Interested', 1150, '4 months', 'Disorganized', 'Introverted', 45, 3, 
+    'Avid collector of vintage vinyl records', 4, 4, 4);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Gannie Dearness', 'Business', 'Youspan', 'San Jose', 'Searching for Roommates', 
+    'Searching for Carpool', 2000, '6 months', 'Cluttered', 'Extroverted', 75, 1, 
+    'Sailing captain leading sailing expeditions and charters', 5, 5, 5);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Garnet Mathieson', 'Chemistry', 'Realbuzz', 'London', 'Complete', 
+    'Searching for Carpool', 1350, '6 months', 'Clean', 'Adventurous', 45, 7, 
+    'Vintage car collector restoring classic automobiles', 6, 6, 6);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Valeria Algore', 'Psychology', 'Quimba', 'Seattle', 'Searching for Housing', 
+    'Has Car', 1600, '6 months', 'Very Clean', 'Adventurous', 40, 4, 
+    'Travel photographer capturing stunning landscapes and cultures', 7, 7, 7);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Lita Delahunty', 'Biology', 'Fivebridge', 'Los Angeles', 'Searching for Roommates', 
+    'Not Interested', 1800, '4 months', 'Moderate', 'Quiet', 40, 7, 
+    'Tech geek experimenting with the latest gadgets and software', 8, 8, 8);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Tanitansy Wallhead', 'Computer Science', 'Kanoodle', 'London', 'Searching for Housing', 
+    'Searching for Carpool', 1200, '6 months', 'Moderate', 'Outdoorsy', 55, 4, 
+    'Dance studio owner providing classes in various dance styles', 9, 9, 9);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Fleur Vitet', 'Psychology', 'Shuffledrive', 'D.C.', 'Searching for Housing', 
+    'Has Car', 2000, '4 months', 'Disorganized', 'Quiet', 10, 4, 
+    'Soccer player training for matches and tournaments', 10, 10, 10);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Celie Franchi', 'Finance', 'Jaxspan', 'Seattle', 'Searching for Housing', 
+    'Has Car', 2500, '1 year', 'Messy', 'Extroverted', 5, 5, 
+    'Dance choreographer creating routines for performances', 11, 11, 11);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Thaddus Pettiford', 'Business', 'Meejo', 'San Francisco', 'Not Interested', 
+    'Has Car', 2500, '4 months', 'Disorganized', 'Active', 55, 7, 
+    'Comic book store owner selling rare and collectible comics', 12, 12, 12);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Aprilette Kidd', 'Computer Science', 'Kaymbo', 'San Francisco', 'Not Interested', 
+    'Complete', 2000, '6 months', 'Disorganized', 'Extroverted', 75, 6, 
+    'Chess master competing in international tournaments and championships', 13, 13, 13);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Simone Fishbourne', 'Art', 'Gigabox', 'Los Angeles', 'Searching for Roommates', 
+    'Complete', 1600, '6 months', 'Disorganized', 'Adventurous', 30, 7, 
+    'Music aficionado attending concerts and music festivals', 14, 14, 14);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Jonis MacAlaster', 'Finance', 'Babbleblab', 'San Jose', 'Searching for Roommates', 
+    'Has Car', 170, '6 months', 'Messy', 'Quiet', 40, 3, 
+    'Yoga studio owner providing classes in relaxation and mindfulness', 15, 15, 15);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Collette Lazenby', 'Finance', 'Gigaclub', 'D.C.', 'Searching for Housing', 
+    'Has Car', 3000, '4 months', 'Cluttered', 'Quiet', 15, 4, 
+    'Firefighter captain leading a team in emergency response and rescue', 16, 16, 16);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Conn Dullard', 'Business', 'Feednation', 'New York City', 'Not Interested', 
+    'Searching for Carpool', 2500, '6 months', 'Moderate', 'Adventurous', 55, 7, 
+    'Cycling coach developing training programs for cyclists', 17, 17, 17);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Everard Benedito', 'Computer Science', 'Zoomcast', 'San Francisco', 'Searching for Housing', 
+    'Complete', 1600, '6 months', 'Messy', 'Outdoorsy', 20, 1, 
+    'Dance choreographer creating routines for performances', 18, 18, 18);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Roman Wais', 'Law', 'Eire', 'Atlanta', 'Complete', 'Has Car', 1350, '1 year', 'Very Clean', 'Introverted', 5, 5, 
+    'Loves hiking and exploring nature trails', 19, 19, 19);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Wynne Codrington', 'Art', 'Topiczoom', 'San Jose', 'Not Interested', 
+    'Not Interested', 1200, '4 months', 'Messy', 'Social', 60, 3, 
+    'Hiking tour guide leading groups on scenic hikes and treks', 20, 20, 20);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Paten Paskell', 'Art', 'Plambee', 'New York City', 'Searching for Roommates', 
+    'Has Car', 1800, '1 year', 'Cluttered', 'Extroverted', 30, 7, 
+    'Fashion designer creating unique clothing and accessories', 21, 21, 21);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Dewey Tubby', 'Mathematics', 'Miboo', 'Los Angeles', 'Not Interested', 
+    'Has Car', 170, '6 months', 'Cluttered', 'Active', 45, 5, 
+    'Antique enthusiast scouring flea markets for hidden treasures', 22, 22, 22);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Banky Tapenden', 'Computer Science', 'Yozio', 'Atlanta', 'Complete', 
+    'Searching for Carpool', 1800, '6 months', 'Messy', 'Active', 45, 6, 
+    'Motorcycle rider exploring scenic routes on two wheels', 23, 23, 23);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Worden Gansbuhler', 'Biology', 'Zoomlounge', 'New York City', 'Searching for Housing', 
+    'Searching for Carpool', 1900, '1 year', 'Cluttered', 'Introverted', 15, 6, 
+    'Travel blogger sharing adventures and tips with readers', 24, 24, 24);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Barbara Brenneke', 'Computer Science', 'Meetz', 'Seattle', 'Searching for Housing', 
+    'Complete', 1200, '6 months', 'Clean', 'Active', 5, 6, 
+    'Dedicated yogi practicing mindfulness and meditation', 25, 25, 25);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Kimbra Absolon', 'Mathematics', 'Shuffletag', 'San Francisco', 'Not Interested', 
+    'Not Interested', 1350, '1 year', 'Moderate', 'Active', 75, 5, 
+    'Environmental advocate promoting conservation and eco-friendly practices', 26, 26, 26);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Jayson Eitter', 'Business', 'Brainlounge', 'Atlanta', 'Searching for Housing', 
+    'Has Car', 1150, '6 months', 'Moderate', 'Adventurous', 15, 4, 
+    'Astrologer providing readings and insights based on celestial movements', 27, 27, 27);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Leonie McGenn', 'Finance', 'Mita', 'Boston', 'Searching for Housing', 
+    'Complete', 170, '1 year', 'Moderate', 'Social', 25, 1, 
+    'Comic book collector preserving rare editions and memorabilia', 28, 28, 28);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Andriette Playhill', 'Art', 'Roombo', 'London', 'Not Interested', 
+    'Complete', 1150, '4 months', 'Messy', 'Outdoorsy', 35, 5, 
+    'Antique dealer specializing in unique and valuable antiques', 29, 29, 29);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Deena Peirce', 'Physics', 'Yodel', 'Boston', 'Complete', 'Has Car', 1600, '4 months', 
+    'Messy', 'Outdoorsy', 45, 2, 'Vintage car collector restoring classic automobiles', 30, 30, 30);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Worthy Schreurs', 'Chemistry', 'Topicblab', 'Chicago', 'Complete', 
+    'Not Interested', 1000, '4 months', 'Clean', 'Extroverted', 10, 3, 
+    'Foodie exploring different cuisines and restaurants', 31, 31, 31);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Gabriel Dedrick', 'Business', 'Flipbug', 'Atlanta', 'Searching for Housing', 
+    'Searching for Carpool', 3000, '1 year', 'Moderate', 'Quiet', 20, 6, 
+    'Dance choreographer creating routines for performances', 32, 32, 32);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Dixie Delgardo', 'Computer Science', 'Trunyx', 'D.C.', 'Searching for Housing', 
+    'Not Interested', 2000, '6 months', 'Clean', 'Introverted', 40, 1, 
+    'Crafting enthusiast creating handmade gifts and decorations', 33, 33, 33);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Amargo Weatherill', 'Finance', 'Browsecat', 'San Francisco', 'Not Interested', 
+    'Searching for Carpool', 1150, '6 months', 'Moderate', 'Adventurous', 10, 3, 
+    'Antique dealer specializing in unique and valuable antiques', 34, 34, 34);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Jack Amos', 'Finance', 'Eimbee', 'San Jose', 'Not Interested', 'Complete', 1900, '1 year', 'Clean', 'Quiet', 60, 7, 
+    'Scuba diver exploring underwater ecosystems and marine life', 35, 35, 35);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Alis Trimbey', 'Law', 'Devpulse', 'New York City', 'Searching for Roommates', 
+    'Searching for Carpool', 1000, '6 months', 'Cluttered', 'Quiet', 25, 1, 
+    'Hiking guide leading groups on challenging mountain trails', 36, 36, 36);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Kacey Outram', 'Computer Science', 'Gigazoom', 'San Jose', 'Complete', 
+    'Searching for Carpool', 1000, '6 months', 'Disorganized', 'Outdoorsy', 35, 6, 
+    'Devoted animal lover volunteering at shelters', 37, 37, 37);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Maddie Rodda', 'Mathematics', 'Dabjam', 'San Jose', 'Searching for Roommates', 
+    'Searching for Carpool', 1350, '6 months', 'Disorganized', 'Extroverted', 35, 1, 
+    'Dedicated yogi practicing mindfulness and meditation', 38, 38, 38);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Vivianna Propper', 'Computer Science', 'Thoughtmix', 'London', 'Searching for Roommates', 
+    'Searching for Carpool', 170, '4 months', 'Messy', 'Introverted', 35, 6, 
+    'Marathon runner training for long-distance races', 39, 39, 39);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Hebert Jurries', 'Physics', 'Avamm', 'Los Angeles', 'Searching for Roommates', 
+    'Searching for Carpool', 1200, '4 months', 'Moderate', 'Extroverted', 15, 7, 
+    'Photography teacher instructing students on composition and lighting', 40, 40, 40);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Dorothee Tomaini', 'Biology', 'Rhybox', 'Chicago', 'Not Interested', 
+    'Not Interested', 1000, '1 year', 'Disorganized', 'Introverted', 45, 5, 
+    'Book publisher releasing new titles and bestsellers', 41, 41, 41);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Kaiser Chitter', 'Physics', 'Thoughtbridge', 'Seattle', 'Searching for Housing', 
+    'Complete', 1800, '1 year', 'Messy', 'Extroverted', 10, 1, 
+    'Surfing school owner offering lessons and rentals for surfers', 42, 42, 42);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Jerry Himsworth', 'Mathematics', 'Quatz', 'Boston', 'Searching for Housing', 
+    'Not Interested', 3000, '6 months', 'Very Clean', 'Quiet', 5, 1, 
+    'Rock climbing coach training climbers on techniques and safety', 43, 43, 43);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Delcina Lies', 'Psychology', 'Dynabox', 'San Francisco', 'Not Interested', 
+    'Has Car', 1150, '4 months', 'Clean', 'Extroverted', 30, 3, 
+    'Passionate about cooking and trying new recipes', 44, 44, 44);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Britni Cowden', 'Finance', 'Tagtune', 'Atlanta', 'Not Interested', 
+    'Searching for Carpool', 1200, '6 months', 'Very Clean', 'Social', 20, 7, 
+    'Birdwatching guide leading tours to spot rare and exotic birds', 45, 45, 45);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Reinald Swancock', 'Finance', 'Thoughtstorm', 'San Jose', 'Searching for Roommates', 
+    'Has Car', 1600, '6 months', 'Clean', 'Outdoorsy', 30, 3, 
+    'Gardening expert cultivating a lush and vibrant garden', 46, 46, 46);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Adel Gatsby', 'Business', 'Yodo', 'Atlanta', 'Searching for Roommates', 
+    'Searching for Carpool', 2500, '6 months', 'Very Clean', 'Outdoorsy', 40, 7, 
+    'Sports journalist reporting on games and athletes', 47, 47, 47);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Stace Muffett', 'Psychology', 'Midel', 'San Francisco', 'Not Interested', 
+    'Searching for Carpool', 3000, '4 months', 'Very Clean', 'Extroverted', 15, 4, 
+    'Dance studio owner providing classes in various dance styles', 48, 48, 48);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Ardelis Benoey', 'Art', 'Aimbu', 'Seattle', 'Complete', 'Searching for Carpool', 
+    1150, '4 months', 'Disorganized', 'Quiet', 5, 1, 'Dance enthusiast taking classes in various styles', 49, 49, 49);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Allan Ivoshin', 'Computer Science', 'JumpXS', 'Los Angeles', 'Not Interested', 
+    'Complete', 1800, '6 months', 'Cluttered', 'Outdoorsy', 10, 2, 
+    'Dedicated yogi practicing mindfulness and meditation', 50, 50, 50);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Brandea Blance', 'Finance', 'Meembee', 'San Jose', 'Searching for Housing', 
+    'Not Interested', 1200, '6 months', 'Disorganized', 'Outdoorsy', 60, 2, 
+    'Motorcycle racer competing in races and rallies', 51, 51, 51);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Charil Staresmeare', 'Biology', 'Meembee', 'San Francisco', 'Not Interested', 
+    'Not Interested', 1600, '4 months', 'Moderate', 'Active', 35, 3, 
+    'Birdwatcher spotting rare species in their natural habitats', 52, 52, 52);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Fleming Wardlow', 'Physics', 'Youopia', 'Seattle', 'Complete', 'Complete', 
+    1900, '6 months', 'Disorganized', 'Social', 5, 4, 'Fitness instructor leading group exercise classes', 53, 53, 53);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Marillin Peasnone', 'Computer Science', 'Wordpedia', 'Seattle', 'Searching for Housing', 
+    'Searching for Carpool', 1200, '4 months', 'Disorganized', 'Social', 40, 1, 
+    'Travel blogger sharing adventures and tips with readers', 54, 54, 54);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Fidel Dootson', 'Mathematics', 'Flipstorm', 'D.C.', 'Searching for Housing', 
+    'Not Interested', 2000, '6 months', 'Disorganized', 'Introverted', 45, 1, 
+    'Tech geek experimenting with the latest gadgets and software', 55, 55, 55);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Arturo Gerling', 'Physics', 'Photojam', 'D.C.', 'Not Interested', 'Complete', 
+    3000, '1 year', 'Very Clean', 'Introverted', 30, 1, 'Dance choreographer creating routines for performances', 56, 56, 56);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Leopold Tremble', 'Chemistry', 'Pixope', 'London', 'Searching for Roommates', 
+    'Not Interested', 2500, '4 months', 'Messy', 'Outdoorsy', 10, 6, 
+    'Sailing captain leading sailing expeditions and charters', 57, 57, 57);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Channa Pitrelli', 'Art', 'Dabvine', 'San Francisco', 'Searching for Roommates', 
+    'Complete', 170, '6 months', 'Cluttered', 'Quiet', 75, 4, 
+    'Art collector acquiring works from emerging and established artists', 58, 58, 58);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Rochella Ranns', 'Chemistry', 'JumpXS', 'Los Angeles', 'Searching for Housing', 
+    'Complete', 2000, '4 months', 'Messy', 'Introverted', 75, 3, 
+    'Tech geek experimenting with the latest gadgets and software', 59, 59, 59);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Fae Maffione', 'Computer Science', 'Twitternation', 'D.C.', 'Searching for Housing', 
+    'Complete', 1150, '6 months', 'Cluttered', 'Quiet', 55, 5, 
+    'Vintage car restorer refurbishing classic vehicles to their former glory', 60, 60, 60);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Nealson Coundley', 'Art', 'Linkbuzz', 'London', 'Complete', 'Has Car', 
+    2000, '1 year', 'Very Clean', 'Adventurous', 30, 7, 'History buff visiting museums and historical sites', 61, 61, 61);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Jaimie Tappin', 'Biology', 'Gigaclub', 'San Jose', 'Not Interested', 
+    'Searching for Carpool', 2000, '4 months', 'Clean', 'Social', 45, 7, 
+    'Thrives on adrenaline with extreme sports like skydiving and bungee jumping', 62, 62, 62);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Susanna Pykerman', 'Law', 'Centidel', 'Chicago', 'Not Interested', 
+    'Searching for Carpool', 2000, '6 months', 'Clean', 'Adventurous', 30, 3, 
+    'Avid collector of vintage vinyl records', 63, 63, 63);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Leda Standish-Brooks', 'Law', 'Eabox', 'Los Angeles', 'Complete', 'Has Car', 
+    2500, '1 year', 'Messy', 'Introverted', 60, 1, 'Sports fan cheering for their favorite teams at games', 64, 64, 64);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Alfredo Verling', 'Physics', 'Livetube', 'San Jose', 'Complete', 'Not Interested', 
+    1200, '4 months', 'Very Clean', 'Social', 55, 7, 'Photography teacher instructing students on composition and lighting', 65, 65, 65);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Kristina Orteu', 'Chemistry', 'Skiptube', 'Los Angeles', 'Not Interested', 
+    'Complete', 1600, '4 months', 'Moderate', 'Introverted', 15, 5, 
+    'Crafting enthusiast creating handmade gifts and decorations', 66, 66, 66);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Darcee Itzkowicz', 'Chemistry', 'Fadeo', 'Chicago', 'Not Interested', 'Has Car', 
+    170, '6 months', 'Very Clean', 'Introverted', 5, 2, 'Chess master competing in international tournaments and championships', 67, 67, 67);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Brigg Braidley', 'Biology', 'Twimbo', 'Los Angeles', 'Complete', 'Searching for Carpool', 
+    1600, '4 months', 'Very Clean', 'Introverted', 55, 1, 'Environmental advocate promoting conservation and eco-friendly practices', 68, 68, 68);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Jade Waplington', 'Finance', 'Innotype', 'Atlanta', 'Not Interested', 'Has Car', 
+    2500, '4 months', 'Very Clean', 'Introverted', 30, 6, 'Environmental advocate promoting conservation and eco-friendly practices', 69, 69, 69);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Claire Mallender', 'Biology', 'Roombo', 'Chicago', 'Complete', 'Has Car', 
+    1200, '6 months', 'Disorganized', 'Active', 10, 6, 'Vintage car restorer refurbishing classic vehicles to their former glory', 70, 70, 70);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Wileen Loveman', 'Biology', 'Abata', 'Atlanta', 'Searching for Housing', 
+    'Complete', 3000, '4 months', 'Very Clean', 'Social', 20, 6, 'History professor researching and teaching historical events', 71, 71, 71);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Shannon Eagar', 'Chemistry', 'Skibox', 'London', 'Complete', 'Searching for Carpool', 
+    1000, '1 year', 'Cluttered', 'Adventurous', 30, 2, 'Sailing captain leading sailing expeditions and charters', 72, 72, 72);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Nikita Ferronet', 'Computer Science', 'Fadeo', 'Boston', 'Complete', 'Searching for Carpool', 
+    2000, '6 months', 'Clean', 'Social', 5, 1, 'Vintage car collector restoring classic automobiles', 73, 73, 73);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Quinn Corner', 'Biology', 'Meevee', 'New York City', 'Searching for Roommates', 
+    'Has Car', 1800, '1 year', 'Cluttered', 'Active', 20, 1, 'Gaming streamer broadcasting gameplay and interacting with viewers', 74, 74, 74);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Hewie Speek', 'Art', 'Einti', 'Seattle', 'Not Interested', 'Complete', 
+    2000, '1 year', 'Moderate', 'Adventurous', 75, 1, 'Antique dealer specializing in unique and valuable antiques', 75, 75, 75);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Ronica Maplethorp', 'Law', 'Skiba', 'D.C.', 'Searching for Roommates', 
+    'Searching for Carpool', 1800, '4 months', 'Cluttered', 'Social', 10, 2, 
+    'Travel blogger sharing adventures and tips with readers', 76, 76, 76);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Blair Shedden', 'Physics', 'Fanoodle', 'Seattle', 'Searching for Roommates', 
+    'Searching for Carpool', 2000, '6 months', 'Disorganized', 'Extroverted', 25, 4, 
+    'Tech geek experimenting with the latest gadgets and software', 77, 77, 77);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Nolly Petry', 'Law', 'Buzzster', 'Atlanta', 'Searching for Roommates', 
+    'Complete', 1000, '6 months', 'Disorganized', 'Social', 55, 5, 'Fashion designer creating unique clothing and accessories', 78, 78, 78);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Flemming Gatecliffe', 'Computer Science', 'Yombu', 'New York City', 'Not Interested', 
+    170, '1 year', 'Cluttered', 'Introverted', 75, 2, 'Tech entrepreneur developing innovative solutions and products', 79, 79, 79);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Prince Stickells', 'Finance', 'Dabfeed', 'Atlanta', 'Not Interested', 'Has Car', 
+    2500, '4 months', 'Cluttered', 'Social', 30, 1, 'Dance choreographer creating routines for performances', 80, 80, 80);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Moselle Huddy', 'Biology', 'Kare', 'Los Angeles', 'Searching for Housing', 
+    'Complete', 1350, '4 months', 'Disorganized', 'Social', 5, 2, 
+    'Thrives on adrenaline with extreme sports like skydiving and bungee jumping', 81, 81, 81);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Fraser Crippill', 'Physics', 'Dynazzy', 'Los Angeles', 'Searching for Roommates', 
+    'Not Interested', 1900, '1 year', 'Disorganized', 'Extroverted', 15, 2, 
+    'Environmental advocate promoting conservation and eco-friendly practices', 82, 82, 82);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Jenda Wrinch', 'Psychology', 'Twinder', 'San Jose', 'Complete', 'Complete', 
+    1000, '6 months', 'Very Clean', 'Outdoorsy', 35, 1, 'Gardening expert cultivating a lush and vibrant garden', 83, 83, 83);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Corliss Lavallie', 'Chemistry', 'Geba', 'Boston', 'Searching for Housing', 
+    'Has Car', 2500, '6 months', 'Clean', 'Social', 55, 2, 'History buff visiting museums and historical sites', 84, 84, 84);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Ivonne Wickrath', 'Art', 'Divavu', 'London', 'Complete', 'Complete', 
+    3000, '4 months', 'Moderate', 'Quiet', 75, 7, 'Keen gardener growing a variety of fruits and vegetables', 85, 85, 85);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Pearline Grumell', 'Chemistry', 'Feedfish', 'Seattle', 'Not Interested', 
+    'Complete', 3000, '6 months', 'Messy', 'Social', 30, 1, 'Gamer immersing themselves in virtual worlds and online competitions', 86, 86, 86);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Susannah Raddan', 'Art', 'Tazzy', 'D.C.', 'Complete', 'Has Car', 
+    1800, '4 months', 'Clean', 'Adventurous', 75, 5, 'Book publisher releasing new titles and bestsellers', 87, 87, 87);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Delila Coulbeck', 'Psychology', 'Demimbu', 'D.C.', 'Searching for Roommates', 
+    'Complete', 2500, '4 months', 'Cluttered', 'Active', 45, 2, 'Wine connoisseur tasting and collecting fine wines', 88, 88, 88);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Berton Harmeston', 'Biology', 'Janyx', 'Chicago', 'Searching for Roommates', 
+    'Has Car', 1000, '1 year', 'Moderate', 'Quiet', 60, 1, 'Vintage car collector restoring classic automobiles', 89, 89, 89);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Donalt Gunning', 'Finance', 'Riffpedia', 'Atlanta', 'Searching for Roommates', 
+    'Not Interested', 1200, '4 months', 'Clean', 'Quiet', 30, 2, 'Astrologer providing readings and insights based on celestial movements', 90, 90, 90);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Tymon Neilus', 'Biology', 'Pixope', 'New York City', 'Complete', 'Searching for Carpool', 
+    1600, '4 months', 'Cluttered', 'Quiet', 30, 7, 'Soccer coach training players on skills and strategies for the game', 91, 91, 91);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Leoine Oswell', 'Art', 'Skimia', 'Chicago', 'Complete', 'Not Interested', 
+    1150, '1 year', 'Messy', 'Social', 45, 5, 'Antique enthusiast scouring flea markets for hidden treasures', 92, 92, 92);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Gerry Gatecliff', 'Finance', 'Shufflebeat', 'San Jose', 'Searching for Housing', 
+    'Searching for Carpool', 1600, '1 year', 'Clean', 'Outdoorsy', 45, 6, 
+    'Sports commentator providing analysis and commentary on games', 93, 93, 93);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Marissa Broun', 'Finance', 'Quire', 'Seattle', 'Searching for Housing', 
+    'Complete', 3000, '1 year', 'Cluttered', 'Extroverted', 45, 1, 'Obsessed with DIY home improvement projects', 94, 94, 94);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Letty Mewton', 'Physics', 'Jabberbean', 'Atlanta', 'Complete', 
+    'Searching for Carpool', 1150, '4 months', 'Moderate', 'Quiet', 45, 5, 
+    'Music festival organizer planning and coordinating live music events', 95, 95, 95);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Arthur Gave', 'Business', 'Blogspan', 'San Francisco', 'Complete', 'Not Interested', 
+    2500, '6 months', 'Disorganized', 'Extroverted', 40, 3, 'Fitness influencer inspiring followers with workout routines and tips', 96, 96, 96);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Joleen Satterly', 'Physics', 'Oodoo', 'Chicago', 'Searching for Housing', 
+    'Searching for Carpool', 1600, '6 months', 'Moderate', 'Adventurous', 75, 4, 'Rock climbing coach training climbers on techniques and safety', 97, 97, 97);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Wheeler Martynka', 'Business', 'Rhynyx', 'London', 'Searching for Housing', 
+    'Searching for Carpool', 1350, '6 months', 'Disorganized', 'Adventurous', 10, 5, 
+    'Rock climbing coach training climbers on techniques and safety', 98, 98, 98);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Marys Hannaby', 'Art', 'Zazio', 'London', 'Searching for Housing', 
+    'Not Interested', 170, '1 year', 'Cluttered', 'Active', 30, 6, 'Surfing enthusiast catching waves at the beach', 99, 99, 99);
+insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, 
+    Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) 
+values ('Ariel Gabotti', 'Biology', 'Latz', 'San Jose', 'Complete', 'Complete', 
+    3000, '1 year', 'Moderate', 'Introverted', 60, 6, 'Soccer coach training players on skills and strategies for the game', 100, 100, 100);
 
--- Student data
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Leland Izaks', 'Computer Science', 'Eire', 'San Jose', 'Searching for Housing', 'Not Interested', 1350, '1 year', 'Cluttered', 'Social', 15, 1, 'Gamer immersing themselves in virtual worlds and online competitions', 7, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Demetris Dury', 'Computer Science', 'Photospace', 'San Jose', 'Searching for Roommates', 'Searching for Carpool', 1800, '4 months', 'Moderate', 'Active', 75, 2, 'Music festival organizer planning and coordinating live music events', 6, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Zelig Matuszinski', 'Physics', 'Podcat', 'London', 'Not Interested', 'Not Interested', 3000, '4 months', 'Moderate', 'Quiet', 55, 1, 'Wine connoisseur tasting and collecting fine wines', 5, null, 10);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Lonni Duke', 'Business', 'Jabbercube', 'Boston', 'Searching for Housing', 'Not Interested', 1150, '4 months', 'Disorganized', 'Introverted', 45, 3, 'Avid collector of vintage vinyl records', 9, null, 10);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Gannie Dearness', 'Business', 'Youspan', 'San Jose', 'Searching for Roommates', 'Searching for Carpool', 2000, '6 months', 'Cluttered', 'Extroverted', 75, 1, 'Sailing captain leading sailing expeditions and charters', 4, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Garnet Mathieson', 'Chemistry', 'Realbuzz', 'London', 'Complete', 'Searching for Carpool', 1350, '6 months', 'Clean', 'Adventurous', 45, 7, 'Vintage car collector restoring classic automobiles', 2, null, 5);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Valeria Algore', 'Psychology', 'Quimba', 'Seattle', 'Searching for Housing', 'Has Car', 1600, '6 months', 'Very Clean', 'Adventurous', 40, 4, 'Travel photographer capturing stunning landscapes and cultures', 7, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Lita Delahunty', 'Biology', 'Fivebridge', 'Los Angeles', 'Searching for Roommates', 'Not Interested', 1800, '4 months', 'Moderate', 'Quiet', 40, 7, 'Tech geek experimenting with the latest gadgets and software', 3, null, 9);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Tanitansy Wallhead', 'Computer Science', 'Kanoodle', 'London', 'Searching for Housing', 'Searching for Carpool', 1200, '6 months', 'Moderate', 'Outdoorsy', 55, 4, 'Dance studio owner providing classes in various dance styles', 1, null, 7);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Fleur Vitet', 'Psychology', 'Shuffledrive', 'D.C.', 'Searching for Housing', 'Has Car', 2000, '4 months', 'Disorganized', 'Quiet', 10, 4, 'Soccer player training for matches and tournaments', 3, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Celie Franchi', 'Finance', 'Jaxspan', 'Seattle', 'Searching for Housing', 'Has Car', 2500, '1 year', 'Messy', 'Extroverted', 5, 5, 'Dance choreographer creating routines for performances', 9, null, 1);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Thaddus Pettiford', 'Business', 'Meejo', 'San Francisco', 'Not Interested', 'Has Car', 2500, '4 months', 'Disorganized', 'Active', 55, 7, 'Comic book store owner selling rare and collectible comics', 1, null, 10);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Aprilette Kidd', 'Computer Science', 'Kaymbo', 'San Francisco', 'Not Interested', 'Complete', 2000, '6 months', 'Disorganized', 'Extroverted', 75, 6, 'Chess master competing in international tournaments and championships', 2, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Simone Fishbourne', 'Art', 'Gigabox', 'Los Angeles', 'Searching for Roommates', 'Complete', 1600, '6 months', 'Disorganized', 'Adventurous', 30, 7, 'Music aficionado attending concerts and music festivals', 5, null, 5);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Jonis MacAlaster', 'Finance', 'Babbleblab', 'San Jose', 'Searching for Roommates', 'Has Car', 170, '6 months', 'Messy', 'Quiet', 40, 3, 'Yoga studio owner providing classes in relaxation and mindfulness', 2, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Collette Lazenby', 'Finance', 'Gigaclub', 'D.C.', 'Searching for Housing', 'Has Car', 3000, '4 months', 'Cluttered', 'Quiet', 15, 4, 'Firefighter captain leading a team in emergency response and rescue', 10, null, 6);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Conn Dullard', 'Business', 'Feednation', 'New York City', 'Not Interested', 'Searching for Carpool', 2500, '6 months', 'Moderate', 'Adventurous', 55, 7, 'Cycling coach developing training programs for cyclists', 9, null, 1);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Everard Benedito', 'Computer Science', 'Zoomcast', 'San Francisco', 'Searching for Housing', 'Complete', 1600, '6 months', 'Messy', 'Outdoorsy', 20, 1, 'Dance choreographer creating routines for performances', 7, null, 9);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Roman Wais', 'Law', 'Eire', 'Atlanta', 'Complete', 'Has Car', 1350, '1 year', 'Very Clean', 'Introverted', 5, 5, 'Loves hiking and exploring nature trails', 3, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Wynne Codrington', 'Art', 'Topiczoom', 'San Jose', 'Not Interested', 'Not Interested', 1200, '4 months', 'Messy', 'Social', 60, 3, 'Hiking tour guide leading groups on scenic hikes and treks', 9, null, 1);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Paten Paskell', 'Art', 'Plambee', 'New York City', 'Searching for Roommates', 'Has Car', 1800, '1 year', 'Cluttered', 'Extroverted', 30, 7, 'Fashion designer creating unique clothing and accessories', 8, null, 5);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Dewey Tubby', 'Mathematics', 'Miboo', 'Los Angeles', 'Not Interested', 'Has Car', 170, '6 months', 'Cluttered', 'Active', 45, 5, 'Antique enthusiast scouring flea markets for hidden treasures', 10, null, 7);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Banky Tapenden', 'Computer Science', 'Yozio', 'Atlanta', 'Complete', 'Searching for Carpool', 1800, '6 months', 'Messy', 'Active', 45, 6, 'Motorcycle rider exploring scenic routes on two wheels', 4, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Worden Gansbuhler', 'Biology', 'Zoomlounge', 'New York City', 'Searching for Housing', 'Searching for Carpool', 1900, '1 year', 'Cluttered', 'Introverted', 15, 6, 'Travel blogger sharing adventures and tips with readers', 8, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Barbara Brenneke', 'Computer Science', 'Meetz', 'Seattle', 'Searching for Housing', 'Complete', 1200, '6 months', 'Clean', 'Active', 5, 6, 'Dedicated yogi practicing mindfulness and meditation', 8, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Kimbra Absolon', 'Mathematics', 'Shuffletag', 'San Francisco', 'Not Interested', 'Not Interested', 1350, '1 year', 'Moderate', 'Active', 75, 5, 'Environmental advocate promoting conservation and eco-friendly practices', 9, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Jayson Eitter', 'Business', 'Brainlounge', 'Atlanta', 'Searching for Housing', 'Has Car', 1150, '6 months', 'Moderate', 'Adventurous', 15, 4, 'Astrologer providing readings and insights based on celestial movements', 3, null, 7);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Leonie McGenn', 'Finance', 'Mita', 'Boston', 'Searching for Housing', 'Complete', 170, '1 year', 'Moderate', 'Social', 25, 1, 'Comic book collector preserving rare editions and memorabilia', 2, null, 3);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Andriette Playhill', 'Art', 'Roombo', 'London', 'Not Interested', 'Complete', 1150, '4 months', 'Messy', 'Outdoorsy', 35, 5, 'Antique dealer specializing in unique and valuable antiques', 9, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Deena Peirce', 'Physics', 'Yodel', 'Boston', 'Complete', 'Has Car', 1600, '4 months', 'Messy', 'Outdoorsy', 45, 2, 'Vintage car collector restoring classic automobiles', 10, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Worthy Schreurs', 'Chemistry', 'Topicblab', 'Chicago', 'Complete', 'Not Interested', 1000, '4 months', 'Clean', 'Extroverted', 10, 3, 'Foodie exploring different cuisines and restaurants', 2, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Gabriel Dedrick', 'Business', 'Flipbug', 'Atlanta', 'Searching for Housing', 'Searching for Carpool', 3000, '1 year', 'Moderate', 'Quiet', 20, 6, 'Dance choreographer creating routines for performances', 4, null, 9);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Dixie Delgardo', 'Computer Science', 'Trunyx', 'D.C.', 'Searching for Housing', 'Not Interested', 2000, '6 months', 'Clean', 'Introverted', 40, 1, 'Crafting enthusiast creating handmade gifts and decorations', 6, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Amargo Weatherill', 'Finance', 'Browsecat', 'San Francisco', 'Not Interested', 'Searching for Carpool', 1150, '6 months', 'Moderate', 'Adventurous', 10, 3, 'Antique dealer specializing in unique and valuable antiques', 2, null, 5);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Jack Amos', 'Finance', 'Eimbee', 'San Jose', 'Not Interested', 'Complete', 1900, '1 year', 'Clean', 'Quiet', 60, 7, 'Scuba diver exploring underwater ecosystems and marine life', 9, null, 9);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Alis Trimbey', 'Law', 'Devpulse', 'New York City', 'Searching for Roommates', 'Searching for Carpool', 1000, '6 months', 'Cluttered', 'Quiet', 25, 1, 'Hiking guide leading groups on challenging mountain trails', 5, null, 6);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Kacey Outram', 'Computer Science', 'Gigazoom', 'San Jose', 'Complete', 'Searching for Carpool', 1000, '6 months', 'Disorganized', 'Outdoorsy', 35, 6, 'Devoted animal lover volunteering at shelters', 8, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Maddie Rodda', 'Mathematics', 'Dabjam', 'San Jose', 'Searching for Roommates', 'Searching for Carpool', 1350, '6 months', 'Disorganized', 'Extroverted', 35, 1, 'Dedicated yogi practicing mindfulness and meditation', 7, null, 7);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Vivianna Propper', 'Computer Science', 'Thoughtmix', 'London', 'Searching for Roommates', 'Searching for Carpool', 170, '4 months', 'Messy', 'Introverted', 35, 6, 'Marathon runner training for long-distance races', 4, null, 7);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Hebert Jurries', 'Physics', 'Avamm', 'Los Angeles', 'Searching for Roommates', 'Searching for Carpool', 1200, '4 months', 'Moderate', 'Extroverted', 15, 7, 'Photography teacher instructing students on composition and lighting', 6, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Dorothee Tomaini', 'Biology', 'Rhybox', 'Chicago', 'Not Interested', 'Not Interested', 1000, '1 year', 'Disorganized', 'Introverted', 45, 5, 'Book publisher releasing new titles and bestsellers', 1, null, 5);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Kaiser Chitter', 'Physics', 'Thoughtbridge', 'Seattle', 'Searching for Housing', 'Complete', 1800, '1 year', 'Messy', 'Extroverted', 10, 1, 'Surfing school owner offering lessons and rentals for surfers', 1, null, 3);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Jerry Himsworth', 'Mathematics', 'Quatz', 'Boston', 'Searching for Housing', 'Not Interested', 3000, '6 months', 'Very Clean', 'Quiet', 5, 1, 'Rock climbing coach training climbers on techniques and safety', 2, null, 5);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Delcina Lies', 'Psychology', 'Dynabox', 'San Francisco', 'Not Interested', 'Has Car', 1150, '4 months', 'Clean', 'Extroverted', 30, 3, 'Passionate about cooking and trying new recipes', 6, null, 7);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Britni Cowden', 'Finance', 'Tagtune', 'Atlanta', 'Not Interested', 'Searching for Carpool', 1200, '6 months', 'Very Clean', 'Social', 20, 7, 'Birdwatching guide leading tours to spot rare and exotic birds', 2, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Reinald Swancock', 'Finance', 'Thoughtstorm', 'San Jose', 'Searching for Roommates', 'Has Car', 1600, '6 months', 'Clean', 'Outdoorsy', 30, 3, 'Gardening expert cultivating a lush and vibrant garden', 8, null, 3);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Adel Gatsby', 'Business', 'Yodo', 'Atlanta', 'Searching for Roommates', 'Searching for Carpool', 2500, '6 months', 'Very Clean', 'Outdoorsy', 40, 7, 'Sports journalist reporting on games and athletes', 4, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Stace Muffett', 'Psychology', 'Midel', 'San Francisco', 'Not Interested', 'Searching for Carpool', 3000, '4 months', 'Very Clean', 'Extroverted', 15, 4, 'Dance studio owner providing classes in various dance styles', 3, null, 10);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Ardelis Benoey', 'Art', 'Aimbu', 'Seattle', 'Complete', 'Searching for Carpool', 1150, '4 months', 'Disorganized', 'Quiet', 5, 1, 'Dance enthusiast taking classes in various styles', 10, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Allan Ivoshin', 'Computer Science', 'JumpXS', 'Los Angeles', 'Not Interested', 'Complete', 1800, '6 months', 'Cluttered', 'Outdoorsy', 10, 2, 'Dedicated yogi practicing mindfulness and meditation', 4, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Brandea Blance', 'Finance', 'Meembee', 'San Jose', 'Searching for Housing', 'Not Interested', 1200, '6 months', 'Disorganized', 'Outdoorsy', 60, 2, 'Motorcycle racer competing in races and rallies', 3, null, 10);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Charil Staresmeare', 'Biology', 'Meembee', 'San Francisco', 'Not Interested', 'Not Interested', 1600, '4 months', 'Moderate', 'Active', 35, 3, 'Birdwatcher spotting rare species in their natural habitats', 5, null, 10);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Fleming Wardlow', 'Physics', 'Youopia', 'Seattle', 'Complete', 'Complete', 1900, '6 months', 'Disorganized', 'Social', 5, 4, 'Fitness instructor leading group exercise classes', 2, null, 5);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Marillin Peasnone', 'Computer Science', 'Wordpedia', 'Seattle', 'Searching for Housing', 'Searching for Carpool', 1200, '4 months', 'Disorganized', 'Social', 40, 1, 'Travel blogger sharing adventures and tips with readers', 7, null, 7);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Fidel Dootson', 'Mathematics', 'Flipstorm', 'D.C.', 'Searching for Housing', 'Not Interested', 2000, '6 months', 'Disorganized', 'Introverted', 45, 1, 'Tech geek experimenting with the latest gadgets and software', 9, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Arturo Gerling', 'Physics', 'Photojam', 'D.C.', 'Not Interested', 'Complete', 3000, '1 year', 'Very Clean', 'Introverted', 30, 1, 'Dance choreographer creating routines for performances', 1, null, 3);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Leopold Tremble', 'Chemistry', 'Pixope', 'London', 'Searching for Roommates', 'Not Interested', 2500, '4 months', 'Messy', 'Outdoorsy', 10, 6, 'Sailing captain leading sailing expeditions and charters', 3, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Channa Pitrelli', 'Art', 'Dabvine', 'San Francisco', 'Searching for Roommates', 'Complete', 170, '6 months', 'Cluttered', 'Quiet', 75, 4, 'Art collector acquiring works from emerging and established artists', 4, null, 6);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Rochella Ranns', 'Chemistry', 'JumpXS', 'Los Angeles', 'Searching for Housing', 'Complete', 2000, '4 months', 'Messy', 'Introverted', 75, 3, 'Tech geek experimenting with the latest gadgets and software', 7, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Fae Maffione', 'Computer Science', 'Twitternation', 'D.C.', 'Searching for Housing', 'Complete', 1150, '6 months', 'Cluttered', 'Quiet', 55, 5, 'Vintage car restorer refurbishing classic vehicles to their former glory', 9, null, 1);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Nealson Coundley', 'Art', 'Linkbuzz', 'London', 'Complete', 'Has Car', 2000, '1 year', 'Very Clean', 'Adventurous', 30, 7, 'History buff visiting museums and historical sites', 1, null, 10);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Jaimie Tappin', 'Biology', 'Gigaclub', 'San Jose', 'Not Interested', 'Searching for Carpool', 2000, '4 months', 'Clean', 'Social', 45, 7, 'Thrives on adrenaline with extreme sports like skydiving and bungee jumping', 3, null, 10);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Susanna Pykerman', 'Law', 'Centidel', 'Chicago', 'Not Interested', 'Searching for Carpool', 2000, '6 months', 'Clean', 'Adventurous', 30, 3, 'Avid collector of vintage vinyl records', 7, null, 7);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Leda Standish-Brooks', 'Law', 'Eabox', 'Los Angeles', 'Complete', 'Has Car', 2500, '1 year', 'Messy', 'Introverted', 60, 1, 'Sports fan cheering for their favorite teams at games', 9, null, 10);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Alfredo Verling', 'Physics', 'Livetube', 'San Jose', 'Complete', 'Not Interested', 1200, '4 months', 'Very Clean', 'Social', 55, 7, 'Photography teacher instructing students on composition and lighting', 6, null, 3);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Kristina Orteu', 'Chemistry', 'Skiptube', 'Los Angeles', 'Not Interested', 'Complete', 1600, '4 months', 'Moderate', 'Introverted', 15, 5, 'Crafting enthusiast creating handmade gifts and decorations', 3, null, 3);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Darcee Itzkowicz', 'Chemistry', 'Fadeo', 'Chicago', 'Not Interested', 'Has Car', 170, '6 months', 'Very Clean', 'Introverted', 5, 2, 'Chess master competing in international tournaments and championships', 10, null, 10);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Brigg Braidley', 'Biology', 'Twimbo', 'Los Angeles', 'Complete', 'Searching for Carpool', 1600, '4 months', 'Very Clean', 'Introverted', 55, 1, 'Environmental advocate promoting conservation and eco-friendly practices', 7, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Jade Waplington', 'Finance', 'Innotype', 'Atlanta', 'Not Interested', 'Has Car', 2500, '4 months', 'Very Clean', 'Introverted', 30, 6, 'Environmental advocate promoting conservation and eco-friendly practices', 4, null, 9);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Claire Mallender', 'Biology', 'Roombo', 'Chicago', 'Complete', 'Has Car', 1200, '6 months', 'Disorganized', 'Active', 10, 6, 'Vintage car restorer refurbishing classic vehicles to their former glory', 1, null, 10);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Wileen Loveman', 'Biology', 'Abata', 'Atlanta', 'Searching for Housing', 'Complete', 3000, '4 months', 'Very Clean', 'Social', 20, 6, 'History professor researching and teaching historical events', 2, null, 1);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Shannon Eagar', 'Chemistry', 'Skibox', 'London', 'Complete', 'Searching for Carpool', 1000, '1 year', 'Cluttered', 'Adventurous', 30, 2, 'Sailing captain leading sailing expeditions and charters', 8, null, 1);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Nikita Ferronet', 'Computer Science', 'Fadeo', 'Boston', 'Complete', 'Searching for Carpool', 2000, '6 months', 'Clean', 'Social', 5, 1, 'Vintage car collector restoring classic automobiles', 3, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Quinn Corner', 'Biology', 'Meevee', 'New York City', 'Searching for Roommates', 'Has Car', 1800, '1 year', 'Cluttered', 'Active', 20, 1, 'Gaming streamer broadcasting gameplay and interacting with viewers', 3, null, 9);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Hewie Speek', 'Art', 'Einti', 'Seattle', 'Not Interested', 'Complete', 2000, '1 year', 'Moderate', 'Adventurous', 75, 1, 'Antique dealer specializing in unique and valuable antiques', 5, null, 6);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Ronica Maplethorp', 'Law', 'Skiba', 'D.C.', 'Searching for Roommates', 'Searching for Carpool', 1800, '4 months', 'Cluttered', 'Social', 10, 2, 'Travel blogger sharing adventures and tips with readers', 10, null, 7);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Blair Shedden', 'Physics', 'Fanoodle', 'Seattle', 'Searching for Roommates', 'Searching for Carpool', 2000, '6 months', 'Disorganized', 'Extroverted', 25, 4, 'Tech geek experimenting with the latest gadgets and software', 7, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Nolly Petry', 'Law', 'Buzzster', 'Atlanta', 'Searching for Roommates', 'Complete', 1000, '6 months', 'Disorganized', 'Social', 55, 5, 'Fashion designer creating unique clothing and accessories', 5, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Flemming Gatecliffe', 'Computer Science', 'Yombu', 'New York City', 'Not Interested', 'Complete', 170, '1 year', 'Cluttered', 'Introverted', 75, 2, 'Tech entrepreneur developing innovative solutions and products', 9, null, 7);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Prince Stickells', 'Finance', 'Dabfeed', 'Atlanta', 'Not Interested', 'Has Car', 2500, '4 months', 'Cluttered', 'Social', 30, 1, 'Dance choreographer creating routines for performances', 9, null, 5);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Moselle Huddy', 'Biology', 'Kare', 'Los Angeles', 'Searching for Housing', 'Complete', 1350, '4 months', 'Disorganized', 'Social', 5, 2, 'Thrives on adrenaline with extreme sports like skydiving and bungee jumping', 4, null, 10);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Fraser Crippill', 'Physics', 'Dynazzy', 'Los Angeles', 'Searching for Roommates', 'Not Interested', 1900, '1 year', 'Disorganized', 'Extroverted', 15, 2, 'Environmental advocate promoting conservation and eco-friendly practices', 10, null, 3);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Jenda Wrinch', 'Psychology', 'Twinder', 'San Jose', 'Complete', 'Complete', 1000, '6 months', 'Very Clean', 'Outdoorsy', 35, 1, 'Gardening expert cultivating a lush and vibrant garden', 9, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Corliss Lavallie', 'Chemistry', 'Geba', 'Boston', 'Searching for Housing', 'Has Car', 2500, '6 months', 'Clean', 'Social', 55, 2, 'History buff visiting museums and historical sites', 1, null, 6);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Ivonne Wickrath', 'Art', 'Divavu', 'London', 'Complete', 'Complete', 3000, '4 months', 'Moderate', 'Quiet', 75, 7, 'Keen gardener growing a variety of fruits and vegetables', 7, null, 6);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Pearline Grumell', 'Chemistry', 'Feedfish', 'Seattle', 'Not Interested', 'Complete', 3000, '6 months', 'Messy', 'Social', 30, 1, 'Gamer immersing themselves in virtual worlds and online competitions', 5, null, 1);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Susannah Raddan', 'Art', 'Tazzy', 'D.C.', 'Complete', 'Has Car', 1800, '4 months', 'Clean', 'Adventurous', 75, 5, 'Book publisher releasing new titles and bestsellers', 5, null, 3);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Delila Coulbeck', 'Psychology', 'Demimbu', 'D.C.', 'Searching for Roommates', 'Complete', 2500, '4 months', 'Cluttered', 'Active', 45, 2, 'Wine connoisseur tasting and collecting fine wines', 2, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Berton Harmeston', 'Biology', 'Janyx', 'Chicago', 'Searching for Roommates', 'Has Car', 1000, '1 year', 'Moderate', 'Quiet', 60, 1, 'Vintage car collector restoring classic automobiles', 8, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Donalt Gunning', 'Finance', 'Riffpedia', 'Atlanta', 'Searching for Roommates', 'Not Interested', 1200, '4 months', 'Clean', 'Quiet', 30, 2, 'Astrologer providing readings and insights based on celestial movements', 9, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Tymon Neilus', 'Biology', 'Pixope', 'New York City', 'Complete', 'Searching for Carpool', 1600, '4 months', 'Cluttered', 'Quiet', 30, 7, 'Soccer coach training players on skills and strategies for the game', 9, null, 6);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Leoine Oswell', 'Art', 'Skimia', 'Chicago', 'Complete', 'Not Interested', 1150, '1 year', 'Messy', 'Social', 45, 5, 'Antique enthusiast scouring flea markets for hidden treasures', 9, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Gerry Gatecliff', 'Finance', 'Shufflebeat', 'San Jose', 'Searching for Housing', 'Searching for Carpool', 1600, '1 year', 'Clean', 'Outdoorsy', 45, 6, 'Sports commentator providing analysis and commentary on games', 9, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Marissa Broun', 'Finance', 'Quire', 'Seattle', 'Searching for Housing', 'Complete', 3000, '1 year', 'Cluttered', 'Extroverted', 45, 1, 'Obsessed with DIY home improvement projects', 6, null, 8);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Letty Mewton', 'Physics', 'Jabberbean', 'Atlanta', 'Complete', 'Searching for Carpool', 1150, '4 months', 'Moderate', 'Quiet', 45, 5, 'Music festival organizer planning and coordinating live music events', 9, null, 7);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Arthur Gave', 'Business', 'Blogspan', 'San Francisco', 'Complete', 'Not Interested', 2500, '6 months', 'Disorganized', 'Extroverted', 40, 3, 'Fitness influencer inspiring followers with workout routines and tips', 3, null, 3);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Joleen Satterly', 'Physics', 'Oodoo', 'Chicago', 'Searching for Housing', 'Searching for Carpool', 1600, '6 months', 'Moderate', 'Adventurous', 75, 4, 'Rock climbing coach training climbers on techniques and safety', 9, null, 2);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Wheeler Martynka', 'Business', 'Rhynyx', 'London', 'Searching for Housing', 'Searching for Carpool', 1350, '6 months', 'Disorganized', 'Adventurous', 10, 5, 'Rock climbing coach training climbers on techniques and safety', 5, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Marys Hannaby', 'Art', 'Zazio', 'London', 'Searching for Housing', 'Not Interested', 170, '1 year', 'Cluttered', 'Active', 30, 6, 'Surfing enthusiast catching waves at the beach', 10, null, 4);
-insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, HousingID, AdvisorID) values ('Ariel Gabotti', 'Biology', 'Latz', 'San Jose', 'Complete', 'Complete', 3000, '1 year', 'Moderate', 'Introverted', 60, 6, 'Soccer coach training players on skills and strategies for the game', 1, null, 9);
+-- 6. Events Data (depends on CityCommunity)
+insert into Events (CommunityID, Date, Name, Description) values (1, '2024-01-01', 'New Year Celebration', 'Community gathering');
+insert into Events (CommunityID, Date, Name, Description) values (2, '2024-06-01', 'Networking Mixer Mondays', 'Interactive workshops on networking skills');
+insert into Events (CommunityID, Date, Name, Description) values (3, '2024-09-25', 'Career Development Workshop', 'Panel discussion on career opportunities in tech');
+insert into Events (CommunityID, Date, Name, Description) values (4, '2024-05-21', 'Industry Panel Discussions', 'Speed networking session with recruiters');
+insert into Events (CommunityID, Date, Name, Description) values (5, '2024-02-24', 'Resume Building Bootcamp', 'Virtual networking happy hour');
+insert into Events (CommunityID, Date, Name, Description) values (6, '2024-02-25', 'LinkedIn Profile Optimization', 'Mock interview practice with HR professionals');
+insert into Events (CommunityID, Date, Name, Description) values (7, '2024-06-07', 'Mock Interview Practice', 'Resume review session with career coaches');
+insert into Events (CommunityID, Date, Name, Description) values (8, '2024-01-11', 'Job Search Strategies', 'Networking bingo game with prizes');
+insert into Events (CommunityID, Date, Name, Description) values (9, '2024-08-12', 'Personal Branding Workshop', 'LinkedIn profile optimization workshop');
+insert into Events (CommunityID, Date, Name, Description) values (10, '2024-02-19', 'Internship Opportunities Panel', 'Networking scavenger hunt');
+insert into Events (CommunityID, Date, Name, Description) values (11, '2023-12-24', 'Alumni Networking Happy Hour', 'Group networking activities and icebreakers');
+insert into Events (CommunityID, Date, Name, Description) values (12, '2024-05-26', 'Diversity in Tech Panel', 'Networking lunch with keynote speaker');
+insert into Events (CommunityID, Date, Name, Description) values (13, '2024-10-24', 'Entrepreneurship Panel Series', 'Networking mixer with live music');
+insert into Events (CommunityID, Date, Name, Description) values (14, '2024-04-15', 'Women in STEM Networking Event', 'Networking roundtable discussions');
+insert into Events (CommunityID, Date, Name, Description) values (15, '2024-02-17', 'Professional Headshot Day', 'Professional headshot photo booth');
+insert into Events (CommunityID, Date, Name, Description) values (16, '2024-07-03', 'Coding Challenge Competition', 'Networking coffee chat with mentors');
+insert into Events (CommunityID, Date, Name, Description) values (17, '2024-07-02', 'Start-Up Pitch Night', 'Networking book club discussion');
+insert into Events (CommunityID, Date, Name, Description) values (18, '2024-07-30', 'Career Fair Prep Workshop', 'Networking yoga session');
+insert into Events (CommunityID, Date, Name, Description) values (19, '2024-04-10', 'Graduate School Info Session', 'Networking cooking class');
+insert into Events (CommunityID, Date, Name, Description) values (20, '2024-01-09', 'Industry Trends Roundtable', 'Networking hike and picnic');
+insert into Events (CommunityID, Date, Name, Description) values (21, '2024-09-27', 'Tech Talk Thursdays', 'Meet and greet with industry professionals');
+insert into Events (CommunityID, Date, Name, Description) values (22, '2024-04-27', 'Networking Mixer Mondays', 'Interactive workshops on networking skills');
+insert into Events (CommunityID, Date, Name, Description) values (23, '2024-07-12', 'Career Development Workshop', 'Panel discussion on career opportunities in tech');
+insert into Events (CommunityID, Date, Name, Description) values (24, '2024-09-01', 'Industry Panel Discussions', 'Speed networking session with recruiters');
+insert into Events (CommunityID, Date, Name, Description) values (25, '2024-09-23', 'Resume Building Bootcamp', 'Virtual networking happy hour');
+insert into Events (CommunityID, Date, Name, Description) values (26, '2024-09-21', 'LinkedIn Profile Optimization', 'Mock interview practice with HR professionals');
+insert into Events (CommunityID, Date, Name, Description) values (27, '2024-01-24', 'Mock Interview Practice', 'Resume review session with career coaches');
+insert into Events (CommunityID, Date, Name, Description) values (28, '2024-01-17', 'Job Search Strategies', 'Networking bingo game with prizes');
+insert into Events (CommunityID, Date, Name, Description) values (29, '2024-01-12', 'Personal Branding Workshop', 'LinkedIn profile optimization workshop');
+insert into Events (CommunityID, Date, Name, Description) values (30, '2024-10-24', 'Internship Opportunities Panel', 'Networking scavenger hunt');
+insert into Events (CommunityID, Date, Name, Description) values (31, '2024-08-10', 'Alumni Networking Happy Hour', 'Group networking activities and icebreakers');
+insert into Events (CommunityID, Date, Name, Description) values (32, '2024-07-14', 'Diversity in Tech Panel', 'Networking lunch with keynote speaker');
+insert into Events (CommunityID, Date, Name, Description) values (33, '2023-12-13', 'Entrepreneurship Panel Series', 'Networking mixer with live music');
+insert into Events (CommunityID, Date, Name, Description) values (34, '2024-10-08', 'Women in STEM Networking Event', 'Networking roundtable discussions');
+insert into Events (CommunityID, Date, Name, Description) values (35, '2024-01-13', 'Professional Headshot Day', 'Professional headshot photo booth');
+insert into Events (CommunityID, Date, Name, Description) values (36, '2024-01-09', 'Coding Challenge Competition', 'Networking coffee chat with mentors');
+insert into Events (CommunityID, Date, Name, Description) values (37, '2024-03-12', 'Start-Up Pitch Night', 'Networking book club discussion');
+insert into Events (CommunityID, Date, Name, Description) values (38, '2024-10-12', 'Career Fair Prep Workshop', 'Networking yoga session');
+insert into Events (CommunityID, Date, Name, Description) values (39, '2024-02-08', 'Graduate School Info Session', 'Networking cooking class');
+insert into Events (CommunityID, Date, Name, Description) values (40, '2024-09-26', 'Industry Trends Roundtable', 'Networking hike and picnic');
+insert into Events (CommunityID, Date, Name, Description) values (41, '2024-01-14', 'Tech Talk Thursdays', 'Meet and greet with industry professionals');
+insert into Events (CommunityID, Date, Name, Description) values (42, '2024-08-12', 'Networking Mixer Mondays', 'Interactive workshops on networking skills');
+insert into Events (CommunityID, Date, Name, Description) values (43, '2024-09-18', 'Career Development Workshop', 'Panel discussion on career opportunities in tech');
+insert into Events (CommunityID, Date, Name, Description) values (44, '2024-08-13', 'Industry Panel Discussions', 'Speed networking session with recruiters');
+insert into Events (CommunityID, Date, Name, Description) values (45, '2024-08-07', 'Resume Building Bootcamp', 'Virtual networking happy hour');
+insert into Events (CommunityID, Date, Name, Description) values (46, '2024-09-06', 'LinkedIn Profile Optimization', 'Mock interview practice with HR professionals');
+insert into Events (CommunityID, Date, Name, Description) values (47, '2024-10-05', 'Mock Interview Practice', 'Resume review session with career coaches');
+insert into Events (CommunityID, Date, Name, Description) values (48, '2024-10-06', 'Job Search Strategies', 'Networking bingo game with prizes');
+insert into Events (CommunityID, Date, Name, Description) values (49, '2024-11-24', 'Personal Branding Workshop', 'LinkedIn profile optimization workshop');
+insert into Events (CommunityID, Date, Name, Description) values (50, '2024-11-08', 'Internship Opportunities Panel', 'Networking scavenger hunt');
 
--- Chat
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (1, 3, 'Network connectivity issues', '2024-04-10 00:27:14', 5);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (2, 20, 'Issue with login credentials', '2024-02-28 09:42:13', 12);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (3, 63, 'Lost files', '2024-01-30 12:56:56', 18);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (4, 41, 'Device not turning on', '2024-03-26 07:02:15', 3);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (5, 54, 'Email not sending', '2024-11-15 05:29:27', 27);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (6, 35, 'Billing inquiry', '2024-02-22 05:26:47', 9);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (7, 47, 'Slow internet connection', '2024-03-25 04:55:29', 14);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (8, 74, 'Network connectivity issues', '2024-03-17 21:17:57', 22);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (9, 56, 'Data backup request', '2024-06-07 10:54:55', 1);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (10, 27, 'Printer not working', '2024-07-17 08:32:42', 30);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (11, 84, 'Forgot password', '2024-08-29 17:46:54', 8);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (12, 17, 'Network connectivity issues', '2024-07-19 09:36:34', 20);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (13, 47, 'Need help setting up new device', '2024-05-23 10:49:46', 11);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (14, 11, 'Billing inquiry', '2024-01-12 23:01:17', 25);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (15, 18, 'Virus detected on device', '2024-03-05 20:24:13', 7);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (16, 22, 'Trouble accessing website', '2024-03-21 09:53:30', 15);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (17, 40, 'Forgot password', '2024-03-09 02:31:51', 29);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (18, 14, 'Need help setting up new device', '2024-03-14 01:05:34', 4);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (19, 79, 'Forgot password', '2024-02-17 07:49:46', 19);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (20, 50, 'Account locked', '2024-04-01 03:43:25', 10);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (21, 80, 'Trouble accessing website', '2024-08-31 22:17:10', 26);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (22, 13, 'Network connectivity issues', '2024-05-26 03:23:54', 6);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (23, 84, 'Forgot password', '2024-11-04 20:27:45', 13);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (24, 38, 'Device not turning on', '2024-11-14 09:07:15', 21);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (25, 45, 'Email not sending', '2024-11-17 08:59:33', 2);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (26, 47, 'Network connectivity issues', '2023-12-31 15:40:05', 28);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (27, 31, 'Issue with login credentials', '2024-09-12 22:29:38', 17);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (28, 81, 'Need help setting up new device', '2024-03-22 15:32:19', 24);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (29, 46, 'Network connectivity issues', '2024-06-19 19:16:20', 16);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (30, 39, 'Lost files', '2024-10-21 21:48:55', 23);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (31, 22, 'Software update needed', '2024-10-18 13:41:46', 5);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (32, 80, 'Data backup request', '2024-07-03 07:46:01', 12);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (33, 35, 'Email not syncing', '2024-10-31 12:28:35', 18);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (34, 45, 'Error message on screen', '2024-03-21 23:01:22', 3);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (35, 63, 'Printer not working', '2024-03-31 09:18:41', 27);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (36, 35, 'Data backup request', '2024-01-01 14:19:33', 9);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (37, 94, 'Data backup request', '2024-01-22 02:11:10', 14);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (38, 36, 'Virus detected on device', '2024-04-21 20:32:07', 22);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (39, 37, 'Need help setting up new device', '2023-12-14 19:54:52', 1);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (40, 65, 'Need help with troubleshooting', '2024-05-23 17:51:25', 30);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (41, 92, 'Account locked', '2024-11-23 02:47:21', 8);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (42, 80, 'Issue with login credentials', '2024-10-22 06:51:05', 20);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (43, 85, 'Need help setting up new device', '2024-07-11 14:32:57', 11);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (44, 22, 'Email not sending', '2024-11-02 23:03:10', 25);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (45, 49, 'Device not turning on', '2024-11-11 06:37:15', 7);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (46, 15, 'Error message on screen', '2024-04-01 19:44:01', 15);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (47, 70, 'Account locked', '2023-12-05 15:00:08', 29);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (48, 87, 'Software update needed', '2024-08-22 03:59:14', 4);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (49, 82, 'Device not turning on', '2024-03-26 07:03:27', 19);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (50, 2, 'Virus detected on device', '2024-03-01 14:51:56', 10);
+-- 7. Feedback Data (depends on Student and Advisor)
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Great progress this semester', '2024-01-15', 5, 1, 1);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Thank you for this recommendation!', '2024-05-02', 2, 83, 7);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Thank you for your help', '2024-08-20', 4, 35, 1);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Still searching for roommates', '2024-01-02', 3, 80, 9);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Still searching for roommates', '2024-06-20', 4, 6, 5);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Thank you for your help', '2024-07-16', 5, 23, 2);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Housing is in a good area', '2024-01-31', 4, 2, 8);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Still looking for housing', '2024-05-10', 2, 73, 6);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Thank you for this recommendation!', '2024-05-23', 5, 90, 4);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('still searching for carpool', '2024-04-27', 3, 93, 10);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Still searching for roommates', '2024-04-02', 4, 60, 3);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Enjoying my co-op experience', '2024-08-07', 5, 17, 7);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Enjoying my co-op experience', '2024-08-05', 4, 81, 1);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('still searching for carpool', '2024-11-14', 2, 15, 9);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Still looking for housing', '2024-07-17', 2, 98, 5);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Still looking for housing', '2024-08-22', 3, 39, 2);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('I appreciate your assistance!', '2024-01-09',4, 95, 8);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Housing is in a good area', '2024-11-09', 5, 30, 6);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Still searching for roommates', '2024-06-19', 1, 84, 4);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Still looking for housing', '2023-12-09', 2, 15, 10);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('I appreciate your assistance!', '2024-01-27', 3, 15, 3);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Thank you for this recommendation!', '2024-01-12', 3, 5, 7);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('still searching for carpool', '2024-10-15', 4, 9, 1);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('still searching for carpool', '2024-09-16', 5, 56, 9);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Housing is in a good area', '2024-09-17', 1, 70, 5);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('I appreciate your assistance!', '2024-11-02', 2, 45, 2);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Currently enjoying this co-op', '2024-02-26', 3, 60, 8);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Still searching for roommates', '2024-07-30', 3, 68, 6);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Currently enjoying this co-op', '2024-09-27', 4, 24, 4);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Still searching for roommates', '2024-11-09', 5, 36, 10);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('I appreciate your assistance!', '2024-07-14', 1, 33, 3);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('still searching for carpool', '2024-05-04', 2, 45, 7);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Enjoying my co-op experience', '2024-11-22', 4, 62, 1);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Housing is in a good area', '2024-01-12', 3, 81, 9);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('I appreciate your assistance!', '2024-09-07', 4, 3, 5);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Enjoying my co-op experience', '2024-10-06', 5, 52, 2);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Currently enjoying this co-op', '2024-06-01', 5, 20, 8);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('still searching for carpool', '2024-07-11', 2, 93, 6);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Thank you for this recommendation!', '2024-05-04', 5, 43, 4);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Still searching for roommates', '2024-04-16', 3, 70, 10);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('still searching for carpool', '2024-06-28', 4, 7, 3);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('I appreciate your assistance!', '2024-06-14', 5, 87, 7);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Enjoying my co-op experience', '2024-10-14', 1, 73, 1);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Currently enjoying this co-op', '2024-05-31', 2, 35, 9);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Still looking for housing', '2024-03-29', 4, 3, 5);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Thank you for your help', '2024-01-07', 3, 2, 2);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Currently enjoying this co-op', '2023-12-28', 4, 86, 8);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Thank you for your help', '2024-11-16', 5, 54, 6);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('Currently enjoying this co-op', '2024-05-19', 5, 32, 4);
+insert into Feedback (Description, Date, ProgressRating, StudentID, AdvisorID) values ('I appreciate your assistance!', '2024-03-05', 2, 95, 10);
 
--- Events
-insert into Events (EventID, CommunityID, Date, Name, Description) values (1, 10, '2024-04-21', 'Tech Talk Thursdays', 'Meet and greet with industry professionals');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (2, 1, '2024-06-01', 'Networking Mixer Mondays', 'Interactive workshops on networking skills');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (3, 4, '2024-09-25', 'Career Development Workshop', 'Panel discussion on career opportunities in tech');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (4, 5, '2024-05-21', 'Industry Panel Discussions', 'Speed networking session with recruiters');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (5, 6, '2024-02-24', 'Resume Building Bootcamp', 'Virtual networking happy hour');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (6, 1, '2024-02-25', 'LinkedIn Profile Optimization', 'Mock interview practice with HR professionals');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (7, 9, '2024-06-07', 'Mock Interview Practice', 'Resume review session with career coaches');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (8, 2, '2024-01-11', 'Job Search Strategies', 'Networking bingo game with prizes');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (9, 6, '2024-08-12', 'Personal Branding Workshop', 'LinkedIn profile optimization workshop');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (10, 2, '2024-02-19', 'Internship Opportunities Panel', 'Networking scavenger hunt');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (11, 2, '2023-12-24', 'Alumni Networking Happy Hour', 'Group networking activities and icebreakers');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (12, 6, '2024-05-26', 'Diversity in Tech Panel', 'Networking lunch with keynote speaker');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (13, 3, '2024-10-24', 'Entrepreneurship Panel Series', 'Networking mixer with live music');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (14, 5, '2024-04-15', 'Women in STEM Networking Event', 'Networking roundtable discussions');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (15, 4, '2024-02-17', 'Professional Headshot Day', 'Professional headshot photo booth');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (16, 3, '2024-07-03', 'Coding Challenge Competition', 'Networking coffee chat with mentors');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (17, 9, '2024-07-02', 'Start-Up Pitch Night', 'Networking book club discussion');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (18, 9, '2024-07-30', 'Career Fair Prep Workshop', 'Networking yoga session');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (19, 1, '2024-04-10', 'Graduate School Info Session', 'Networking cooking class');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (20, 8, '2024-01-09', 'Industry Trends Roundtable', 'Networking hike and picnic');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (21, 7, '2024-09-27', 'Tech Talk Thursdays', 'Meet and greet with industry professionals');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (22, 2, '2024-04-27', 'Networking Mixer Mondays', 'Interactive workshops on networking skills');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (23, 10, '2024-07-12', 'Career Development Workshop', 'Panel discussion on career opportunities in tech');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (24, 3, '2024-09-01', 'Industry Panel Discussions', 'Speed networking session with recruiters');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (25, 1, '2024-09-23', 'Resume Building Bootcamp', 'Virtual networking happy hour');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (26, 9, '2024-09-21', 'LinkedIn Profile Optimization', 'Mock interview practice with HR professionals');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (27, 3, '2024-01-24', 'Mock Interview Practice', 'Resume review session with career coaches');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (28, 6, '2024-01-17', 'Job Search Strategies', 'Networking bingo game with prizes');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (29, 6, '2024-01-12', 'Personal Branding Workshop', 'LinkedIn profile optimization workshop');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (30, 3, '2024-10-24', 'Internship Opportunities Panel', 'Networking scavenger hunt');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (31, 3, '2024-08-10', 'Alumni Networking Happy Hour', 'Group networking activities and icebreakers');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (32, 7, '2024-07-14', 'Diversity in Tech Panel', 'Networking lunch with keynote speaker');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (33, 3, '2023-12-13', 'Entrepreneurship Panel Series', 'Networking mixer with live music');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (34, 2, '2024-10-08', 'Women in STEM Networking Event', 'Networking roundtable discussions');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (35, 10, '2024-01-13', 'Professional Headshot Day', 'Professional headshot photo booth');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (36, 2, '2024-01-09', 'Coding Challenge Competition', 'Networking coffee chat with mentors');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (37, 4, '2024-03-12', 'Start-Up Pitch Night', 'Networking book club discussion');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (38, 4, '2024-10-12', 'Career Fair Prep Workshop', 'Networking yoga session');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (39, 6, '2024-02-08', 'Graduate School Info Session', 'Networking cooking class');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (40, 2, '2024-09-26', 'Industry Trends Roundtable', 'Networking hike and picnic');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (41, 7, '2024-01-14', 'Tech Talk Thursdays', 'Meet and greet with industry professionals');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (42, 10, '2024-08-12', 'Networking Mixer Mondays', 'Interactive workshops on networking skills');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (43, 6, '2024-09-18', 'Career Development Workshop', 'Panel discussion on career opportunities in tech');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (44, 1, '2024-08-13', 'Industry Panel Discussions', 'Speed networking session with recruiters');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (45, 8, '2024-08-07', 'Resume Building Bootcamp', 'Virtual networking happy hour');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (46, 8, '2024-09-06', 'LinkedIn Profile Optimization', 'Mock interview practice with HR professionals');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (46, 8, '2024-09-06', 'LinkedIn Profile Optimization', 'Mock interview practice with HR professionals');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (47, 9, '2024-10-05', 'Mock Interview Practice', 'Resume review session with career coaches');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (48, 8, '2024-10-06', 'Job Search Strategies', 'Networking bingo game with prizes');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (49, 7, '2024-11-24', 'Personal Branding Workshop', 'LinkedIn profile optimization workshop');
-insert into Events (EventID, CommunityID, Date, Name, Description) values (50, 6, '2024-11-08', 'Internship Opportunities Panel', 'Networking scavenger hunt');
-
-
--- Feedback
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (1, 'Still looking for housing', '2024-08-01', 1, 18, 3);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (2, 'Thank you for this recommendation!', '2024-05-02', 2, 83, 7);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (3, 'Thank you for your help', '2024-08-20', 4, 35, 1);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (4, 'Still searching for roommates', '2024-01-02', 3, 80, 9);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (5, 'Still searching for roommates', '2024-06-20', 4, 6, 5);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (6, 'Thank you for your help', '2024-07-16', 5, 23, 2);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (7, 'Housing is in a good area', '2024-01-31', 4, 2, 8);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (8, 'Still looking for housing', '2024-05-10', 2, 73, 6);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (9, 'Thank you for this recommendation!', '2024-05-23', 5, 90, 4);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (10, 'still searching for carpool', '2024-04-27', 3, 93, 10);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (11, 'Still searching for roommates', '2024-04-02', 4, 60, 3);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (12, 'Enjoying my co-op experience', '2024-08-07', 5, 17, 7);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (13, 'Enjoying my co-op experience', '2024-08-05', 4, 81, 1);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (14, 'still searching for carpool', '2024-11-14', 2, 15, 9);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (15, 'Still looking for housing', '2024-07-17', 2, 98, 5);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (16, 'Still looking for housing', '2024-08-22', 3, 39, 2);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (17, 'I appreciate your assistance!', '2024-01-09',4, 95, 8);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (18, 'Housing is in a good area', '2024-11-09', 5, 30, 6);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (19, 'Still searching for roommates', '2024-06-19', 1, 84, 4);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (20, 'Still looking for housing', '2023-12-09', 2, 15, 10);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (21, 'I appreciate your assistance!', '2024-01-27', 3, 15, 3);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (22, 'Thank you for this recommendation!', '2024-01-12', 3, 5, 7);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (23, 'still searching for carpool', '2024-10-15', 4, 9, 1);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (24, 'still searching for carpool', '2024-09-16', 5, 56, 9);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (25, 'Housing is in a good area', '2024-09-17', 1, 70, 5);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (26, 'I appreciate your assistance!', '2024-11-02', 2, 45, 2);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (27, 'Currently enjoying this co-op', '2024-02-26', 3, 60, 8);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (28, 'Still searching for roommates', '2024-07-30', 3, 68, 6);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (29, 'Currently enjoying this co-op', '2024-09-27', 4, 24, 4);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (30, 'Still searching for roommates', '2024-11-09', 5, 36, 10);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (31, 'I appreciate your assistance!', '2024-07-14', 1, 33, 3);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (32, 'still searching for carpool', '2024-05-04', 2, 45, 7);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (33, 'Enjoying my co-op experience', '2024-11-22', 4, 62, 1);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (34, 'Housing is in a good area', '2024-01-12', 3, 81, 9);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (35, 'I appreciate your assistance!', '2024-09-07', 4, 3, 5);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (36, 'Enjoying my co-op experience', '2024-10-06', 5, 52, 2);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (37, 'Currently enjoying this co-op', '2024-06-01', 5, 20, 8);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (38, 'still searching for carpool', '2024-07-11', 2, 93, 6);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (39, 'Thank you for this recommendation!', '2024-05-04', 5, 43, 4);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (40, 'Still searching for roommates', '2024-04-16', 3, 70, 10);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (41, 'still searching for carpool', '2024-06-28', 4, 7, 3);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (42, 'I appreciate your assistance!', '2024-06-14', 5, 87, 7);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (43, 'Enjoying my co-op experience', '2024-10-14', 1, 73, 1);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (44, 'Currently enjoying this co-op', '2024-05-31', 2, 35, 9);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (45, 'Still looking for housing', '2024-03-29', 4, 3, 5);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (46, 'Thank you for your help', '2024-01-07', 3, 2, 2);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (47, 'Currently enjoying this co-op', '2023-12-28', 4, 86, 8);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (48, 'Thank you for your help', '2024-11-16', 5, 54, 6);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (49, 'Currently enjoying this co-op', '2024-05-19', 5, 32, 4);
-insert into Feedback (FeedbackID, Description, Date, ProgressRating, StudentID, AdvisorID) values (50, 'I appreciate your assistance!', '2024-03-05', 2, 95, 10);
-
--- Advisor
-insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (1, 'Jessica Doofenshmirtz', 'gmccard0@nps.gov', 'Khoury College', 8);
-insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (2, 'Babbette Marle', 'bmarle1@bbc.co.uk', 'College of Engineering', 50);
-insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (3, 'Lena Graver', 'lgraver2@creativecommons.org', 'D''Amore Mc-Kim', 99);
-insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (4, 'Kevina Garden', 'kgarden3@sina.com.cn', 'College of Science', 38);
-insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (5, 'Cathryn Tatershall', 'ctatershall4@free.fr', 'Bouve College', 14);
-insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (6, 'Domingo Stanlick', 'dstanlick5@arstechnica.com', 'College of Science', 77);
-insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (7, 'Joyous Ferby', 'jferby6@yahoo.com', 'Khoury College', 91);
-insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (8, 'Thibaut Biles', 'tbiles7@4shared.com', 'College of Engineering', 17);
-insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (9, 'Tana Roblou', 'troblou8@cargocollective.com', 'D''Amore Mc-Kim', 26);
-insert into Advisor (AdvisorID, Name, Email, Department, StudentID) values (10, 'Sheridan Gunny', 'sgunny9@arizona.edu', 'College of Science', 65);
-
--- Task
+-- 8. Task Data (depends on Student and Advisor)
+insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Complete housing application', '2024-02-01', 1, '2024-02-15', 'Pending', 1);
 insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Khoury College', '2024-02-27', 22, '2024-08-03', 'In Progress', 6);
 insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Engineering', '2024-05-09', 89, '2024-03-09', 'In Progress', 10);
 insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('D''Amore Mc-Kim', '2024-07-08', 37, '2024-05-01', 'Completed', 8);
@@ -458,7 +822,60 @@ insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID)
 insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('Khoury College', '2024-02-21', 73, '2024-11-12', 'Completed', 1);
 insert into Task (Description, Reminder, AssignedTo, DueDate, Status, AdvisorID) values ('College of Engineering', '2024-08-21', 40, '2024-09-04', 'Completed', 6);
 
--- SystemLog
+-- 9. Ticket Data (depends on User)
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (1, 'Technical Issue', 'Open', 'High', '2024-01-01', NULL);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (2, 'payment processing error', 'completed', 'Medium', '2024-10-02', '2024-05-15');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (3, 'video playback issue', 'cancelled', 'Low', '2024-05-21', '2024-06-08');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (4, 'page not loading', 'cancelled', 'High', '2024-05-30', '2024-03-22');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (5, 'broken link', 'cancelled', 'High', '2023-12-26', '2024-11-23');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (6, 'payment processing error', 'pending', 'High', '2024-02-12', '2024-01-19');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (7, 'missing images', 'pending', 'Low', '2024-07-18', '2024-06-13');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (8, 'incorrect password', 'pending', 'Medium', '2024-07-29', '2024-01-02');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (9, 'login error', 'completed', 'Medium', '2024-02-22', '2024-09-28');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (10, 'page not loading', 'pending', 'High', '2024-07-24', '2024-05-24');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (11, 'search function not working', 'pending', 'High', '2024-01-25', '2024-07-07');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (12, 'payment processing error', 'cancelled', 'Low', '2024-05-25', '2024-05-22');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (13, 'formatting problem', 'pending', 'Low', '2024-01-12', '2024-09-08');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (14, 'missing images', 'cancelled', 'Low', '2024-01-12', '2024-01-18');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (15, 'search function not working', 'cancelled', 'Medium', '2024-01-03', '2024-05-23');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (16, 'slow performance', 'completed', 'Low', '2024-02-16', '2024-09-30');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (17, 'slow performance', 'pending', 'High', '2024-03-27', '2024-07-02');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (18, 'payment processing error', 'pending', 'Medium', '2024-08-14', '2024-10-16');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (19, 'payment processing error', 'pending', 'Medium', '2024-08-20', '2024-10-06');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (20, 'missing images', 'pending', 'High', '2024-08-12', '2024-11-14');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (21, 'broken link', 'pending', 'Medium', '2024-01-15', '2024-04-20');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (22, 'payment processing error', 'pending', 'Low', '2023-12-09', '2024-01-23');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (23, 'search function not working', 'completed', 'Medium', '2024-02-05', '2024-02-18');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (24, 'formatting problem', 'completed', 'Low', '2024-04-06', '2024-08-09');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (25, 'video playback issue', 'pending', 'High', '2024-08-22', '2024-08-19');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (26, 'search function not working', 'pending', 'Medium', '2024-07-19', '2024-09-25');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (27, 'broken link', 'cancelled', 'High', '2024-05-20', '2024-01-22');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (28, 'broken link', 'cancelled', 'High', '2024-07-23', '2023-12-03');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (29, 'broken link', 'pending', 'Low', '2024-10-16', '2024-07-15');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (30, 'login error', 'completed', 'Low', '2024-07-08', '2024-03-14');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (31, 'formatting problem', 'cancelled', 'High', '2024-11-02', '2024-02-13');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (32, 'incorrect password', 'cancelled', 'Medium', '2024-05-02', '2024-01-02');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (33, 'missing images', 'completed', 'Low', '2024-03-28', '2024-03-10');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (34, 'slow performance', 'completed', 'High', '2024-07-04', '2024-03-22');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (35, 'formatting problem', 'completed', 'Medium', '2024-03-20', '2024-06-02');
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (36, 'Data backup request', '2024-01-01 14:19:33', 9, 35);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (37, 'Data backup request', '2024-01-22 02:11:10', 14, 94);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (38, 'Virus detected on device', '2024-04-21 20:32:07', 22, 36);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (39, 'Need help setting up new device', '2023-12-14 19:54:52', 1, 37);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (40, 'Need help with troubleshooting', '2024-05-23 17:51:25', 30, 65);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (41, 'Account locked', '2024-11-23 02:47:21', 8, 92);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (42, 'Issue with login credentials', '2024-10-22 06:51:05', 20, 80);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (43, 'Need help setting up new device', '2024-07-11 14:32:57', 11, 85);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (44, 'Email not sending', '2024-11-02 23:03:10', 25, 22);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (45, 'Device not turning on', '2024-11-11 06:37:15', 7, 49);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (46, 'Error message on screen', '2024-04-01 19:44:01', 15, 15);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (47, 'Account locked', '2023-12-05 15:00:08', 29, 70);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (48, 'Software update needed', '2024-08-22 03:59:14', 4, 87);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (49, 'Device not turning on', '2024-03-26 07:03:27', 19, 82);
+insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate) values (50, 'Virus detected on device', '2024-03-01 14:51:56', 10, 2);
+
+-- 10. SystemLog Data (depends on Ticket)
+insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (1, '2024-01-01 12:00:00', 'System startup', 'Performance', 'Protected', 'Secure');
 insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values ('Khoury College', '2024-03-27 09:10:45', 'User logged in', 'CPU Usage', 'Data Minimization Compliance', 'Intrusion Detection Alerts');
 insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values ('College of Engineering', '2024-08-18 13:56:45', 'User viewed dashboard', 'System Load', 'Data Retention Policy Compliance', 'Authentication Failures');
 insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values ('D''Amore Mc-Kim', '2024-04-02 21:27:13', 'User updated profile', 'System Uptime', 'Data Retention Policy Compliance', 'Encryption Key Rotation');
@@ -510,7 +927,8 @@ insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Secur
 insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values ('Khoury College', '2024-03-19 04:19:05', 'User added item to cart', 'System Load', 'Privacy Policy Compliance', 'Data Encryption Status');
 insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values ('College of Engineering', '2024-01-28 09:04:12', 'User changed password', 'Active Connections', 'Sensitive Data Exposure', 'Firewall Activity');
 
--- SystemHealth
+-- 11. SystemHealth Data (depends on SystemLog)
+insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (1, '2024-01-01 12:00:00', 'Normal', 'System Performance');
 insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (12, '2023-12-08 03:13:57', 'Normal', 'Security Events');
 insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (34, '2023-12-02 23:34:00', 'Active', 'Network Latency');
 insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (7, '2024-06-20 11:47:06', 'Operational', 'Service Downtime');
