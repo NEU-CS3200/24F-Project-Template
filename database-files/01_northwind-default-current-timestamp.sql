@@ -56,4 +56,8 @@ CREATE TABLE ticket
 (
   userId int,
   helperId int,
+  summary text,
+  completed boolean DEFAULT 0,
+  viewedAt datetime,
+
 )
