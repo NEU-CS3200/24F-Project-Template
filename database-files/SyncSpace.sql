@@ -18,6 +18,8 @@ CREATE TABLE IF NOT EXISTS Housing (
     Availability VARCHAR(50),
     Style VARCHAR(50),
     Location VARCHAR(100)
+    CommunityID INT,
+    FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
 );
 
 -- Create table for User
@@ -61,11 +63,9 @@ CREATE TABLE IF NOT EXISTS Student (
     CommuteDays INT,
     Bio TEXT,
     CommunityID INT,
-    HousingID INT,
     AdvisorID INT,
     Reminder INT,
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID),
-    FOREIGN KEY (HousingID) REFERENCES Housing(HousingID)
 );
 
 -- Create table for Events
