@@ -14,5 +14,6 @@ CREATE TABLE users
 (
   name varchar(150),
   firstName varchar(50),
+  middleName varchar(50),
   
 )
