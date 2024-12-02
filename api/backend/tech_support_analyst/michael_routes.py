@@ -72,8 +72,7 @@ def get_tickets():
 @tech_support_analyst.route('/tickets', methods=['POST'])
 def add_new_tickets():
     
-    # In a POST request, there is a 
-    # collecting data from the request object 
+    # In a POST request, collecting data from the request object 
     the_data = request.json
     current_app.logger.info(the_data)
 
