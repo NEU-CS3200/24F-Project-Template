@@ -46,5 +46,5 @@ CREATE TABLE user_reference
   referral text,
   userId int,
   registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,.
-  
+  PRIMARY KEY(name, userId),
 )
