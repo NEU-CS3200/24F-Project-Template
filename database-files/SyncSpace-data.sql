@@ -236,58 +236,6 @@ insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatu
 insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Biography, CommunityID, AdvisorID, Reminder) values ('Marji Towell', 'Art', 'Johnson & Johnson', 'Seattle', 'Searching for Housing', 'Search Complete', 1900, '4 months', 4, 'Balanced', 35, 5, 'Fascinated by astronomy and stargazing', 1, 1, 3);
 insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Biography, CommunityID, AdvisorID, Reminder) values ('Jillie Leivesley', 'Data Engineering', 'Best Buy', 'Boston', 'Search Complete', 'Has Car', 2200, '4 months', 4, 'Active', 40, 4, 'Devoted to learning about different types of cuisine and cooking techniques', 6, 7, 3);
 
--- Chat
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (1, 3, 'Network connectivity issues', '2024-04-10 00:27:14', 5);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (2, 20, 'Issue with login credentials', '2024-02-28 09:42:13', 12);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (3, 63, 'Lost files', '2024-01-30 12:56:56', 18);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (4, 41, 'Device not turning on', '2024-03-26 07:02:15', 3);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (5, 54, 'Email not sending', '2024-11-15 05:29:27', 27);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (6, 35, 'Billing inquiry', '2024-02-22 05:26:47', 9);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (7, 47, 'Slow internet connection', '2024-03-25 04:55:29', 14);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (8, 74, 'Network connectivity issues', '2024-03-17 21:17:57', 22);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (9, 56, 'Data backup request', '2024-06-07 10:54:55', 1);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (10, 27, 'Printer not working', '2024-07-17 08:32:42', 30);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (11, 84, 'Forgot password', '2024-08-29 17:46:54', 8);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (12, 17, 'Network connectivity issues', '2024-07-19 09:36:34', 20);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (13, 47, 'Need help setting up new device', '2024-05-23 10:49:46', 11);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (14, 11, 'Billing inquiry', '2024-01-12 23:01:17', 25);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (15, 18, 'Virus detected on device', '2024-03-05 20:24:13', 7);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (16, 22, 'Trouble accessing website', '2024-03-21 09:53:30', 15);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (17, 40, 'Forgot password', '2024-03-09 02:31:51', 29);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (18, 14, 'Need help setting up new device', '2024-03-14 01:05:34', 4);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (19, 79, 'Forgot password', '2024-02-17 07:49:46', 19);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (20, 50, 'Account locked', '2024-04-01 03:43:25', 10);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (21, 80, 'Trouble accessing website', '2024-08-31 22:17:10', 26);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (22, 13, 'Network connectivity issues', '2024-05-26 03:23:54', 6);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (23, 84, 'Forgot password', '2024-11-04 20:27:45', 13);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (24, 38, 'Device not turning on', '2024-11-14 09:07:15', 21);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (25, 45, 'Email not sending', '2024-11-17 08:59:33', 2);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (26, 47, 'Network connectivity issues', '2023-12-31 15:40:05', 28);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (27, 31, 'Issue with login credentials', '2024-09-12 22:29:38', 17);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (28, 81, 'Need help setting up new device', '2024-03-22 15:32:19', 24);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (29, 46, 'Network connectivity issues', '2024-06-19 19:16:20', 16);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (30, 39, 'Lost files', '2024-10-21 21:48:55', 23);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (31, 22, 'Software update needed', '2024-10-18 13:41:46', 5);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (32, 80, 'Data backup request', '2024-07-03 07:46:01', 12);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (33, 35, 'Email not syncing', '2024-10-31 12:28:35', 18);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (34, 45, 'Error message on screen', '2024-03-21 23:01:22', 3);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (35, 63, 'Printer not working', '2024-03-31 09:18:41', 27);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (36, 35, 'Data backup request', '2024-01-01 14:19:33', 9);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (37, 94, 'Data backup request', '2024-01-22 02:11:10', 14);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (38, 36, 'Virus detected on device', '2024-04-21 20:32:07', 22);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (39, 37, 'Need help setting up new device', '2023-12-14 19:54:52', 1);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (40, 65, 'Need help with troubleshooting', '2024-05-23 17:51:25', 30);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (41, 92, 'Account locked', '2024-11-23 02:47:21', 8);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (42, 80, 'Issue with login credentials', '2024-10-22 06:51:05', 20);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (43, 85, 'Need help setting up new device', '2024-07-11 14:32:57', 11);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (44, 22, 'Email not sending', '2024-11-02 23:03:10', 25);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (45, 49, 'Device not turning on', '2024-11-11 06:37:15', 7);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (46, 15, 'Error message on screen', '2024-04-01 19:44:01', 15);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (47, 70, 'Account locked', '2023-12-05 15:00:08', 29);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (48, 87, 'Software update needed', '2024-08-22 03:59:14', 4);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (49, 82, 'Device not turning on', '2024-03-26 07:03:27', 19);
-insert into Chat (ChatID, StudentID, Content, Time, SupportStaffID) values (50, 2, 'Virus detected on device', '2024-03-01 14:51:56', 10);
-
 -- Events
 insert into Events (EventID, CommunityID, Date, Name, Description) values (1, 10, '2024-04-21', 'Tech Talk Thursdays', 'Meet and greet with industry professionals');
 insert into Events (EventID, CommunityID, Date, Name, Description) values (2, 1, '2024-06-01', 'Networking Mixer Mondays', 'Interactive workshops on networking skills');
