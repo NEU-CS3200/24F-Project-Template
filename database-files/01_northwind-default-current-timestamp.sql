@@ -76,4 +76,7 @@ CREATE TABLE positions
   country varchar(15),
   city varchar(15),
   address varchar(60),
+  filled boolean DEFAULT 0,
+  expectedSalary int,
+  viewedAt datetime,
 )
