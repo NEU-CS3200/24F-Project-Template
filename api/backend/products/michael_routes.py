@@ -68,9 +68,7 @@ def get_tickets():
     return response
     
 
-# This is a POST route to add a new product.
-# Remember, we are using POST routes to create new entries
-# in the database. 
+# Create a new ticket or prioritize tickets
 @tech_support_analyst.route('/chats', methods=['POST'])
 def add_new_chats():
     
