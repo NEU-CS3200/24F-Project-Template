@@ -31,6 +31,10 @@ def TicketOverviewNav():
     st.sidebar.page_link("pages/02_Ticket_Overview.py", label="Ticket Overview", icon="🎫")
 
 
+def SysHealthDashNav():
+    st.sidebar.page_link("pages/04_Access_System_Health_Dashboard.py", label="System Health Dashboard", icon="📊")
+
+
 ## ------------------------ Examples for Role of usaid_worker ------------------------
 def ApiTestNav():
     st.sidebar.page_link("pages/12_Form.py", label="Test the API", icon="🛜")
