@@ -8,22 +8,22 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title(f"Welcome USAID Worker, {st.session_state['first_name']}.")
+st.title(f"Welcome Student, {st.session_state['first_name']}.")
 st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button('Predict Value Based on Regression Model', 
+if st.button('Positon Opening Search', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/11_Prediction.py')
 
-if st.button('View the Simple API Demo', 
+if st.button('Employer Search', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/12_API_Test.py')
 
-if st.button("View Classification Demo",
+if st.button("Application Editor",
              type='primary',
              use_container_width=True):
   st.switch_page('pages/13_Classification.py')
