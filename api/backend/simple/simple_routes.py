@@ -24,3 +24,11 @@ def welcome():
     response = make_response(welcome_message)
     response.status_code = 200
     return response
+
+
+@simple_routes.route("/test")
+def api_test():
+    message = "API is working"
+    response = make_response(jsonify({"message": message}))
+    response.status_code = 200
+    return response
