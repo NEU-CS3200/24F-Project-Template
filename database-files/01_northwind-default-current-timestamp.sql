@@ -59,5 +59,6 @@ CREATE TABLE ticket
   summary text,
   completed boolean DEFAULT 0,
   viewedAt datetime,
-
+  updatedAt datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
 )
