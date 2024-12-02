@@ -4,6 +4,11 @@ This repo is a template for your semester project.  It includes most of the infr
 
 Team Fontenators: Christine Ahn, Praytusha Chamarthi, Mika Nguyen, Yugeun Park, Xavier Yu
 
+## About SyncSpace (UPDATE TO FIT OUR MOST UDPATED MODEL)
+Our app SyncSpace is a data-driven virtual community that aims to connect students going on co-ops and internships, helping them make the most of their experience. Students often feel isolated or overwhelmed when relocating for work, facing the challenges of finding housing, arranging transportation, and locating familiar faces nearby. SyncSpace solves this by using geolocation and shared interests/community forums to match students with ‘co-op buddies’ in their area, helping them form connections, navigate new cities, and share resources for housing and commuting. 
+
+Designed for students and co-op advisors, SyncSpace offers real-time data insights that help students connect with each other and thrive professionally. With curated interest-based groups, housing and transportation discussion forums, and a hub for live events, students can access networking, guidance, and new friendships anytime they need it. Co-op advisors and system admin staff can effortlessly organize and track engagement, while gaining valuable data on student satisfaction, location trends, and engagement levels. By building a vibrant, supportive community, we hope to empower students to make meaningful connections and maximize their co-op and internship experiences. 
+
 ## Prerequisites
 
 - A GitHub Account
