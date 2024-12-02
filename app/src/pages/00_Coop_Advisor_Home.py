@@ -17,9 +17,9 @@ st.write('### What would you like to do today?')
 if st.button('View Student Search Page', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_World_Bank_Viz.py')
+  st.switch_page('pages/01_Student_Search.py')
 
 if st.button('View Employer Search Page', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/02_Employer_Search.py')
