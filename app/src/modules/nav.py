@@ -63,8 +63,8 @@ def EmployerSearchNav():
         "pages/33_Employer_Search.py", label="Employers", icon="🕴️"
     )
 
-    def ApplicationEditorNav():
-    st.sidebar.page_link(
+def ApplicationEditorNav():
+    st.sidebar.page_link( 
         "pages/34_Application_Editor.py", label="Applications", icon="📝"
     )
 
