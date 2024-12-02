@@ -112,7 +112,7 @@ def update_tickets():
     privacy = ticket_info.get('Privacy')
     security = ticket_info.get('Security')
 
-    # Build the SQL query dynamically
+    # Build the SQL query
     update_fields = []
     params = []
     if timestamp:
