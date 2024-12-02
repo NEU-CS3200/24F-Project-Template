@@ -20,3 +20,8 @@ if st.button('View Professional Events',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/31_Professional_Events.py')
+
+if st.button('View Alumni Board', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/31_Professional_Events.py')
