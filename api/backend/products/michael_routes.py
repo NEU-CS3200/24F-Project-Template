@@ -28,6 +28,26 @@ def get_SystemLog():
     response.status_code = 200
     return response
 
+# Review user activity logs for troubleshooting
+@tech_support_analyst.route('/SystemHealth', methods=['GET'])
+def get_SystemHealth():
+    query = '''
+        SELECT  TicketID, 
+                Timestamp, 
+                Activity, 
+                MetricType, 
+                Privacy,
+                Security 
+        FROM SystemLog
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
 # View all tickets and their statuses
 @tech_support_analyst.route('/tickets', methods=['GET'])
 def get_tickets():
