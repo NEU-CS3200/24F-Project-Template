@@ -9,7 +9,10 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('Student Home Page')
+st.title(f"Welcome Student, {st.session_state['first_name']}.")
+st.write('')
+st.write('')
+st.write('### What would you like to do today?')
 
 if st.button('View Advisor Feedback', 
              type='primary',
