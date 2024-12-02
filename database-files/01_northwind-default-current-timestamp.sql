@@ -151,5 +151,6 @@ CREATE TABLE application_bookmark
 
 CREATE TABLE offer_list
 (
-
+  positionId int,
+  userId int,
 );
