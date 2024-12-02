@@ -211,7 +211,7 @@ def update_logs():
     return {"message": "Logs updated successfully"}, 200
 
 # -------------------------------------------------------------
-# This is a DELETE statement 
+# This is for archiving completed tickets.
 @tech_support_analyst.route('/tickets/<int:ticket_id>', methods=['DELETE'])
 def archive_ticket(ticket_id):
     ticket = TicketModel.query.filter_by(id=ticket_id, status="completed").first()
@@ -219,5 +219,4 @@ def archive_ticket(ticket_id):
         return {"error": "Ticket not found or not completed"}, 404
     db.session.delete(ticket)
     db.session.commit()
-
     return {"message": "Ticket archived successfully"}, 200
