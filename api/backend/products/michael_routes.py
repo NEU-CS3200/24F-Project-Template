@@ -10,16 +10,15 @@ tech_support_analyst = Blueprint('tech_support_analyst', __name__)
 
 # View real-time diagnostics on app performance 
 @tech_support_analyst.route('/SystemLog', methods=['GET'])
-def get_systemlog():
+def get_SystemLog():
     query = '''
         SELECT  TicketID, 
-                UserID, 
-                IssueType, 
-                Status, 
-                Priority,
-                ReceivedDate,
-                ResolvedDate 
-        FROM ticket
+                Timestamp, 
+                Activity, 
+                MetricType, 
+                Privacy,
+                Security 
+        FROM SystemLog
     '''
     
     cursor = db.get_db().cursor()
