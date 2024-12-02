@@ -55,16 +55,17 @@ def get_tickets():
 # notice that the route takes <id> and then you see id
 # as a parameter to the function.  This is one way to send 
 # parameterized information into the route handler.
-@tech_support_analyst.route('/product/<id>', methods=['GET'])
-def get_product_detail (id):
-
-    query = f'''SELECT id, 
-                       product_name, 
-                       description, 
-                       list_price, 
-                       category 
-                FROM products 
-                WHERE id = {str(id)}
+@tech_support_analyst.route('diagnostics', methods=['GET'])
+def get_diagnostics():
+  query = '''
+        SELECT  TicketID, 
+                UserID, 
+                IssueType, 
+                Status, 
+                Priority,
+                ReceivedDate,
+                ResolvedDate 
+        FROM ticket
     '''
     
     # logging the query for debugging purposes.  
