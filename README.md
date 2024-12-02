@@ -2,6 +2,8 @@
 
 This repo is a template for your semester project.  It includes most of the infrastructure setup (containers) and sample code and data throughout.  Explore it fully and ask questions.
 
+Team Fontenators: Christine Ahn, Praytusha Chamarthi, Mika Nguyen, Yugeun Park, Xavier Yu
+
 ## Prerequisites
 
 - A GitHub Account
