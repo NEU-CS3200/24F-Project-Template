@@ -81,7 +81,7 @@ def SideBarLinks(show_home=False):
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
 
-        # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
+        # Show System Logs, Ticket Overview, and System Health Dashboard if the user is in a technical support analyst role.
         if st.session_state["role"] == "TechnicalSupportAnalyst":
             TechSupportAnalystHomeNav()
             SystemLogsNav()
@@ -93,7 +93,7 @@ def SideBarLinks(show_home=False):
             ApiTestNav()
             ClassificationNav()
 
-        # If the user is an administrator, give them access to the administrator pages
+        # If the user is a student, give them access to the student pages
         if st.session_state["role"] == "Student":
             KevinPageNav()
 
