@@ -78,6 +78,21 @@ def community_housing():
     response.status_code = 200
     return response
 
+@community.route('/community', methods=['PUT'])
+# route to update student profiles
+def update_profile():
+    current_app.logger.info('PUT /community route')
+    cust_info = request.json
+    cust_id = cust_info['id']
+    first = cust_info['first_name']
+    last = cust_info['last_name']
+    company = cust_info['company']
 
+    query = 'UPDATE customers SET first_name = %s, last_name = %s, company = %s where id = %s'
+    data = (first, last, company, cust_id)
+    cursor = db.get_db().cursor()
+    r = cursor.execute(query, data)
+    db.get_db().commit()
+    return 'profile updated!'
 
 
