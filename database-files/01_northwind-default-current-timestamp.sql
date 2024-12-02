@@ -45,4 +45,6 @@ CREATE TABLE user_reference
   email varchar(75),
   referral text,
   userId int,
+  registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,.
+  
 )
