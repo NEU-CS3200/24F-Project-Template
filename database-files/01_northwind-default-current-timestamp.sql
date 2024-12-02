@@ -93,3 +93,8 @@ CREATE TABLE applications
   submittedAt datetime,
   accepted boolean DEFAULT 0,
   viewedAt datetime,
+  updatedAt datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  id int AUTO_INCREMENT,
+  PRIMARY KEY(id)
+);
+
