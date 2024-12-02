@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Housing (
     HousingID INT AUTO_INCREMENT PRIMARY KEY,
     Availability VARCHAR(50),
     Style VARCHAR(50),
-    Location VARCHAR(100)
+    Location VARCHAR(100),
     CommunityID INT,
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
 );
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS Student (
     CommunityID INT,
     AdvisorID INT,
     Reminder INT,
-    FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID),
+    FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
 );
 
 -- Create table for Events
@@ -99,6 +99,7 @@ CREATE TABLE IF NOT EXISTS Advisor (
     Email VARCHAR(100),
     Department VARCHAR(100),
     StudentID INT,
+    FOREIGN KEY (StudentID) REFERENCES Student(StudentID)
 );
 
 -- Add foreign key to Feedback for Advisor after Advisor is created
@@ -160,7 +161,7 @@ SET Status = 'Completed'
 WHERE TaskID = 5;
 
 -- 3.2 
-INSERT INTO Student (Name, Major, Location, HousingStatus, Budget, Cleanliness, Lifestyle, CommuteTime, Interests)
+INSERT INTO Student (Name, Major, Location, HousingStatus, Budget, Cleanliness, Lifestyle, CommuteTime, Bio)
 VALUES (
     'Kevin Chen',
     'Data Science and Business',
