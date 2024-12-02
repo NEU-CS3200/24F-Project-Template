@@ -66,40 +66,6 @@ def get_tickets():
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
-
-# View real-time diagnostics on app performance 
-@tech_support_analyst.route('diagnostics', methods=['GET'])
-def get_diagnostics():
-  query = '''
-        SELECT  TicketID, 
-                UserID, 
-                IssueType, 
-                Status, 
-                Priority,
-                ReceivedDate,
-                ResolvedDate 
-        FROM ticket
-    '''
-    
-    # logging the query for debugging purposes.  
-    # The output will appear in the Docker logs output
-    # This line has nothing to do with actually executing the query...
-    # It is only for debugging purposes. 
-    current_app.logger.info(f'GET /product/<id> query={query}')
-
-    # get the database connection, execute the query, and 
-    # fetch the results as a Python Dictionary
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    theData = cursor.fetchall()
-    
-    # Another example of logging for debugging purposes.
-    # You can see if the data you're getting back is what you expect. 
-    current_app.logger.info(f'GET /product/<id> Result of query = {theData}')
-    
-    response = make_response(jsonify(theData))
-    response.status_code = 200
-    return response
     
 
 # This is a POST route to add a new product.
