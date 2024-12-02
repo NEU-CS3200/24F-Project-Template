@@ -1,7 +1,8 @@
 # Fall 2024 CS 3200 SyncSpace Repository
 
 # Welcome to our guidebook for everything and anything SyncSpace! 
-This guidebook is inclusive 
+This guidebook is inclusive of the details of our project and all the information you need to build/start the containers. We hope you enjoy exploring!
+
 This repo is a template for your semester project.  It includes most of the infrastructure setup (containers) and sample code and data throughout.  Explore it fully and ask questions.
 
 Team Fontenators: Christine Ahn, Praytusha Chamarthi, Mika Nguyen, Yugeun Park, Xavier Yu
