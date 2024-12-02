@@ -28,7 +28,7 @@ def get_commonQuestions(company_id):
     the_response.status_code = 200
     return the_response
 
-@commonQuestions.route('/addQuestion', methods=['POST'])
+@commonQuestions.route('/commonQuestions', methods=['POST'])
 def add_commonQuestion():
     payload = request.json
     company_id = payload['company_id']
@@ -45,7 +45,7 @@ def add_commonQuestion():
     the_response.status_code = 200
     return the_response
 
-@commonQuestions.route('/updateQuestion/<question_id>', methods=['PUT'])
+@commonQuestions.route('/commonQuestions/<question_id>', methods=['PUT'])
 def update_commonQuestion(question_id):
     payload = request.json
     edited_question = payload['edited_question']
@@ -61,7 +61,7 @@ def update_commonQuestion(question_id):
     the_response.status_code = 200
     return the_response
 
-@commonQuestions.route('/deleteQuestion/<question_id>', methods=['DELETE'])
+@commonQuestions.route('/commonQuestions/<question_id>', methods=['DELETE'])
 def delete_commonQuestion(question_id):
     cursor = db.get_db().cursor()
 
@@ -73,7 +73,7 @@ def delete_commonQuestion(question_id):
     the_response.status_code = 200
     return the_response
 
-@commonQuestions.route('/getQuestionsByKeyphrase/<keyphrase>', methods=['GET'])
+@commonQuestions.route('/commonQuestions/filterBy/<keyphrase>', methods=['GET'])
 def search_commonQuestions(keyphrase):
 
     cursor = db.get_db().cursor()

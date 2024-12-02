@@ -44,7 +44,7 @@ with col1:
         keyphrase = st.text_input("Filter questions by keyphrase:")
 
         if keyphrase.strip():
-            filtered_response = requests.get(f"http://api:4000/cq/getQuestionsByKeyphrase/{keyphrase.strip()}")
+            filtered_response = requests.get(f"http://api:4000/cq/commonQuestions/filterBy/{keyphrase.strip()}")
             if filtered_response.status_code == 200:
                 questions = filtered_response.json()
                 if not questions:
@@ -70,7 +70,7 @@ with col1:
                     else:
                         payload = {'edited_question': editable_question}
                         update_response = requests.put(
-                            f"http://api:4000/cq/updateQuestion/{question_id}",
+                            f"http://api:4000/cq/commonQuestions/{question_id}",
                             json=payload
                         )
                         if update_response.status_code == 200:
@@ -80,7 +80,7 @@ with col1:
 
             with col_delete:
                 if st.button("Delete", key=f"delete_{question_id}"):
-                    delete_response = requests.delete(f"http://api:4000/cq/deleteQuestion/{question_id}")
+                    delete_response = requests.delete(f"http://api:4000/cq/commonQuestions/{question_id}")
                     if delete_response.status_code == 200:
                         st.success("Question deleted successfully!")
                     else:
@@ -106,7 +106,7 @@ with col2:
                 'question': common_question_input
             }
 
-            add_question_response = requests.post("http://api:4000/cq/addQuestion", json=payload)
+            add_question_response = requests.post("http://api:4000/cq/commonQuestions", json=payload)
             if add_question_response.status_code == 200:
                 st.success("Common question added successfully.")
             elif add_question_response.status_code == 404:
