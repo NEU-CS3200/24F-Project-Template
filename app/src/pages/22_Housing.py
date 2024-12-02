@@ -10,10 +10,6 @@ SideBarLinks()
 
 st.title('Housing Search')
 
-st.write('\n\n')
-st.write('## Model 1 Maintenance')
-st.write("Test")
-
 # Set the backend API URL
 API_URL = "http://localhost:4000/c/community/{communityid}/housing"
 
@@ -25,7 +21,7 @@ communityid = st.text_input("Enter Community ID:", placeholder="e.g., 123")
 
 # Fetch Data on Button Click
 if st.button("Get Housing Details"):
-    if not community_id:
+    if not communityid:
         st.warning("Please enter a valid Community ID.")
     else:
         try:

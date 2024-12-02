@@ -43,11 +43,11 @@ services:
     volumes:
       - type: bind
         source: ./database-files/SyncSpace.sql
-        target: /docker-entrypoint-initdb.d/01-SyncSpace.sql
+        target: /docker-entrypoint-initdb.d/SyncSpace.sql
         read_only: true
       - type: bind
         source: ./database-files/SyncSpace-data.sql
-        target: /docker-entrypoint-initdb.d/02-SyncSpace-data.sql
+        target: /docker-entrypoint-initdb.d/SyncSpace-data.sql
         read_only: true
     ports:
       - 3308:3306
