@@ -3,5 +3,5 @@ USE cosint;
 
 CREATE TABLE companies
 (
-  name
+  name varchar(30)
 )
