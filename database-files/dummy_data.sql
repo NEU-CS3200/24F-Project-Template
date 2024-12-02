@@ -6,3 +6,4 @@ VALUES
     ('TechCorp'),
     ('Innovate Inc'),
     ('Healthify Solutions'),
+    ('EduVenture');
