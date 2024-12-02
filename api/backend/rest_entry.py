@@ -4,7 +4,12 @@ from dotenv import load_dotenv
 
 from backend.db_connection import db
 from backend.simple.simple_routes import simple_routes
+
+# Blueprints
 from backend.students.student_routes import students
+from backend.admins.admin_routes import admins
+from backend.employers.employer_routes import employers
+from backend.advisors.advisors import advisor
 
 
 def create_app():
