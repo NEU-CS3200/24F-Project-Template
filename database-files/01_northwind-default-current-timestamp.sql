@@ -153,4 +153,7 @@ CREATE TABLE offer_list
 (
   positionId int,
   userId int,
+  PRIMARY KEY (positionId, userId),
+  CONSTRAINT fk_20 FOREIGN KEY (positionId) REFERENCES positions (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_21 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
