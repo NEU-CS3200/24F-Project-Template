@@ -144,7 +144,10 @@ CREATE TABLE application_bookmark
 (
   applicationId int,
   userId int,
-)
+  PRIMARY KEY (applicationId, userId),
+  CONSTRAINT fk_14 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_15 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
 
 
 
