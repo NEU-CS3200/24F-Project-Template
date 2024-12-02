@@ -78,25 +78,25 @@ def add_new_tickets():
     current_app.logger.info(the_data)
 
     #extracting the variable
-    name = the_data['product_name']
-    content = the_data['chat_content']
-    time = the_data['chat_time']
-    category = the_data['product_category']
-    
-    query = f'''
-        INSERT INTO products (product_name,
-                              description,
-                              category, 
-                              list_price)
-        VALUES ('{name}', '{content}', '{category}', {str(time)})
+    ticket_id = the_data['TicketID']
+    timestamp = the_data['Timestamp']
+    activity = the_data['Activity']
+    metric_type = the_data['MetricType']
+    privacy = the_data['Privacy']
+    security = the_data['Security']
+
+    query = '''
+        INSERT INTO tickets (TicketID, Timestamp, Activity, MetricType, Privacy, Security)
+        VALUES (%s, %s, %s, %s, %s, %s)
     '''
+    data = (ticket_id, timestamp, activity, metric_type, privacy, security)
 
     # executing and committing the insert statement 
     cursor = db.get_db().cursor()
-    cursor.execute(query)
+    cursor.execute(query, data)
     db.get_db().commit()
     
-    response = make_response("Successfully initiated chat")
+    response = make_response("Ticket successfully created!")
     response.status_code = 200
     return response
 
