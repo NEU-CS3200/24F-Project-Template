@@ -85,7 +85,7 @@ def SideBarLinks(show_home=False):
             WorldBankVizNav()
             MapDemoNav()
 
-        # If the user role is usaid worker, show the Api Testing page
+        # If the user role is employer, show the Api Testing page
         if st.session_state["role"] == "employer":
             PredictionNav()
             ApiTestNav()
