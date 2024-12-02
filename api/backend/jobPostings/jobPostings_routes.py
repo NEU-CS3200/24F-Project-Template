@@ -68,3 +68,18 @@ def add_review(job_posting_id):
     the_response = make_response(jsonify('Review Added'))
     the_response.status_code = 200
     return the_response
+
+@jobPostings.route('/jobPostings/reviews/<review_id>', methods=['PUT'])
+def update_review(review_id):
+    cursor = db.get_db().cursor()
+    cursor.execute('''UPDATE reviews
+                      SET content = %s
+                      WHERE id = %s''', 
+                   (request.json['edited_review'], review_id))
+
+    db.get_db().commit()
+
+    the_response = make_response(jsonify('Review Updated'))
+    the_response.status_code = 200
+    return the_response
+

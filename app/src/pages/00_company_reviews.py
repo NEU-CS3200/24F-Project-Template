@@ -64,11 +64,11 @@ with col1:
             st.write(f"Location: {job_posting['location']}")
             st.write(f"Contact Name & Email: {job_posting['firstName']} {job_posting['lastName']} | {job_posting['email']} | {job_posting['phone']}")
             st.write(f"Date Posted: {job_posting['datePosted']}")
-            if st.button("View Reviews"):
+            if st.button("View Reviews (Click 2x)"):
                 st.session_state["selected_job_id"] = job_posting['id']
                 st.session_state["selected_job_name"] = job_posting['name']
 
-            if st.button('Add Review'):
+            if st.button('Add Review (Click 2x)'):
                 st.session_state["selected_job_id"] = job_posting['id']
                 st.session_state["selected_job_name"] = job_posting['name']
                 st.session_state["show_add_review_form"] = True
@@ -88,14 +88,28 @@ with col2:
 
         if reviews_response.status_code == 200:
             reviews = reviews_response.json()
+            reviews.reverse()
             if reviews:
                 for review in reviews:
                     st.write(f"Title: {review['title']}")
                     st.write(f"Rating: {review['rating']}/5")
-                    st.write(f"Description: {review['content']}")
-                    st.write(f"Date: {review['datePosted']}")
+                    editable_review = st.text_input("Edit Review", review['content'], key=f"edit_{review['title']}")
+                    st.write(f"Date Posted: {review['datePosted']}")
+
+                    if st.button("Save Review Edits", key=f"save_{review['title']}"):
+                        if editable_review.strip() == "":
+                            st.error("Please enter some text")
+                        else:
+                            payload = {'edited_review': editable_review}
+                            update_review_response = requests.put(
+                                f"http://api:4000/jp/jobPostings/reviews/{selected_job_id}",
+                                json=payload
+                            )
+                            if update_review_response.status_code == 200:
+                                st.success("Review updated successfully!")
+                            else:
+                                st.error(f"Failed to update question: {update_review_response.text}")
                     st.write('---')
-                
             else:
                 st.info(f"No reviews available for {st.session_state['selected_job_name']}.")
         else:
