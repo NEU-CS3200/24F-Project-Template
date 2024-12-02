@@ -41,5 +41,5 @@ CREATE TABLE user_reference
   firstName varchar(50),
   middleName varchar(50),
   lastName varchar(50),
-  
+  mobile varchar(15),
 )
