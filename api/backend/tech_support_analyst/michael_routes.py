@@ -69,8 +69,8 @@ def get_tickets():
     
 
 # Create a new ticket or prioritize tickets
-@tech_support_analyst.route('/chats', methods=['POST'])
-def add_new_chats():
+@tech_support_analyst.route('/tickets', methods=['POST'])
+def add_new_tickets():
     
     # In a POST request, there is a 
     # collecting data from the request object 
@@ -109,8 +109,8 @@ def add_new_chats():
     return response
 
 # Mark a ticket as completed or update its status
-@tech_support_analyst.route('/logs/{user_id}', methods = ['PUT'])
-def update_logs():
+@tech_support_analyst.route('/tickets', methods = ['PUT'])
+def update_tickets():
     logs_info = request.json
     if not logs_info:
         return {"error": "Invalid JSON payload"}, 400
