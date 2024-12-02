@@ -73,12 +73,12 @@ if st.button('Act as Mark, a Northeastern Student',
     st.session_state['first_name'] = 'Mark'
     st.switch_page('pages/31_Student_Home.py')
 
-if st.button('Act as System Administrator', 
+if st.button('Act as Jordan, a System Administrator', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'SysAdmin'
+    st.session_state['first_name'] = 'Jordan'
     st.switch_page('pages/20_Admin_Home.py')
 
 
