@@ -15,6 +15,6 @@ CREATE TABLE users
   name varchar(150),
   firstName varchar(50),
   middleName varchar(50),
-  lastName varcharr(50),
-  
+  lastName varchar(50),
+  mobile varchar(50),
 )
