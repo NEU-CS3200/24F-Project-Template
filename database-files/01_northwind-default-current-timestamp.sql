@@ -54,5 +54,5 @@ CREATE TABLE user_reference
 
 CREATE TABLE ticket
 (
-
+  userId int,
 )
