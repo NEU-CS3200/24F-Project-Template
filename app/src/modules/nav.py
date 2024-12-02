@@ -27,8 +27,8 @@ def StudentSearchNav():
     )
 
 
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+def EmployerSearchNav():
+    st.sidebar.page_link("pages/02_Employer_Search.py", label="Employer Search", icon="🕴️")
 
 
 #### ------------------------ Emplyer Role ------------------------
