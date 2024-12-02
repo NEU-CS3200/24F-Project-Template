@@ -97,4 +97,7 @@ CREATE TABLE applications
   id int AUTO_INCREMENT,
   PRIMARY KEY(id)
 );
+CREATE TABLE related_coursework
+(
+
 
