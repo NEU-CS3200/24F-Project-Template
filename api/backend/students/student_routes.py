@@ -5,3 +5,5 @@ from flask import make_response
 from flask import current_app
 from backend._db_connection import db
 from backend._ml_models.model01 import predict
+
+students = Blueprint('students', __name__)
