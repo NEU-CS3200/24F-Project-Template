@@ -39,4 +39,6 @@ CREATE TABLE user_reference
 (
   name varchar(150),
   firstName varchar(50),
+  middleName varchar(50),
+
 )
