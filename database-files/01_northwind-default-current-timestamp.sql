@@ -61,4 +61,5 @@ CREATE TABLE ticket
   viewedAt datetime,
   updatedAt datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  id int AUTO_INCREMENT,
 )
