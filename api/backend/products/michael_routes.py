@@ -205,7 +205,8 @@ def get_all_categories():
 @tech_support_analyst.route('/logs/{user_id}', methods = ['PUT'])
 def update_logs():
     logs_info = request.json
-    current_app.logger.info(logs_info)
-
-    return "Success"
+    if not logs_info:
+        return {"error": "Invalid JSON payload"}, 400
+    current_app.logger.info(f"Updating logs for user {user_id}: {logs_info}")
+    return {"message": "Logs updated successfully"}, 200
 
