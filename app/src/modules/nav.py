@@ -47,8 +47,11 @@ def ClassificationNav():
         "pages/13_Classification.py", label="Classification Demo", icon="🌺"
     )
 
-#### ------------------------ Co-op Advisor Role ------------------------
-
+#### ------------------------ Student Role ------------------------
+def StudentAdvHomeNav():
+    st.sidebar.page_link(
+        "pages/31_Student_Home.py", label="Student Home", icon="🧑‍🎓"
+    )
 
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
