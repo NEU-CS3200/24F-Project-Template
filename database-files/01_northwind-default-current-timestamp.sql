@@ -142,7 +142,8 @@ CREATE TABLE company_user_bookmark
 
 CREATE TABLE application_bookmark
 (
-  
+  applicationId int,
+  userId int,
 )
 
 
