@@ -8,6 +8,5 @@ from flask import (
     url_for,
 )
 from backend.db_connection import db
-from backend._ml_models.model01 import predict
 
 students = Blueprint('students', __name__)
