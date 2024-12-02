@@ -78,15 +78,5 @@ if st.button('Act as Student - Sarah Lopez',
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'Student'
-    st.switch_page('pages/40_Student_Sarah_Home.py')
-        
-# Add a button for the Warehouse Manager Portal
-if st.button('Act as Warehouse Manager', 
-            type='primary', 
-            use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'warehouse_manager'
-    st.session_state['first_name'] = 'Warehouse Manager'
-    logger.info("Logging in as Warehouse Manager Persona")
-    st.switch_page('pages/40_Warehouse_Home.py')
+    st.switch_page('pages/30_Student_Sarah_Home.py')
 

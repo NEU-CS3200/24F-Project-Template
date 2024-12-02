@@ -11,7 +11,7 @@ def HomeNav():
 
 
 def AboutPageNav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+    st.sidebar.page_link("pages/50_About.py", label="About", icon="🧠")
 
 
 #### ------------------------ Examples for Role of pol_strat_advisor ------------------------
@@ -48,12 +48,12 @@ def ClassificationNav():
     )
 
 
-#### ------------------------ System Admin Role ------------------------
-def AdminPageNav():
-    st.sidebar.page_link("pages/20_Student_Kevin_Home.py", label="Student - Kevin Chen", icon="🖥️")
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
-    )
+#### ------------------------ Student Housing/Carpool Role ------------------------
+def KevinPageNav():
+    st.sidebar.page_link("pages/20_Student_Kevin_Home.py", label="Student Home", icon="👤")
+    st.sidebar.page_link("pages/21_Advisor_Rec.py", label="Advisor Feedback", icon="🏢")
+    st.sidebar.page_link("pages/22_Housing.py", label="Housing Search", icon="🏘️")
+    st.sidebar.page_link("pages/23_Carpool.py", label="Carpool Search", icon="🚗")
 
 
 # --------------------------------Links Function -----------------------------------------------
@@ -91,7 +91,7 @@ def SideBarLinks(show_home=False):
 
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "Student":
-            AdminPageNav()
+            KevinPageNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()

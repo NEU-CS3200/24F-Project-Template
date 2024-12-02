@@ -17,15 +17,14 @@ st.write('### What would you like to do today?')
 if st.button('View Advisor Feedback', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/21_Advisor_Rec.py')
+  st.switch_page('pages/21_Advisor_Feedback.py')
 
-if st.button('Access Housing Search', 
-             type='primary', 
+if st.button('View Professional Events', 
+             type='primary',
              use_container_width=True):
-    st.switch_page('pages/22_Housing.py')
+  st.switch_page('pages/31_Professional_Events.py')
 
-if st.button('Access Carpool Search', 
-             type='primary', 
+if st.button('View Alumni Board', 
+             type='primary',
              use_container_width=True):
-    st.switch_page('pages/23_Carpool.py')
-
+  st.switch_page('pages/31_Professional_Events.py')

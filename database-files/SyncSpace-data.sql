@@ -1,3 +1,5 @@
+USE SyncSpace;
+
 -- CityCommunity Data
 insert into CityCommunity (CommunityID, Location) values (1, 'San Francisco');
 insert into CityCommunity (CommunityID, Location) values (2, 'San Jose');
