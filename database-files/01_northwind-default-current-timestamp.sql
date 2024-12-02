@@ -86,3 +86,6 @@ CREATE TABLE positions
 );
 CREATE TABLE applications
 (
+  registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  questionResponse text,
+  summary text,
