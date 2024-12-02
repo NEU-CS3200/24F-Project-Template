@@ -27,8 +27,8 @@ def SystemLogsNav():
     )
 
 
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+def TicketOverviewNav():
+    st.sidebar.page_link("pages/02_Ticket_Overview.py", label="Ticket Overview", icon="🗺️")
 
 
 ## ------------------------ Examples for Role of usaid_worker ------------------------
