@@ -52,7 +52,7 @@ def community_events():
 
 @community.route('/community/<community_id>/carpools', methods=['GET'])
 # route for retrieving carpools for the students in the same community
-def community_carpools():
+def community_carpool():
     query = '''
 
     '''
@@ -78,4 +78,6 @@ def community_housing():
     response.status_code = 200
     return response
 
-    
+
+
+
