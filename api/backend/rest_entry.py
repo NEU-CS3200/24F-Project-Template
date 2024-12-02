@@ -9,7 +9,7 @@ from backend.simple.simple_routes import simple_routes
 from backend.students.student_routes import students
 from backend.admins.admin_routes import admins
 from backend.employers.employer_routes import employers
-from backend.advisors.advisors import advisor
+from backend.advisors.advisors import advisors
 
 
 def create_app():
@@ -49,7 +49,7 @@ def create_app():
     app.register_blueprint(students, url_prefix="/s")
     app.register_blueprint(admins, url_prefix="/a")
     app.register_blueprint(employers, url_prefix="/e")
-    app.register_blueprint(advisor, url_prefix="/c")
+    app.register_blueprint(advisors, url_prefix="/c")
 
     # Don't forget to return the app object
     return app
