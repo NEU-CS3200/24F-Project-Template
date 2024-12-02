@@ -1,31 +1,39 @@
-from flask import Blueprint
-from flask import request
-from flask import jsonify
-from flask import make_response
-from flask import current_app
+from flask import Blueprint, jsonify, make_response
 from backend.db_connection import db
 
 students = Blueprint('students', __name__)
 
 @students.route('/students', methods=['GET'])
-# route for retreiving all student profiles
-def get_students():
-    query = '''
-
-    '''
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    theData = cursor.fetchall()
-    
-    response = make_response(jsonify(theData))
-    response.status_code = 200
-    return response
+def get_all_students():
+    try:
+        query = '''
+        SELECT 
+            StudentID AS student_id,
+            Name AS student_name,
+            Location AS co_op_location,
+            Company AS company_name,
+            Major AS major
+        FROM Student
+        ORDER BY student_id ASC
+        '''
+        cursor = db.get_db().cursor()
+        cursor.execute(query)
+        
+        # Convert the data to a list of dictionaries
+        columns = [column[0] for column in cursor.description]
+        results = []
+        for row in cursor.fetchall():
+            results.append(dict(zip(columns, row)))
+        
+        return jsonify(results), 200
+        
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @students.route('/students/<student_id>/reminders', methods=['GET'])
-# route for retrieving recommendation for specific student
-def get_students():
+def get_student_reminders(student_id):
     query = '''
-
+    -- Add your SQL query here
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -36,10 +44,9 @@ def get_students():
     return response
 
 @students.route('/students/<student_id>/feedback', methods=['GET'])
-# route for retrieving feedback for specific student
-def get_students():
+def get_student_feedback(student_id):
     query = '''
-
+    -- Add your SQL query here
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)

@@ -22,6 +22,12 @@ services:
       - 4000:4000
     depends_on:
       - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=root
+      - MYSQL_ROOT_PASSWORD=password123
+      - DB_NAME=SyncSpace
     networks:
       - app-network
 
@@ -33,10 +39,16 @@ services:
       MYSQL_ROOT_PASSWORD: password123
       MYSQL_DATABASE: SyncSpace
     volumes:
-      - ./SyncSpace.sql:/docker-entrypoint-initdb.d/01-SyncSpace.sql:ro
-      - ./SyncSpace-data.sql:/docker-entrypoint-initdb.d/02-SyncSpace-data.sql:ro
+      - type: bind
+        source: ./database-files/SyncSpace.sql
+        target: /docker-entrypoint-initdb.d/01-SyncSpace.sql
+        read_only: true
+      - type: bind
+        source: ./database-files/SyncSpace-data.sql
+        target: /docker-entrypoint-initdb.d/02-SyncSpace-data.sql
+        read_only: true
     ports:
-      - 3307:3306
+      - 3308:3306
     networks:
       - app-network
 
