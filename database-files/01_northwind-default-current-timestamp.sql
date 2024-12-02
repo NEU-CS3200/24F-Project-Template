@@ -89,3 +89,7 @@ CREATE TABLE applications
   registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
   questionResponse text,
   summary text,
+  GPA decimal(3,2),
+  submittedAt datetime,
+  accepted boolean DEFAULT 0,
+  viewedAt datetime,
