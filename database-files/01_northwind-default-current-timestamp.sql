@@ -72,5 +72,8 @@ CREATE TABLE positions
   registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
   companyId int,
   applicantQuestions text,
-
+  summary text,
+  country varchar(15),
+  city varchar(15),
+  address varchar(60),
 )
