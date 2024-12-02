@@ -37,5 +37,6 @@ CREATE TABLE users
 
 CREATE TABLE user_reference
 (
+  name varchar(150),
   
 )
