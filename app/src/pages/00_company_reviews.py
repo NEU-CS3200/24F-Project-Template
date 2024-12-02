@@ -90,7 +90,6 @@ with col2:
             reviews = reviews_response.json()
             if reviews:
                 for review in reviews:
-                    st.write(f"Author: {review['firstName']}, {review['lastName']}")
                     st.write(f"Title: {review['title']}")
                     st.write(f"Rating: {review['rating']}/5")
                     st.write(f"Description: {review['content']}")
@@ -106,30 +105,25 @@ with col2:
         st.subheader(f"Add a review for {st.session_state['selected_job_name']}")
 
         with st.form(key='addReviewForm', clear_on_submit=True):
-            first_name = st.text_input("First Name", "")
-            last_name = st.text_input("Last Name", "")
             title = st.text_input("Enter Title", "")
             rating = st.slider("Rating", 1, 5, 5)
             description = st.text_area("Enter Review")
             submit_button = st.form_submit_button("Submit")
 
             if submit_button:
-                if not first_name or not last_name or not title or not description:
+                if not title or not description or not rating:
                     st.error("All fields must be filled out!")
                 else:
                     review_payload = {
-                        "firstName": first_name,
-                        "lastName": last_name,
                         "title": title,
                         "rating": rating,
                         "content": description,
-                        "jobPostingId": st.session_state["selected_job_id"],
+                        "studentId": -1
                     }
 
-                    response = requests.post("http://api:4000/jp/jobPostings/reviews", json=review_payload)
-                    if response.status_code == 201:
+                    response = requests.post(f"http://api:4000/jp/jobPostings/reviews/{st.session_state['selected_job_id']}", json=review_payload)
+                    if response.status_code == 200:
                         st.success("Review added successfully!")
                         st.session_state["show_add_review_form"] = False
-                        st.experimental_rerun()
                     else:
                         st.error("Failed to add review. Please try again.")

@@ -223,7 +223,8 @@ INSERT INTO students (firstName, middleName, lastName, phone, email, dateOfBirth
             'sample resume 2'),
            ('John', 'Jonah', 'Jones', '(123) 546-7890', 'jojojo@gmail.com',
             '2005-02-02', 3.6, 2027, 0, 3, 3,
-            'sample resume 3');
+            'sample resume 3'),
+            ('Guest', 'GuestMN', 'GuestLN', '(123) 456-7890', 'gues@user.com', '2004-01-06', 3.8, 2026, 1, 2, 2, 'sample resume guest');
 
 INSERT INTO skills (skillName)
     VALUES ('JavaScript'), ('React'), ('SQL');
