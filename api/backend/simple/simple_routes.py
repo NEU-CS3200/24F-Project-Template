@@ -32,3 +32,7 @@ def api_test():
     response = make_response(jsonify({"message": message}))
     response.status_code = 200
     return response
+
+
+def create_help_ticket():
+    pass
