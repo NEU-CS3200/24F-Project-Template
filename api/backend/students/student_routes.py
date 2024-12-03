@@ -122,6 +122,9 @@ def student_search(res):
     return response
 
 
+# curl http://127.0.0.1:4000/s/students/010101010/update -X PUT -H 'Content-Type: application/json' -d '{ "studentId": "010101010", "firstName": "Bob", "mobile": "1234567890" }'
+
+
 @students.route("/students/<student_id>/update", methods=["PUT"])
 def update_student(student_id):
     data = request.get_json()
@@ -138,20 +141,34 @@ def update_student(student_id):
     cursor = db.get_db().cursor()
 
     cursor.execute(query)
-    student = jsonify(cursor.fetchall())
+    student = cursor.fetchall()[0]
 
     if len(student) == 0:
         response = make_response(jsonify({"message": "student_id not found"}))
         response.status_code = 404
         return response
 
-    for key in data:
-        if key in student:
-            student[key] = data[key]
+    query = "UPDATE users SET "
 
-    query = f"""
-        UPDATE users SET name = "{student["name"]}", firstName = "{student["firstName"]}", middleName, "{student["middleName"]}", lastName = "{student["lastName"]}", mobile = "{student["mobile"]}", email = "{student["email"]}", profile = "{student["profile"]}", advisorId = {int(student["advisorId"])}, companyId = {int(student["companyId"])}, active = {int(student["active"])} WHERE studentId = {int(student_id)};
-    """
+    for key in data:
+        if key in student and key != "studentId":
+            if type(data[key]) is int:
+                query = query + f"{key} = {data[key]}, "
+            else:
+                query = query + f'{key} = "{data[key]}", '
+
+    query = query[:-2] + f" WHERE studentId = {int(student_id)};"
+
+    current_app.logger.error(query)
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
 
 
 def delete_student(student_id):
