@@ -45,6 +45,58 @@ def create_student():
     return response
 
 
+@students.route("/bookmark_company", methods=["POST"])
+def add_bookmark():
+    data = request.get_json()
+    stu_id = int(data["studentId"])
+    pos_id = int(data["positionId"])
+
+    query = f"""
+        INSERT INTO position_user_bookmark (positionId, userId) VALUES
+        (
+            {pos_id}, {stu_id}
+        );
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
+@students.route("/user_reference", methods=["POST"])
+def add_user_reference():
+    data = request.get_json()
+    user_id = int(data["studentId"])
+    name = data["name"]
+    firstName = data["firstName"]
+    middleName = data["middleName"]
+    lastName = data["lastName"]
+    mobile = data["mobile"]
+    email = data["email"]
+    referral = data["referral"]
+
+    query = f"""
+        INSERT INTO user_references (userId, name, firstName, middleName, lastName, mobile, email, referral) VALUES
+        (
+            {user_id}, "{name}", "{firstName}", "{middleName}", "{lastName}", "{mobile}", "{email}", "{referral}"
+        );
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
 # curl http://127.0.0.1:4000/stu/students -X GET
 
 
@@ -133,7 +185,7 @@ def student_search(res):
     query = f"""
         SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u
         WHERE INSTR(u.name, "{res}") OR INSTR(u.email, "{res}")
-        LIMIT 10;
+        LIMIT 100;
     """
 
     cursor = db.get_db().cursor()
