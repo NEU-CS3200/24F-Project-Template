@@ -171,6 +171,9 @@ def update_student(student_id):
     return response
 
 
+# curl http://127.0.0.1:4000/s/students/010101010/delete -X DELETE
+
+
 @students.route("/students/<student_id>/delete", methods=["DELETE"])
 def delete_student(student_id):
     query = f"""
