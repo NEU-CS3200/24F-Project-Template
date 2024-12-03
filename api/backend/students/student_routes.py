@@ -80,7 +80,7 @@ def get_student_by_id(student_id):
 @students.route("/students/<student_id>/applications", methods=["GET"])
 def get_student_applications(student_id):
     query = f"""
-        SELECT a.*, u.* FROM applications a NATURAL JOIN users u, WHERE studentId = {int(student_id)};
+        SELECT a.* FROM applications a NATURAL JOIN users u, WHERE u.studentId = {int(student_id)};
     """
 
     cursor = db.get_db().cursor()
@@ -92,8 +92,19 @@ def get_student_applications(student_id):
     return response
 
 
+@students.route("/students/<student_id>/advisor", methods=["GET"])
 def get_student_advisor(student_id):
-    pass
+    query = f"""
+        SELECT a.* FROM users u JOIN users a ON u.advisorId = a.id, WHERE u.studentId = {int(student_id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
 
 
 def student_search(res):
