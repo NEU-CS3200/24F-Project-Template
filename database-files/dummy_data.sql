@@ -21,3 +21,5 @@ INSERT INTO user_references (name, firstName, middleName, lastName, mobile, emai
 VALUES
     ('Mark Taylor', 'Mark', 'E', 'Taylor', '1234567894', 'marktaylor@example.com', 'Referred for engineering role', 1),
     ('Lucy Brown', 'Lucy', 'F', 'Brown', '1234567895', 'lucybrown@example.com', 'Recommended for a data position', 3);
+
+-- Insert into tickets
