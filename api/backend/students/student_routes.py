@@ -14,15 +14,15 @@ students = Blueprint("students", __name__)
 
 
 # Example of a POST request
-# curl http://127.0.0.1:4000/s/create -X POST -H 'Content-Type: application/json' -d '{ "student_id": "010101010", "first_name": "Sam", "last_name": "Ehlers", "email": "ehlers.s@northeastern.edu", "password": "P@s5w0rD", "profile": "A student at northeastern university" }'
+# curl http://127.0.0.1:4000/s/create -X POST -H 'Content-Type: application/json' -d '{ "studentId": "010101010", "firstName": "Sam", "lastName": "Ehlers", "email": "ehlers.s@northeastern.edu", "password": "P@s5w0rD", "profile": "A student at northeastern university" }'
 
 
 @students.route("/create", methods=["POST"])
 def create_student():
     data = request.get_json()
-    student_id = data["student_id"]
-    first_name = data["first_name"]
-    last_name = data["last_name"]
+    student_id = data["studentId"]
+    first_name = data["firstName"]
+    last_name = data["lastName"]
     name = f"{first_name} {last_name}"
     email = data["email"]
     password = data["password"]
@@ -107,12 +107,51 @@ def get_student_advisor(student_id):
     return response
 
 
+@students.route("/students/search/<res>", methods=["GET"])
 def student_search(res):
-    pass
+    query = f"""
+        SELECT * FROM users u, WHERE u.studentId = {int(student_id)} OR INSTR(u.name, "{res}") OR INSTR(u.email, "{res}");
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
 
 
+@students.route("/students/<student_id>/update", methods=["PUT"])
 def update_student(student_id):
-    pass
+    data = request.get_json()
+    if student_id != data["studentId"]:
+        response = make_response(
+            jsonify({"message": "student_id in URL does not match student_id in body"})
+        )
+        response.status_code = 400
+        return response
+
+    query = f"""
+        SELECT * FROM users WHERE studentId = {int(student_id)};
+    """
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    student = jsonify(cursor.fetchall())
+
+    if len(student) == 0:
+        response = make_response(jsonify({"message": "student_id not found"}))
+        response.status_code = 404
+        return response
+
+    for key in data:
+        if key in student:
+            student[key] = data[key]
+
+    query = f"""
+        UPDATE users SET name = "{student["name"]}", firstName = "{student["firstName"]}", middleName, "{student["middleName"]}", lastName = "{student["lastName"]}", mobile = "{student["mobile"]}", email = "{student["email"]}", profile = "{student["profile"]}", advisorId = {int(student["advisorId"])}, companyId = {int(student["companyId"])}, active = {int(student["active"])} WHERE studentId = {int(student_id)};
+    """
 
 
 def delete_student(student_id):
