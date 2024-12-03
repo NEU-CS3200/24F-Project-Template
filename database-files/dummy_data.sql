@@ -19,4 +19,4 @@ VALUES
 -- Insert into user_references
 INSERT INTO user_references (name, firstName, middleName, lastName, mobile, email, referral, userId) 
 VALUES
-    ('Mark Taylor', 'Mark', 'E', 'Taylor', '1234567894', 'marktaylor@example.com', )
+    ('Mark Taylor', 'Mark', 'E', 'Taylor', '1234567894', 'marktaylor@example.com', 'Referred for engineering role', )
