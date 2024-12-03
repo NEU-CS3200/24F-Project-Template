@@ -25,4 +25,4 @@ VALUES
 -- Insert into tickets
 INSERT INTO tickets (userId, helperId, summary, completed, viewedAt)
 VALUES
-    (),
+    (1, 2, ),
