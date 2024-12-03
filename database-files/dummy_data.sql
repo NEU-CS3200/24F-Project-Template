@@ -29,3 +29,5 @@ VALUES
     (3, 4, 'Database optimization task', 1, NOW());
 
 -- Insert into positions
+INSERT INTO positions (companyId, applicantQuestions, summary, country, city, address, expectedSalary)
+VALUES
