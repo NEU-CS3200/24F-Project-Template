@@ -60,7 +60,7 @@ if st.button("Act as System Administrator - Michael Ortega",
 if st.button('Act as Co-op Advisor - Jessica Doofenshmirtz', 
             type='primary', 
             use_container_width=True):
-    st.session_state['logged_in'] = True
+    st.session_state['authenticated'] = True
     st.session_state['role'] = 'Advisor'
     st.session_state['first_name'] = 'Jessica'
     st.switch_page('pages/10_Co-op_Advisor_Home.py')

@@ -1,18 +1,16 @@
+import logging
+logger = logging.getLogger(__name__)
+
 import streamlit as st
-import pandas as pd
 from modules.nav import SideBarLinks
 import requests
 
-# Set Streamlit page configuration
-st.set_page_config(layout="wide")
+st.set_page_config(layout = 'wide')
 
-# Add navigation sidebar
 SideBarLinks()
 
-# Page title and welcome message
-st.title('Co-op Advisor Home Page')
-st.write(f"Welcome, {st.session_state.get('first_name', 'Advisor')}!")
-
+st.title(f"Welcome Student, {st.session_state['first_name']}.")
+st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
