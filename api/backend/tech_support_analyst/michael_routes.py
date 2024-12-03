@@ -72,51 +72,84 @@ def get_tickets():
 @tech_support_analyst.route('/tickets', methods=['POST'])
 def add_new_tickets():
     
-    # In a POST request, there is a 
-    # collecting data from the request object 
+    # In a POST request, collecting data from the request object 
     the_data = request.json
     current_app.logger.info(the_data)
 
-    #extracting the variable
-    name = the_data['product_name']
-    content = the_data['chat_content']
-    time = the_data['chat_time']
-    category = the_data['product_category']
-    
-    query = f'''
-        INSERT INTO products (product_name,
-                              description,
-                              category, 
-                              list_price)
-        VALUES ('{name}', '{content}', '{category}', {str(time)})
-    '''
-    # TODO: Make sure the version of the query above works properly
-    # Constructing the query
-    # query = 'insert into products (product_name, description, category, list_price) values ("'
-    # query += name + '", "'
-    # query += description + '", "'
-    # query += category + '", '
-    # query += str(price) + ')'
-    current_app.logger.info(query)
+    # Extracting the variables
+    ticket_id = the_data['TicketID']
+    timestamp = the_data['Timestamp']
+    activity = the_data['Activity']
+    metric_type = the_data['MetricType']
+    privacy = the_data['Privacy']
+    security = the_data['Security']
 
-    # executing and committing the insert statement 
+    query = '''
+        INSERT INTO tickets (TicketID, Timestamp, Activity, MetricType, Privacy, Security)
+        VALUES (%s, %s, %s, %s, %s, %s)
+    '''
+    data = (ticket_id, timestamp, activity, metric_type, privacy, security)
+
+    # Executing and committing the insert statement 
     cursor = db.get_db().cursor()
-    cursor.execute(query)
+    cursor.execute(query, data)
     db.get_db().commit()
     
-    response = make_response("Successfully initiated chat")
+    # Building a response
+    response = make_response("Ticket successfully created!")
     response.status_code = 200
     return response
 
 # Mark a ticket as completed or update its status
 @tech_support_analyst.route('/tickets', methods = ['PUT'])
 def update_tickets():
-    logs_info = request.json
-    if not logs_info:
-        return {"error": "Invalid JSON payload"}, 400
-    current_app.logger.info(f"Updating logs for user {user_id}: {logs_info}")
-    return {"message": "Logs updated successfully"}, 200
+    current_app.logger.info('PUT /tickets route')
+    ticket_info = request.json
+    ticket_id = ticket_info['TicketID']
+    timestamp = ticket_info.get('Timestamp')
+    activity = ticket_info.get('Activity')
+    metric_type = ticket_info.get('MetricType')
+    privacy = ticket_info.get('Privacy')
+    security = ticket_info.get('Security')
 
+    # Build the SQL query
+    update_fields = []
+    params = []
+    if timestamp:
+        update_fields.append("Timestamp = %s")
+        params.append(timestamp)
+    if activity:
+        update_fields.append("Activity = %s")
+        params.append(activity)
+    if metric_type:
+        update_fields.append("MetricType = %s")
+        params.append(metric_type)
+    if privacy:
+        update_fields.append("Privacy = %s")
+        params.append(privacy)
+    if security:
+        update_fields.append("Security = %s")
+        params.append(security)
+
+    if not update_fields:
+        return 'No valid fields to update', 400
+
+    # Add TicketID to parameters
+    params.append(ticket_id)
+
+    # Prepare the SQL query
+    query = f'UPDATE tickets SET {", ".join(update_fields)} WHERE TicketID = %s'
+
+    # Execute the query
+    cursor = db.get_db().cursor()
+    cursor.execute(query, params)
+    db.get_db().commit()
+
+    # Check if the update was successful
+    if cursor.rowcount == 0:
+        return 'No ticket found with the given TicketID', 404
+
+    return 'Ticket updated successfully!'
 
 # Archive completed tickets
 @tech_support_analyst.route('/tickets/<int:ticket_id>', methods=['DELETE'])

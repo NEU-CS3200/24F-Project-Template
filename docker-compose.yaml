@@ -4,15 +4,8 @@ services:
     container_name: web-app  
     hostname: web-app
     volumes: ['./app/src:/appcode']
-    env_file:
-      - ./api/.env
     ports:
       - 8501:8501
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - app-network
 
   api:
     build: ./api
@@ -21,45 +14,16 @@ services:
     volumes: ['./api:/apicode']
     ports:
       - 4000:4000
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_USER=root
-      - MYSQL_ROOT_PASSWORD=password123
-      - DB_NAME=SyncSpace
-    networks:
-      - app-network
 
   db:
-    image: mysql:8.0
+    env_file:
+      - ./api/.env
+    image: mysql:9
     container_name: mysql_db
     hostname: db
-    environment:
-      MYSQL_ROOT_PASSWORD: password123
-      MYSQL_DATABASE: SyncSpace
     volumes:
-      - type: bind
-        source: ./database-files/SyncSpace.sql
-        target: /docker-entrypoint-initdb.d/01-SyncSpace.sql
-        read_only: true
-      - type: bind
-        source: ./database-files/SyncSpace-data.sql
-        target: /docker-entrypoint-initdb.d/02-SyncSpace-data.sql
-        read_only: true
+      - ./database-files:/docker-entrypoint-initdb.d/:ro
     ports:
-      - 3308:3306
-    networks:
-      - app-network
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 5s
-      retries: 10
-
-networks:
-  app-network:
-    driver: bridge
+      - 3200:3306
 
 

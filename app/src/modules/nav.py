@@ -14,21 +14,25 @@ def AboutPageNav():
     st.sidebar.page_link("pages/50_About.py", label="About", icon="🧠")
 
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
-def PolStratAdvHomeNav():
+#### ------------------------ Role of Technical Support Analyst ------------------------
+def TechSupportAnalystHomeNav():
     st.sidebar.page_link(
         "pages/00_Tech_Support_Analyst_Home.py", label="Tech Support Analyst Home", icon="👤"
     )
 
 
-def WorldBankVizNav():
+def SystemLogsNav():
     st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
+        "pages/01_Run_System_Logs.py", label="System Logs", icon="⚙️"
     )
 
 
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+def TicketOverviewNav():
+    st.sidebar.page_link("pages/02_Ticket_Overview.py", label="Ticket Overview", icon="🎫")
+
+
+def SysHealthDashNav():
+    st.sidebar.page_link("pages/04_Access_System_Health_Dashboard.py", label="System Health Dashboard", icon="📊")
 
 
 ## ------------------------ Examples for Role of usaid_worker ------------------------
@@ -77,11 +81,11 @@ def SideBarLinks(show_home=False):
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
 
-        # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state["role"] == "SysAdmin":
-            PolStratAdvHomeNav()
-            WorldBankVizNav()
-            MapDemoNav()
+        # Show System Logs, Ticket Overview, and System Health Dashboard if the user is in a technical support analyst role.
+        if st.session_state["role"] == "TechnicalSupportAnalyst":
+            TechSupportAnalystHomeNav()
+            SystemLogsNav()
+            TicketOverviewNav()
 
         # If the user role is usaid worker, show the Api Testing page
         if st.session_state["role"] == "Advisor":
@@ -89,7 +93,7 @@ def SideBarLinks(show_home=False):
             ApiTestNav()
             ClassificationNav()
 
-        # If the user is an administrator, give them access to the administrator pages
+        # If the user is a student, give them access to the student pages
         if st.session_state["role"] == "Student":
             KevinPageNav()
 

@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS Housing (
     HousingID INT AUTO_INCREMENT PRIMARY KEY,
     Availability VARCHAR(50),
     Style VARCHAR(50),
-    Location VARCHAR(100),
     CommunityID INT,
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
 );
