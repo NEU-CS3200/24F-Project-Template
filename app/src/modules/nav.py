@@ -101,22 +101,28 @@ def SideBarLinks(show_home=False):
             EmployerSearchNav()
             ApplicationReviewNav()
             PositionOpeningSearchNav()
+            CreateTicketNav()
 
         # If the user role is employer, show the Api Testing page
         if st.session_state["role"] == "employer":
-            PredictionNav()
-            ApiTestNav()
-            ClassificationNav()
+            EmployerAdvHomeNav()
+            StudentSearchNav()
+            ApplicationReviewNav()
+            CreateTicketNav()
 
         # If the user role is student, show student home
         if st.session_state["role"] == "student":
             StudentAdvHomeNav()
             PositionOpeningSearchNav()
+            EmployerSearchNav()
+            ApplicationEditorNav()
+            CreateTicketNav()
 
 
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "administrator":
             AdminPageNav()
+            ViewTicketNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
