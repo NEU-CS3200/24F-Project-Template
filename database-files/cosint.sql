@@ -1,7 +1,7 @@
 Create DATABASE cosint;
 USE cosint;
 
-CREATE TABLE companies
+CREATE TABLE IF NOT EXISTS companies
 (
   name varchar(30),
   registeredAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE companies
   PRIMARY KEY(id)
 );
 
-CREATE TABLE users
+CREATE TABLE IF NOT EXISTS users
 (
   name varchar(150),
   firstName varchar(50) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE users
   lastName varchar(50) NOT NULL,
   studentId varchar(15) UNIQUE,
   mobile varchar(50),
-  email varchar(15) NOT NULL,
+  email varchar(40) NOT NULL,
   passwordHash varchar(128) NOT NULL, 
   profile text,
   advisorId int, 
@@ -32,28 +32,27 @@ CREATE TABLE users
   UNIQUE INDEX uq_idx_mobile (mobile),
   UNIQUE INDEX uq_idx_email (email),
   CONSTRAINT fk_01 FOREIGN KEY (advisorId) REFERENCES users (id) ON UPDATE CASCADE, 
-  CONSTRAINT fk_02 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE,
-
+  CONSTRAINT fk_02 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE
 );
 
-CREATE TABLE user_reference
+CREATE TABLE IF NOT EXISTS user_reference
 (
   name varchar(150),
   firstName varchar(50) NOT NULL,
   middleName varchar(50),
   lastName varchar(50) NOT NULL,
   mobile varchar(15),
-  email varchar(75) NOT NULL,
+  email varchar(40) NOT NULL,
   referral text,
   userId int NOT NULL,
-  registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,.
+  registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY(userId),
   UNIQUE INDEX uq_idx_mobile (mobile),
   UNIQUE INDEX uq_idx_email (email),
   CONSTRAINT fk_03 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE
 );
 
-CREATE TABLE ticket
+CREATE TABLE IF NOT EXISTS ticket
 (
   userId int NOT NULL,
   helperId int,
@@ -68,7 +67,7 @@ CREATE TABLE ticket
   CONSTRAINT fk_05 FOREIGN KEY (helperId) REFERENCES users (id) ON UPDATE CASCADE
 );
 
-CREATE TABLE positions
+CREATE TABLE IF NOT EXISTS positions
 (
   registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
   companyId int NOT NULL,
@@ -86,7 +85,7 @@ CREATE TABLE positions
   CONSTRAINT fk_11 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE
 );
 
-CREATE TABLE applications
+CREATE TABLE IF NOT EXISTS applications
 (
   registeredAt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
   questionResponse text,
@@ -100,7 +99,7 @@ CREATE TABLE applications
   PRIMARY KEY(id)
 );
 
-CREATE TABLE related_coursework
+CREATE TABLE IF NOT EXISTS related_coursework
 (
   applicationId int NOT NULL,
   name varchar(30) NOT NULL,
@@ -109,7 +108,7 @@ CREATE TABLE related_coursework
   CONSTRAINT fk_08 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-CREATE TABLE notable_skills
+CREATE TABLE IF NOT EXISTS notable_skills
 (
   applicationId int NOT NULL,
   name varchar(30) NOT NULL,
@@ -118,7 +117,7 @@ CREATE TABLE notable_skills
   CONSTRAINT fk_09 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-CREATE TABLE work_experience 
+CREATE TABLE IF NOT EXISTS work_experience 
 (
   applicationId int NOT NULL,
   name varchar(30) NOT NULL,
@@ -127,7 +126,7 @@ CREATE TABLE work_experience
   CONSTRAINT fk_10 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-CREATE TABLE position_user_bookmark
+CREATE TABLE IF NOT EXISTS position_user_bookmark
 (
   positionId int, 
   userId int, 
@@ -136,16 +135,16 @@ CREATE TABLE position_user_bookmark
   CONSTRAINT fk_13 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-CREATE TABLE company_user_bookmark
+CREATE TABLE IF NOT EXISTS company_user_bookmark
 ( 
-  companyID int, 
+  companyId int, 
   userId int, 
   PRIMARY KEY (companyId, userId),
   CONSTRAINT fk_18 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT fk_19 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-CREATE TABLE application_bookmark
+CREATE TABLE IF NOT EXISTS application_bookmark
 (
   applicationId int,
   userId int,
@@ -154,7 +153,7 @@ CREATE TABLE application_bookmark
   CONSTRAINT fk_15 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-CREATE TABLE offer_list
+CREATE TABLE IF NOT EXISTS offer_list
 (
   positionId int,
   userId int,
