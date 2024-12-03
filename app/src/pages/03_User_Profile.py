@@ -6,3 +6,4 @@ from modules.nav import SideBarLinks
 
 st.set_page_config(layout = 'wide')
 
+st.title(" Full Name's Profile")
