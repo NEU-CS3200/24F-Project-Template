@@ -27,3 +27,5 @@ INSERT INTO tickets (userId, helperId, summary, completed, viewedAt)
 VALUES
     (1, 2, 'System upgrade issue', 0, NULL),
     (3, 4, 'Database optimization task', 1, NOW());
+
+-- Insert into positions
