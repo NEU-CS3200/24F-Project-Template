@@ -77,8 +77,19 @@ def get_student_by_id(student_id):
     return response
 
 
+@students.route("/students/<student_id>/applications", methods=["GET"])
 def get_student_applications(student_id):
-    pass
+    query = f"""
+        SELECT a.*, u.* FROM applications a NATURAL JOIN users u, WHERE studentId = {int(student_id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
 
 
 def get_student_advisor(student_id):
