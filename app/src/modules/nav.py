@@ -36,9 +36,9 @@ def ApiTestNav():
     st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
 
 
-def PredictionNav():
+def StudentSearchNav():
     st.sidebar.page_link(
-        "pages/11_Prediction.py", label="Regression Prediction", icon="📈"
+        "pages/01_Student_Search.py", label="Student Search", icon="🧑‍🎓"
     )
 
 
