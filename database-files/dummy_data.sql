@@ -65,3 +65,9 @@ INSERT INTO position_user_bookmark (positionId, userId)
 VALUES
     (1, 1),
     (2, 2);
+
+-- Insert into position_application_bookmark
+INSERT INTO position_application_bookmark (positionId, applicationId)
+VALUES
+    (1, 1),
+    (2, 2);
