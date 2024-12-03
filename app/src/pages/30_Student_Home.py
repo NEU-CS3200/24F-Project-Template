@@ -21,9 +21,9 @@ if st.button('Positon Opening Search',
 if st.button('Employer Search', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/32_Employer_Search.py')
+  st.switch_page('pages/02_Employer_Search.py')
 
 if st.button("Application Editor",
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/33_Application_Editor.py')
+  st.switch_page('pages/32_Application_Editor.py')

@@ -17,14 +17,12 @@ def AboutPageNav():
 #### ------------------------ Co-op Advisor Role ------------------------
 def CoopAdvisorAdvHomeNav():
     st.sidebar.page_link(
-        "pages/00_Coop_Advisor_Home.py", label="Co-op Advisor Home", icon="👤"
-    )
+        "pages/00_Coop_Advisor_Home.py", label="Co-op Advisor Home", icon="👤")
 
 
 def StudentSearchNav():
     st.sidebar.page_link(
-        "pages/01_Student_Search.py", label="Student Search", icon="🧑‍🎓"
-    )
+        "pages/01_Student_Search.py", label="Student Search", icon="🧑‍🎓")
 
 
 def EmployerSearchNav():
@@ -33,47 +31,40 @@ def EmployerSearchNav():
 
 #### ------------------------ Emplyer Role ------------------------
 def PositionOpeningsNav():
-    st.sidebar.page_link("pages/12_Postion_Openings.py", label="Position Openings Editor", icon="💼")
+    st.sidebar.page_link(
+        "pages/12_Postion_Openings.py", label="Position Openings Editor", icon="💼")
 
 
 def StudentSearchNav():
     st.sidebar.page_link(
-        "pages/01_Student_Search.py", label="Student Search", icon="🧑‍🎓"
-    )
+        "pages/01_Student_Search.py", label="Student Search", icon="🧑‍🎓")
 
 
 def ApplicationReviewNav():
     st.sidebar.page_link( 
-        "pages/11_Application_Editor.py", label="Applications", icon="📝"
-    )
+        "pages/11_Application_Editor.py", label="Applications", icon="📝")
 
 #### ------------------------ Student Role ------------------------
 def StudentAdvHomeNav():
     st.sidebar.page_link(
-        "pages/30_Student_Home.py", label="Student Home", icon="🧑‍🎓"
-    )
+        "pages/30_Student_Home.py", label="Student Home", icon="🧑‍🎓")
 
 def PositionOpeningSearchNav():
     st.sidebar.page_link(
-        "pages/31_Position_Opening_Search.py", label="Position Openings", icon="🔎"
-    )
+        "pages/31_Position_Opening_Search.py", label="Position Openings", icon="🔎")
 
 def EmployerSearchNav():
     st.sidebar.page_link(
-        "pages/32_Employer_Search.py", label="Employers", icon="🕴️"
-    )
+        "pages/02_Employer_Search.py", label="Employers", icon="🕴️")
 
 def ApplicationEditorNav():
     st.sidebar.page_link( 
-        "pages/33_Application_Editor.py", label="Applications", icon="📝"
-    )
+        "pages/33_Application_Editor.py", label="Applications", icon="📝")
 
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
-    )
+    
 
 
 # --------------------------------Links Function -----------------------------------------------
@@ -100,8 +91,10 @@ def SideBarLinks(show_home=False):
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
         if st.session_state["role"] == "coop_advisor":
             CoopAdvisorAdvHomeNav()
-            WorldBankVizNav()
-            MapDemoNav()
+            StudentSearchNav()
+            EmployerSearchNav()
+            ApplicationReviewNav()
+            PositionOpeningSearchNav()
 
         # If the user role is employer, show the Api Testing page
         if st.session_state["role"] == "employer":
@@ -112,6 +105,8 @@ def SideBarLinks(show_home=False):
         # If the user role is student, show student home
         if st.session_state["role"] == "student":
             StudentAdvHomeNav()
+            PositionOpeningSearchNav()
+
 
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "administrator":

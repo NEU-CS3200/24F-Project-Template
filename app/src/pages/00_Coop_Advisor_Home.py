@@ -23,3 +23,13 @@ if st.button('View Employer Search Page',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/02_Employer_Search.py')
+
+if st.button("View Applications",
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/11_Application_Review.py')
+
+if st.button('Positon Opening Search', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/31_Position_Opening_Search.py')
