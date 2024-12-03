@@ -47,3 +47,9 @@ INSERT INTO related_coursework (applicationId, name, summary)
 VALUES
     (1, 'Advanced Database Systems', 'Focus on relational databases and optimization techniques'),
     (2, 'Leadership in Organizations', 'Explored management theories and practices');
+
+-- Insert into notable_skills
+INSERT INTO notable_skills (applicationId, name, summary)
+VALUES
+    (1, 'Microservices Architecture', 'Designed and implemented scalable backend services'),
+    (2, 'Team Leadership', 'Led diverse teams across multiple projects');
