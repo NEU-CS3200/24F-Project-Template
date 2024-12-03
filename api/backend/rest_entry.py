@@ -7,7 +7,7 @@ from backend.simple.simple_routes import simple_routes
 from backend.companies.company_routes import companies
 from backend.commonQuestions.commonQuestions_routes import commonQuestions
 from backend.jobPostings.jobPostings_routes import jobPostings
-from backend.interns import interns
+# from backend.interns import interns
 from backend.students.student_routes import students
 import os
 from dotenv import load_dotenv
