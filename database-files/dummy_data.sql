@@ -23,3 +23,6 @@ VALUES
     ('Lucy Brown', 'Lucy', 'F', 'Brown', '1234567895', 'lucybrown@example.com', 'Recommended for a data position', 3);
 
 -- Insert into tickets
+INSERT INTO tickets (userId, helperId, summary, completed, viewedAt)
+VALUES
+    (),
