@@ -175,8 +175,9 @@ VALUES (
 
 
 -- 4.3 
-INSERT INTO Housing (Style, Availability, Location)
-VALUES ('Apartment', 'Available', 'New York City');
+INSERT INTO Housing (Style, Availability)
+VALUES ('Apartment', 'Available');
+
 
 
 
