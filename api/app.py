@@ -3,6 +3,11 @@ from flask import Flask
 from backend.db_connection import init_app
 from backend.students.student_routes import students
 
+
+# Register blueprints
+app.register_blueprint(students, url_prefix='/api/students')
+
+
 app = Flask(__name__)
 
 # Initialize database
