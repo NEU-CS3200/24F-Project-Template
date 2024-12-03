@@ -177,6 +177,27 @@ def get_student_advisor(student_id):
     return response
 
 
+@students.route("/students/<student_id>/progress", methods=["GET"])
+def get_progress(student_id):
+    query = f"""
+        SELECT (COUNT(*)/3) * 100 AS progress FROM cosint.users u
+            JOIN cosint.application_bookmark ab on u.id = ab.userId
+            JOIN cosint.applications a on ab.applicationId = a.id
+            JOIN cosint.related_coursework r ON a.id = r.applicationId
+            JOIN cosint.notable_skills n ON a.id = n.applicationId
+            JOIN cosint.work_experience we ON a.id = we.applicationId
+        WHERE u.studentId = {int(student_id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
 # curl http://127.0.0.1:4000/stu/students/search/sam -X GET
 
 
@@ -201,7 +222,7 @@ def student_search(res):
 # curl http://127.0.0.1:4000/stu/students/010101010/update -X PUT -H 'Content-Type: application/json' -d '{ "studentId": "010101010", "firstName": "Bob", "mobile": "1234567899" }'
 
 
-@students.route("/students/<student_id>/update", methods=["PUT"])
+@students.route("/students/<student_id>", methods=["PUT"])
 def update_student(student_id):
     data = request.get_json()
     if student_id != data["studentId"]:
@@ -255,7 +276,7 @@ def update_student(student_id):
 # curl http://127.0.0.1:4000/stu/students/010101010/delete -X DELETE
 
 
-@students.route("/students/<student_id>/delete", methods=["DELETE"])
+@students.route("/students/<student_id>", methods=["DELETE"])
 def delete_student(student_id):
     query = f"""
         DELETE FROM users
