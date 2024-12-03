@@ -16,8 +16,7 @@ st.write("Phone Number:",)
 st.wrire("Last Active: ")
 st.write("Bio:",)
 
-if st.session_state["user_id"] == [user_id]:
-    if st.button('Edit Profile', 
+if st.button('Save Changes', 
              type='primary',
              use_container_width=True):
-      st.switch_page('pages/04_User_Profile_Editor.py')
+  st.switch_page('pages/03_User_Profile.py')
