@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS users
   CONSTRAINT fk_02 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS user_reference
+CREATE TABLE IF NOT EXISTS user_references
 (
   name varchar(150),
   firstName varchar(50) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS user_reference
   CONSTRAINT fk_03 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS ticket
+CREATE TABLE IF NOT EXISTS tickets
 (
   userId int NOT NULL,
   helperId int,
@@ -135,15 +135,6 @@ CREATE TABLE IF NOT EXISTS position_user_bookmark
   CONSTRAINT fk_13 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-CREATE TABLE IF NOT EXISTS company_user_bookmark
-( 
-  companyId int, 
-  userId int, 
-  PRIMARY KEY (companyId, userId),
-  CONSTRAINT fk_18 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT fk_19 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
-);
-
 CREATE TABLE IF NOT EXISTS application_bookmark
 (
   applicationId int,
@@ -151,6 +142,24 @@ CREATE TABLE IF NOT EXISTS application_bookmark
   PRIMARY KEY (applicationId, userId),
   CONSTRAINT fk_14 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT fk_15 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE position_application_bookmark
+(
+   positionId int,
+   applicationId int,
+   PRIMARY KEY (positionId, applicationId),
+   CONSTRAINT fk_16 FOREIGN KEY (positionId) REFERENCES positions (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+   CONSTRAINT fk_17 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE IF NOT EXISTS company_user_bookmark
+( 
+  companyId int, 
+  userId int, 
+  PRIMARY KEY (companyId, userId),
+  CONSTRAINT fk_18 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_19 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS offer_list

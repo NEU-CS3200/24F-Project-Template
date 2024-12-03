@@ -4,8 +4,6 @@ from flask import (
     jsonify,
     make_response,
     current_app,
-    redirect,
-    url_for,
 )
 from bcrypt import hashpw, gensalt
 from backend.db_connection import db
@@ -14,7 +12,7 @@ students = Blueprint("students", __name__)
 
 
 # Example of a POST request
-# curl http://127.0.0.1:4000/s/create -X POST -H 'Content-Type: application/json' -d '{ "studentId": "010101010", "firstName": "Sam", "lastName": "Ehlers", "email": "ehlers.s@northeastern.edu", "password": "P@s5w0rD", "profile": "A student at northeastern university" }'
+# curl http://127.0.0.1:4000/stu/create -X POST -H 'Content-Type: application/json' -d '{ "studentId": "010101010", "firstName": "Sam", "lastName": "Ehlers", "email": "ehlers.s@northeastern.edu", "password": "P@s5w0rD", "profile": "A student at northeastern university" }'
 
 
 @students.route("/create", methods=["POST"])
@@ -47,10 +45,15 @@ def create_student():
     return response
 
 
+# curl http://127.0.0.1:4000/stu/students -X GET
+
+
 @students.route("/students", methods=["GET"])
 def get_students():
     query = """
-        SELECT * FROM users WHERE studentId IS NOT NULL;
+        SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u 
+        WHERE studentId IS NOT NULL
+        LIMIT 100;
     """
 
     cursor = db.get_db().cursor()
@@ -60,12 +63,16 @@ def get_students():
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+
+# curl http://127.0.0.1:4000/stu/students/010101010 -X GET
 
 
 @students.route("/students/<student_id>", methods=["GET"])
 def get_student_by_id(student_id):
     query = f"""
-        SELECT * FROM users WHERE studentId = {int(student_id)};
+        SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u 
+        WHERE studentId = {int(student_id)};
     """
 
     cursor = db.get_db().cursor()
@@ -75,12 +82,18 @@ def get_student_by_id(student_id):
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+
+# curl http://127.0.0.1:4000/stu/students/010101010/applications -X GET
 
 
 @students.route("/students/<student_id>/applications", methods=["GET"])
 def get_student_applications(student_id):
     query = f"""
-        SELECT a.* FROM applications a NATURAL JOIN users u, WHERE u.studentId = {int(student_id)};
+        SELECT a.* FROM applications a 
+            NATURAL JOIN application_bookmark o 
+            NATURAL JOIN users u
+        WHERE u.studentId = {int(student_id)};
     """
 
     cursor = db.get_db().cursor()
@@ -90,12 +103,17 @@ def get_student_applications(student_id):
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+
+# curl http://127.0.0.1:4000/stu/students/010101010/advisor -X GET
 
 
 @students.route("/students/<student_id>/advisor", methods=["GET"])
 def get_student_advisor(student_id):
     query = f"""
-        SELECT a.* FROM users u JOIN users a ON u.advisorId = a.id, WHERE u.studentId = {int(student_id)};
+        SELECT a.* FROM users u 
+            JOIN users a ON u.advisorId = a.id 
+        WHERE u.studentId = {int(student_id)};
     """
 
     cursor = db.get_db().cursor()
@@ -105,12 +123,17 @@ def get_student_advisor(student_id):
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+
+# curl http://127.0.0.1:4000/stu/students/search/sam -X GET
 
 
 @students.route("/students/search/<res>", methods=["GET"])
 def student_search(res):
     query = f"""
-        SELECT * FROM users u, WHERE u.studentId = {int(student_id)} OR INSTR(u.name, "{res}") OR INSTR(u.email, "{res}");
+        SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u
+        WHERE INSTR(u.name, "{res}") OR INSTR(u.email, "{res}")
+        LIMIT 10;
     """
 
     cursor = db.get_db().cursor()
@@ -122,7 +145,8 @@ def student_search(res):
     return response
 
 
-# curl http://127.0.0.1:4000/s/students/010101010/update -X PUT -H 'Content-Type: application/json' -d '{ "studentId": "010101010", "firstName": "Bob", "mobile": "1234567890" }'
+# Example of a PUT request
+# curl http://127.0.0.1:4000/stu/students/010101010/update -X PUT -H 'Content-Type: application/json' -d '{ "studentId": "010101010", "firstName": "Bob", "mobile": "1234567899" }'
 
 
 @students.route("/students/<student_id>/update", methods=["PUT"])
@@ -136,7 +160,8 @@ def update_student(student_id):
         return response
 
     query = f"""
-        SELECT * FROM users WHERE studentId = {int(student_id)};
+        SELECT * FROM users
+        WHERE studentId = {int(student_id)};
     """
     cursor = db.get_db().cursor()
 
@@ -148,7 +173,10 @@ def update_student(student_id):
         response.status_code = 404
         return response
 
-    query = "UPDATE users SET "
+    query = "UPDATE users "
+
+    if len(data) > 1:
+        query += "SET "
 
     for key in data:
         if key in student and key != "studentId":
@@ -171,13 +199,15 @@ def update_student(student_id):
     return response
 
 
-# curl http://127.0.0.1:4000/s/students/010101010/delete -X DELETE
+# Example of a DELETE request
+# curl http://127.0.0.1:4000/stu/students/010101010/delete -X DELETE
 
 
 @students.route("/students/<student_id>/delete", methods=["DELETE"])
 def delete_student(student_id):
     query = f"""
-        DELETE FROM users WHERE studentId = {int(student_id)};
+        DELETE FROM users
+        WHERE studentId = {int(student_id)};
     """
 
     cursor = db.get_db().cursor()

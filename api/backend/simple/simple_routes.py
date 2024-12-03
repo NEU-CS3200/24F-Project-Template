@@ -4,8 +4,6 @@ from flask import (
     jsonify,
     make_response,
     current_app,
-    redirect,
-    url_for,
 )
 from backend.db_connection import db
 
@@ -34,5 +32,22 @@ def api_test():
     return response
 
 
+@simple_routes.route("/create_help_ticket")
 def create_help_ticket():
-    pass
+    data = request.get_json()
+
+    query = f"""
+        INSERT INTO help_tickets (userId, summary, completed) VALUES
+        (
+            {int(data['userId'])}, "{data['summary']}", 0
+        );
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
