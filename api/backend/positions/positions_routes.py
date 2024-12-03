@@ -10,4 +10,4 @@ from flask import (
 from bcrypt import hashpw, gensalt
 from backend.db_connection import db
 
-students = Blueprint("positions", __name__)
+positions = Blueprint("positions", __name__)

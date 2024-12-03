@@ -9,7 +9,7 @@ from backend.simple.simple_routes import simple_routes
 from backend.students.student_routes import students
 from backend.admins.admin_routes import admins
 from backend.employers.employer_routes import employers
-from api.backend.advisors.advisor_routes import advisors
+from backend.advisors.advisor_routes import advisors
 from backend.applications.application_routes import applications
 from backend.positions.positions_routes import positions
 
