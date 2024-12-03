@@ -33,3 +33,5 @@ INSERT INTO positions (companyId, applicantQuestions, summary, country, city, ad
 VALUES
     (1, 'What is your experience in backend development?', 'Backend Developer Role', 'USA', 'New York', '123 Tech Street', 75000),
     (1, 'Describe your approach to team management.', 'Team Manager Role', 'Canada', 'Toronto', '456 Innovate Lane', 85000);
+
+-- Insert into applications
