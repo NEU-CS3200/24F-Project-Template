@@ -40,4 +40,4 @@ VALUES
     ('I have 5 years of experience in backend development and microservices architecture.',
     'Application for Backend Developer', 3.8, NOW()),
     ('I have 10 years of experience in management and have successfully led teams.',
-    'Application for Manager Role', 3.5);
+    'Application for Manager Role', 3.5, NOW());
