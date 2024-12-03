@@ -9,59 +9,62 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-# Define the API URL
-API_URL = "http://api:4000/c/community"
+def fetch_student_profiles(communityid, cleanliness_filter=None, lease_duration_filter=None, budget_filter=None):
+    url = f'http://api:4000/c/community/{communityid}/housing' 
+    
+    # apend filters
+    if cleanliness_filter:
+        url += f"?cleanliness={cleanliness_filter}"
+    if lease_duration_filter:
+        if "?" in url:
+            url += f"&lease_duration={lease_duration_filter}"
+        else:
+            url += f"?lease_duration={lease_duration_filter}"
+    if budget_filter:
+        if "?" in url:
+            url += f"&budget={budget_filter}"
+        else:
+            url += f"?budget={budget_filter}"
 
-# Fetch data from the API
-response = requests.get(API_URL)
-
-# Check if the response is successful
-if response.status_code == 200:
-    data = response.json()  # Assuming the API returns JSON data
-    df = pd.DataFrame(data)  # Convert the JSON data to a DataFrame
-
-    # Display the DataFrame in Streamlit
-    st.write("Playlist Data", df)
-else:
-    st.error(f"Failed to fetch data. Status code: {response.status_code}")
-
-'''
-# Set the backend API URL
-
-
-# Streamlit App Layout
-st.title("Community Housing Details")
-
-# User Input: Community ID
-communityid = st.text_input("Enter Community ID:", placeholder="e.g., 123")
-
-# Fetch Data on Button Click
-if st.button("Get Housing Details"):
-    if not communityid:
-        st.warning("Please enter a valid Community ID.")
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
     else:
-        try:
-            # Make GET request to the backend
-            response = requests.get(API_URL.format(communityid=communityid))
+        st.error(f"Error fetching data: {response.status_code}")
+        return []
 
-            # Check for successful response
-            if response.status_code == 200:
-                data = response.json()
+# Streamlit app UI
+st.title("Community Housing Profiles")
 
-                # Convert JSON to DataFrame for better display
-                df = pd.DataFrame(data, columns=[
-                    "Name", "Major", "Company", "Location", "HousingStatus",
-                    "Budget", "LeaseDuration", "Cleanliness", "LifeStyle", 
-                    "Bio", "CommunityID"
-                ])
-                # Display the DataFrame in Streamlit
-                st.dataframe(df)
+# textf field for coop location
+communityid = st.text_input("Enter Co-op Location:", placeholder="e.g., San Francisco")
 
-            elif response.status_code == 404:
-                st.warning("No students found for the given Community ID.")
-            else:
-                st.error(f"Error: {response.status_code} - {response.text}")
+## sidebar filters
+st.sidebar.header('Preference Filters')
+cleanliness_filter = st.sidebar.slider("Filter by Cleanliness", min_value=1, max_value=5, step=1, value=1)
+budget_filter = st.sidebar.slider("Filter by Budget", min_value=1000, max_value=3000, step=100)
+lease_duration_filter = st.sidebar.selectbox(
+    "Filter by Lease Duration", 
+    ["Any", "1 Year", "6 Months", "4 Months"], 
+    index=0)
 
-        except requests.exceptions.RequestException as e:
-            st.error(f"Failed to connect to the API: {str(e)}")
-'''
+if communityid:
+    # Fetch data for the community, passing cleanliness filter
+    student_profiles = fetch_student_profiles(communityid, cleanliness_filter, lease_duration_filter, budget_filter)
+
+    # Display student profiles
+    if student_profiles:
+        for student in student_profiles:
+            with st.expander(f"{student['Name']}"):
+                st.markdown(f"### {student['Name']}")
+                st.write(f"**Major:** {student['Major']}")
+                st.write(f"**Company:** {student['Company']}")
+                st.write(f"**Location:** {student['Location']}")
+                st.write(f"**Housing Status:** {student['HousingStatus']}")
+                st.write(f"**Budget:** {student['Budget']}")
+                st.write(f"**Lease Duration:** {student['LeaseDuration']}")
+                st.write(f"**Cleanliness:** {student['Cleanliness']}")
+                st.write(f"**Lifestyle:** {student['Lifestyle']}")
+                st.write(f"**Bio:** {student['Bio']}")
+    else:
+        st.write("No profiles found.")
