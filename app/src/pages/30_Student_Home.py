@@ -27,3 +27,8 @@ if st.button("Application Editor",
              type='primary',
              use_container_width=True):
   st.switch_page('pages/32_Application_Editor.py')
+
+  if st.button('Create Help Tickets', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/21_Create_Ticket.py')

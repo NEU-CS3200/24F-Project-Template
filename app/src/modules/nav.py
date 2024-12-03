@@ -9,10 +9,11 @@ import streamlit as st
 def HomeNav():
     st.sidebar.page_link("Home.py", label="Home", icon="🏠")
 
-
 def AboutPageNav():
     st.sidebar.page_link("pages/40_About.py", label="About", icon="🧠")
 
+def CreateTicketNav():
+    st.sidebar.page_link("pages/22_Create_Ticket.py", label="Create Help Ticket", icon="🎫")
 
 #### ------------------------ Co-op Advisor Role ------------------------
 def CoopAdvisorAdvHomeNav():
@@ -30,6 +31,10 @@ def EmployerSearchNav():
 
 
 #### ------------------------ Emplyer Role ------------------------
+def EmployerAdvHomeNav():
+    st.sidebar.page_link(
+        "pages/10_Employer_Home.py", label="Employer Home", icon="🕴️")
+
 def PositionOpeningsNav():
     st.sidebar.page_link(
         "pages/12_Postion_Openings.py", label="Position Openings Editor", icon="💼")
@@ -64,8 +69,9 @@ def ApplicationEditorNav():
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
-    
 
+def ViewTicketsNav():
+    st.sidebar.page_link("pages/22_View_Ticket.py", label="View Tickets", icon="🎫")
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
