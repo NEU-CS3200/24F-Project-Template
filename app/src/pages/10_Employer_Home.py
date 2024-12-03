@@ -29,7 +29,7 @@ if st.button("View Applications",
              use_container_width=True):
   st.switch_page('pages/11_Application_Review.py')
 
-    if st.button('Create Help Tickets', 
+if st.button('Create Help Tickets', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/21_Create_Ticket.py')
