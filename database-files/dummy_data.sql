@@ -59,3 +59,9 @@ INSERT INTO work_experience (applicationId, name, summary)
 VALUES
     (1, 'Software Engineer at ABC Corp', 'Developed backend systems using Node.js and PostgreSQL'),
     (2, 'Manager at XYZ Ltd.', 'Managed a team of 15 engineers and achieved project milestones.');
+
+-- Insert into position_user_bookmark
+INSERT INTO position_user_bookmark (positionId, userId)
+VALUES
+    (1, 1),
+    (2, 2);
