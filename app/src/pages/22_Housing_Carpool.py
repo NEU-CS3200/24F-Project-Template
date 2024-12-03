@@ -55,7 +55,7 @@ def fetch_carpool_profiles(communityid, days_filter=None, time_filter=None):
 
 # Streamlit app UI
 st.title("Community Profiles")
-
+st.write('Filter based on preferences')
 # Text field for co-op location
 communityid = st.text_input("Enter Co-op Location:", placeholder="e.g., San Francisco")
 

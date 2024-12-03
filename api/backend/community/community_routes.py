@@ -5,6 +5,8 @@ from flask import make_response
 from flask import current_app
 from backend.db_connection import db
 
+# Kevin routes 
+
 community = Blueprint('community', __name__)
 
 @community.route('/community/<communityid>/housing', methods=['GET'])
