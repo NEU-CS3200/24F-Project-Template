@@ -70,7 +70,7 @@ def community_carpool(communityid):
 
     # Execute the query
     cursor = db.get_db().cursor()
-    cursor.execute(query, tuple(params))  # Use tuple(params) to prevent SQL injection
+    cursor.execute(query, tuple(params))  
     theData = cursor.fetchall()
     
     # Format the response
