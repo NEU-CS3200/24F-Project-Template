@@ -39,3 +39,5 @@ INSERT INTO applications (questionResponse, summary, GPA, submittedAt)
 VALUES
     ('I have 5 years of experience in backend development and microservices architecture.',
     'Application for Backend Developer', 3.8, NOW()),
+    ('I have 10 years of experience in management and have successfully led teams.',
+    );
