@@ -41,3 +41,9 @@ VALUES
     'Application for Backend Developer', 3.8, NOW()),
     ('I have 10 years of experience in management and have successfully led teams.',
     'Application for Manager Role', 3.5, NOW());
+
+-- Insert into related_coursework
+INSERT INTO related_coursework (applicationId, name, summary)
+VALUES
+    (1, 'Advanced Database Systems', 'Focus on relational databases and optimization techniques'),
+    (2, 'Leadership in Organizations', 'Explored management theories and practices');
