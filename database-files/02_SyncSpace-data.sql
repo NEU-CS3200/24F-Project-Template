@@ -404,87 +404,52 @@ insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedD
 
 
 -- 10. SystemLog Data (depends on Ticket)
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (25, '2024-01-07 11:42:46', 'User logged in', 'Medium', 'Privacy Requests', 'Encryption');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (12, '2024-05-18 02:54:04', 'User logged out', 'Medium', 'User Consent', 'Vulnerabilities');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (12, '2024-07-28 21:18:40', 'User deleted profile', 'Medium', 'Anonymity', 'Password Security');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (30, '2024-03-24 08:24:45', 'User deleted profile', 'High', 'Data Access', 'Audit Logs');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (26, '2024-01-03 07:43:04', 'User logged in', 'Low', 'User Consent', 'Data Integrity');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (30, '2024-01-10 03:27:04', 'User deleted profile', 'Low', 'Privacy Requests', 'Access Control');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (21, '2024-08-05 23:16:22', 'User deleted profile', 'Low', 'Data Access', 'Data Integrity');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (27, '2024-05-05 18:50:35', 'User updated profile', 'High', 'Data Access', 'User Reports');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (19, '2024-09-02 00:47:26', 'User logged out', 'Medium', 'Privacy Requests', 'Authentication');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (28, '2024-06-27 20:06:55', 'User logged out', 'Low', 'Data Sharing', 'Vulnerabilities');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (28, '2024-09-30 09:30:10', 'User logged in', 'High', 'Security Events', 'Intrusion Detection');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (3, '2024-08-19 20:28:53', 'User added event', 'High', 'Privacy Settings', 'Password Security');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (17, '2024-04-24 05:22:56', 'User deleted profile', 'High', 'Privacy Requests', 'Encryption');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (27, '2024-09-19 09:02:51', 'User updated profile', 'High', 'Anonymity', 'User Reports');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (8, '2024-01-06 18:55:06', 'User logged out', 'Medium', 'User Consent', 'Security Events');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (15, '2024-08-26 03:50:58', 'User logged out', 'High', 'Privacy Settings', 'Security Events');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (14, '2024-01-21 08:12:26', 'User added event', 'High', 'Privacy Settings', 'Access Control');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (16, '2024-11-03 01:28:24', 'User logged out', 'Low', 'Anonymity', 'Access Control');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (28, '2024-08-17 13:04:07', 'User logged in', 'High', 'Anonymity', 'Authentication');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (25, '2024-06-05 00:12:22', 'User logged in', 'Medium', 'Privacy Requests', 'Encryption');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (29, '2024-03-30 17:02:10', 'User updated profile', 'Low', 'Data Access', 'Audit Logs');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (5, '2024-02-12 03:28:39', 'User logged out', 'Low', 'Anonymity', 'Encryption');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (26, '2024-11-27 13:33:33', 'User updated profile', 'High', 'Data Sharing', 'Audit Logs');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (29, '2024-01-02 19:03:06', 'User logged out', 'High', 'Privacy Requests', 'Encryption');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (23, '2024-06-13 18:46:16', 'User added event', 'Low', 'Privacy Requests', 'Password Security');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (6, '2024-07-20 17:53:27', 'User logged out', 'Low', 'Data Access', 'Authentication');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (26, '2024-03-30 15:36:27', 'User updated profile', 'Low', 'Privacy Requests', 'Encryption');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (18, '2024-11-22 23:10:19', 'User logged in', 'High', 'Security Events', 'User Reports');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (21, '2024-03-18 03:36:00', 'User logged in', 'Medium', 'Data Sharing', 'Data Integrity');
-insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (3, '2024-06-15 14:25:00', 'User logged out', 'Low', 'Anonymity', 'User Reports');
+INSERT INTO SystemLog (LogID, TicketID, Timestamp, Activity, MetricType, Privacy, Security)
+VALUES 
+(1, 10, '2024-02-01 10:30:00', 'User logged in', 'High', 'Privacy Requests', 'Encryption'),
+(2, 15, '2024-03-05 14:15:00', 'User updated profile', 'Medium', 'User Consent', 'Data Integrity'),
+(3, 8, '2024-04-10 18:45:00', 'User logged out', 'Low', 'Anonymity', 'Authentication'),
+(4, 20, '2024-05-01 09:00:00', 'User deleted profile', 'High', 'Privacy Requests', 'Access Control'),
+(5, 12, '2024-06-20 12:00:00', 'User logged in', 'Medium', 'Data Sharing', 'Audit Logs'),
+(6, 18, '2024-07-15 16:30:00', 'User updated profile', 'High', 'Security Events', 'Password Security'),
+(7, 22, '2024-08-08 13:00:00', 'User logged out', 'Low', 'Privacy Requests', 'Encryption'),
+(8, 25, '2024-09-12 17:45:00', 'User added event', 'High', 'Privacy Settings', 'User Reports'),
+(9, 11, '2024-10-05 15:00:00', 'User logged in', 'Medium', 'Security Events', 'Intrusion Detection'),
+(10, 6, '2024-11-15 11:30:00', 'User deleted profile', 'High', 'Anonymity', 'Access Control'),
+(11, 19, '2024-12-02 08:45:00', 'User updated profile', 'Low', 'Data Access', 'Audit Logs'),
+(12, 7, '2025-01-10 14:15:00', 'User logged in', 'Medium', 'User Consent', 'Authentication'),
+(13, 14, '2025-02-05 16:00:00', 'User logged out', 'High', 'Privacy Requests', 'Encryption'),
+(14, 23, '2025-03-12 10:30:00', 'User added event', 'Low', 'Anonymity', 'User Reports'),
+(15, 5, '2025-04-15 12:45:00', 'User deleted profile', 'High', 'Data Sharing', 'Data Integrity'),
+(16, 3, '2025-05-20 15:30:00', 'User logged out', 'Medium', 'Security Events', 'Password Security'),
+(17, 16, '2025-06-25 09:15:00', 'User updated profile', 'High', 'Privacy Requests', 'Audit Logs'),
+(18, 2, '2025-07-01 18:00:00', 'User added event', 'Medium', 'User Consent', 'Encryption'),
+(19, 9, '2025-08-05 11:00:00', 'User logged in', 'Low', 'Privacy Requests', 'Intrusion Detection'),
+(20, 4, '2025-09-15 14:00:00', 'User deleted profile', 'High', 'Security Events', 'Access Control');
 
--- 11. SystemHealth Data (depends on SystemLog)
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (1, '2024-01-01 12:00:00', 'Normal', 'System Performance');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (12, '2023-12-08 03:13:57', 'Normal', 'Security Events');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (34, '2023-12-02 23:34:00', 'Active', 'Network Latency');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (7, '2024-06-20 11:47:06', 'Operational', 'Service Downtime');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (23, '2024-02-26 08:05:29', 'Recovered', 'Data Throughput');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (45, '2024-06-29 11:52:55', 'Operational', 'Backup Success Rate');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (18, '2024-05-21 12:15:08', 'Operational', 'Incident Resolution Time');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (31, '2023-12-20 16:19:30', 'Recovered', 'Service Downtime');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (9, '2023-12-25 09:35:03', 'Normal', 'Database Backup Frequency');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (27, '2024-01-11 21:42:14', 'Complete', 'System Uptime');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (50, '2024-06-08 16:58:41', 'Recovered', 'Service Downtime');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (14, '2024-10-25 20:48:26', 'Complete', 'Disk Space');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (39, '2024-05-14 09:39:44', 'Recovered', 'System Uptime');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (5, '2024-06-24 02:45:26', 'Active', 'User Login Attempts');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (20, '2024-07-24 13:11:47', 'Normal', 'System Scalability');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (42, '2024-07-17 13:01:47', 'Complete', 'Error Rate');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (3, '2024-11-05 13:29:34', 'Recovered', 'CPU Usage');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (36, '2024-03-25 07:56:21', 'Operational', 'Service Downtime');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (10, '2024-03-22 07:01:50', 'Complete', 'Response Time');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (25, '2024-05-16 19:39:19', 'Complete', 'Data Throughput');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (48, '2024-11-05 10:44:02', 'Complete', 'Patch Management');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (16, '2024-05-01 15:17:33', 'Normal', 'CPU Usage');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (41, '2024-03-21 17:26:03', 'Normal', 'Security Events');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (8, '2024-04-09 02:34:09', 'Recovered', 'User Login Attempts');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (30, '2024-11-21 15:10:52', 'Active', 'System Scalability');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (47, '2024-11-20 22:30:35', 'Active', 'Backup Success Rate');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (13, '2024-08-31 10:17:14', 'Recovered', 'Network Latency');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (38, '2024-03-10 16:47:48', 'Normal', 'System Uptime');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (6, '2024-11-18 07:29:51', 'Active', 'Network Latency');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (21, '2024-08-23 20:03:42', 'Operational', 'Data Throughput');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (44, '2024-10-22 18:03:39', 'Operational', 'Disk Space');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (2, '2024-06-10 10:19:24', 'Active', 'Data Throughput');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (35, '2024-09-24 13:11:15', 'Recovered', 'User Login Attempts');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (11, '2024-10-30 09:38:08', 'Operational', 'Database Backup Frequency');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (26, '2024-05-20 00:54:29', 'Recovered', 'Network Latency');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (49, '2024-11-09 18:50:06', 'Active', 'Database Backup Frequency');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (15, '2024-07-25 12:48:28', 'Normal', 'Disk Space');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (40, '2023-12-31 12:28:57', 'Recovered', 'Error Rate');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (4, '2024-02-01 03:15:07', 'Operational', 'Active Connections');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (19, '2024-08-18 07:34:13', 'Recovered', 'System Uptime');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (43, '2024-11-11 05:01:35', 'Normal', 'System Load');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (1, '2023-12-10 23:28:13', 'Active', 'Response Time');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (37, '2024-05-17 12:57:33', 'Complete', 'Disk Space');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (24, '2024-08-05 23:12:30', 'Normal', 'Database Query Time');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (46, '2024-03-07 08:42:21', 'Active', 'Database Backup Frequency');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (17, '2024-05-06 10:13:32', 'Normal', 'Patch Management');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (32, '2024-09-22 01:10:12', 'Complete', 'CPU Usage');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (22, '2024-01-30 03:51:19', 'Normal', 'Data Throughput');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (33, '2024-06-11 12:00:15', 'Operational', 'Disk Space');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (28, '2024-05-26 08:55:01', 'Complete', 'Patch Management');
-insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (29, '2024-11-28 04:45:43', 'Operational', 'User Login Attempts');
+
+
+
+INSERT INTO SystemHealth (LogID, Timestamp, Status, MetricType)
+VALUES 
+(1, '2024-02-01 12:00:00', 'Normal', 'System Performance'),
+(2, '2024-03-05 14:30:00', 'Operational', 'User Login Attempts'),
+(3, '2024-04-10 19:00:00', 'Recovered', 'Network Latency'),
+(4, '2024-05-01 09:30:00', 'Active', 'Data Throughput'),
+(5, '2024-06-20 12:30:00', 'Complete', 'Disk Space'),
+(6, '2024-07-15 17:00:00', 'Normal', 'CPU Usage'),
+(7, '2024-08-08 13:30:00', 'Operational', 'System Uptime'),
+(8, '2024-09-12 18:00:00', 'Recovered', 'Service Downtime'),
+(9, '2024-10-05 15:30:00', 'Complete', 'Backup Success Rate'),
+(10, '2024-11-15 12:00:00', 'Active', 'Response Time'),
+(11, '2024-12-02 09:00:00', 'Normal', 'System Scalability'),
+(12, '2025-01-10 14:30:00', 'Operational', 'Error Rate'),
+(13, '2025-02-05 16:30:00', 'Recovered', 'Database Backup Frequency'),
+(14, '2025-03-12 11:00:00', 'Complete', 'Patch Management'),
+(15, '2025-04-15 13:00:00', 'Active', 'System Load'),
+(16, '2025-05-20 16:00:00', 'Operational', 'Active Connections'),
+(17, '2025-06-25 09:30:00', 'Normal', 'Security Events'),
+(18, '2025-07-01 18:30:00', 'Recovered', 'Incident Resolution Time'),
+(19, '2025-08-05 11:30:00', 'Complete', 'Database Query Time'),
+(20, '2025-09-15 14:30:00', 'Active', 'System Load');
 
