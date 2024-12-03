@@ -24,6 +24,21 @@ def community_housing():
     response.status_code = 200
     return response
 
+@community.route('/community', methods=['GET'])
+# route for retrieving carpools for the students in the same community
+def community_housing():
+    query = '''
+    SELECT *
+    FROM Student;
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
 @community.route('/community/<community_id>/carpool', methods=['GET'])
 # route for retrieving carpools for the students in the same community
 def community_housing():

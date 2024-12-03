@@ -3,15 +3,31 @@ logger = logging.getLogger(__name__)
 import streamlit as st
 from modules.nav import SideBarLinks
 import requests
+import pandas as pd
 
 st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('Housing Search')
+# Define the API URL
+API_URL = "http://api:4000/c/community"
 
+# Fetch data from the API
+response = requests.get(API_URL)
+
+# Check if the response is successful
+if response.status_code == 200:
+    data = response.json()  # Assuming the API returns JSON data
+    df = pd.DataFrame(data)  # Convert the JSON data to a DataFrame
+
+    # Display the DataFrame in Streamlit
+    st.write("Playlist Data", df)
+else:
+    st.error(f"Failed to fetch data. Status code: {response.status_code}")
+
+'''
 # Set the backend API URL
-API_URL = "http://api:4000/c/community/{communityid}/housing"
+
 
 # Streamlit App Layout
 st.title("Community Housing Details")
@@ -48,3 +64,4 @@ if st.button("Get Housing Details"):
 
         except requests.exceptions.RequestException as e:
             st.error(f"Failed to connect to the API: {str(e)}")
+'''
