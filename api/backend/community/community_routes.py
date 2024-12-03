@@ -5,6 +5,8 @@ from flask import make_response
 from flask import current_app
 from backend.db_connection import db
 
+# Kevin routes 
+
 community = Blueprint('community', __name__)
 
 @community.route('/community/<communityid>/housing', methods=['GET'])
@@ -22,9 +24,8 @@ def community_housing(communityid):
     WHERE c.Location = %s
     '''
     
-    params = [communityid]  # initial params with communityid
+    params = [communityid]  
 
-    # Add filters based on cleanliness and lease_duration if they are provided
     if cleanliness_filter is not None:
         query += ' AND s.Cleanliness >= %s'
         params.append(cleanliness_filter)
@@ -32,35 +33,49 @@ def community_housing(communityid):
     if lease_duration_filter and lease_duration_filter != "Any":
         query += ' AND s.LeaseDuration = %s'
         params.append(lease_duration_filter)
-    
+
     if budget_filter is not None:
         query += ' AND s.Budget <= %s'
         params.append(budget_filter)
 
-    # Execute the query with the parameters
     cursor = db.get_db().cursor()
-    cursor.execute(query, tuple(params))
+    cursor.execute(query, tuple(params))  
     theData = cursor.fetchall()
     
-    # Prepare and return the response
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
 
 
 @community.route('/community/<communityid>/carpool', methods=['GET'])
-# route for retrieving carpools for the students in the same community
 def community_carpool(communityid):
+    time_filter = request.args.get('commute_time', type=int)
+    days_filter = request.args.get('commute_days', type=int)
+
+    # Base query
     query = '''
     SELECT s.Name, s.Major, s.Company, c.Location, s.CarpoolStatus, s.Budget, s.CommuteTime, s.CommuteDays, s.Bio
     FROM Student s
     JOIN CityCommunity c ON s.CommunityID=c.CommunityID
-    WHERE c.Location = %s;
+    WHERE c.Location = %s
     '''
+    params = [communityid]  
+
+    # Append filters conditionally
+    if time_filter is not None:
+        query += ' AND s.CommuteTime <= %s'
+        params.append(time_filter)
+
+    if days_filter is not None:
+        query += ' AND s.CommuteDays <= %s'
+        params.append(days_filter)
+
+    # Execute the query
     cursor = db.get_db().cursor()
-    cursor.execute(query, (communityid,))
+    cursor.execute(query, tuple(params))  
     theData = cursor.fetchall()
     
+    # Format the response
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response

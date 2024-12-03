@@ -8,6 +8,4 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('Advisor Communications')
-
-
+st.title('My Profile')
