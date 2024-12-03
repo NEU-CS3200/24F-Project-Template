@@ -32,8 +32,8 @@ def EmployerSearchNav():
 
 
 #### ------------------------ Emplyer Role ------------------------
-def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
+def PositionOpeningsNav():
+    st.sidebar.page_link("pages/12_Postion_Openings.py", label="Position Openings Editor", icon="💼")
 
 
 def StudentSearchNav():
