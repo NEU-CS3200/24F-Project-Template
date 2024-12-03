@@ -78,17 +78,6 @@ CREATE TABLE IF NOT EXISTS Events (
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
 );
 
--- Create table for Feedback
-DROP TABLE IF EXISTS Feedback;
-CREATE TABLE IF NOT EXISTS Feedback (
-    FeedbackID INT AUTO_INCREMENT PRIMARY KEY,
-    Description TEXT,
-    Date DATE,
-    ProgressRating INT,
-    StudentID INT,
-    AdvisorID INT,
-    FOREIGN KEY (StudentID) REFERENCES Student(StudentID)
-);
 
 -- Create table for Advisor
 DROP TABLE IF EXISTS Advisor;
@@ -98,6 +87,18 @@ CREATE TABLE IF NOT EXISTS Advisor (
     Email VARCHAR(100),
     Department VARCHAR(100),
     StudentID INT,
+    FOREIGN KEY (StudentID) REFERENCES Student(StudentID)
+);
+
+-- Create table for Feedback
+DROP TABLE IF EXISTS Feedback;
+CREATE TABLE IF NOT EXISTS Feedback (
+    FeedbackID INT AUTO_INCREMENT PRIMARY KEY,
+    Description TEXT,
+    Date DATE,
+    ProgressRating INT,
+    StudentID INT,
+    AdvisorID INT,
     FOREIGN KEY (StudentID) REFERENCES Student(StudentID)
 );
 
@@ -120,8 +121,18 @@ CREATE TABLE IF NOT EXISTS Task (
     Status VARCHAR(50),
     AdvisorID INT,
     FOREIGN KEY (AssignedTo) REFERENCES Student(StudentID),
-    FOREIGN KEY (AdvisorID) REFERENCES Advisor(AdvisorID)
+    FOREIGN KEY (AdvisorID) REFERENCES Advisor(AdvisorID) ON DELETE CASCADE
+
 );
+
+CREATE TABLE AdvisorStudent (
+    AdvisorID INT,
+    StudentID INT,
+    PRIMARY KEY (AdvisorID, StudentID),
+    FOREIGN KEY (AdvisorID) REFERENCES Advisor(AdvisorID),
+    FOREIGN KEY (StudentID) REFERENCES Student(StudentID)
+);
+
 
 -- Create table for System Log
 DROP TABLE IF EXISTS SystemLog;
