@@ -16,4 +16,4 @@ with st.form("ticket_data"):
         placeholder="State the issue and it's details",
         key="ticket_summary")
 
-    st.form_submit_button('Search')
+    st.form_submit_button('Submit')
