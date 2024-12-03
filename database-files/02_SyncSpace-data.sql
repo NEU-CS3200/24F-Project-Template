@@ -436,7 +436,6 @@ insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Secur
 insert into SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security) values (3, '2024-06-15 14:25:00', 'User logged out', 'Low', 'Anonymity', 'User Reports');
 
 -- 11. SystemHealth Data (depends on SystemLog)
-<<<<<<< HEAD
 insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (1, '2024-01-01 12:00:00', 'Normal', 'System Performance');
 insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (12, '2023-12-08 03:13:57', 'Normal', 'Security Events');
 insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (34, '2023-12-02 23:34:00', 'Active', 'Network Latency');
@@ -488,57 +487,3 @@ insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (22, '202
 insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (33, '2024-06-11 12:00:15', 'Operational', 'Disk Space');
 insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (28, '2024-05-26 08:55:01', 'Complete', 'Patch Management');
 insert into SystemHealth (LogID, Timestamp, Status, MetricType) values (29, '2024-11-28 04:45:43', 'Operational', 'User Login Attempts');
-
-=======
-insert into SystemHealth (LogID, Timestamp, Status) values (1, '2024-01-01 12:00:00', 'Normal');
-insert into SystemHealth (LogID, Timestamp, Status) values (12, '2023-12-08 03:13:57', 'Normal');
-insert into SystemHealth (LogID, Timestamp, Status) values (30, '2023-12-02 23:34:00', 'Active');
-insert into SystemHealth (LogID, Timestamp, Status) values (7, '2024-06-20 11:47:06', 'Operational');
-insert into SystemHealth (LogID, Timestamp, Status) values (23, '2024-02-26 08:05:29', 'Recovered');
-insert into SystemHealth (LogID, Timestamp, Status) values (5, '2024-06-29 11:52:55', 'Operational');
-insert into SystemHealth (LogID, Timestamp, Status) values (18, '2024-05-21 12:15:08', 'Operational');
-insert into SystemHealth (LogID, Timestamp, Status) values (30, '2023-12-20 16:19:30', 'Recovered');
-insert into SystemHealth (LogID, Timestamp, Status) values (9, '2023-12-25 09:35:03', 'Normal');
-insert into SystemHealth (LogID, Timestamp, Status) values (27, '2024-01-11 21:42:14', 'Complete');
-insert into SystemHealth (LogID, Timestamp, Status) values (20, '2024-06-08 16:58:41', 'Recovered');
-insert into SystemHealth (LogID, Timestamp, Status) values (14, '2024-10-25 20:48:26', 'Complete');
-insert into SystemHealth (LogID, Timestamp, Status) values (30, '2024-05-14 09:39:44', 'Recovered');
-insert into SystemHealth (LogID, Timestamp, Status) values (5, '2024-06-24 02:45:26', 'Active');
-insert into SystemHealth (LogID, Timestamp, Status) values (20, '2024-07-24 13:11:47', 'Normal');
-insert into SystemHealth (LogID, Timestamp, Status) values (3, '2024-07-17 13:01:47', 'Complete');
-insert into SystemHealth (LogID, Timestamp, Status) values (3, '2024-11-05 13:29:34', 'Recovered');
-insert into SystemHealth (LogID, Timestamp, Status) values (26, '2024-03-25 07:56:21', 'Operational');
-insert into SystemHealth (LogID, Timestamp, Status) values (10, '2024-03-22 07:01:50', 'Complete');
-insert into SystemHealth (LogID, Timestamp, Status) values (25, '2024-05-16 19:39:19', 'Complete');
-insert into SystemHealth (LogID, Timestamp, Status) values (18, '2024-11-05 10:44:02', 'Complete');
-insert into SystemHealth (LogID, Timestamp, Status) values (16, '2024-05-01 15:17:33', 'Normal');
-insert into SystemHealth (LogID, Timestamp, Status) values (11, '2024-03-21 17:26:03', 'Normal');
-insert into SystemHealth (LogID, Timestamp, Status) values (8, '2024-04-09 02:34:09', 'Recovered');
-insert into SystemHealth (LogID, Timestamp, Status) values (30, '2024-11-21 15:10:52', 'Active');
-insert into SystemHealth (LogID, Timestamp, Status) values (17, '2024-11-20 22:30:35', 'Active');
-insert into SystemHealth (LogID, Timestamp, Status) values (13, '2024-08-31 10:17:14', 'Recovered');
-insert into SystemHealth (LogID, Timestamp, Status) values (18, '2024-03-10 16:47:48', 'Normal');
-insert into SystemHealth (LogID, Timestamp, Status) values (6, '2024-11-18 07:29:51', 'Active');
-insert into SystemHealth (LogID, Timestamp, Status) values (21, '2024-08-23 20:03:42', 'Operational');
-insert into SystemHealth (LogID, Timestamp, Status) values (24, '2024-10-22 18:03:39', 'Operational');
-insert into SystemHealth (LogID, Timestamp, Status) values (2, '2024-06-10 10:19:24', 'Active');
-insert into SystemHealth (LogID, Timestamp, Status) values (25, '2024-09-24 13:11:15', 'Recovered');
-insert into SystemHealth (LogID, Timestamp, Status) values (11, '2024-10-30 09:38:08', 'Operational');
-insert into SystemHealth (LogID, Timestamp, Status) values (26, '2024-05-20 00:54:29', 'Recovered');
-insert into SystemHealth (LogID, Timestamp, Status) values (29, '2024-11-09 18:50:06', 'Active');
-insert into SystemHealth (LogID, Timestamp, Status) values (15, '2024-07-25 12:48:28', 'Normal');
-insert into SystemHealth (LogID, Timestamp, Status) values (4, '2023-12-31 12:28:57', 'Recovered');
-insert into SystemHealth (LogID, Timestamp, Status) values (4, '2024-02-01 03:15:07', 'Operational');
-insert into SystemHealth (LogID, Timestamp, Status) values (19, '2024-08-18 07:34:13', 'Recovered');
-insert into SystemHealth (LogID, Timestamp, Status) values (23, '2024-11-11 05:01:35', 'Normal');
-insert into SystemHealth (LogID, Timestamp, Status) values (1, '2023-12-10 23:28:13', 'Active');
-insert into SystemHealth (LogID, Timestamp, Status) values (17, '2024-05-17 12:57:33', 'Complete');
-insert into SystemHealth (LogID, Timestamp, Status) values (24, '2024-08-05 23:12:30', 'Normal');
-insert into SystemHealth (LogID, Timestamp, Status) values (6, '2024-03-07 08:42:21', 'Active');
-insert into SystemHealth (LogID, Timestamp, Status) values (17, '2024-05-06 10:13:32', 'Normal');
-insert into SystemHealth (LogID, Timestamp, Status) values (2, '2024-09-22 01:10:12', 'Complete');
-insert into SystemHealth (LogID, Timestamp, Status) values (22, '2024-01-30 03:51:19', 'Normal');
-insert into SystemHealth (LogID, Timestamp, Status) values (3, '2024-06-11 12:00:15', 'Operational');
-insert into SystemHealth (LogID, Timestamp, Status) values (8, '2024-05-26 08:55:01', 'Complete');
-insert into SystemHealth (LogID, Timestamp, Status) values (29, '2024-11-28 04:45:43', 'Operational');
->>>>>>> 837ec705ac3b86ef91a72ccf3d0199fb92aae389
