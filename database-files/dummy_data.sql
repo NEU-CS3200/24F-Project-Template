@@ -17,3 +17,6 @@ VALUES
     ('Emily White', 'Emily', 'D', 'White', '1234567893', 'emilywhite@example.com', MD5('whitepass'), 'CTO at EduVenture', 4, NOW());
 
 -- Insert into user_references
+INSERT INTO user_references (name, firstName, middleName, lastName, mobile, email, referral, userId) 
+VALUES
+    ()
