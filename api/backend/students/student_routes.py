@@ -52,7 +52,8 @@ def create_student():
 def get_students():
     query = """
         SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u 
-        WHERE studentId IS NOT NULL;
+        WHERE studentId IS NOT NULL
+        LIMIT 100;
     """
 
     cursor = db.get_db().cursor()
@@ -131,7 +132,8 @@ def get_student_advisor(student_id):
 def student_search(res):
     query = f"""
         SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u
-        WHERE INSTR(u.name, "{res}") OR INSTR(u.email, "{res}");
+        WHERE INSTR(u.name, "{res}") OR INSTR(u.email, "{res}")
+        LIMIT 10;
     """
 
     cursor = db.get_db().cursor()
