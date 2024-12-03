@@ -21,17 +21,10 @@ with st.form("student_search"):
         placeholder="Enter company name",
         key="search")
 
-    if st.session_state["role"] == "coop_advisor":
-        st.radio(
-            "Position Type",
-            key="employer_type",
-            options=["All", "Already Advising",],
-        )
-
     if st.session_state["role"] == "student":
         st.radio(
-            "Employer Type",
-            key="employer_type",
+            "Position Status",
+            key="position_status",
             options=["All", "Applied", "Flagged",],
         )
 
