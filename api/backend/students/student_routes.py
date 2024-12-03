@@ -4,8 +4,6 @@ from flask import (
     jsonify,
     make_response,
     current_app,
-    redirect,
-    url_for,
 )
 from bcrypt import hashpw, gensalt
 from backend.db_connection import db
@@ -109,9 +107,15 @@ def get_student_advisor(student_id):
 
 @students.route("/students/search/<res>", methods=["GET"])
 def student_search(res):
-    query = f"""
-        SELECT * FROM users u, WHERE u.studentId = {int(student_id)} OR INSTR(u.name, "{res}") OR INSTR(u.email, "{res}");
-    """
+    query = ""
+    if type(res) is str:
+        query += f"""
+            SELECT * FROM users u, WHERE INSTR(u.name, "{res}") OR INSTR(u.email, "{res}");
+        """
+    else:
+        query += f"""
+            SELECT * FROM users u, WHERE u.studentId = {res};
+        """
 
     cursor = db.get_db().cursor()
 
