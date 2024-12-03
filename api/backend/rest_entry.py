@@ -8,6 +8,7 @@ from backend.companies.company_routes import companies
 from backend.commonQuestions.commonQuestions_routes import commonQuestions
 from backend.jobPostings.jobPostings_routes import jobPostings
 from backend.interns import interns
+from backend.students.student_routes import students
 import os
 from dotenv import load_dotenv
 
@@ -49,7 +50,8 @@ def create_app():
     app.register_blueprint(companies,   url_prefix='/co')
     app.register_blueprint(commonQuestions, url_prefix='/cq')
     app.register_blueprint(jobPostings, url_prefix='/jp')
-    app.register_blueprint(interns, url_prefix='/in')
+    app.register_blueprint(students, url_prefix='/st')
+    # app.register_blueprint(interns, url_prefix='/in')
 
     # Don't forget to return the app object
     return app

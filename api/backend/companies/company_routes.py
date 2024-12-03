@@ -56,7 +56,8 @@ ORDER BY
 def get_company(company_id):
 
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT 
+    cursor.execute('''SELECT
+    students.id AS StudentId, 
     students.firstName AS FirstName,
     students.lastName AS LastName,
     reviews.title AS ReviewTitle,
