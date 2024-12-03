@@ -53,3 +53,9 @@ INSERT INTO notable_skills (applicationId, name, summary)
 VALUES
     (1, 'Microservices Architecture', 'Designed and implemented scalable backend services'),
     (2, 'Team Leadership', 'Led diverse teams across multiple projects');
+
+-- Insert into work_experience
+INSERT INTO work_experience (applicationId, name, summary)
+VALUES
+    (1, 'Software Engineer at ABC Corp', 'Developed backend systems using Node.js and PostgreSQL'),
+    (2, 'Manager at XYZ Ltd.', 'Managed a team of 15 engineers and achieved project milestones.');
