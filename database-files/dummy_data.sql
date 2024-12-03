@@ -32,3 +32,4 @@ VALUES
 INSERT INTO positions (companyId, applicantQuestions, summary, country, city, address, expectedSalary)
 VALUES
     (1, 'What is your experience in backend development?', 'Backend Developer Role', 'USA', 'New York', '123 Tech Street', 75000),
+    (1, 'Describe your approach to team management.', )
