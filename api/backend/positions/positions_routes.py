@@ -77,8 +77,7 @@ def get_contact(id):
     query = f"""
         SELECT u.companyId, u.firstName, u.middleName, u.lastName, u.mobile, u.email, u.active FROM cosint.positions p
             JOIN cosint.companies c ON p.companyId = c.id
-            JOIN cosint.comapny_user_bookmark cub ON c.id = cub.companyId
-            JOIN cosint.users u ON cub.userId = u.id
+            JOIN cosint.users u ON c.id = u.companyId
         WHERE p.id = {int(id)}
         LIMIT 10;
     """
@@ -96,8 +95,32 @@ def get_contact(id):
 # curl http://127.0.0.1:4000/pos/positions/1/update -X PUT -H 'Content-Type: application/json' -d '{ "id": 1, "summary": "Front end engineer" }'
 
 
+@positions.route("/positions/detailed", methods=["GET"])
+def detailed_pos():
+    query = """
+        SELECT c.name, p2.registeredAt, p2.applicantQuestions, p2.summary, p2.country, p2.city, p2.address, p2.filled, p2.expectedSalary 
+            FROM cosint.companies c 
+            LEFT JOIN cosint.positions p2 
+            ON c.id = p2.companyId
+        WHERE EXISTS(
+            SELECT 1
+            FROM cosint.positions p
+            WHERE p.companyId = c.id
+            AND p.summary IS NOT NULL
+        );
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
 @positions.route("/positions/<id>/update", methods=["PUT"])
-def update_student(id):
+def update_pos(id):
     data = request.get_json()
     if int(id) != int(data["id"]):
         response = make_response(
@@ -151,7 +174,7 @@ def update_student(id):
 
 
 @positions.route("/positions/<id>/delete", methods=["DELETE"])
-def delete_student(id):
+def delete_pos(id):
     query = f"""
         DELETE FROM positions
         WHERE id = {int(id)};
