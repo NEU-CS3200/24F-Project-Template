@@ -13,7 +13,7 @@ def AboutPageNav():
     st.sidebar.page_link("pages/40_About.py", label="About", icon="🧠")
 
 def CreateTicketNav():
-    st.sidebar.page_link("pages/22_Create_Ticket.py", label="Create Help Ticket", icon="🎫")
+    st.sidebar.page_link("pages/21_Create_Ticket.py", label="Create Help Ticket", icon="🎫")
 
 #### ------------------------ Co-op Advisor Role ------------------------
 def CoopAdvisorAdvHomeNav():
@@ -64,14 +64,14 @@ def EmployerSearchNav():
 
 def ApplicationEditorNav():
     st.sidebar.page_link( 
-        "pages/33_Application_Editor.py", label="Applications", icon="📝")
+        "pages/32_Application_Editor.py", label="Applications", icon="📝")
 
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
 
 def ViewTicketsNav():
-    st.sidebar.page_link("pages/22_View_Ticket.py", label="View Tickets", icon="🎫")
+    st.sidebar.page_link("pages/22_View_Tickets.py", label="View Tickets", icon="🎫")
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
@@ -122,7 +122,7 @@ def SideBarLinks(show_home=False):
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "administrator":
             AdminPageNav()
-            ViewTicketNav()
+            ViewTicketsNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
