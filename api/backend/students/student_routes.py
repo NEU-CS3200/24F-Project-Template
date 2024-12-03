@@ -171,5 +171,17 @@ def update_student(student_id):
     return response
 
 
+@students.route("/students/<student_id>/delete", methods=["DELETE"])
 def delete_student(student_id):
-    pass
+    query = f"""
+        DELETE FROM users WHERE studentId = {int(student_id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
