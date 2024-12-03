@@ -31,7 +31,7 @@ def create_student():
     passwordHash = hashpw(password.encode("utf-8"), gensalt(12)).decode("utf-8")
 
     query = f"""
-        INSERT INTO cosint.users (studentId, name, firstName, lastName, email, passwordHash, profile) VALUES 
+        INSERT INTO users (studentId, name, firstName, lastName, email, passwordHash, profile) VALUES 
         (
             "{student_id}", "{name}", "{first_name}", "{last_name}", "{email}", "{passwordHash}", "{profile}"
         );
@@ -62,8 +62,19 @@ def get_students():
     return response
 
 
+@students.route("/students/<student_id>", methods=["GET"])
 def get_student_by_id(student_id):
-    pass
+    query = f"""
+        SELECT * FROM users WHERE studentId = {int(student_id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
 
 
 def get_student_applications(student_id):
