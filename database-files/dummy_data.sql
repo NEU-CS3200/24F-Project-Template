@@ -77,3 +77,8 @@ INSERT INTO application_bookmark (applicationId, userId)
 VALUES
     (1, 2),
     (2, 3);
+
+-- Insert into company_user_bookmark
+INSERT INTO company_user_bookmark (companyId, userId)
+VALUES
+    (1, 1);
