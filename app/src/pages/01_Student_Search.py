@@ -13,7 +13,7 @@ SideBarLinks()
 st.title(f"Student Search")
 with st.form("student_search"):
     
-    text_input = st.text_input(
+    student_input = st.text_input(
         "Search",
         placeholder="Enter student name or Id#",
         key="search")
