@@ -11,6 +11,7 @@ from backend.admins.admin_routes import admins
 from backend.employers.employer_routes import employers
 from api.backend.advisors.advisor_routes import advisors
 from backend.applications.application_routes import applications
+from backend.positions.positions_routes import positions
 
 
 def create_app():
@@ -47,11 +48,12 @@ def create_app():
     # and give a url prefix to each
     app.logger.info("current_app(): registering blueprints with Flask app object.")
     app.register_blueprint(simple_routes)
-    app.register_blueprint(students, url_prefix="/student")
-    app.register_blueprint(admins, url_prefix="/admin")
-    app.register_blueprint(employers, url_prefix="/employer")
-    app.register_blueprint(advisors, url_prefix="/advisor")
+    app.register_blueprint(students, url_prefix="/stu")
+    app.register_blueprint(admins, url_prefix="/adm")
+    app.register_blueprint(employers, url_prefix="/emp")
+    app.register_blueprint(advisors, url_prefix="/adv")
     app.register_blueprint(applications, url_prefix="/app")
+    app.register_blueprint(positionss, url_prefix="/pos")
 
     # Don't forget to return the app object
     return app

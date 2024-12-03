@@ -14,7 +14,7 @@ students = Blueprint("students", __name__)
 
 
 # Example of a POST request
-# curl http://127.0.0.1:4000/student/create -X POST -H 'Content-Type: application/json' -d '{ "studentId": "010101010", "firstName": "Sam", "lastName": "Ehlers", "email": "ehlers.s@northeastern.edu", "password": "P@s5w0rD", "profile": "A student at northeastern university" }'
+# curl http://127.0.0.1:4000/stu/create -X POST -H 'Content-Type: application/json' -d '{ "studentId": "010101010", "firstName": "Sam", "lastName": "Ehlers", "email": "ehlers.s@northeastern.edu", "password": "P@s5w0rD", "profile": "A student at northeastern university" }'
 
 
 @students.route("/create", methods=["POST"])
@@ -122,7 +122,8 @@ def student_search(res):
     return response
 
 
-# curl http://127.0.0.1:4000/student/students/010101010/update -X PUT -H 'Content-Type: application/json' -d '{ "studentId": "010101010", "firstName": "Bob", "mobile": "1234567890" }'
+# Example of a PUT request
+# curl http://127.0.0.1:4000/stu/students/010101010/update -X PUT -H 'Content-Type: application/json' -d '{ "studentId": "010101010", "firstName": "Bob", "mobile": "1234567890" }'
 
 
 @students.route("/students/<student_id>/update", methods=["PUT"])
@@ -171,7 +172,8 @@ def update_student(student_id):
     return response
 
 
-# curl http://127.0.0.1:4000/student/students/010101010/delete -X DELETE
+# Example of a DELETE request
+# curl http://127.0.0.1:4000/stu/students/010101010/delete -X DELETE
 
 
 @students.route("/students/<student_id>/delete", methods=["DELETE"])
