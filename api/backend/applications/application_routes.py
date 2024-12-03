@@ -11,7 +11,7 @@ from backend.db_connection import db
 
 applications = Blueprint("applications", __name__)
 
-# curl http://localhost:4000/app/applications -X POST -H "Content-Type: application/json" -d '{"questionResponse": "I am a student", "summary": "I am a student", "GPA": 3.5}'
+# curl http://localhost:4000/app/applications -X POST -H "Content-Type: application/json" -d '{"userId": 1,"questionResponse": "I am a student", "summary": "I am a student", "GPA": 3.5}'
 
 
 @applications.route("/applications", methods=["POST"])
@@ -30,10 +30,23 @@ def create_app():
     db.get_db().commit()
 
     application_id = cursor.lastrowid
+    user_id = data["userId"]
 
-    current_app.logger.error(application_id)
+    query = f"""
+        INSERT INTO application_bookmark (applicationId, userId) VALUES
+        (
+            {int(application_id)}, {int(user_id)}
+        );
+    """
 
-    return "ok"
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
 
 
 @applications.route("/applications/<id>", methods=["GET"])
