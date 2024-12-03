@@ -14,18 +14,20 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button('View Advisor Feedback', 
+if st.button('Access My Profile', 
+             type='primary', 
+             use_container_width=True):
+    st.switch_page('pages/23_My_Profile.py')
+
+if st.button('Access Housing & Transit Search', 
+             type='primary', 
+             use_container_width=True):
+    st.switch_page('pages/22_Housing_Carpool.py')
+
+if st.button('View Advisor Communications', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/21_Advisor_Rec.py')
 
-if st.button('Access Housing Search', 
-             type='primary', 
-             use_container_width=True):
-    st.switch_page('pages/22_Housing.py')
 
-if st.button('Access Carpool Search', 
-             type='primary', 
-             use_container_width=True):
-    st.switch_page('pages/23_Carpool.py')
 
