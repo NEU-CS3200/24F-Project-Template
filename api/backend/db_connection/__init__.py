@@ -3,11 +3,11 @@
 #------------------------------------------------------------
 from flaskext.mysql import MySQL
 from pymysql import cursors
-#from flask import current_app
+from flask import current_app
 
-db = MySQL(cursorclass=cursors.DictCursor)
+#db = MySQL(cursorclass=cursors.DictCursor)
 
-'''
+
 print("Loading db_connection/__init__.py...")
 
 try:
@@ -32,4 +32,3 @@ def init_app(app):
     # Initialize the MySQL connection
     db.init_app(app)
     print("Database connection initialized")
-'''

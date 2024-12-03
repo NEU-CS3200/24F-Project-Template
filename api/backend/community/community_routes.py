@@ -26,7 +26,7 @@ def community_housing():
 
 @community.route('/community', methods=['GET'])
 # route for retrieving carpools for the students in the same community
-def community_housing():
+def community_all():
     query = '''
     SELECT *
     FROM Student;
@@ -39,36 +39,7 @@ def community_housing():
     response.status_code = 200
     return response
 
-@community.route('/community/<community_id>/carpool', methods=['GET'])
-# route for retrieving carpools for the students in the same community
-def community_housing():
-    query = '''
 
-    '''
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    theData = cursor.fetchall()
-    
-    response = make_response(jsonify(theData))
-    response.status_code = 200
-    return response
-
-@community.route('/community/<community_id>/housing', methods=['PUT'])
-# route to update student profiles -- CODE NOT UPDATED YET
-def update_profile():
-    current_app.logger.info('PUT /community/<community_id>/housing route')
-    cust_info = request.json
-    cust_id = cust_info['id']
-    first = cust_info['first_name']
-    last = cust_info['last_name']
-    company = cust_info['company']
-
-    query = 'UPDATE customers SET first_name = %s, last_name = %s, company = %s where id = %s'
-    data = (first, last, company, cust_id)
-    cursor = db.get_db().cursor()
-    r = cursor.execute(query, data)
-    db.get_db().commit()
-    return 'profile updated!'
 
 
 
