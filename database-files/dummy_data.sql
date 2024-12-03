@@ -31,4 +31,4 @@ VALUES
 -- Insert into positions
 INSERT INTO positions (companyId, applicantQuestions, summary, country, city, address, expectedSalary)
 VALUES
-    (1, 'What is your experience in backend development?', ),
+    (1, 'What is your experience in backend development?', 'Backend Developer Role', ),
