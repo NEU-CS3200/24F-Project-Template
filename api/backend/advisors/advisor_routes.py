@@ -63,3 +63,19 @@ def get_advisor_students(id):
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+
+@advisors.route("/advisors/<id>/students/count", methods=["GET"])
+def get_advisor_students_count(id):
+    query = f"""
+        SELECT COUNT(*) FROM cosint.users u
+        WHERE u.advisorId = {int(id)} AND u.companyId IS NOT NULL;
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
