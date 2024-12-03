@@ -69,6 +69,29 @@ def get_positions_questions_by_id(id):
     return response
 
 
+# curl http://127.0.0.1:4000/pos/positions/1/contact -X GET
+
+
+@positions.route("/positions/<id>/contact", methods=["GET"])
+def get_contact(id):
+    query = f"""
+        SELECT u.companyId, u.firstName, u.middleName, u.lastName, u.mobile, u.email, u.active FROM cosint.positions p
+            JOIN cosint.companies c ON p.companyId = c.id
+            JOIN cosint.comapny_user_bookmark cub ON c.id = cub.companyId
+            JOIN cosint.users u ON cub.userId = u.id
+        WHERE p.id = {int(id)}
+        LIMIT 10;
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
 # Example of a PUT request
 # curl http://127.0.0.1:4000/pos/positions/1/update -X PUT -H 'Content-Type: application/json' -d '{ "id": 1, "summary": "Front end engineer" }'
 

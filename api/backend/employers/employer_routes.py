@@ -87,3 +87,21 @@ def create_pos(id):
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+
+@employers.route("/<id>/positions", methods=["GET"])
+def get_positions(id):
+    query = f"""
+        SELECT * FROM positions p
+        WHERE p.companyId = {int(id)}
+        LIMIT 100;
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
