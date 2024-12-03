@@ -14,13 +14,7 @@ students = Blueprint("students", __name__)
 
 
 # Example of a POST request
-# curl http://127.0.0.1:4000/s/create \
-#     -X POST \
-#     -H 'Content-Type: application/json' \
-#     -d '{ "student_id": "010101010", "first_name": \
-#         "Sam", "last_name": "Ehlers", "email": \
-#         "ehlers.s@northeastern.edu", "password": "P@s5w0rD", \
-#         "profile": "A student at northeastern university" }'
+# curl http://127.0.0.1:4000/s/create -X POST -H 'Content-Type: application/json' -d '{ "student_id": "010101010", "first_name": "Sam", "last_name": "Ehlers", "email": "ehlers.s@northeastern.edu", "password": "P@s5w0rD", "profile": "A student at northeastern university" }'
 
 
 @students.route("/create", methods=["POST"])
@@ -29,18 +23,35 @@ def create_student():
     student_id = data["student_id"]
     first_name = data["first_name"]
     last_name = data["last_name"]
-    email = data["email"].replace("@", "")
+    name = f"{first_name} {last_name}"
+    email = data["email"]
     password = data["password"]
     profile = data["profile"]
 
     passwordHash = hashpw(password.encode("utf-8"), gensalt(12)).decode("utf-8")
 
-    query = """
-        INSERT INTO users (studentId, firstName, lastName, email, passwordHash, profile) VALUES 
+    query = f"""
+        INSERT INTO cosint.users (studentId, name, firstName, lastName, email, passwordHash, profile) VALUES 
         (
-            "%s", "%s", "%s", "%s", "%s", "%s"
+            "{student_id}", "{name}", "{first_name}", "{last_name}", "{email}", "{passwordHash}", "{profile}"
         );
-    """ % (student_id, first_name, last_name, email, passwordHash, profile)
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
+@students.route("/students", methods=["GET"])
+def get_students():
+    query = """
+        SELECT * FROM users WHERE studentId IS NOT NULL;
+    """
 
     cursor = db.get_db().cursor()
 
@@ -49,10 +60,6 @@ def create_student():
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
-
-
-def get_students():
-    pass
 
 
 def get_student_by_id(student_id):
