@@ -167,14 +167,17 @@ VALUES (
     'San Jose, California',
     'Searching',
     1200.00,
-    'Very Clean',
+    2,
     'Quiet',
     30,
     'Hiking, Basketball, Technology'
 );
 
+
 -- 4.3 
 INSERT INTO Housing (Style, Availability, Location)
 VALUES ('Apartment', 'Available', 'New York City');
+
+
 
 
