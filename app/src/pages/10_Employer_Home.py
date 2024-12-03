@@ -17,7 +17,7 @@ st.write('### What would you like to do today?')
 if st.button('View Position Openings', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/31_Position_Openings.py')
+  st.switch_page('pages/12_Position_Openings.py')
 
 if st.button('Search Students', 
              type='primary',

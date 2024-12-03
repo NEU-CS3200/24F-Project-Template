@@ -42,9 +42,9 @@ def StudentSearchNav():
     )
 
 
-def ClassificationNav():
-    st.sidebar.page_link(
-        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
+def ApplicationReviewNav():
+    st.sidebar.page_link( 
+        "pages/11_Application_Editor.py", label="Applications", icon="📝"
     )
 
 #### ------------------------ Student Role ------------------------
