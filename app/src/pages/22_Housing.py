@@ -11,7 +11,7 @@ SideBarLinks()
 st.title('Housing Search')
 
 # Set the backend API URL
-API_URL = "http://localhost:4000/c/community/{communityid}/housing"
+API_URL = "http://api:4000/c/community/{communityid}/housing"
 
 # Streamlit App Layout
 st.title("Community Housing Details")

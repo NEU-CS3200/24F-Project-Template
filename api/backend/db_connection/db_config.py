@@ -1,3 +1,4 @@
+'''
 from os import getenv
 
 print("Loading db_config.py...")
@@ -12,3 +13,4 @@ DB_CONFIG = {
 }
 
 print(f"DB_CONFIG loaded: {DB_CONFIG}") 
+'''
