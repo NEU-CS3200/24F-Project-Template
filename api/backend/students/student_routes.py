@@ -6,14 +6,8 @@ students = Blueprint('students', __name__)
 @students.route('/students', methods=['GET'])
 def get_all_students():
     try:
-        # First, let's check if we can connect to the database
         connection = db.get_db()
-        print("Database connection successful")
-        
-        # Let's check if the Student table exists and has data
         cursor = connection.cursor()
-        print("Created cursor")
-        
         query = '''
         SELECT 
             StudentID as student_id,
@@ -24,35 +18,13 @@ def get_all_students():
         FROM Student
         ORDER BY StudentID ASC
         '''
-        print(f"Executing query: {query}")
         cursor.execute(query)
-        
-        # Get column names from cursor description
         columns = [desc[0] for desc in cursor.description]
-        
-        # Convert results to list of dictionaries
-        results = []
-        for row in cursor.fetchall():
-            results.append(dict(zip(columns, row)))
-            
-        print(f"Query returned {len(results)} results")
-        if results:
-            print("Sample first row:", results[0])
-        
+        results = [dict(zip(columns, row)) for row in cursor.fetchall()]
         cursor.close()
         return jsonify(results), 200
-        
     except Exception as e:
-        error_msg = f"Error in get_all_students: {str(e)}"
-        print(error_msg)
-        print(f"Error type: {type(e).__name__}")
-        import traceback
-        print("Traceback:", traceback.format_exc())
-        return jsonify({
-            "error": error_msg,
-            "type": type(e).__name__,
-            "traceback": traceback.format_exc()
-        }), 500
+        return jsonify({'error': 'Failed to fetch students'}), 500
 
 @students.route('/students/<student_id>/reminders', methods=['GET'])
 def get_student_reminders(student_id):

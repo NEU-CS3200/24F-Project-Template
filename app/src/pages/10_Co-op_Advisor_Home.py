@@ -38,12 +38,9 @@ with col4:
 # Load and display student data
 try:
     response = requests.get('http://web-api:4000/api/students')
-    st.write("API Response Status:", response.status_code)
-    st.write("API Response Content:", response.json())
-    
     if response.status_code == 200:
         data = response.json()
-        if data:  # Check if we got any data
+        if data:
             df = pd.DataFrame(data)
             st.subheader(f"Student List ({len(df)})")
             st.dataframe(
@@ -60,7 +57,7 @@ try:
         else:
             st.warning("No student data available")
     else:
-        st.error(f"Failed to fetch student data. Status: {response.status_code}")
+        st.error(f"Failed to fetch student data")
 except Exception as e:
-    st.error(f"Error loading student data: {str(e)}")
+    st.error(f"Error loading student data")
 
