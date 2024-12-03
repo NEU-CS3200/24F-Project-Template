@@ -133,7 +133,7 @@ def student_search(res):
     query = f"""
         SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u
         WHERE INSTR(u.name, "{res}") OR INSTR(u.email, "{res}")
-        LIMIT 10;
+        LIMIT 100;
     """
 
     cursor = db.get_db().cursor()
