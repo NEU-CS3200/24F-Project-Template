@@ -35,3 +35,5 @@ VALUES
     (1, 'Describe your approach to team management.', 'Team Manager Role', 'Canada', 'Toronto', '456 Innovate Lane', 85000);
 
 -- Insert into applications
+INSERT INTO applications (questionResponse, summary, GPA, submittedAt)
+VALUES
