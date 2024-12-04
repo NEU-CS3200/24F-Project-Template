@@ -43,12 +43,29 @@ def get_employees(id):
     response.status_code = 200
     return response
 
-@employers.route("/emp_company", methods=["GET"])
+@employers.route("/emp_company/<name>", methods=["GET"])
 def get_employees(name):
     query = f"""
         SELECT * FROM users u
         JOIN companies c ON u.companyId = c.id
-        WHERE u.name LIKE CONCAT('%', {name}, '%')
+        WHERE c.name LIKE CONCAT('%', {name}, '%')
+        LIMIT 100;
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+@employers.route("/emp_name/<name>", methods=["GET"])
+def get_employees(name):
+    query = f"""
+        SELECT * FROM users u
+        WHERE name LIKE CONCAT('%', {name}, '%') AND companyId IS NOT NULL
         LIMIT 100;
     """
 

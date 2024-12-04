@@ -20,32 +20,33 @@ try:
 except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to students API: {str(e)}")
 
-with st.form("student_search"):
-    student_value = student_input = st.text_input(
-        "Search Students",
-        placeholder="Enter student name or Id#",
-    )
+with st.form("employer_search"):
+    employer_value = st.text_input(
+        "Search Employers",
+        placeholder="Enter employer or company name",
+        key="search")
 
-    #    if st.session_state["role"] == "employer":
-    #        student_type = st.radio(
-    #            "Student Type",
-    #            options=["All", "Applied", "Flagged",],
-    #        )
+    # if st.session_state["role"] == "student":
+    #     st.radio(
+    #        "Employer Type",
+    #        key="employer_type",
+    #        options=["All", "Applied", "Flagged",],
+    #    )
 
     submit_button = st.form_submit_button("Search")
 
     if submit_button:
-        if not student_value:
-            st.error("Please enter a student name or id")
+        if not employer_value:
+            st.error("Please enter an employer name or company")
         else:
-            logger.info(f"Student form submitted with data: {student_value}")
+            logger.info(f"Employer form submitted with data: {employer_value}")
 
             try:
                 response1 = requests.get(
-                    f"http://api:4000/stu/students/search/{student_value}"
+                    f"http://api:4000/emp/emp_company/{employer_value}"
                 )
                 response2 = requests.get(
-                    f"http://api:4000/stu/students/{student_value}"
+                    f"http://api:4000/emp/emp_name/{employer_value}"
                 )
                 if response1.status_code == 200:
                     if len(response1.json()) != 0:
@@ -57,22 +58,3 @@ with st.form("student_search"):
                         st.write(df)
             except requests.exceptions.RequestException as e:
                 st.error(f"Error connecting to server: {str(e)}")
-
-
-
-company_input = st.text_input(
-        "Search Companies",
-        placeholder="Enter company name",
-        key="search")
-
-    employer_input = st.text_input(
-        "Search Employers",
-        placeholder="Enter employer name",
-        key="search")
-
-    # if st.session_state["role"] == "student":
-    #     st.radio(
-    #        "Employer Type",
-    #        key="employer_type",
-    #        options=["All", "Applied", "Flagged",],
-    #    )
