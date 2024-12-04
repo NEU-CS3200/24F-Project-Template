@@ -12,6 +12,20 @@ st.set_page_config(layout = 'wide')
 SideBarLinks()
 
 st.title(f"Student Search")
+
+try:
+    categories_response = requests.get('http://api:4000/p/categories')
+    
+    if categories_response.status_code == 200:
+        categories_data = categories_response.json()
+        category_options = [""] + [category['value'] for category in categories_data]
+    else:
+        st.error("Failed to fetch categories")
+        category_options = []
+except requests.exceptions.RequestException as e:
+    st.error(f"Error connecting to categories API: {str(e)}")
+    category_options = []
+
 with st.form("student_search"):
     
     student_input = st.text_input(
@@ -34,28 +48,6 @@ with st.form("student_search"):
         )
 
     st.form_submit_button('Search')
-
-try:
-    categories_response = requests.get('http://api:4000/p/categories')
-    
-    if categories_response.status_code == 200:
-        categories_data = categories_response.json()
-        category_options = [""] + [category['value'] for category in categories_data]
-    else:
-        st.error("Failed to fetch categories")
-        category_options = []
-except requests.exceptions.RequestException as e:
-    st.error(f"Error connecting to categories API: {str(e)}")
-    category_options = []
-
-with st.form("add_product_form"):
-    
-    product_name = st.text_input("Product Name")
-    product_description = st.text_area("Product Description")
-    product_price = st.number_input("Product Price", min_value=0.0, step=0.01)
-    product_category = st.selectbox("Product Category", options=category_options, index=0)
-    
-    submit_button = st.form_submit_button("Add Product")
     
     if submit_button:
         if not product_name:
