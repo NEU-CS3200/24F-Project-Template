@@ -38,19 +38,16 @@ with st.form("student_search"):
 #            options=["All", "Applied", "Flagged",],
 #        )
 
-    st.form_submit_button('Search')
+    submit_button = st.form_submit_button('Search')
     
     if submit_button:
         if not student_value:
             st.error("Please enter a student name or id")
         else:
-            student_search_data = {
-                "product_name": student_value,
-            }
             logger.info(f"Product form submitted with data: {student_search_data}")
             
             try:
-                response = requests.post('http://api:4000/stu/student_search', json=student_search_data)
+                response = requests.post(f'http://api:4000/stu/student_search/{student_search_data}')
                 if response.status_code == 200:
                     st.success("Student added successfully!")
                 else:
