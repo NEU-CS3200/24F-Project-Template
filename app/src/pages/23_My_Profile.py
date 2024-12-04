@@ -41,8 +41,6 @@ if student and isinstance(student, list):
     days = record.get("CommuteDays", "Not available")
     bio = record.get("Bio", "Not available")
 
-
-
     container = st.container(border=True)
     container.write(f"### {name}")
     container.write(f"Major: {major}")

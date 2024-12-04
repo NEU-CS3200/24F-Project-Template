@@ -100,51 +100,35 @@ def get_profile(name):
     return response
 
 # 
-@community.route('/profile', methods=['POST'])
-def create_profile():
-
+@community.route('/profile', methods=['PUT'])
+def update_profile():
+    # Get the data sent with the PUT request
     the_data = request.json
     current_app.logger.info(the_data)
 
-    name = the_data.get('Name', None)
-    major = the_data.get('Major', None)
-    company = the_data.get('Company', None)
-    location = the_data.get('Location', None)
-    housing_status = the_data.get('HousingStatus', None)
-    carpool_status = the_data.get('CarpoolStatus', None)
-    #budget = the_data.get('Budget', float('nan'))
-    lease_duration = the_data.get('LeaseDuration', None)
-    #cleanliness = the_data.get('Cleanliness', None)
-    #lifestyle = the_data.get('Lifestyle', None)
-    #commute_time = the_data.get('CommuteTime', None)
-    #commute_days = the_data.get('CommuteDays', None)
-    bio = the_data.get('Bio', None)
+    # Extract relevant fields from the received data
+    company = the_data.get('Company')
+    location = the_data.get('Location')
+    housing_status = the_data.get('HousingStatus')
+    carpool_status = the_data.get('CarpoolStatus')
+    lease_duration = the_data.get('LeaseDuration')
+    budget = the_date.get('Budget')
+    bio = the_data.get('Bio')
 
     query = '''
-    INSERT INTO Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus,
-                            LeaseDuration, Bio)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    UPDATE Student
+    SET Company = %s, Location = %s, HousingStatus = %s,
+        CarpoolStatus = %s, Budget = %s, LeaseDuration = %s, Bio = %s
+    WHERE Name = 'Kevin Chen'
     '''
+    
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
-    cursor.execute(query, (name, major, company, location, housing_status, carpool_status, lease_duration, bio))
+    cursor.execute(query, (company, location, housing_status, carpool_status, budget, lease_duration, bio))
     db.get_db().commit()
-    
-    response = make_response("Successfully added product")
+
+    # Return success response
+    response = make_response({"message": "Profile updated successfully"})
     response.status_code = 200
     return response
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
