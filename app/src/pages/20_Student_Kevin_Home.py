@@ -13,21 +13,19 @@ st.title(f"Welcome Student, {st.session_state['first_name']}.")
 st.write('')
 st.write('')
 st.write('### What would you like to do today?')
+st.write('')
 
-if st.button('View and Edit My Profile', 
-             type='primary', 
+if st.button('View and Edit My Profile', type='primary',
              use_container_width=True):
     st.switch_page('pages/23_My_Profile.py')
 
-if st.button('Access Housing & Transit Search', 
-             type='primary', 
+if st.button('Access Housing & Transit Search', type='primary',
              use_container_width=True):
     st.switch_page('pages/22_Housing_Carpool.py')
 
-if st.button('View Advisor Communications', 
-             type='primary',
+if st.button('View Advisor Communications', type='primary',
              use_container_width=True):
-  st.switch_page('pages/21_Advisor_Rec.py')
+  st.switch_page('pages/21_Advisor_Rec.py') 
 
 
 

@@ -16,12 +16,14 @@ init_app(app)
 
 # Register blueprints
 app.register_blueprint(advisor, url_prefix='/api')
+app.register_blueprint(tech_support_analyst, url_prefix='/api')
 app.register_blueprint(students, url_prefix='/api')
 
 
 
 # Register blueprints
 app.register_blueprint(advisor, url_prefix='/api/advisor')
+app.register_blueprint(tech_support_analyst, url_prefix='/api/tech_support_analyst')
 app.register_blueprint(students, url_prefix='/api/students')
 
 

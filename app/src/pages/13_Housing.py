@@ -63,7 +63,7 @@ try:
                 availability_filter = st.multiselect(
                     "Filter by Availability",
                     options=['Available', 'Vacant', 'Pending Approval', 'Occupied'],
-                    default=['Available', 'Vacant']
+                    default=['Vacant']
                 )
                 
                 # Apply filters
