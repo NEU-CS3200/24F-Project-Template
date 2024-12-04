@@ -170,19 +170,10 @@ UPDATE Task
 SET Status = 'Completed'
 WHERE TaskID = 5;
 
--- 3.2 
-INSERT INTO Student (Name, Major, Location, HousingStatus, Budget, Cleanliness, Lifestyle, CommuteTime, Bio)
-VALUES (
-    'Kevin Chen',
-    'Data Science and Business',
-    'San Jose, California',
-    'Searching',
-    1200.00,
-    2,
-    'Quiet',
-    30,
-    'Hiking, Basketball, Technology'
-);
+-- 3.2 Commenting out to insert own data from application
+--INSERT INTO Student (Name, Major)
+--VALUES ('Kevin Chen','Data Science and Business'
+--);
 
 
 -- 4.3 

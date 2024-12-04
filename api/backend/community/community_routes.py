@@ -80,6 +80,66 @@ def community_carpool(communityid):
     response.status_code = 200
     return response
 
+# retrieve kevin's profile
+@community.route('/profile/<name>', methods=['GET'])
+def get_profile(name):
+    query = '''
+    SELECT *
+    FROM Student s
+    JOIN CityCommunity c
+    WHERE s.Name = %s
+    '''
+    # Execute the query
+    cursor = db.get_db().cursor()
+    cursor.execute(query, (name, ))  
+    theData = cursor.fetchall()
+    
+    # Format the response
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+# 
+@community.route('/profile', methods=['POST'])
+def create_profile():
+
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    company=the_data['Company']
+    location=the_data['Location']
+    housing_status=the_data['HousingStatus']
+    carpool_status=the_data['CarpoolStatus']
+    budget=the_data['Budget']
+    lease_duration=the_data['LeaseDuration']
+    cleanliness = the_data['Cleanliness']
+    lifestyle = the_data['Lifestyle']
+    commute_time = the_data['CommuteTime']
+    commute_days = the_data['CommuteDays']
+    bio = the_data['Bio']
+
+    query = '''
+    INSERT INTO Student (Company, Location, HousingStatus, CarpoolStatus,
+                            Budget, LeaseDuration, Cleanliness, Lifestyle,
+                            CommuteTime, CommuteDays, Bio)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    '''
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query, (company, location, housing_status, carpool_status,
+                       budget, lease_duration, cleanliness, lifestyle,
+                       commute_time, commute_days, bio))
+    db.get_db().commit()
+    
+    response = make_response("Successfully added product")
+    response.status_code = 200
+    return response
+
+
+    
+
+
 
 
 
