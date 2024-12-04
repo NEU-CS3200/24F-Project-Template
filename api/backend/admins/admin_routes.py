@@ -4,11 +4,12 @@ from backend.db_connection import db
 admins = Blueprint("admins", __name__)
 
 
-@admins.route("/coop_rep", methods=["GET"])
-def get_reps():
-    query = """
+@admins.route("/<com_id>/coop_rep", methods=["GET"])
+def get_reps(com_id):
+    data = request.get_json()
+    query = f"""
         SELECT u.firstName, u.middleName, u.lastName, u.mobile, u.email FROM cosint.users u
-        WHERE u.firstName = 'John' AND u.lastName = 'Doe' AND u.companyId = 1;
+        WHERE u.firstName = '{data["firstName"]}' AND u.lastName = '{data["lastName"]}' AND u.companyId = {int(com_id)};
     """
 
     cursor = db.get_db().cursor()
@@ -131,31 +132,7 @@ def stats():
     return response
 
 
-@admins.route("/create_ticket", methods=["POST"])
-def add_tickets():
-    data = request.get_json()
-    user_id = int(data["userId"])
-    helper_id = int(data["helperId"])
-    summary = data["summary"]
-
-    query = f"""
-        INSERT INTO cosint.tickets (userId, helperId, summary, completed) VALUES
-        (
-            {user_id}, {helper_id}, {summary}, 0
-        );
-    """
-
-    cursor = db.get_db().cursor()
-
-    cursor.execute(query)
-    db.get_db().commit()
-    data = cursor.fetchall()
-    response = make_response(jsonify(data))
-    response.status_code = 200
-    return response
-
-
-@admins.route("/delete_user", method=["DELETE"])
+@admins.route("/delete_user", methods=["DELETE"])
 def remove_user(user_id):
     query = f"""
         DELETE FROM cosint.users u WHERE u.id = {int(user_id)};

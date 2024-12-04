@@ -103,7 +103,7 @@ def add_user_reference():
 @students.route("/students", methods=["GET"])
 def get_students():
     query = """
-        SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u 
+        SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.preferredName, u.pronouns, u.major, u.year, u.birthday, u.profilePic, u.role, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u 
         WHERE studentId IS NOT NULL
         LIMIT 100;
     """
@@ -123,7 +123,7 @@ def get_students():
 @students.route("/students/<student_id>", methods=["GET"])
 def get_student_by_id(student_id):
     query = f"""
-        SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u 
+        SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.preferredName, u.pronouns, u.major, u.year, u.birthday, u.profilePic, u.role, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u 
         WHERE studentId = {int(student_id)};
     """
 
@@ -204,7 +204,7 @@ def get_progress(student_id):
 @students.route("/students/search/<res>", methods=["GET"])
 def student_search(res):
     query = f"""
-        SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u
+        SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.preferredName, u.pronouns, u.major, u.year, u.birthday, u.profilePic, u.role, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u
         WHERE INSTR(u.name, "{res}") OR INSTR(u.email, "{res}")
         LIMIT 100;
     """
