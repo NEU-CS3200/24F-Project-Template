@@ -16,7 +16,6 @@ def community_housing(communityid):
     lease_duration_filter = request.args.get('lease_duration', type=str)
     budget_filter = request.args.get('budget', type=int)
     
-    # Base query
     query = '''
     SELECT s.Name, s.Major, s.Company, c.Location, s.HousingStatus, s.Budget, s.LeaseDuration, s.Cleanliness, s.Lifestyle, s.Bio
     FROM Student s
@@ -52,7 +51,6 @@ def community_carpool(communityid):
     time_filter = request.args.get('commute_time', type=int)
     days_filter = request.args.get('commute_days', type=int)
 
-    # Base query
     query = '''
     SELECT s.Name, s.Major, s.Company, c.Location, s.CarpoolStatus, s.Budget, s.CommuteTime, s.CommuteDays, s.Bio
     FROM Student s
@@ -61,7 +59,6 @@ def community_carpool(communityid):
     '''
     params = [communityid]  
 
-    # Append filters conditionally
     if time_filter is not None:
         query += ' AND s.CommuteTime <= %s'
         params.append(time_filter)
@@ -70,9 +67,27 @@ def community_carpool(communityid):
         query += ' AND s.CommuteDays <= %s'
         params.append(days_filter)
 
-    # Execute the query
+
     cursor = db.get_db().cursor()
     cursor.execute(query, tuple(params))  
+    theData = cursor.fetchall()
+
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+# retrieve kevin's profile
+@community.route('/profile/<name>', methods=['GET'])
+def get_profile(name):
+    query = '''
+    SELECT *
+    FROM Student s
+    JOIN CityCommunity c
+    WHERE s.Name = %s
+    '''
+    # Execute the query
+    cursor = db.get_db().cursor()
+    cursor.execute(query, (name, ))  
     theData = cursor.fetchall()
     
     # Format the response
@@ -80,12 +95,38 @@ def community_carpool(communityid):
     response.status_code = 200
     return response
 
+# kevins profile - update
+@community.route('/profile', methods=['PUT'])
+def update_profile():
+    the_data = request.json
+    current_app.logger.info(the_data)
 
+    company = the_data.get('Company')
+    location = the_data.get('Location')
+    housing_status = the_data.get('HousingStatus')
+    carpool_status = the_data.get('CarpoolStatus')
+    lease_duration = the_data.get('LeaseDuration')
+    budget = the_data.get('Budget')
+    cleanliness = the_data.get('Cleanliness')
+    lifestyle = the_data.get('Lifestyle')
+    time = the_data.get('CommuteTime')
+    days = the_data.get('CommuteDays')
+    bio = the_data.get('Bio')
 
+    query = '''
+    UPDATE Student
+    SET Company = %s, Location = %s, HousingStatus = %s,
+        CarpoolStatus = %s, Budget = %s, LeaseDuration = %s, 
+        Cleanliness = %s, Lifestyle=%s, CommuteTime=%s, CommuteDays=%s, Bio = %s
+    WHERE Name = 'Kevin Chen'
+    '''
+    
+    current_app.logger.info(query)
 
+    cursor = db.get_db().cursor()
+    cursor.execute(query, (company, location, housing_status, carpool_status, budget, lease_duration, cleanliness, lifestyle, time, days, bio))
+    db.get_db().commit()
 
-
-
-
-
-
+    response = make_response({"message": "Profile updated successfully"})
+    response.status_code = 200
+    return response

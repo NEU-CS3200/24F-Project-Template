@@ -35,7 +35,7 @@ def SysHealthDashNav():
     st.sidebar.page_link("pages/04_Access_System_Health_Dashboard.py", label="System Health Dashboard", icon="📊")
 
 
-## ------------------------ Examples for Role of usaid_worker ------------------------
+## ------------------------ Role of Co-op Advisor ------------------------
 
 
 
@@ -49,9 +49,13 @@ def KevinPageNav():
     st.sidebar.page_link("pages/20_Student_Kevin_Home.py", label="Student Home", icon="📖")
     st.sidebar.page_link("pages/23_My_Profile.py", label="My Profile", icon="👤")
     st.sidebar.page_link("pages/22_Housing_Carpool.py", label="Housing & Transit", icon="🏘️")
-    st.sidebar.page_link("pages/21_Advisor_Rec.py", label="Advisor Feedback", icon="🏫")
+    st.sidebar.page_link("pages/21_Advisor_Rec.py", label="Advisor Communications", icon="🏫")
     
-
+def SarahPageNav():
+    st.sidebar.page_link("pages/30_Student_Sarah_Home.py", label="Student Home", icon="📖")
+    st.sidebar.page_link("pages/31_Professional_Events.py", label="Events", icon="👤")
+    st.sidebar.page_link("pages/32_Browse_Profiles.py", label="Browse Profiles", icon="🔍")
+    st.sidebar.page_link("pages/33_Advisor_Feedback.py", label="Advisor Feedback", icon="🏫")
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
@@ -85,8 +89,11 @@ def SideBarLinks(show_home=False):
             JessicaPageNav()
 
         # If the user is a student, give them access to the student pages
-        if st.session_state["role"] == "Student":
+        if st.session_state["role"] == "Student1":
             KevinPageNav()
+
+        if st.session_state["role"] == "Student2":
+            SarahPageNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()

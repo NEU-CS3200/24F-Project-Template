@@ -171,18 +171,6 @@ SET Status = 'Completed'
 WHERE TaskID = 5;
 
 -- 3.2 
-INSERT INTO Student (Name, Major, Location, HousingStatus, Budget, Cleanliness, Lifestyle, CommuteTime, Bio)
-VALUES (
-    'Kevin Chen',
-    'Data Science and Business',
-    'San Jose, California',
-    'Searching',
-    1200.00,
-    2,
-    'Quiet',
-    30,
-    'Hiking, Basketball, Technology'
-);
 
 
 -- 4.3 
