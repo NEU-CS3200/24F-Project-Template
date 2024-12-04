@@ -61,6 +61,24 @@ def get_tickets():
     return response
 
 
+@admins.route("/tickets/<ticket_id>", methods=["GET"])
+def get_tickets(ticket_id):
+    query = """
+        SELECT u.name AS 'helping', h.name AS 'assignedTo', t.summary, t.completed, t.updatedAt, t.registeredAt FROM cosint.tickets t
+        JOIN cosint.users u ON t.helperId = u.id
+        JOIN cosint.users h ON t.userId = h.id
+        WHERE completed = 0 and id = {int(ticket_id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
 @admins.route("/tickets/<id>", methods=["PUT"])
 def update_ticket(id):
     data = request.get_json()
