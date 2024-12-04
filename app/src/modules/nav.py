@@ -9,52 +9,69 @@ import streamlit as st
 def HomeNav():
     st.sidebar.page_link("Home.py", label="Home", icon="🏠")
 
-
 def AboutPageNav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+    st.sidebar.page_link("pages/40_About.py", label="About", icon="🧠")
 
+def CreateTicketNav():
+    st.sidebar.page_link("pages/21_Create_Ticket.py", label="Create Help Ticket", icon="🎫")
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
-def PolStratAdvHomeNav():
+#### ------------------------ Co-op Advisor Role ------------------------
+def CoopAdvisorAdvHomeNav():
     st.sidebar.page_link(
-        "pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon="👤"
-    )
+        "pages/00_Coop_Advisor_Home.py", label="Co-op Advisor Home", icon="👤")
 
 
-def WorldBankVizNav():
+def StudentSearchNav():
     st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
-    )
+        "pages/01_Student_Search.py", label="Student Search", icon="🧑‍🎓")
 
 
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+def EmployerSearchNav():
+    st.sidebar.page_link("pages/02_Employer_Search.py", label="Employer Search", icon="🕴️")
 
 
-## ------------------------ Examples for Role of usaid_worker ------------------------
-def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
-
-
-def PredictionNav():
+#### ------------------------ Emplyer Role ------------------------
+def EmployerAdvHomeNav():
     st.sidebar.page_link(
-        "pages/11_Prediction.py", label="Regression Prediction", icon="📈"
-    )
+        "pages/10_Employer_Home.py", label="Employer Home", icon="🕴️")
 
-
-def ClassificationNav():
+def PositionOpeningsNav():
     st.sidebar.page_link(
-        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
-    )
+        "pages/12_Postion_Openings.py", label="Position Openings Editor", icon="💼")
 
+
+def StudentSearchNav():
+    st.sidebar.page_link(
+        "pages/01_Student_Search.py", label="Student Search", icon="🧑‍🎓")
+
+
+def ApplicationReviewNav():
+    st.sidebar.page_link( 
+        "pages/11_Application_Review.py", label="Applications", icon="📝")
+
+#### ------------------------ Student Role ------------------------
+def StudentAdvHomeNav():
+    st.sidebar.page_link(
+        "pages/30_Student_Home.py", label="Student Home", icon="🧑‍🎓")
+
+def PositionOpeningSearchNav():
+    st.sidebar.page_link(
+        "pages/31_Position_Opening_Search.py", label="Position Openings", icon="🔎")
+
+def EmployerSearchNav():
+    st.sidebar.page_link(
+        "pages/02_Employer_Search.py", label="Employers", icon="🕴️")
+
+def ApplicationEditorNav():
+    st.sidebar.page_link( 
+        "pages/32_Application_Editor.py", label="Applications", icon="📝")
 
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
-    )
 
+def ViewTicketsNav():
+    st.sidebar.page_link("pages/22_View_Tickets.py", label="View Tickets", icon="🎫")
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
@@ -78,20 +95,34 @@ def SideBarLinks(show_home=False):
     if st.session_state["authenticated"]:
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state["role"] == "pol_strat_advisor":
-            PolStratAdvHomeNav()
-            WorldBankVizNav()
-            MapDemoNav()
+        if st.session_state["role"] == "coop_advisor":
+            CoopAdvisorAdvHomeNav()
+            StudentSearchNav()
+            EmployerSearchNav()
+            ApplicationReviewNav()
+            PositionOpeningSearchNav()
+            CreateTicketNav()
 
-        # If the user role is usaid worker, show the Api Testing page
-        if st.session_state["role"] == "usaid_worker":
-            PredictionNav()
-            ApiTestNav()
-            ClassificationNav()
+        # If the user role is employer, show the Api Testing page
+        if st.session_state["role"] == "employer":
+            EmployerAdvHomeNav()
+            StudentSearchNav()
+            ApplicationReviewNav()
+            CreateTicketNav()
+
+        # If the user role is student, show student home
+        if st.session_state["role"] == "student":
+            StudentAdvHomeNav()
+            PositionOpeningSearchNav()
+            EmployerSearchNav()
+            ApplicationEditorNav()
+            CreateTicketNav()
+
 
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "administrator":
             AdminPageNav()
+            ViewTicketsNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
