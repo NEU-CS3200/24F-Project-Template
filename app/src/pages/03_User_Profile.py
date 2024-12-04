@@ -6,8 +6,11 @@ import requests
 import pandas as pd
 import numpy as np
 from modules.nav import SideBarLinks
+from datetime import date
 
 st.set_page_config(layout = 'wide')
+
+SideBarLinks()
 
 try:
     response = requests.get(
@@ -20,15 +23,18 @@ try:
         st.write("Pronouns:")
         st.write(str(data['pronouns']))
         st.write("Preferred Name:")
-
+        st.write(str(data['preferredName']))
         st.write("Age:",)
-
+        st.write(str(int(date.today().year) - int(data['birthday'].year) - ((date.today().month, date.today().day) < (born.month, born.day))))
         st.write("Email:",)
-
+        st.write(str(data['email']))
         st.write("Phone Number:",)
-
+        st.write(str(data['mobile']))
         st.write("Last Active:")
-
+        if(data[active]):
+            st.write(str(now))
+        else:
+            (data['lastLogin'])
         st.write("Bio:",)
         st.write(data['profile'])
 except requests.exceptions.RequestException as e:
