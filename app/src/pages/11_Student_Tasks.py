@@ -1,46 +1,38 @@
-import logging
 import streamlit as st
-from modules.nav import SideBarLinks
-import requests
 import pandas as pd
+import requests
 
-# Configure logging
-logger = logging.getLogger(__name__)
-
+# Configure Streamlit page
 st.set_page_config(layout='wide')
-SideBarLinks()
+st.title("All Tasks")
 
-st.title("Student Tasks")
+# API endpoint for tasks
+api_url = 'http://localhost:4000/api/advisor/tasks'
 
-# Load and display task data
+# Fetch task data from the API
 try:
-    response = requests.get('http://api:4000/api/advisor')
+    response = requests.get(api_url)
     if response.status_code == 200:
+        # Parse API response JSON
         data = response.json()
+        
+        # Check if data is available
         if data:
-            # Convert data to DataFrame and ensure all columns are strings
-            df = pd.DataFrame(data).astype(str)
+            # Convert to DataFrame
+            df = pd.DataFrame(data)
             
-            # Display filtered dataframe with explicit column types
+            # Display the table dynamically
             st.dataframe(
-                df.astype(str),
+                df,
                 use_container_width=True,
-                column_config={
-                    "student_name": "Student Name",
-                    "task_status": "Task Status",
-                    "due_date": "Due Date",
-                    "date_assigned": "Date Assigned",
-                    "description": "Description"
-                },
                 hide_index=True
             )
         else:
-            logger.warning("No student tasks data received from API")
-            st.warning("No student tasks available")
+            st.warning("No tasks available.")
     else:
-        logger.error(f"API request failed with status code: {response.status_code}")
-        st.error(f"Failed to fetch student tasks. Status code: {response.status_code}")
+        st.error(f"Failed to fetch data. API returned status code: {response.status_code}")
 except Exception as e:
-    logger.error(f"Error loading student tasks: {str(e)}")
-    st.error("Error loading student tasks. Please try again later.")
+    st.error(f"Error loading tasks: {str(e)}")
+
+    
     
