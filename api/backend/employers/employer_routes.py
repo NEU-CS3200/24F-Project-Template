@@ -48,7 +48,7 @@ def get_employees_by_company(name):
     query = f"""
         SELECT * FROM users u
         JOIN companies c ON u.companyId = c.id
-        WHERE c.name LIKE CONCAT('%', {name}, '%')
+        WHERE INSTR(c.name, "{name}")
         LIMIT 100;
     """
 
@@ -65,7 +65,7 @@ def get_employees_by_company(name):
 def get_employee_by_name(name):
     query = f"""
         SELECT * FROM users u
-        WHERE name LIKE CONCAT('%', {name}, '%') AND companyId IS NOT NULL
+        WHERE INSTR(u.name, "{name}") AND companyId IS NOT NULL
         LIMIT 100;
     """
 
