@@ -1,15 +1,8 @@
-from flask import (
-    Blueprint,
-    request,
-    jsonify,
-    make_response,
-    current_app,
-    redirect,
-    url_for,
-)
+from flask import Blueprint, request, jsonify, make_response
 from backend.db_connection import db
 
 admins = Blueprint("admins", __name__)
+
 
 @admins.route("/coop_rep", methods=["GET"])
 def get_reps():
@@ -48,6 +41,7 @@ def add_company():
     response.status_code = 200
     return response
 
+
 @admins.route("/tickets", methods=["GET"])
 def get_tickets():
     query = """
@@ -65,8 +59,57 @@ def get_tickets():
     response.status_code = 200
     return response
 
+
+@admins.route("/tickets/<id>", methods=["PUT"])
+def update_ticket(id):
+    data = request.get_json()
+    if int(id) != int(data["id"]):
+        response = make_response(
+            jsonify({"message": "id in URL does not match id in body"})
+        )
+        response.status_code = 400
+        return response
+
+    query = f"""
+        SELECT * FROM tickets
+        WHERE id = {int(id)};
+    """
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    student = cursor.fetchall()[0]
+
+    if len(student) == 0:
+        response = make_response(jsonify({"message": "id not found"}))
+        response.status_code = 404
+        return response
+
+    query = "UPDATE tickets "
+
+    if len(data) > 1:
+        query += "SET "
+
+    for key in data:
+        if key in student and key != "studentId":
+            if type(data[key]) is int:
+                query = query + f"{key} = {data[key]}, "
+            else:
+                query = query + f'{key} = "{data[key]}", '
+
+    query = query[:-2] + f" WHERE id = {int(id)};"
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
 @admins.route("/stats", methods=["GET"])
-def get_tickets():
+def stats():
     query = """
         SELECT
             MIN(lastLogin) AS intervalStart,
@@ -86,6 +129,7 @@ def get_tickets():
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
 
 @admins.route("/create_ticket", methods=["POST"])
 def add_tickets():
@@ -110,10 +154,11 @@ def add_tickets():
     response.status_code = 200
     return response
 
+
 @admins.route("/delete_user", method=["DELETE"])
 def remove_user(user_id):
     query = f"""
-        DELETE FROM cosint.users u WHERE u.id = 1;
+        DELETE FROM cosint.users u WHERE u.id = {int(user_id)};
     """
 
     cursor = db.get_db().cursor()
