@@ -56,7 +56,32 @@ def get_student_feedback(student_id):
     response.status_code = 200
     return response
 
+@students.route('/students/<student_id>/feedback/<feedback_id>', methods=['DELETE'])
+def del_feedback(feedback_id, student_id):
+    try:
+        query = '''
+        DELETE FROM Feedback
+        WHERE StudentID = %s AND FeedbackID = %s
+        '''
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (student_id, feedback_id))
+        
+        db.get_db().commit()
 
+        if cursor.rowcount == 0:
+            response = make_response(jsonify({
+                "error": "No feedback entry found for the given student ID and feedback ID."
+            }))
+            response.status_code = 404
+            return response
+        
+        response = make_response(jsonify({"message": "Feedback entry deleted successfully."}))
+        response.status_code = 200
+        return response
+    except Exception as e:
+        response = make_response(jsonify({"error": str(e)}))
+        response.status_code = 500
+        return response
 
 
 
