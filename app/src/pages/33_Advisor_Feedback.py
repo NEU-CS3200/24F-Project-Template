@@ -9,7 +9,7 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('Professional Events Hub')
+st.title('View Advisor Feedback')
 
 st.write('\n\n')
 st.write('## test')

@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS Housing (
     HousingID INT AUTO_INCREMENT PRIMARY KEY,
     Availability VARCHAR(50),
     Style VARCHAR(50),
-    Location VARCHAR(100)
+    CommunityID INT,
+    FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
 );
 
 -- Create table for User
@@ -55,31 +56,18 @@ CREATE TABLE IF NOT EXISTS Student (
     CarpoolStatus VARCHAR(50),
     Budget DECIMAL(10, 2),
     LeaseDuration VARCHAR(50),
-    Cleanliness VARCHAR(50),
+    Cleanliness INT,
     Lifestyle VARCHAR(50),
     CommuteTime INT,
     CommuteDays INT,
     Bio TEXT,
     CommunityID INT,
-    HousingID INT,
     AdvisorID INT,
-    FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID),
-    FOREIGN KEY (HousingID) REFERENCES Housing(HousingID)
+    Reminder INT,
+    FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
 );
 
--- Create table for Chat
-DROP TABLE IF EXISTS Chat;
-CREATE TABLE IF NOT EXISTS Chat (
-    ChatID INT AUTO_INCREMENT PRIMARY KEY,
-    StudentID INT,
-    Content TEXT,
-    Time DATETIME,
-    SupportStaffID INT,
-    FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
-    FOREIGN KEY (SupportStaffID) REFERENCES User(UserID)
-);
-
--- Create table for Events
+/*-- Create table for Events
 DROP TABLE IF EXISTS Events;
 CREATE TABLE IF NOT EXISTS Events (
     EventID INT AUTO_INCREMENT PRIMARY KEY,
@@ -88,6 +76,18 @@ CREATE TABLE IF NOT EXISTS Events (
     Name VARCHAR(100),
     Description TEXT,
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
+);
+*/
+
+-- Create table for Advisor
+DROP TABLE IF EXISTS Advisor;
+CREATE TABLE IF NOT EXISTS Advisor (
+    AdvisorID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Department VARCHAR(100),
+    StudentID INT,
+    FOREIGN KEY (StudentID) REFERENCES Student(StudentID)
 );
 
 -- Create table for Feedback
@@ -100,16 +100,6 @@ CREATE TABLE IF NOT EXISTS Feedback (
     StudentID INT,
     AdvisorID INT,
     FOREIGN KEY (StudentID) REFERENCES Student(StudentID)
-);
-
--- Create table for Advisor
-DROP TABLE IF EXISTS Advisor;
-CREATE TABLE IF NOT EXISTS Advisor (
-    AdvisorID INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(100),
-    Email VARCHAR(100),
-    Department VARCHAR(100),
-    StudentID INT,
 );
 
 -- Add foreign key to Feedback for Advisor after Advisor is created
@@ -131,8 +121,18 @@ CREATE TABLE IF NOT EXISTS Task (
     Status VARCHAR(50),
     AdvisorID INT,
     FOREIGN KEY (AssignedTo) REFERENCES Student(StudentID),
-    FOREIGN KEY (AdvisorID) REFERENCES Advisor(AdvisorID)
+    FOREIGN KEY (AdvisorID) REFERENCES Advisor(AdvisorID) ON DELETE CASCADE
+
 );
+
+CREATE TABLE AdvisorStudent (
+    AdvisorID INT,
+    StudentID INT,
+    PRIMARY KEY (AdvisorID, StudentID),
+    FOREIGN KEY (AdvisorID) REFERENCES Advisor(AdvisorID),
+    FOREIGN KEY (StudentID) REFERENCES Student(StudentID)
+);
+
 
 -- Create table for System Log
 DROP TABLE IF EXISTS SystemLog;
@@ -171,21 +171,18 @@ SET Status = 'Completed'
 WHERE TaskID = 5;
 
 -- 3.2 
-INSERT INTO Student (Name, Major, Location, HousingStatus, Budget, Cleanliness, Lifestyle, CommuteTime, Interests)
-VALUES (
-    'Kevin Chen',
-    'Data Science and Business',
-    'San Jose, California',
-    'Searching',
-    1200.00,
-    'Very Clean',
-    'Quiet',
-    30,
-    'Hiking, Basketball, Technology'
-);
+
 
 -- 4.3 
+<<<<<<< HEAD:database-files/SyncSpace.sql
 INSERT INTO Housing (Style, Availability, Location)
 VALUES ('Apartment', 'Available', 'New York City');
+=======
+INSERT INTO Housing (Style, Availability)
+VALUES ('Apartment', 'Available');
 
+
+
+
+>>>>>>> b7b4fa75cccf25a91b785f0a2f7cfce53b1a8555:database-files/01_SyncSpace.sql
 

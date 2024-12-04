@@ -13,12 +13,12 @@ from backend.ml_models.model01 import predict
 #------------------------------------------------------------
 # Create a new Blueprint object, which is a collection of 
 # routes.
-students = Blueprint('students', __name__)
+student2 = Blueprint('student2', __name__)
 
 
 #------------------------------------------------------------
 # Get all students from the system
-@students.route('/students', methods=['GET'])
+@student2.route('/student2', methods=['GET'])
 def get_students():
 
     cursor = db.get_db().cursor()

@@ -14,17 +14,17 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button('Run Diagnostics', 
+if st.button('Run System Logs', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_World_Bank_Viz.py')
+  st.switch_page('pages/01_Run_System_Logs.py')
 
 if st.button('View Ticket Overview', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/02_Ticket_Overview.py')
 
 if st.button('Access System Health Dashboard', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/04_Access_System_Health_Dashboard.py')

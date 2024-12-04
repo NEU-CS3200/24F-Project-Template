@@ -36,7 +36,7 @@ SideBarLinks(show_home=True)
 logger.info("Loading the Home page of the app")
 st.title('SyncSpace')
 st.write('\n\n')
-st.write('### HI! As which user would you like to log in?')
+st.write('### Hi there! As which user would you like to log in?')
 
 # For each of the user personas for which we are implementing
 # functionality, we put a button on the screen that the user 
@@ -58,7 +58,7 @@ if st.button("Act as System Administrator - Michael Ortega",
     st.switch_page('pages/00_Tech_Support_Analyst_Home.py')
 
 if st.button('Act as Co-op Advisor - Jessica Doofenshmirtz', 
-            type = 'primary', 
+            type='primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'Advisor'
@@ -69,7 +69,7 @@ if st.button('Act as Student - Kevin Chen',
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'Student'
+    st.session_state['role'] = 'Student1'
     st.session_state['first_name'] = 'Kevin'
     st.switch_page('pages/20_Student_Kevin_Home.py')
 
@@ -77,17 +77,7 @@ if st.button('Act as Student - Sarah Lopez',
             type = 'secondary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'Student1'
+    st.session_state['role'] = 'Student2'
     st.session_state['first_name'] = 'Sarah'
     st.switch_page('pages/30_Student_Sarah_Home.py')
-        
-# Add a button for the Warehouse Manager Portal
-if st.button('Act as Warehouse Manager', 
-            type='primary', 
-            use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'warehouse_manager'
-    st.session_state['first_name'] = 'Warehouse Manager'
-    logger.info("Logging in as Warehouse Manager Persona")
-    st.switch_page('pages/40_Warehouse_Home.py')
 
