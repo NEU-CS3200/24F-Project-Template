@@ -18,11 +18,44 @@ positions = Blueprint('positions', __name__)
 @positions.route('/positions', methods=['GET'])
 def get_positions():
     cursor = db.get_db().cursor()
-    cursor.execute('''
-    SELECT * 
-    FROM positions;
-    ''')
     
+    # Get filter parameters from query string
+    # TO DO: Add correct filters
+    filters = {
+        'company': request.args.get('company'),
+        'location': request.args.get('location'),
+        'min_salary': request.args.get('min_salary'),
+        'max_salary': request.args.get('max_salary'),
+        'title': request.args.get('title')
+    }
+    
+    # Start with base query
+    query = 'SELECT * FROM positions WHERE 1=1'
+    params = []
+    
+    # Dynamically add filters if they're provided
+    if filters['company']:
+        query += ' AND company LIKE %s'
+        params.append(f'%{filters["company"]}%')
+        
+    if filters['location']:
+        query += ' AND location LIKE %s'
+        params.append(f'%{filters["location"]}%')
+        
+    if filters['min_salary']:
+        query += ' AND salary >= %s'
+        params.append(filters['min_salary'])
+        
+    if filters['max_salary']:
+        query += ' AND salary <= %s'
+        params.append(filters['max_salary'])
+        
+    if filters['title']:
+        query += ' AND title LIKE %s'
+        params.append(f'%{filters["title"]}%')
+    
+    # Execute the query with any applied filters
+    cursor.execute(query, tuple(params))
     theData = cursor.fetchall()
     
     the_response = make_response(jsonify(theData))
@@ -31,6 +64,7 @@ def get_positions():
 
 # Making a request given the blueprint
 # Creating a new position
+# TO DO: Add correct filters
 @positions.route('/positions', methods=['POST'])
 def create_position():
     # Get the position details from the request body
@@ -40,7 +74,7 @@ def create_position():
     cursor = db.get_db().cursor()
     cursor.execute('''
     INSERT INTO positions (
-        # TO DO
+        
     ) VALUES (
         %s, %s, %s, %s, %s
     )''', (
