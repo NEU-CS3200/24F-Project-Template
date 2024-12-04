@@ -9,9 +9,6 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-# Page Configuration
-st.set_page_config(page_title="Run System Logs", layout='wide')
-
 # Page Header
 st.title("Access System Logs")
 st.write("### Analyze and export system logs for troubleshooting.")
