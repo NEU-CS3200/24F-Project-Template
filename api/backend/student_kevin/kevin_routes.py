@@ -162,27 +162,27 @@ def give_feedback():
     description = data['Description']
     date = data['Date']
     rating = data['ProgressRating']
+    student_id = data['StudentID']
+    advisor_id = data['AdvisorID']
 
-    student = st.session_state['first_name']
-
-    db = get_db()
-    cursor = db.cursor()
-    cursor.execute('SELECT StudentID, AdvisorID FROM Student WHERE Name = %s', (student,))
-    result = cursor.fetchone()
-
-    advisor_id, student_id = result
-
-    insert_query = '''
+    query = '''
     INSERT INTO Feedback (Description, Date, ProgressRating, StudentID, AdvisorID)
         VALUES (%s, %s, %s, %s, %s)
     '''
 
-    cursor.execute(insert_query, (description, date, rating, student_id, advisor_id))
-    db.commit()
+    current_app.logger.info(query)
+    connection = db.get_db()  # Get the actual database connection
+    cursor = connection.cursor()  # Get a cursor from the connection
 
-    response = make_response("Feedback Submitted")
+    cursor.execute(query, (description, date, rating, student_id, advisor_id))
+    connection.commit()  # Commit the transaction
+
+    cursor.close()  # Always close the cursor after use
+
+    response = make_response("Successfully added feedback")
     response.status_code = 200
     return response
+    
     
 
 
