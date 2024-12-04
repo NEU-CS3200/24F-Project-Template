@@ -3,6 +3,7 @@ from flask import Flask
 from backend.db_connection import db
 from backend.student_kevin.kevin_routes import kevin
 from backend.students.student_routes import students
+from backend.advisor.co_op_advisor_routes import advisor
 import os
 from dotenv import load_dotenv
 
@@ -42,7 +43,7 @@ def create_app():
     #app.register_blueprint(customers,   url_prefix='/c')
     app.register_blueprint(kevin,    url_prefix='/c')
     app.register_blueprint(students, url_prefix='/api')
-
+    app.register_blueprint(advisor, url_prefix='/api')
     # Don't forget to return the app object
     return app
 

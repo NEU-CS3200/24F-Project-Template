@@ -46,17 +46,18 @@ def get_student_reminders(student_id):
 @students.route('/students/feedback', methods=['GET'])
 def get_all_feedback():
     query = '''
-    SELECT
-    s.Name AS student_name
+SELECT
     s.StudentID,
-    f.Date,
+    s.Name AS student_name,
     f.FeedbackID,
-    f.Description,
-    f.ProgressRating,
+            f.Description,
+            f.Date,
+            f.ProgressRating
+
         FROM Feedback f
         JOIN Student s ON f.StudentID = s.StudentID
         ORDER BY f.Date DESC;
-        '''
+    '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()

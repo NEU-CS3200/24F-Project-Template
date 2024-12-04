@@ -48,9 +48,10 @@ try:
             # Detailed View
             if st.checkbox("Show Detailed Feedback View"):
                 for index, row in df.iterrows():
-                    with st.expander(f"Feedback ID: {row['FeedbackID']}"):
-                        st.markdown(f"**Student Name:** {row['student_name']}")
-                        st.markdown(f"**Student ID:** {row['student_id']}")
+         
+                    with st.expander(f"**Student Name:** {row['student_name']}"):
+                        st.markdown(f"Feedback ID: {row['FeedbackID']}")
+                        st.markdown(f"**Student ID:** {row['StudentID']}")
                         st.markdown(f"**Date:** {row['Date']}")
                         st.markdown(f"**Progress Rating:** {row['ProgressRating']}")
                         st.markdown(f"**Description:** {row['Description']}")
