@@ -103,17 +103,31 @@ if communityid:
     elif search_type == "Carpool":
         student_profiles = fetch_carpool_profiles(communityid, days_filter, time_filter)
         if student_profiles:
-            for student in student_profiles:
-                with st.expander(f"{student['Name']}"):
-                    st.markdown(f"### {student['Name']}")
-                    st.write(f"**Major:** {student['Major']}")
-                    st.write(f"**Company:** {student['Company']}")
-                    st.write(f"**Location:** {student['Location']}")
-                    st.write(f"**Carpool Status:** {student['CarpoolStatus']}")
-                    st.write(f"**Travel time:** {student['CommuteTime']}")
-                    st.write(f"**Number of Days Commuting:** {student['CommuteDays']}")
-                    st.write(f"**Bio:** {student['Bio']}")
+            # Split the profiles into two columns
+            col1, col2 = st.columns(2)
+            for i, student in enumerate(student_profiles):
+                # Alternate between the columns
+                if i % 2 == 0:
+                    with col1:
+                        with st.expander(f"{student['Name']}"):
+                            st.markdown(f"### {student['Name']}")
+                            st.write(f"**Major:** {student['Major']}")
+                            st.write(f"**Company:** {student['Company']}")
+                            st.write(f"**Location:** {student['Location']}")
+                            st.write(f"**Carpool Status:** {student['CarpoolStatus']}")
+                            st.write(f"**Travel time:** {student['CommuteTime']}")
+                            st.write(f"**Number of Days Commuting:** {student['CommuteDays']}")
+                            st.write(f"**Bio:** {student['Bio']}")
+                else:
+                    with col2:
+                        with st.expander(f"{student['Name']}"):
+                            st.markdown(f"### {student['Name']}")
+                            st.write(f"**Major:** {student['Major']}")
+                            st.write(f"**Company:** {student['Company']}")
+                            st.write(f"**Location:** {student['Location']}")
+                            st.write(f"**Carpool Status:** {student['CarpoolStatus']}")
+                            st.write(f"**Travel time:** {student['CommuteTime']}")
+                            st.write(f"**Number of Days Commuting:** {student['CommuteDays']}")
+                            st.write(f"**Bio:** {student['Bio']}")
         else:
             st.write("No profiles found.")
-    
-    
