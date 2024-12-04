@@ -25,3 +25,25 @@ def get_reps():
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+
+@admins.route("/add_company", methods=["POST"])
+def add_company():
+    data = request.get_json()
+    comp_name = str(data["name"])
+
+    query = f"""
+        INSERT INTO cosint.companies (name) VALUES
+        (
+            {comp_name}
+        );
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
