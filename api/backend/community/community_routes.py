@@ -16,7 +16,6 @@ def community_housing(communityid):
     lease_duration_filter = request.args.get('lease_duration', type=str)
     budget_filter = request.args.get('budget', type=int)
     
-    # Base query
     query = '''
     SELECT s.Name, s.Major, s.Company, c.Location, s.HousingStatus, s.Budget, s.LeaseDuration, s.Cleanliness, s.Lifestyle, s.Bio
     FROM Student s
@@ -52,7 +51,6 @@ def community_carpool(communityid):
     time_filter = request.args.get('commute_time', type=int)
     days_filter = request.args.get('commute_days', type=int)
 
-    # Base query
     query = '''
     SELECT s.Name, s.Major, s.Company, c.Location, s.CarpoolStatus, s.Budget, s.CommuteTime, s.CommuteDays, s.Bio
     FROM Student s
@@ -61,7 +59,6 @@ def community_carpool(communityid):
     '''
     params = [communityid]  
 
-    # Append filters conditionally
     if time_filter is not None:
         query += ' AND s.CommuteTime <= %s'
         params.append(time_filter)
@@ -70,12 +67,11 @@ def community_carpool(communityid):
         query += ' AND s.CommuteDays <= %s'
         params.append(days_filter)
 
-    # Execute the query
+
     cursor = db.get_db().cursor()
     cursor.execute(query, tuple(params))  
     theData = cursor.fetchall()
-    
-    # Format the response
+
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
@@ -131,7 +127,6 @@ def update_profile():
     cursor.execute(query, (company, location, housing_status, carpool_status, budget, lease_duration, cleanliness, lifestyle, time, days, bio))
     db.get_db().commit()
 
-    # Return success response
     response = make_response({"message": "Profile updated successfully"})
     response.status_code = 200
     return response
