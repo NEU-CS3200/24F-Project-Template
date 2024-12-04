@@ -41,36 +41,20 @@ def get_student_reminders(student_id):
     response.status_code = 200
     return response
 
-@students.route('/students/<student_id>/feedback', methods=['GET'])
-def get_student_feedback(student_id):
-    query = '''
-    -- Add your SQL query here
-    '''
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    theData = cursor.fetchall()
-    
-    response = make_response(jsonify(theData))
-    response.status_code = 200
-    return response
-
-
-
 
 
 @students.route('/students/feedback', methods=['GET'])
 def get_all_feedback():
     query = '''
-        SELECT 
-            s.StudentID,
-            s.Name as student_name,
-            f.FeedbackID,
-            f.Description,
-            f.Date,
-            f.ProgressRating,
+    SELECT
+    s.Name AS student_name
+    s.StudentID,
+    f.Date,
+    f.FeedbackID,
+    f.Description,
+    f.ProgressRating,
         FROM Feedback f
         JOIN Student s ON f.StudentID = s.StudentID
-        JOIN Advisor a ON f.AdvisorID = a.AdvisorID
         ORDER BY f.Date DESC;
         '''
     cursor = db.get_db().cursor()

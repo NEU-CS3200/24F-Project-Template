@@ -11,7 +11,7 @@ st.title("All Tasks")
 SideBarLinks()
 
 # API endpoint for tasks
-api_url = 'http://localhost:4000/api/advisor'
+api_url = 'http://api:4000/api/advisor'
 
 # Fetch task data from the API
 try:

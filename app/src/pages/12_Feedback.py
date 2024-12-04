@@ -5,14 +5,13 @@ from modules.nav import SideBarLinks
 
 # Configure Streamlit page
 st.set_page_config(layout='wide')
-st.title("Tasks Dashboard")
+st.title("Feedback Dashboard")
 SideBarLinks()
 
+# API endpoint for feedback
+api_url = 'http://api:4000/api/students/feedback'
 
-# API endpoint for tasks
-api_url = 'http://localhost:4000/api/students/feedback'  # Adjust the URL to match your actual Flask route
-
-# Fetch task data from the API
+# Fetch feedback data from the API
 try:
     response = requests.get(api_url)
     if response.status_code == 200:
@@ -21,54 +20,47 @@ try:
 
         if data:
             # Convert to DataFrame
+            # Convert to DataFrame
             df = pd.DataFrame(data)
 
-            # Sidebar Filters
-            st.sidebar.header("Filter Tasks")
-            student_filter = st.sidebar.text_input("Search by Student Name")
-            student_id_filter = st.sidebar.text_input("Search by Student ID")
-            task_status_filter = st.sidebar.text_input("Search by Task Status")
+            # Ensure the DataFrame is sorted in the same order as the SQL query
+            df = df.sort_values(by='Date', ascending=False)
+
+            # Top Filters
+            col1, col2, col3 = st.columns([2, 2, 1])
+            with col1:
+                student_filter = st.text_input("Search by Student Name")
+            with col2:
+                advisor_filter = st.text_input("Search by Student ID")
+            with col3:
+                min_rating = st.slider("Minimum Progress Rating", 1, 5, 1)
 
             # Apply filters
             if student_filter:
                 df = df[df['student_name'].str.contains(student_filter, case=False, na=False)]
-            if student_id_filter:
-                df = df[df['StudentID'].astype(str).str.contains(student_id_filter, case=False, na=False)]
-            if task_status_filter:
-                df = df[df['task_status'].str.contains(task_status_filter, case=False, na=False)]
+            if advisor_filter:
+                df = df[df['student_id'].astype(str).str.contains(advisor_filter, case=False, na=False)]
+            df = df[df['ProgressRating'] >= min_rating]
 
-            # Reorder columns to match SQL query
-            column_order = [
-                "TaskID", "Description", "Reminder", "DueDate", "Status", 
-                "AdvisorID", "StudentID", "student_name"
-            ]
-            df = df[column_order]
-
-            # Display Data
-            st.subheader(f"Showing {len(df)} Task Entries")
-            st.dataframe(
-                df,
-                use_container_width=True,
-                hide_index=True
-            )
+            # Display filtered DataFrame
+            st.dataframe(df)
 
             # Detailed View
-            if st.checkbox("Show Detailed Task View"):
+            if st.checkbox("Show Detailed Feedback View"):
                 for index, row in df.iterrows():
-                    with st.expander(f"Task ID: {row['TaskID']}"):
+                    with st.expander(f"Feedback ID: {row['FeedbackID']}"):
                         st.markdown(f"**Student Name:** {row['student_name']}")
-                        st.markdown(f"**Student ID:** {row['StudentID']}")
-                        st.markdown(f"**Task Description:** {row['Description']}")
-                        st.markdown(f"**Reminder Date:** {row['Reminder']}")
-                        st.markdown(f"**Due Date:** {row['DueDate']}")
-                        st.markdown(f"**Task Status:** {row['Status']}")
-                        st.markdown(f"**Advisor ID:** {row['AdvisorID']}")
+                        st.markdown(f"**Student ID:** {row['student_id']}")
+                        st.markdown(f"**Date:** {row['Date']}")
+                        st.markdown(f"**Progress Rating:** {row['ProgressRating']}")
+                        st.markdown(f"**Description:** {row['Description']}")
                         st.markdown("---")
         else:
-            st.warning("No task entries found.")
+            st.warning("No feedback entries found.")
     else:
-        st.error(f"Failed to fetch tasks. API returned status code: {response.status_code}")
+        st.error(f"Failed to fetch feedback. API returned status code: {response.status_code}")
 except Exception as e:
-    st.error(f"Error loading tasks: {str(e)}")
+    st.error(f"Error loading feedback: {str(e)}")
+
 
 

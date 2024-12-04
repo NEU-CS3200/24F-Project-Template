@@ -67,7 +67,9 @@ CREATE TABLE IF NOT EXISTS Student (
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
 );
 
-/*-- Create table for Events
+
+
+
 DROP TABLE IF EXISTS Events;
 CREATE TABLE IF NOT EXISTS Events (
     EventID INT AUTO_INCREMENT PRIMARY KEY,
@@ -77,7 +79,7 @@ CREATE TABLE IF NOT EXISTS Events (
     Description TEXT,
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
 );
-*/
+
 
 -- Create table for Advisor
 DROP TABLE IF EXISTS Advisor;
@@ -159,7 +161,6 @@ CREATE TABLE IF NOT EXISTS SystemHealth (
 );
 
 -- NOTE - need to add in data for our personas
-
 -- 1.4 
 UPDATE Ticket
 SET Priority = 'Critical'
@@ -176,8 +177,5 @@ WHERE TaskID = 5;
 -- 4.3 
 INSERT INTO Housing (Style, Availability)
 VALUES ('Apartment', 'Available');
-
-
-
 
 

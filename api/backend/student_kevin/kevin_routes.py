@@ -153,6 +153,8 @@ def get_resources(community_id):
     response.status_code = 200
     return response
 
+
+
 # route to provide feedback to advisor
 @kevin.route('/feedback', methods=['POST'])
 def give_feedback():
@@ -170,7 +172,8 @@ def give_feedback():
     cursor.execute('SELECT StudentID, AdvisorID FROM Student WHERE Name = %s', (student,))
     result = cursor.fetchone()
 
-    advisor_id, student_id = result
+    student_id, advisor_id = result
+
 
     insert_query = '''
     INSERT INTO Feedback (Description, Date, ProgressRating, StudentID, AdvisorID)
@@ -183,7 +186,7 @@ def give_feedback():
     response = make_response("Feedback Submitted")
     response.status_code = 200
     return response
-    
+
 
 
 

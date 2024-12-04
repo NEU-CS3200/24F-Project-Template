@@ -19,19 +19,7 @@ def get_student_reminders(student_id):
     response.status_code = 200
     return response
 
-@advisor.route('/students/<student_id>/feedback', methods=['GET'])
-# route for retrieving feedback for specific student
-def get_student_feedback(student_id):
-    query = '''
 
-    '''
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    theData = cursor.fetchall()
-    
-    response = make_response(jsonify(theData))
-    response.status_code = 200
-    return response
 
 @advisor.route('/advisor/notifications', methods=['GET'])
 def get_notifications():
