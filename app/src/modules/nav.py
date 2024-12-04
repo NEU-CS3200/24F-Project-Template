@@ -51,10 +51,11 @@ def ClassificationNav():
 #### ------------------------ Student Housing/Carpool Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Student_Kevin_Home.py", label="Student - Kevin Chen", icon="🖥️")
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
-    )
-
+    #st.sidebar.page_link(
+       #"pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
+    #)
+def StudentPageNav():
+    st.sidebar.page_link("pages/30_Student_Sarah_Home.py", label="Student - Sarah Lopez", icon="🖥️")
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
@@ -92,6 +93,12 @@ def SideBarLinks(show_home=False):
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "Student":
             AdminPageNav()
+        
+        if st.session_state["role"] == "Student1":
+            StudentPageNav()
+
+
+
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
