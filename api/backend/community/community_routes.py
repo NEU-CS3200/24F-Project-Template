@@ -83,6 +83,7 @@ def get_profile(name):
     SELECT *
     FROM Student s
     JOIN CityCommunity c
+    ON s.CommunityID = c.CommunityID
     WHERE s.Name = %s
     '''
     # Execute the query
@@ -139,7 +140,7 @@ def get_feedback(community_id):
     CityCommunity c
     JOIN Housing h
     ON c.CommunityID=h.CommunityID
-    WHERE c.Location = %s
+    WHERE c.CommunityID = %s
     '''
     # Execute the query
     cursor = db.get_db().cursor()
