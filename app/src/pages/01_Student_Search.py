@@ -16,15 +16,10 @@ st.title(f"Student Search")
 try:
     test_response = requests.get('http://api:4000/stu/students')
     
-    if test_response.status_code == 200:
-        student_search_data = test_response.json()
-        category_options = [""] + [category['value'] for category in categories_data]
-    else:
+    if not test_response.status_code == 200:
         st.error("Failed to fetch categories")
-        category_options = []
 except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to students API: {str(e)}")
-    category_options = []
 
 with st.form("student_search"):
     
@@ -47,7 +42,7 @@ with st.form("student_search"):
             logger.info(f"Product form submitted with data: {student_value}")
             
             try:
-                response = requests.post(f'http://api:4000/stu/student_search/{student_value}')
+                response = requests.get(f'http://api:4000/stu/student_search/{student_value}')
                 if response.status_code == 200:
                     st.success("Student added successfully!")
                 else:
