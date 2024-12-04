@@ -20,12 +20,29 @@ def get_profile(name):
         st.error(f"Error fetching data: {response.status_code}")
         return []
 
-name = 'Kevin Chen'
+def get_feedback(student_id):
+    url = f'http://api:4000/api/students/{student_id}/feedback'
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        st.error(f"Error fetching data: {response.status_code}")
+        return []
+
+name = st.session_state['first_name']
 student = get_profile(name)
+
 
 if student and isinstance(student, list):
     record = student[0]
     reminders = record.get('Reminder')
+    s_id = record.get('StudentID')
+    
+    feedback = get_feedback(s_id)
+    df = pd.DataFrame(feedback)
+    st.write(df)
+
+    
     st.write(f'🔔 You have {reminders} reminders from your advisor')
 
 st.write('')

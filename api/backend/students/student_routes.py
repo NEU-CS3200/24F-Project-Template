@@ -43,11 +43,13 @@ def get_student_reminders(student_id):
 
 @students.route('/students/<student_id>/feedback', methods=['GET'])
 def get_student_feedback(student_id):
+    
     query = '''
-    -- Add your SQL query here
+    SELECT * FROM Feedback
+    WHERE StudentID = %s
     '''
     cursor = db.get_db().cursor()
-    cursor.execute(query)
+    cursor.execute(query, (student_id, ))  
     theData = cursor.fetchall()
     
     response = make_response(jsonify(theData))
