@@ -1,12 +1,16 @@
 from flask import Flask
 
 from backend.db_connection import db
+<<<<<<< HEAD
 from backend.customers.customer_routes import customers
 from backend.products.products_routes import products
 from backend.simple.simple_routes import simple_routes
 from backend.students.student2_routes import student2
 
 #from backend.community.community_routes import community
+=======
+from backend.tech_support_analyst.michael_routes import tech_support_analyst
+>>>>>>> d7c102f74620a007f7e13c152ad5f2385a594fe9
 from backend.student_kevin.kevin_routes import kevin
 #from backend.students.student_routes import students
 import os
@@ -51,6 +55,7 @@ def create_app():
     
     #app.register_blueprint(simple_routes)
     #app.register_blueprint(customers,   url_prefix='/c')
+    app.register_blueprint(tech_support_analyst,    url_prefix='/t')
     app.register_blueprint(kevin,    url_prefix='/c')
     #app.register_blueprint(students, url_prefix='/api')
 
