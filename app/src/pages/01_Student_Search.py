@@ -18,7 +18,7 @@ try:
     test_response = requests.get("http://api:4000/stu/students")
 
     if not test_response.status_code == 200:
-        st.error("Failed to fetch categories")
+        st.error("Failed to fetch students")
 except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to students API: {str(e)}")
 
@@ -40,7 +40,7 @@ with st.form("student_search"):
         if not student_value:
             st.error("Please enter a student name or id")
         else:
-            logger.info(f"Student form submitted with data: {student_value}")
+            logger.info(f"Employee form submitted with data: {student_value}")
 
             try:
                 response1 = requests.get(

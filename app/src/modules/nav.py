@@ -6,6 +6,9 @@ import streamlit as st
 
 
 #### ------------------------ General ------------------------
+def UserProfileNav():
+    st.sidebar.page_link("pages/03_User_Profile.py", label="Profile", icon="🖼️")
+
 def HomeNav():
     st.sidebar.page_link("Home.py", label="Home", icon="🏠")
 
@@ -93,6 +96,7 @@ def SideBarLinks(show_home=False):
 
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
+        UserProfileNav()
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
         if st.session_state["role"] == "coop_advisor":
