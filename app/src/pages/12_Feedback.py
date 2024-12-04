@@ -20,9 +20,22 @@ try:
 
         if data:
             # Convert to DataFrame
-            # Convert to DataFrame
             df = pd.DataFrame(data)
-
+            
+            
+            # Reorder columns to match SQL query
+            columns_to_display = [
+                'StudentID',
+                'student_name',
+                'FeedbackID',
+                'Description',
+                'Date',
+                'ProgressRating'
+            ]
+            
+            # Ensure all columns exist and are in the right order
+            df = df[columns_to_display]
+            
             # Ensure the DataFrame is sorted in the same order as the SQL query
             df = df.sort_values(by='Date', ascending=False)
 

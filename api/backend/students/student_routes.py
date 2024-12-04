@@ -137,7 +137,7 @@ def get_available_housing():
         h.HousingID,
         h.Style,
         h.Availability,
-        cc.Location as community_name,
+        cc.Location as Location,
         h.CommunityID
     FROM Housing h
     LEFT JOIN CityCommunity cc ON h.CommunityID = cc.CommunityID

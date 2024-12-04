@@ -10,8 +10,6 @@ def HomeNav():
     st.sidebar.page_link("Home.py", label="Home", icon="🏠")
 
 
-def AboutPageNav():
-    st.sidebar.page_link("pages/50_About.py", label="About", icon="🧠")
 
 
 #### ------------------------ Role of Technical Support Analyst ------------------------
@@ -95,8 +93,6 @@ def SideBarLinks(show_home=False):
         if st.session_state["role"] == "Student2":
             SarahPageNav()
 
-    # Always show the About page at the bottom of the list of links
-    AboutPageNav()
 
     if st.session_state["authenticated"]:
         # Always show a logout button if there is a logged in user

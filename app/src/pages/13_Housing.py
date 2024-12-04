@@ -27,18 +27,46 @@ try:
         preferences_df = pd.DataFrame(preferences_data)
         housing_df = pd.DataFrame(housing_data)
         
+        # Reorder columns for preferences table to match SQL
+        preferences_columns = [
+            'StudentID',
+            'student_name',
+            'HousingStatus',
+            'Budget',
+            'LeaseDuration',
+            'Cleanliness',
+            'Lifestyle',
+            'CommuteTime',
+        ]
+        
+        
+        # Reorder columns for housing table to match SQL
+        housing_columns = [
+            'HousingID',
+            'Style',
+            'Availability',
+            'Location',
+        ]
+        
+        # Ensure all columns exist and are in the right order
+        preferences_df = preferences_df[preferences_columns]
+        housing_df = housing_df[housing_columns]
+        
         # Create two columns for the layout
         col1, col2 = st.columns(2)
         
         with col1:
             st.subheader("Student Housing Preferences")
             if len(preferences_df) > 0:
-                # Filters for students
-                student_name_filter = st.text_input("Search by Student Name")
-                housing_status_filter = st.multiselect(
-                    "Filter by Housing Status",
-                    options=['Searching for Housing', 'Searching for Roommates', 'Complete']
-                )
+                # Put filters in two columns
+                filter_col1, filter_col2 = st.columns(2)
+                with filter_col1:
+                    student_name_filter = st.text_input("Search by Student Name")
+                with filter_col2:
+                    housing_status_filter = st.multiselect(
+                        "Filter by Housing Status",
+                        options=['Searching for Housing', 'Searching for Roommates', 'Complete']
+                    )
                 
                 # Apply filters
                 filtered_preferences = preferences_df.copy()
@@ -59,11 +87,15 @@ try:
         with col2:
             st.subheader("Available Housing")
             if len(housing_df) > 0:
+                # Add some vertical space to align with left table
+                st.write("")
+                st.write("")
+                
                 # Filters for housing
                 availability_filter = st.multiselect(
                     "Filter by Availability",
                     options=['Available', 'Vacant', 'Pending Approval', 'Occupied'],
-                    default=['Vacant']
+                    default=['Available', 'Vacant']
                 )
                 
                 # Apply filters
