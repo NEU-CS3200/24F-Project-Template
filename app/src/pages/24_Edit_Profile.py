@@ -12,14 +12,14 @@ st.title('My Profile')
 
 company=st.text_input('Company')
 location=st.text_input('Location')
-housing_status=st.text_input('Housing Status')
-carpool_status=st.text_input('Carpool Status')
+housing_status=st.text_input('Housing Status', placeholder='e.g. Searching for Housing')
+carpool_status=st.text_input('Carpool Status', placeholder='e.g. Has Car')
 budget= st.number_input('Budget', min_value=1000, max_value=3000, step=50)
-lease_duration=st.text_input('Lease Duration')
-#cleanliness = st.number_input('Cleanliness')
-lifestyle = st.text_input('Lifestyle')
-#commute_time = st.number_input('Commute Time')
-#commute_days = st.number_input('Commute Days')
+lease_duration=st.text_input('Lease Duration', placeholder='e.g. 1 year, 6 months')
+cleanliness = st.number_input('Cleanliness', min_value=1, max_value=5, step=1)
+lifestyle = st.text_input('Lifestyle', placeholder='e.g. Active, Quiet')
+commute_time = st.number_input('Commute Time (minutes)', min_value=10, max_value=70, step=5)
+commute_days = st.number_input('Number of Commute Days', min_value=1, max_value=5, step=1)
 bio = st.text_input('Biography')
 
 url = 'http://api:4000/c/profile'
@@ -32,10 +32,10 @@ if st.button('Create Profile'):
         "CarpoolStatus" :carpool_status,
         "Budget" : budget,
         "LeaseDuration" : lease_duration,
-        #"Cleanliness" : cleanliness,
+        "Cleanliness" : cleanliness,
         "Lifestyle" : lifestyle,
-        #"CommuteTime": commute_time,
-        #"CommuteDays" : commute_days,
+        "CommuteTime": commute_time,
+        "CommuteDays" : commute_days,
         "Bio" : bio
     }
     response = requests.put(url, json=data)

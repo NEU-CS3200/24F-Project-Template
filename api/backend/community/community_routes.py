@@ -99,33 +99,36 @@ def get_profile(name):
     response.status_code = 200
     return response
 
-# 
+# kevins profile - update
 @community.route('/profile', methods=['PUT'])
 def update_profile():
-    # Get the data sent with the PUT request
     the_data = request.json
     current_app.logger.info(the_data)
 
-    # Extract relevant fields from the received data
     company = the_data.get('Company')
     location = the_data.get('Location')
     housing_status = the_data.get('HousingStatus')
     carpool_status = the_data.get('CarpoolStatus')
     lease_duration = the_data.get('LeaseDuration')
-    budget = the_date.get('Budget')
+    budget = the_data.get('Budget')
+    cleanliness = the_data.get('Cleanliness')
+    lifestyle = the_data.get('Lifestyle')
+    time = the_data.get('CommuteTime')
+    days = the_data.get('CommuteDays')
     bio = the_data.get('Bio')
 
     query = '''
     UPDATE Student
     SET Company = %s, Location = %s, HousingStatus = %s,
-        CarpoolStatus = %s, Budget = %s, LeaseDuration = %s, Bio = %s
+        CarpoolStatus = %s, Budget = %s, LeaseDuration = %s, 
+        Cleanliness = %s, Lifestyle=%s, CommuteTime=%s, CommuteDays=%s, Bio = %s
     WHERE Name = 'Kevin Chen'
     '''
     
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
-    cursor.execute(query, (company, location, housing_status, carpool_status, budget, lease_duration, bio))
+    cursor.execute(query, (company, location, housing_status, carpool_status, budget, lease_duration, cleanliness, lifestyle, time, days, bio))
     db.get_db().commit()
 
     # Return success response
