@@ -14,7 +14,7 @@ st.title("Student Tasks")
 
 # Load and display task data
 try:
-    response = requests.get('http://api:4000/api/advisor/tasks')
+    response = requests.get('http://api:4000/api/advisor')
     if response.status_code == 200:
         data = response.json()
         if data:
