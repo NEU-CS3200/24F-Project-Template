@@ -1,21 +1,16 @@
-<<<<<<< HEAD
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 import logging
-=======
->>>>>>> 2077be10ba693456e2fb92b0c8eae83d8ca62c9d
 import streamlit as st
-import pandas as pd
 import requests
+import pandas as pd
+from modules.nav import SideBarLinks
+
 
 # Configure Streamlit page
 st.set_page_config(layout='wide')
 st.title("All Tasks")
 
 # API endpoint for tasks
-api_url = 'http://localhost:4000/api/advisor/tasks'
+api_url = 'http://localhost:4000/api/advisor'
 
 # Fetch task data from the API
 try:
