@@ -43,12 +43,19 @@ with st.form("student_search"):
             logger.info(f"Student form submitted with data: {student_value}")
 
             try:
-                response = requests.get(
+                response1 = requests.get(
                     f"http://api:4000/stu/students/search/{student_value}"
                 )
-                if response.status_code == 200:
-                    st.success(f"{response.json()}")
-                else:
-                    st.error(f"Error adding accessing api: {response.status_code}")
+                response2 = requests.get(
+                    f"http://api:4000/stu/students/{student_value}"
+                )
+                if response1.status_code == 200:
+                    if len(response1.json()) != 0:
+                        df = pd.json_normalize(response1.json())
+                        st.write(df)
+                if response2.status_code == 200:
+                    if len(response2.json()) != 0:
+                        df = pd.json_normalize(response2.json())
+                        st.write(df)
             except requests.exceptions.RequestException as e:
                 st.error(f"Error connecting to server: {str(e)}")
