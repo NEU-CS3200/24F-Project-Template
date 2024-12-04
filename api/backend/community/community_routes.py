@@ -106,30 +106,29 @@ def create_profile():
     the_data = request.json
     current_app.logger.info(the_data)
 
-    company=the_data['Company']
-    location=the_data['Location']
-    housing_status=the_data['HousingStatus']
-    carpool_status=the_data['CarpoolStatus']
-    budget=the_data['Budget']
-    lease_duration=the_data['LeaseDuration']
-    cleanliness = the_data['Cleanliness']
-    lifestyle = the_data['Lifestyle']
-    commute_time = the_data['CommuteTime']
-    commute_days = the_data['CommuteDays']
-    bio = the_data['Bio']
+    name = the_data.get('Name', None)
+    major = the_data.get('Major', None)
+    company = the_data.get('Company', None)
+    location = the_data.get('Location', None)
+    housing_status = the_data.get('HousingStatus', None)
+    carpool_status = the_data.get('CarpoolStatus', None)
+    #budget = the_data.get('Budget', float('nan'))
+    lease_duration = the_data.get('LeaseDuration', None)
+    #cleanliness = the_data.get('Cleanliness', None)
+    #lifestyle = the_data.get('Lifestyle', None)
+    #commute_time = the_data.get('CommuteTime', None)
+    #commute_days = the_data.get('CommuteDays', None)
+    bio = the_data.get('Bio', None)
 
     query = '''
-    INSERT INTO Student (Company, Location, HousingStatus, CarpoolStatus,
-                            Budget, LeaseDuration, Cleanliness, Lifestyle,
-                            CommuteTime, CommuteDays, Bio)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    INSERT INTO Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus,
+                            LeaseDuration, Bio)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
     '''
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
-    cursor.execute(query, (company, location, housing_status, carpool_status,
-                       budget, lease_duration, cleanliness, lifestyle,
-                       commute_time, commute_days, bio))
+    cursor.execute(query, (name, major, company, location, housing_status, carpool_status, lease_duration, bio))
     db.get_db().commit()
     
     response = make_response("Successfully added product")

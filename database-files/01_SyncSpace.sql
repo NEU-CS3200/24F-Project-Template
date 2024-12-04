@@ -170,10 +170,7 @@ UPDATE Task
 SET Status = 'Completed'
 WHERE TaskID = 5;
 
--- 3.2 Commenting out to insert own data from application
---INSERT INTO Student (Name, Major)
---VALUES ('Kevin Chen','Data Science and Business'
---);
+-- 3.2 
 
 
 -- 4.3 

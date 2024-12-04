@@ -17,7 +17,7 @@ st.write('### What would you like to do today?')
 if st.button('Access My Profile', 
              type='primary', 
              use_container_width=True):
-    st.switch_page('pages/23_My_Profile.py')
+    st.switch_page('pages/24_Edit_Profile.py')
 
 if st.button('Access Housing & Transit Search', 
              type='primary', 
