@@ -9,7 +9,7 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('Advisor Communications')
+st.title('Housing in Your Location')
 
 def get_profile(name):
     url = f'http://api:4000/c/profile/{name}'
