@@ -14,10 +14,10 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button('View or Edit Company Positions', 
+if st.button('View or Edit Job Postings', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_company_positions.py')
+  st.switch_page('pages/02_job_postings.py')
 
 if st.button('View Student Feedback', 
              type='primary',
