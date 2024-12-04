@@ -6,8 +6,9 @@ from backend.products.products_routes import products
 from backend.simple.simple_routes import simple_routes
 from backend.students.student2_routes import student2
 
-from backend.community.community_routes import community
-from backend.students.student_routes import students
+#from backend.community.community_routes import community
+from backend.student_kevin.kevin_routes import kevin
+#from backend.students.student_routes import students
 import os
 from dotenv import load_dotenv
 
@@ -50,7 +51,7 @@ def create_app():
     
     #app.register_blueprint(simple_routes)
     #app.register_blueprint(customers,   url_prefix='/c')
-    app.register_blueprint(community,    url_prefix='/c')
+    app.register_blueprint(kevin,    url_prefix='/c')
     app.register_blueprint(students, url_prefix='/api')
 
     # Don't forget to return the app object

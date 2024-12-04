@@ -21,6 +21,7 @@ lifestyle = st.text_input('Lifestyle', placeholder='e.g. Active, Quiet')
 commute_time = st.number_input('Commute Time (minutes)', min_value=10, max_value=70, step=5)
 commute_days = st.number_input('Number of Commute Days', min_value=1, max_value=5, step=1)
 bio = st.text_input('Biography')
+name = st.session_state['first_name']
 
 url = 'http://api:4000/c/profile'
 
@@ -36,7 +37,8 @@ if st.button('Create Profile'):
         "Lifestyle" : lifestyle,
         "CommuteTime": commute_time,
         "CommuteDays" : commute_days,
-        "Bio" : bio
+        "Bio" : bio,
+        "Name": name
     }
     response = requests.put(url, json=data)
 

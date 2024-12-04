@@ -7,9 +7,9 @@ from backend.db_connection import db
 
 # Kevin routes 
 
-community = Blueprint('community', __name__)
+kevin = Blueprint('kevin', __name__)
 
-@community.route('/community/<communityid>/housing', methods=['GET'])
+@kevin.route('/community/<communityid>/housing', methods=['GET'])
 # Route for retrieving housing for students in the same community
 def community_housing(communityid):
     cleanliness_filter = request.args.get('cleanliness', type=int)
@@ -46,7 +46,7 @@ def community_housing(communityid):
     return response
 
 
-@community.route('/community/<communityid>/carpool', methods=['GET'])
+@kevin.route('/community/<communityid>/carpool', methods=['GET'])
 def community_carpool(communityid):
     time_filter = request.args.get('commute_time', type=int)
     days_filter = request.args.get('commute_days', type=int)
@@ -77,7 +77,7 @@ def community_carpool(communityid):
     return response
 
 # retrieve kevin's profile
-@community.route('/profile/<name>', methods=['GET'])
+@kevin.route('/profile/<name>', methods=['GET'])
 def get_profile(name):
     query = '''
     SELECT *
@@ -97,7 +97,7 @@ def get_profile(name):
     return response
 
 # kevins profile - update
-@community.route('/profile', methods=['PUT'])
+@kevin.route('/profile', methods=['PUT'])
 def update_profile():
     the_data = request.json
     current_app.logger.info(the_data)
@@ -113,19 +113,20 @@ def update_profile():
     time = the_data.get('CommuteTime')
     days = the_data.get('CommuteDays')
     bio = the_data.get('Bio')
+    name = the_data.get('Name')
 
     query = '''
     UPDATE Student
     SET Company = %s, Location = %s, HousingStatus = %s,
         CarpoolStatus = %s, Budget = %s, LeaseDuration = %s, 
         Cleanliness = %s, Lifestyle=%s, CommuteTime=%s, CommuteDays=%s, Bio = %s
-    WHERE Name = 'Kevin Chen'
+    WHERE Name = %s
     '''
     
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
-    cursor.execute(query, (company, location, housing_status, carpool_status, budget, lease_duration, cleanliness, lifestyle, time, days, bio))
+    cursor.execute(query, (company, location, housing_status, carpool_status, budget, lease_duration, cleanliness, lifestyle, time, days, bio, name))
     db.get_db().commit()
 
     response = make_response({"message": "Profile updated successfully"})
@@ -133,8 +134,8 @@ def update_profile():
     return response
 
 # obtain housing resources based on location
-@community.route('/community/<community_id>/housing-resources', methods=['GET'])
-def get_feedback(community_id):
+@kevin.route('/community/<community_id>/housing-resources', methods=['GET'])
+def get_resources(community_id):
     query = '''
     SELECT * FROM
     CityCommunity c
@@ -153,5 +154,36 @@ def get_feedback(community_id):
     return response
 
 # route to provide feedback to advisor
-#@community.route('/feedback', methods=['POST'])
+@kevin.route('/feedback', methods=['POST'])
+def give_feedback():
+    data = request.json
+    current_app.logger.info(data)
+
+    description = data['Description']
+    date = data['Date']
+    rating = data['ProgressRating']
+    student_id = data['StudentID']
+    advisor_id = data['AdvisorID']
+
+    query = '''
+    INSERT INTO Feedback (Description, Date, ProgressRating, StudentID, AdvisorID)
+        VALUES (%s, %s, %s, %s, %s)
+    '''
+
+    current_app.logger.info(query)
+    connection = db.get_db()  # Get the actual database connection
+    cursor = connection.cursor()  # Get a cursor from the connection
+
+    cursor.execute(query, (description, date, rating, student_id, advisor_id))
+    connection.commit()  # Commit the transaction
+
+    cursor.close()  # Always close the cursor after use
+
+    response = make_response("Successfully added feedback")
+    response.status_code = 200
+    return response
+    
+    
+
+
 

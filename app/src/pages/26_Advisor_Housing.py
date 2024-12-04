@@ -9,7 +9,7 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('Advisor Communications')
+st.title('Housing in Your Location')
 
 def get_profile(name):
     url = f'http://api:4000/c/profile/{name}'
@@ -20,7 +20,7 @@ def get_profile(name):
         st.error(f"Error fetching data: {response.status_code}")
         return []
 
-name = 'Kevin Chen'
+name = st.session_state['first_name']
 student = get_profile(name)
 
 def get_id(communityid):
