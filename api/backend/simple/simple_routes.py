@@ -1,48 +1,53 @@
-from flask import Blueprint, request, jsonify, make_response, current_app, redirect, url_for
-import json
+from flask import (
+    Blueprint,
+    request,
+    jsonify,
+    make_response,
+    current_app,
+)
 from backend.db_connection import db
-from backend.simple.playlist import sample_playlist_data
 
 # This blueprint handles some basic routes that you can use for testing
-simple_routes = Blueprint('simple_routes', __name__)
+simple_routes = Blueprint("simple_routes", __name__)
 
 
 # ------------------------------------------------------------
 # / is the most basic route
-# Once the api container is started, in a browser, go to 
+# Once the api container is started, in a browser, go to
 # localhost:4000/playlist
-@simple_routes.route('/')
+@simple_routes.route("/")
 def welcome():
-    current_app.logger.info('GET / handler')
-    welcome_message = '<h1>Welcome to the CS 3200 Project Template REST API'
+    current_app.logger.info("GET / handler")
+    welcome_message = "<h1>Welcome to the cosint REST API</h1>"
     response = make_response(welcome_message)
     response.status_code = 200
     return response
 
-# ------------------------------------------------------------
-# /playlist returns the sample playlist data contained in playlist.py
-# (imported above)
-@simple_routes.route('/playlist')
-def get_playlist_data():
-    current_app.logger.info('GET /playlist handler')
-    response = make_response(jsonify(sample_playlist_data))
+
+@simple_routes.route("/test")
+def api_test():
+    message = "API is working"
+    response = make_response(jsonify({"message": message}))
     response.status_code = 200
     return response
 
-# ------------------------------------------------------------
-@simple_routes.route('/niceMesage', methods = ['GET'])
-def affirmation():
-    message = '''
-    <H1>Think about it...</H1>
-    <br />
-    You only need to be 1% better today than you were yesterday!
-    '''
-    response = make_response(message)
+
+@simple_routes.route("/create_help_ticket")
+def create_help_ticket():
+    data = request.get_json()
+
+    query = f"""
+        INSERT INTO help_tickets (userId, summary, completed) VALUES
+        (
+            {int(data['userId'])}, "{data['summary']}", 0
+        );
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
     response.status_code = 200
     return response
-
-# ------------------------------------------------------------
-# Demonstrates how to redirect from one route to another. 
-@simple_routes.route('/message')
-def mesage():
-    return redirect(url_for(affirmation))
