@@ -54,11 +54,11 @@ def create_help_ticket():
 
 
 @simple_routes.route("/users/<user_id>", methods=["GET"])
-def get_user():
-    query = """
+def get_user(user_id):
+    query = f"""
         SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.preferredName, u.pronouns, u.major, u.year, u.birthday, u.profilePic, u.role, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin 
         FROM users u 
-        WHERE u.id = int{int(user_id)}
+        WHERE u.id = {int(user_id)}
     """
 
     cursor = db.get_db().cursor()

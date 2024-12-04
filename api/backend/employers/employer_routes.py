@@ -11,7 +11,7 @@ employers = Blueprint("employers", __name__)
 
 
 @employers.route("/employees", methods=["GET"])
-def get_employees():
+def get_all_employees():
     query = """
         SELECT u.id, u.companyId, u.name, u.firstName, u.middleName, u.lastName, u.preferredName, u.pronouns, u.major, u.year, u.birthday, u.profilePic, u.role, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin FROM users u 
         WHERE companyId IS NOT NULL
@@ -44,7 +44,7 @@ def get_employees(id):
     return response
 
 @employers.route("/emp_company/<name>", methods=["GET"])
-def get_employees(name):
+def get_employees_by_company(name):
     query = f"""
         SELECT * FROM users u
         JOIN companies c ON u.companyId = c.id
@@ -62,7 +62,7 @@ def get_employees(name):
     return response
 
 @employers.route("/emp_name/<name>", methods=["GET"])
-def get_employees(name):
+def get_employee_by_name(name):
     query = f"""
         SELECT * FROM users u
         WHERE name LIKE CONCAT('%', {name}, '%') AND companyId IS NOT NULL

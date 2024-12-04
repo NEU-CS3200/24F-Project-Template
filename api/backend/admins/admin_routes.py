@@ -62,7 +62,7 @@ def get_tickets():
 
 
 @admins.route("/tickets/<ticket_id>", methods=["GET"])
-def get_tickets(ticket_id):
+def get_tickets_by_id(ticket_id):
     query = """
         SELECT u.name AS 'helping', h.name AS 'assignedTo', t.summary, t.completed, t.updatedAt, t.registeredAt FROM cosint.tickets t
         JOIN cosint.users u ON t.helperId = u.id
