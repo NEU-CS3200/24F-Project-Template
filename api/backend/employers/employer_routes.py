@@ -89,6 +89,27 @@ def create_pos(id):
     return response
 
 
+@employers.route("/<id>/positions/<pos_id>", methods=["POST"])
+def offer_position(id, pos_id):
+    data = request.get_json()
+
+    query = f"""
+        INSERT INTO cosint.offer_list (positionId, userId) VALUES
+        (
+            {int(pos_id)}, {int(data["userId"])}
+        );
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
 @employers.route("/<id>/positions", methods=["GET"])
 def get_positions(id):
     query = f"""

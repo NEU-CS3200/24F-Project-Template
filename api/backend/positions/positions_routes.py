@@ -91,8 +91,98 @@ def get_contact(id):
     return response
 
 
-# Example of a PUT request
-# curl http://127.0.0.1:4000/pos/positions/1/update -X PUT -H 'Content-Type: application/json' -d '{ "id": 1, "summary": "Front end engineer" }'
+# curl http://127.0.0.1:4000/pos/positions/1/job_count -X GET
+
+
+@positions.route("/positions/<id>/job_count", methods=["GET"])
+def get_job_count(id):
+    query = f"""
+        SELECT COUNT(w.name) AS numPreviousJobs, pa.applicationId FROM cosint.positions p
+            JOIN cosint.position_application_bookmark pa ON p.id = pa.positionId
+            JOIN cosint.work_experience w ON pa.applicationId = w.applicationId
+        WHERE p.id = {int(id)}
+        GROUP BY pa.applicationId;
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
+@positions.route("/positions/<id>/summaries", methods=["GET"])
+def get_summaries(id):
+    query = f"""
+        SELECT a.id, a.summary, a.questionResponse FROM cosint.positions p
+            JOIN position_application_bookmark pa ON p.id = pa.positionId
+            JOIN cosint.applications a on pa.applicationId = a.id
+        WHERE p.id = {int(id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
+@positions.route("/positions/<id>/high_gpa_applicants", methods=["GET"])
+def get_high_gpa_apps(id):
+    query = f"""
+        SELECT a.id, a.GPA FROM cosint.applications a
+            JOIN cosint.position_application_bookmark pa ON a.id = pa.applicationId
+        WHERE pa.positionId = {id} AND GPA > 2.0;
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
+@positions.route("/positions/<id>/student_contacts", methods=["GET"])
+def get_student_contacts(id):
+    query = f"""
+        SELECT pa.applicationId, u.email FROM cosint.positions p
+            JOIN cosint.position_application_bookmark pa ON p.id = pa.positionId
+            JOIN cosint.application_bookmark a ON pa.applicationId = a.applicationId
+            JOIN cosint.users u ON a.userId = u.id
+        WHERE p.id = {int(id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
+@positions.route("/positions/<id>/coursework", methods=["GET"])
+def pos_coursework(id):
+    query = f"""
+        SELECT pa.applicationId, r.name, r.summary FROM cosint.positions p
+            JOIN cosint.position_application_bookmark pa ON p.id = pa.positionId
+            JOIN cosint.related_coursework r ON pa.applicationId = r.applicationId
+        WHERE p.id = {int(id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
 
 
 @positions.route("/positions/detailed", methods=["GET"])
@@ -117,6 +207,10 @@ def detailed_pos():
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+
+# Example of a PUT request
+# curl http://127.0.0.1:4000/pos/positions/1/update -X PUT -H 'Content-Type: application/json' -d '{ "id": 1, "summary": "Front end engineer" }'
 
 
 @positions.route("/positions/<id>/update", methods=["PUT"])
