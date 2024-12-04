@@ -12,19 +12,26 @@ tech_support_analyst = Blueprint('tech_support_analyst', __name__)
 @tech_support_analyst.route('/SystemLog', methods=['GET'])
 def get_SystemLog():
     query = '''
-        SELECT  TicketID, 
-                Timestamp, 
-                Activity, 
-                MetricType, 
-                Privacy,
-                Security 
+        SELECT LogID, 
+               TicketID, 
+               Timestamp, 
+               Activity, 
+               MetricType, 
+               Privacy, 
+               Security 
         FROM SystemLog
     '''
     
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()
-    response = make_response(jsonify(theData))
+    
+    # Convert the fetched data (list of tuples) to a list of dictionaries
+    column_names = ["LogID", "TicketID", "Timestamp", "Activity", "MetricType", "Privacy", "Security"]
+    formatted_data = [dict(zip(column_names, row)) for row in theData]
+    
+    # Return the formatted data as JSON
+    response = make_response(jsonify(formatted_data))
     response.status_code = 200
     return response
 

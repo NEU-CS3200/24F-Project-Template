@@ -14,7 +14,7 @@ st.title("Real-Time App Diagnostics")
 st.write("### Monitor system activity and analyze logs in real-time.")
 
 # Backend API URL
-API_URL = "http://api:4000/t/SystemLog"  # Replace with your backend API URL
+API_URL = "http://api:4000/t/SystemLog" 
 
 # Fetch System Logs
 @st.cache_data(show_spinner=True)
@@ -24,12 +24,11 @@ def fetch_system_logs():
         response = requests.get(API_URL)
         response.raise_for_status()  # Raise exception for HTTP errors
         data = response.json()  # Assuming API returns JSON
-        # Convert to DataFrame for better handling
-        logs_df = pd.DataFrame(data, columns=["TicketID", "Timestamp", "Activity", "MetricType", "Privacy", "Security"])
+        logs_df = pd.DataFrame(data, columns=["LogID", "TicketID", "Timestamp", "Activity", "MetricType", "Privacy", "Security"])
         return logs_df
     except requests.exceptions.RequestException as e:
         st.error(f"Error fetching system logs: {e}")
-        return pd.DataFrame()
+        return pd.DataFrame()  # Return empty DataFrame on error
 
 # Fetch data
 logs_df = fetch_system_logs()
