@@ -16,46 +16,45 @@ st.write("### Monitor system activity and analyze logs in real-time.")
 # Backend API URL
 API_URL = "http://api:4000/t/SystemLog"  # Replace with your backend API URL
 
-# Fetch Logs from API
+# Fetch System Logs
 @st.cache_data(show_spinner=True)
 def fetch_system_logs():
-    """Fetch system logs from the Flask API."""
+    """Fetch logs from the Flask API."""
     try:
         response = requests.get(API_URL)
-        response.raise_for_status()
-        logs = response.json()  # Assuming the API returns a JSON list
-        # Convert to a DataFrame for easier handling
-        logs_df = pd.DataFrame(logs, columns=["TicketID", "Timestamp", "Activity", "MetricType", "Privacy", "Security"])
+        response.raise_for_status()  # Raise exception for HTTP errors
+        data = response.json()  # Assuming API returns JSON
+        # Convert to DataFrame for better handling
+        logs_df = pd.DataFrame(data, columns=["TicketID", "Timestamp", "Activity", "MetricType", "Privacy", "Security"])
         return logs_df
     except requests.exceptions.RequestException as e:
-        st.error(f"Failed to fetch system logs: {e}")
+        st.error(f"Error fetching system logs: {e}")
         return pd.DataFrame()
 
-# Fetch the logs
+# Fetch data
 logs_df = fetch_system_logs()
 
 # Display Logs
 if not logs_df.empty:
     st.write("### System Logs")
-    
-    # Add Filters
+    # Interactive Filters
     col1, col2 = st.columns(2)
     with col1:
-        activity_filter = st.multiselect("Filter by Activity", options=logs_df["Activity"].unique(), default=logs_df["Activity"].unique())
+        activity_filter = st.multiselect("Filter by Activity", logs_df["Activity"].unique(), default=logs_df["Activity"].unique())
     with col2:
-        metric_filter = st.multiselect("Filter by Metric Type", options=logs_df["MetricType"].unique(), default=logs_df["MetricType"].unique())
+        metric_filter = st.multiselect("Filter by Metric Type", logs_df["MetricType"].unique(), default=logs_df["MetricType"].unique())
 
     # Apply Filters
     filtered_logs = logs_df[
-        (logs_df["Activity"].isin(activity_filter)) & 
+        (logs_df["Activity"].isin(activity_filter)) &
         (logs_df["MetricType"].isin(metric_filter))
     ]
 
-    # Display Filtered Data
+    # Display Filtered Logs
     st.dataframe(filtered_logs, use_container_width=True)
 
-    # Metrics Summary
-    st.write("### Diagnostics Summary")
+    # Summary Metrics
+    st.write("### Summary Metrics")
     col1, col2, col3 = st.columns(3)
     with col1:
         st.metric("Total Logs", len(filtered_logs))
@@ -66,10 +65,10 @@ if not logs_df.empty:
 
     # Download Filtered Logs
     st.write("### Export Data")
-    csv = filtered_logs.to_csv(index=False)
+    csv_data = filtered_logs.to_csv(index=False)
     st.download_button(
         label="Download Logs as CSV",
-        data=csv,
+        data=csv_data,
         file_name="filtered_system_logs.csv",
         mime="text/csv",
     )
@@ -79,4 +78,4 @@ else:
 # Footer
 st.write("---")
 st.write("#### Notes")
-st.text("This page refreshes automatically with the latest system logs.")
+st.text("Data fetched directly from the system logs API in real time.")
