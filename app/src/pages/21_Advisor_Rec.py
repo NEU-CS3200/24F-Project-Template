@@ -36,16 +36,15 @@ student = get_profile(name)
 if student and isinstance(student, list):
     record = student[0]
     reminders = record.get('Reminder')
+    st.write(f'🔔 You have {reminders} reminders from your advisor')
+    st.write('')
     s_id = record.get('StudentID')
-    
     feedback = get_feedback(s_id)
     df = pd.DataFrame(feedback)
-    st.write(df)
+    st.write('Past Reports')
+    st.write(df[['Date', 'Description', 'ProgressRating']])
 
     
-    st.write(f'🔔 You have {reminders} reminders from your advisor')
-
-st.write('')
 st.write('')
 st.write('')
     

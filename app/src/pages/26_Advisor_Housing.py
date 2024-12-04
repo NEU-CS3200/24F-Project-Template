@@ -20,7 +20,7 @@ def get_profile(name):
         st.error(f"Error fetching data: {response.status_code}")
         return []
 
-name = 'Kevin Chen'
+name = st.session_state['first_name']
 student = get_profile(name)
 
 def get_id(communityid):
