@@ -14,7 +14,7 @@ st.title("Run System Logs")
 st.write("### Analyze and export system logs for troubleshooting.")
 
 # Backend API Configuration
-API_URL = "http://your_backend_url/SystemLog"  # Replace with actual backend URL
+API_URL = "http://api:4000/c/SystemLog"  # Replace with actual backend URL
 
 # Fetch Logs from Backend
 @st.cache_data(show_spinner=True)
