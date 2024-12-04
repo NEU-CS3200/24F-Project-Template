@@ -14,10 +14,10 @@ SideBarLinks()
 st.title(f"Student Search")
 
 try:
-    student_search = requests.get('http://api:4000/stu/search')
+    test_response = requests.get('http://api:4000/stu/students')
     
-    if student_search.status_code == 200:
-        student_search_data = student_search.json()
+    if test_response.status_code == 200:
+        student_search_data = test_response.json()
         category_options = [""] + [category['value'] for category in categories_data]
     else:
         st.error("Failed to fetch categories")
@@ -44,10 +44,10 @@ with st.form("student_search"):
         if not student_value:
             st.error("Please enter a student name or id")
         else:
-            logger.info(f"Product form submitted with data: {student_search_data}")
+            logger.info(f"Product form submitted with data: {student_value}")
             
             try:
-                response = requests.post(f'http://api:4000/stu/student_search/{student_search_data}')
+                response = requests.post(f'http://api:4000/stu/student_search/{student_value}')
                 if response.status_code == 200:
                     st.success("Student added successfully!")
                 else:
