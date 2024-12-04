@@ -14,7 +14,7 @@ from backend.db_connection import db
 # routes.
 students = Blueprint('students', __name__)
 
-@students.route('/student/<student_id>', methods=['GET'])
+@students.route('/students/<student_id>', methods=['GET'])
 def get_student(student_id):
 
     cursor = db.get_db().cursor()
