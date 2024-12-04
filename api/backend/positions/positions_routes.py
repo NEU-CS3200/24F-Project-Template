@@ -91,6 +91,9 @@ def get_contact(id):
     return response
 
 
+# curl http://127.0.0.1:4000/pos/positions/1/job_count -X GET
+
+
 @positions.route("/positions/<id>/job_count", methods=["GET"])
 def get_job_count(id):
     query = f"""
@@ -113,9 +116,9 @@ def get_job_count(id):
 @positions.route("/positions/<id>/summaries", methods=["GET"])
 def get_summaries(id):
     query = f"""
-        SELECT a.summary, a.questionResponse FROM cosint.positions p
+        SELECT a.id, a.summary, a.questionResponse FROM cosint.positions p
             JOIN position_application_bookmark pa ON p.id = pa.positionId
-            JOIN cosint.applications a on pa.applicationId = a.id;
+            JOIN cosint.applications a on pa.applicationId = a.id
         WHERE p.id = {int(id)};
     """
 
@@ -131,7 +134,7 @@ def get_summaries(id):
 @positions.route("/positions/<id>/high_gpa_applicants", methods=["GET"])
 def get_high_gpa_apps(id):
     query = f"""
-        SELECT a.GPA FROM cosint.applications a
+        SELECT a.id, a.GPA FROM cosint.applications a
             JOIN cosint.position_application_bookmark pa ON a.id = pa.applicationId
         WHERE pa.positionId = {id} AND GPA > 2.0;
     """
@@ -148,8 +151,8 @@ def get_high_gpa_apps(id):
 @positions.route("/positions/<id>/student_contacts", methods=["GET"])
 def get_student_contacts(id):
     query = f"""
-        SELECT u.email FROM cosint.positions p
-            JOIN cosint.position_application_bookmark pa ON p.id = pa.positionId;
+        SELECT pa.applicationId, u.email FROM cosint.positions p
+            JOIN cosint.position_application_bookmark pa ON p.id = pa.positionId
             JOIN cosint.application_bookmark a ON pa.applicationId = a.applicationId
             JOIN cosint.users u ON a.userId = u.id
         WHERE p.id = {int(id)};
@@ -167,7 +170,7 @@ def get_student_contacts(id):
 @positions.route("/positions/<id>/coursework", methods=["GET"])
 def pos_coursework(id):
     query = f"""
-        SELECT r.name, r.summary FROM cosint.positions p
+        SELECT pa.applicationId, r.name, r.summary FROM cosint.positions p
             JOIN cosint.position_application_bookmark pa ON p.id = pa.positionId
             JOIN cosint.related_coursework r ON pa.applicationId = r.applicationId
         WHERE p.id = {int(id)};

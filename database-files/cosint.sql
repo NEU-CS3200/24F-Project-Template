@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS related_coursework
   name varchar(30) NOT NULL,
   summary text,
   PRIMARY KEY (applicationId, name),
-  CONSTRAINT fk_08 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT fk_08 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS notable_skills
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS notable_skills
   name varchar(30) NOT NULL,
   summary text,
   PRIMARY KEY (applicationId, name),
-  CONSTRAINT fk_09 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT fk_09 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS work_experience 
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS work_experience
   name varchar(30) NOT NULL,
   summary text,
   PRIMARY KEY (applicationId, name),
-  CONSTRAINT fk_10 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT fk_10 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS position_user_bookmark
@@ -131,8 +131,8 @@ CREATE TABLE IF NOT EXISTS position_user_bookmark
   positionId int, 
   userId int, 
   PRIMARY KEY (positionId, userId),
-  CONSTRAINT fk_12 FOREIGN KEY (positionId) REFERENCES positions (id) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT fk_13 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT fk_12 FOREIGN KEY (positionId) REFERENCES positions (id) ON UPDATE CASCADE,
+  CONSTRAINT fk_13 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS application_bookmark
@@ -140,8 +140,8 @@ CREATE TABLE IF NOT EXISTS application_bookmark
   applicationId int,
   userId int,
   PRIMARY KEY (applicationId, userId),
-  CONSTRAINT fk_14 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT fk_15 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT fk_14 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE,
+  CONSTRAINT fk_15 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS position_application_bookmark
@@ -149,8 +149,8 @@ CREATE TABLE IF NOT EXISTS position_application_bookmark
    positionId int,
    applicationId int,
    PRIMARY KEY (positionId, applicationId),
-   CONSTRAINT fk_16 FOREIGN KEY (positionId) REFERENCES positions (id) ON UPDATE CASCADE ON DELETE CASCADE,
-   CONSTRAINT fk_17 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE ON DELETE CASCADE
+   CONSTRAINT fk_16 FOREIGN KEY (positionId) REFERENCES positions (id) ON UPDATE CASCADE,
+   CONSTRAINT fk_17 FOREIGN KEY (applicationId) REFERENCES applications (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS company_user_bookmark
@@ -158,8 +158,8 @@ CREATE TABLE IF NOT EXISTS company_user_bookmark
   companyId int, 
   userId int, 
   PRIMARY KEY (companyId, userId),
-  CONSTRAINT fk_18 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT fk_19 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT fk_18 FOREIGN KEY (companyId) REFERENCES companies (id) ON UPDATE CASCADE,
+  CONSTRAINT fk_19 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS offer_list
@@ -167,6 +167,6 @@ CREATE TABLE IF NOT EXISTS offer_list
   positionId int,
   userId int,
   PRIMARY KEY (positionId, userId),
-  CONSTRAINT fk_20 FOREIGN KEY (positionId) REFERENCES positions (id) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT fk_21 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT fk_20 FOREIGN KEY (positionId) REFERENCES positions (id) ON UPDATE CASCADE,
+  CONSTRAINT fk_21 FOREIGN KEY (userId) REFERENCES users (id) ON UPDATE CASCADE
 );

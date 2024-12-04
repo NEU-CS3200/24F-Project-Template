@@ -29,7 +29,6 @@ def create_app():
 
     application_id = cursor.lastrowid
     user_id = data["userId"]
-    position_id = data["positionId"]
 
     query = f"""
         INSERT INTO application_bookmark (applicationId, userId) VALUES
@@ -48,11 +47,14 @@ def create_app():
     return response
 
 
+# curl http://localhost:4000/app/applications/3/add_position -X POST -H "Content-Type: application/json" -d '{"positionId": 1}'
+
+
 @applications.route("/applications/<id>/add_position", methods=["POST"])
 def add_position(id):
     data = request.get_json()
     query = f"""
-        INSERT INTO application_position (applicationId, positionId) VALUES
+        INSERT INTO position_application_bookmark (applicationId, positionId) VALUES
         (
             {int(id)}, {int(data["positionId"])}
         );
