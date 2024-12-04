@@ -14,63 +14,45 @@ SideBarLinks()
 st.title(f"Student Search")
 
 try:
-    categories_response = requests.get('http://api:4000/p/categories')
+    student_search = requests.get('http://api:4000/stu/search')
     
-    if categories_response.status_code == 200:
-        categories_data = categories_response.json()
+    if student_search.status_code == 200:
+        student_search_data = student_search.json()
         category_options = [""] + [category['value'] for category in categories_data]
     else:
         st.error("Failed to fetch categories")
         category_options = []
 except requests.exceptions.RequestException as e:
-    st.error(f"Error connecting to categories API: {str(e)}")
+    st.error(f"Error connecting to students API: {str(e)}")
     category_options = []
 
 with st.form("student_search"):
     
-    student_input = st.text_input(
+    student_value = student_input = st.text_input(
         "Search Students",
-        placeholder="Enter student name or Id#",
-        key="search")
+        placeholder="Enter student name or Id#",)
 
-    if st.session_state["role"] == "coop_advisor":
-        st.radio(
-            "Student Type",
-            key="student_type",
-            options=["All", "Already Advising",],
-        )
-
-    if st.session_state["role"] == "employer":
-        st.radio(
-            "Student Type",
-            key="student_type",
-            options=["All", "Applied", "Flagged",],
-        )
+#    if st.session_state["role"] == "employer":
+#        student_type = st.radio(
+#            "Student Type",
+#            options=["All", "Applied", "Flagged",],
+#        )
 
     st.form_submit_button('Search')
     
     if submit_button:
-        if not product_name:
-            st.error("Please enter a product name")
-        elif not product_description:
-            st.error("Please enter a product description")
-        elif product_price <= 0:
-            st.error("Please enter a valid product price")
-        elif not product_category:
-            st.error("Please select a product category")
+        if not student_value:
+            st.error("Please enter a student name or id")
         else:
-            product_data = {
-                "product_name": product_name,
-                "product_description": product_description,
-                "product_price": product_price,
-                "product_category": product_category
+            student_search_data = {
+                "product_name": student_value,
             }
-            logger.info(f"Product form submitted with data: {product_data}")
+            logger.info(f"Product form submitted with data: {student_search_data}")
             
             try:
-                response = requests.post('http://api:4000/p/product', json=product_data)
+                response = requests.post('http://api:4000/stu/student_search', json=student_search_data)
                 if response.status_code == 200:
-                    st.success("Product added successfully!")
+                    st.success("Student added successfully!")
                 else:
                     st.error(f"Error adding product: {response.text}")
             except requests.exceptions.RequestException as e:
