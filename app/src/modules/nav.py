@@ -52,7 +52,7 @@ def KevinPageNav():
     st.sidebar.page_link("pages/21_Advisor_Rec.py", label="Advisor Communications", icon="🏫")
     
 def SarahPageNav():
-    st.sidebar.page_link("pages/20_Student_Sarah_Home.py", label="Student Home", icon="📖")
+    st.sidebar.page_link("pages/30_Student_Sarah_Home.py", label="Student Home", icon="📖")
     st.sidebar.page_link("pages/31_Professional_Events.py", label="Events", icon="👤")
     st.sidebar.page_link("pages/32_Browse_Profiles.py", label="Browse Profiles", icon="🏘️")
     st.sidebar.page_link("pages/33_Advisor_Feedback.py", label="Advisor Feedback", icon="🏫")
