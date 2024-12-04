@@ -8,9 +8,6 @@ VALUES
     ('Healthify Solutions'),
     ('EduVenture');
 
-
--- u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.preferredName, u.pronouns, u.major, u.year, u.birthday, u.profilePic, u.role, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin
-
 -- Insert into users
 INSERT INTO users (name, firstName, middleName, lastName, mobile, email, passwordHash, profile, companyId, lastLogin, preferredName, pronouns, major, year, birthday, profilePic, role)
 VALUES
