@@ -14,7 +14,7 @@ st.title("Real-Time App Diagnostics")
 st.write("### Monitor system activity and analyze logs in real-time.")
 
 # Backend API URL
-API_URL = "http://api:4000/c/SystemLog"  # Replace with your backend API URL
+API_URL = "http://api:4000/t/SystemLog"  # Replace with your backend API URL
 
 # Fetch Logs from API
 @st.cache_data(show_spinner=True)
