@@ -25,7 +25,7 @@ try:
         st.write("Preferred Name:")
         st.write(str(data['preferredName']))
         st.write("Age:",)
-        st.write(str(int(date.today().year) - int(data['birthday'].year) - ((date.today().month, date.today().day) < (born.month, born.day))))
+        st.write(str(int(date.today().year) - int(data['birthday'].year) - ((date.today().month, date.today().day) < (data['birthday'].month, data['birthday'].day))))
         st.write("Email:",)
         st.write(str(data['email']))
         st.write("Phone Number:",)
