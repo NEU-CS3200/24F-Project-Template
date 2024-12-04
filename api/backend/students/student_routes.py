@@ -68,7 +68,7 @@ SELECT
 @students.route('/students/housing-preferences', methods=['GET'])
 def get_student_housing_preferences():
     query = '''
-    SELECT 
+    SELECT
         s.StudentID,
         s.Name as student_name,
         s.HousingStatus,
@@ -77,10 +77,8 @@ def get_student_housing_preferences():
         s.Cleanliness,
         s.Lifestyle,
         s.CommuteTime,
-        cc.Name as preferred_community,
         s.CommunityID
     FROM Student s
-    LEFT JOIN CityCommunity cc ON s.CommunityID = cc.CommunityID
     ORDER BY s.StudentID
     '''
     cursor = db.get_db().cursor()
@@ -93,15 +91,14 @@ def get_student_housing_preferences():
 @students.route('/housing/available', methods=['GET'])
 def get_available_housing():
     query = '''
-    SELECT 
+    SELECT
         h.HousingID,
         h.Style,
         h.Availability,
-        cc.Name as community_name,
+        cc.Location as community_name,
         h.CommunityID
     FROM Housing h
     LEFT JOIN CityCommunity cc ON h.CommunityID = cc.CommunityID
-    WHERE h.Availability = 'Available'
     ORDER BY h.HousingID
     '''
     cursor = db.get_db().cursor()
@@ -118,15 +115,15 @@ def update_housing_match():
         student_id = data.get('student_id')
         housing_id = data.get('housing_id')
         
-        # Update student's housing status and community
+        # Update student's housing status to Complete
         student_query = '''
         UPDATE Student 
-        SET HousingStatus = 'Assigned',
+        SET HousingStatus = 'Complete',
             CommunityID = (SELECT CommunityID FROM Housing WHERE HousingID = %s)
         WHERE StudentID = %s
         '''
         
-        # Update housing availability
+        # Update housing availability to Occupied
         housing_query = '''
         UPDATE Housing 
         SET Availability = 'Occupied'
