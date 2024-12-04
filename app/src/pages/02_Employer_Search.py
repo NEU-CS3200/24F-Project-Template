@@ -4,7 +4,11 @@ import requests
 logger = logging.getLogger(__name__)
 
 import streamlit as st
+import requests
+import pandas as pd
+import numpy as np
 from modules.nav import SideBarLinks
+
 
 st.set_page_config(layout = 'wide')
 
@@ -16,7 +20,7 @@ try:
     test_response = requests.get("http://api:4000/emp/employees")
 
     if not test_response.status_code == 200:
-        st.error("Failed to fetch categories")
+        st.error("Failed to fetch employees")
 except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to students API: {str(e)}")
 
