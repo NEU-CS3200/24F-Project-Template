@@ -152,5 +152,5 @@ def get_feedback(community_id):
     return response
 
 # route to provide feedback to advisor
-@community.route('/feedback', methods=['POST'])
+#@community.route('/feedback', methods=['POST'])
 
