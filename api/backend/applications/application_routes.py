@@ -29,11 +29,32 @@ def create_app():
 
     application_id = cursor.lastrowid
     user_id = data["userId"]
+    position_id = data["positionId"]
 
     query = f"""
         INSERT INTO application_bookmark (applicationId, userId) VALUES
         (
             {int(application_id)}, {int(user_id)}
+        );
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
+@applications.route("/applications/<id>/add_position", methods=["POST"])
+def add_position(id):
+    data = request.get_json()
+    query = f"""
+        INSERT INTO application_position (applicationId, positionId) VALUES
+        (
+            {int(id)}, {int(data["positionId"])}
         );
     """
 
