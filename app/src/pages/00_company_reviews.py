@@ -5,8 +5,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 st.set_page_config(layout = 'wide')
-
-# Show appropriate sidebar links for the role of the currently logged in user
 SideBarLinks()
 
 if st.button("Back", key="back_button"):
@@ -64,16 +62,17 @@ with col1:
             st.write(f"Location: {job_posting['location']}")
             st.write(f"Contact Name & Email: {job_posting['firstName']} {job_posting['lastName']} | {job_posting['email']} | {job_posting['phone']}")
             st.write(f"Date Posted: {job_posting['datePosted']}")
-            if st.button("View Reviews (Click 2x)"):
+            
+            if st.button("View Reviews (Click 2x)", key=f"view_reviews_{job_posting['id']}"):
                 st.session_state["selected_job_id"] = job_posting['id']
                 st.session_state["selected_job_name"] = job_posting['name']
 
-            if st.button('Add Review (Click 2x)'):
+            if st.button('Add Review (Click 2x)', key=f"add_review_{job_posting['id']}"):
                 st.session_state["selected_job_id"] = job_posting['id']
                 st.session_state["selected_job_name"] = job_posting['name']
                 st.session_state["show_add_review_form"] = True
 
-            if st.button("Delete Posting"):
+            if st.button("Delete Posting", key=f"delete_posting_{job_posting['id']}"):
                 response = requests.delete(f"http://api:4000/jp/jobPostings/{job_posting['id']}")
                 if response.status_code == 200:
                     st.success("Job posting deleted successfully.")
@@ -102,7 +101,7 @@ with col2:
                         else:
                             payload = {'edited_review': editable_review}
                             update_review_response = requests.put(
-                                f"http://api:4000/jp/jobPostings/reviews/{selected_job_id}",
+                                f"http://api:4000/jp/jobPostings/reviews/{review['title']}",
                                 json=payload
                             )
                             if update_review_response.status_code == 200:
