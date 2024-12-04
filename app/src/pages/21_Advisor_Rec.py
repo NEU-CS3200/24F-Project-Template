@@ -69,9 +69,9 @@ with st.expander('Past Reports'):
 
 st.write('')
     
-if st.button('View Housing Recommendations', use_container_width=True):
+if st.button('View Housing Recommendations', use_container_width=True, type='primary'):
     st.switch_page('pages/26_Advisor_Housing.py')
-if st.button('Feedback Form', use_container_width=True):
+if st.button('Feedback Form', use_container_width=True, type='primary'):
     st.switch_page('pages/25_Advisor_Feedback.py')
 
 

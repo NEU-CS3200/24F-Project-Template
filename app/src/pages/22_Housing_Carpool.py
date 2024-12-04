@@ -81,72 +81,73 @@ elif search_type == "Carpool":
     time_filter = st.sidebar.slider("Travel Time (minutes)", min_value=10, max_value=70, step=5, value=20)
 
 # Fetch data based on the selected search type
-if communityid:
-    if search_type == "Housing":
-        student_profiles = fetch_housing_profiles(communityid, cleanliness_filter, lease_duration_filter, budget_filter)
-        if student_profiles:
-            col1, col2 = st.columns(2)
-            for i, student in enumerate(student_profiles):
-                # Alternate between the columns
-                if i % 2 == 0:
-                    with col1:
-                        container=st.container(border=True, height=520)
-                        container.markdown(f"### {student['Name']}")
-                        container.write(f"**Major:** {student['Major']}")
-                        container.write(f"**Company:** {student['Company']}")
-                        container.write(f"**Location:** {student['Location']}")
-                        container.write(f"**Housing Status:** {student['HousingStatus']}")
-                        container.write(f"**Budget:** {student['Budget']}")
-                        container.write(f"**Lease Duration:** {student['LeaseDuration']}")
-                        container.write(f"**Cleanliness:** {student['Cleanliness']}")
-                        container.write(f"**Lifestyle:** {student['Lifestyle']}")
-                        container.write(f"**Bio:** {student['Bio']}")
-                else:
-                    with col2:
-                        container=st.container(border=True, height=520)
-                        container.markdown(f"### {student['Name']}")
-                        container.write(f"**Major:** {student['Major']}")
-                        container.write(f"**Company:** {student['Company']}")
-                        container.write(f"**Location:** {student['Location']}")
-                        container.write(f"**Housing Status:** {student['HousingStatus']}")
-                        container.write(f"**Budget:** {student['Budget']}")
-                        container.write(f"**Lease Duration:** {student['LeaseDuration']}")
-                        container.write(f"**Cleanliness:** {student['Cleanliness']}")
-                        container.write(f"**Lifestyle:** {student['Lifestyle']}")
-                        container.write(f"**Bio:** {student['Bio']}")
-        else:  
-            st.write("No profiles found.")
+if st.button("Search Profiles"):
+    if communityid:
+        if search_type == "Housing":
+            student_profiles = fetch_housing_profiles(communityid, cleanliness_filter, lease_duration_filter, budget_filter)
+            if student_profiles:
+                col1, col2 = st.columns(2)
+                for i, student in enumerate(student_profiles):
+                    # Alternate between the columns
+                    if i % 2 == 0:
+                        with col1:
+                            container=st.container(border=True, height=520)
+                            container.markdown(f"### {student['Name']}")
+                            container.write(f"**Major:** {student['Major']}")
+                            container.write(f"**Company:** {student['Company']}")
+                            container.write(f"**Location:** {student['Location']}")
+                            container.write(f"**Housing Status:** {student['HousingStatus']}")
+                            container.write(f"**Budget:** {student['Budget']}")
+                            container.write(f"**Lease Duration:** {student['LeaseDuration']}")
+                            container.write(f"**Cleanliness:** {student['Cleanliness']}")
+                            container.write(f"**Lifestyle:** {student['Lifestyle']}")
+                            container.write(f"**Bio:** {student['Bio']}")
+                    else:
+                        with col2:
+                            container=st.container(border=True, height=520)
+                            container.markdown(f"### {student['Name']}")
+                            container.write(f"**Major:** {student['Major']}")
+                            container.write(f"**Company:** {student['Company']}")
+                            container.write(f"**Location:** {student['Location']}")
+                            container.write(f"**Housing Status:** {student['HousingStatus']}")
+                            container.write(f"**Budget:** {student['Budget']}")
+                            container.write(f"**Lease Duration:** {student['LeaseDuration']}")
+                            container.write(f"**Cleanliness:** {student['Cleanliness']}")
+                            container.write(f"**Lifestyle:** {student['Lifestyle']}")
+                            container.write(f"**Bio:** {student['Bio']}")
+            else:  
+                st.write("No profiles found.")
 
-    elif search_type == "Carpool":
-        student_profiles = fetch_carpool_profiles(communityid, days_filter, time_filter)
-        if student_profiles:
-            # Split the profiles into two columns
-            col1, col2 = st.columns(2)
-            for i, student in enumerate(student_profiles):
-                # Alternate between the columns
-                if i % 2 == 0:
-                    with col1:
-                        #with st.expander(f"{student['Name']}"):
-                        container = st.container(border=True, height=520)
-                        container.markdown(f"### {student['Name']}")
-                        container.write(f"**Major:** {student['Major']}")
-                        container.write(f"**Company:** {student['Company']}")
-                        container.write(f"**Location:** {student['Location']}")
-                        container.write(f"**Carpool Status:** {student['CarpoolStatus']}")
-                        container.write(f"**Travel time:** {student['CommuteTime']}")
-                        container.write(f"**Number of Days Commuting:** {student['CommuteDays']}")
-                        container.write(f"**Bio:** {student['Bio']}")
-                else:
-                    with col2:
-                        #with st.expander(f"{student['Name']}"):
-                        container = st.container(border=True, height=520)
-                        container.markdown(f"### {student['Name']}")
-                        container.write(f"**Major:** {student['Major']}")
-                        container.write(f"**Company:** {student['Company']}")
-                        container.write(f"**Location:** {student['Location']}")
-                        container.write(f"**Carpool Status:** {student['CarpoolStatus']}")
-                        container.write(f"**Travel time:** {student['CommuteTime']}")
-                        container.write(f"**Number of Days Commuting:** {student['CommuteDays']}")
-                        container.write(f"**Bio:** {student['Bio']}")
-        else:
-            st.write("No profiles found.")
+        elif search_type == "Carpool":
+            student_profiles = fetch_carpool_profiles(communityid, days_filter, time_filter)
+            if student_profiles:
+                # Split the profiles into two columns
+                col1, col2 = st.columns(2)
+                for i, student in enumerate(student_profiles):
+                    # Alternate between the columns
+                    if i % 2 == 0:
+                        with col1:
+                            #with st.expander(f"{student['Name']}"):
+                            container = st.container(border=True, height=520)
+                            container.markdown(f"### {student['Name']}")
+                            container.write(f"**Major:** {student['Major']}")
+                            container.write(f"**Company:** {student['Company']}")
+                            container.write(f"**Location:** {student['Location']}")
+                            container.write(f"**Carpool Status:** {student['CarpoolStatus']}")
+                            container.write(f"**Travel time:** {student['CommuteTime']}")
+                            container.write(f"**Number of Days Commuting:** {student['CommuteDays']}")
+                            container.write(f"**Bio:** {student['Bio']}")
+                    else:
+                        with col2:
+                            #with st.expander(f"{student['Name']}"):
+                            container = st.container(border=True, height=520)
+                            container.markdown(f"### {student['Name']}")
+                            container.write(f"**Major:** {student['Major']}")
+                            container.write(f"**Company:** {student['Company']}")
+                            container.write(f"**Location:** {student['Location']}")
+                            container.write(f"**Carpool Status:** {student['CarpoolStatus']}")
+                            container.write(f"**Travel time:** {student['CommuteTime']}")
+                            container.write(f"**Number of Days Commuting:** {student['CommuteDays']}")
+                            container.write(f"**Bio:** {student['Bio']}")
+            else:
+                st.write("No profiles found.")
