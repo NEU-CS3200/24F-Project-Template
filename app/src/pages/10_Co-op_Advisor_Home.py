@@ -23,8 +23,8 @@ st.write('### What would you like to do today?')
 col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
 
 with col1:
-    if st.button("🔔 NOTIFICATION\n Unread Notifications", key="notification_btn"):
-        st.switch_page("pages/11_Notification.py")
+    if st.button("📝 STUDENT TASKS\nStudent Tasks", key="notification_btn"):
+        st.switch_page("pages/11_Student_Tasks.py")
 
 with col2:
     if st.button("📝 FORMS\n Student Forms Update", key="forms_btn"):
@@ -53,29 +53,30 @@ try:
             # Add text input filters for each column
             with col1:
                 name_filter = st.text_input("Filter by Name")
-            with col2:
-                major_filter = st.text_input("Filter by Major")
             with col3:
-                company_filter = st.text_input("Filter by Company")
+                major_filter = st.text_input("Filter by Major")
             with col4:
-                location_filter = st.text_input("Filter by Location")
+                company_filter = st.text_input("Filter by Company")
             with col5:
+                location_filter = st.text_input("Filter by Location")
+            with col2:
                 id_filter = st.text_input("Filter by ID")
             
             # Apply filters
             if name_filter:
                 df = df[df['student_name'].str.contains(name_filter, case=False, na=False)]
+            if id_filter:
+                df = df[df['student_id'].astype(str).str.contains(id_filter, na=False)]
             if major_filter:
                 df = df[df['major'].str.contains(major_filter, case=False, na=False)]
             if company_filter:
                 df = df[df['company_name'].str.contains(company_filter, case=False, na=False)]
             if location_filter:
                 df = df[df['co_op_location'].str.contains(location_filter, case=False, na=False)]
-            if id_filter:
-                df = df[df['student_id'].astype(str).str.contains(id_filter, na=False)]
+            
             
             # Specify the exact column order
-            column_order = ["student_name", "major", "company_name", "co_op_location", "student_id"]
+            column_order = ["student_name","student_id", "major", "company_name", "co_op_location" ]
             df = df[column_order]
             
             # Display filtered dataframe
@@ -84,10 +85,10 @@ try:
                 use_container_width=True,
                 column_config={
                     "student_name": "Name",
+                    "student_id": "Student ID",
                     "major": "Major",
                     "company_name": "Company",
-                    "co_op_location": "Co-op Location",
-                    "student_id": "Student ID"
+                    "co_op_location": "Co-op Location"
                 },
                 hide_index=True
             )
