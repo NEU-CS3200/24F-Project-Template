@@ -77,15 +77,14 @@ def update_task_status(task_id):
                 'error': f'Invalid status. Must be one of: {", ".join(valid_statuses)}'
             }), 400
 
-        # Update the task status
+        # Update using the correct column name (Status)
         query = '''
         UPDATE Task 
-        SET Status = %s,
-            LastUpdated = %s
+        SET Status = %s
         WHERE TaskID = %s
         '''
         cursor = db.get_db().cursor()
-        cursor.execute(query, (new_status, datetime.now(), task_id))
+        cursor.execute(query, (new_status, task_id))
         db.get_db().commit()
 
         return jsonify({
@@ -115,15 +114,14 @@ def update_task_reminder(task_id):
                 'error': 'Invalid date format. Please use YYYY-MM-DD format'
             }), 400
 
-        # Update the task reminder
+        # Update using the correct column name (Reminder)
         query = '''
         UPDATE Task 
-        SET Reminder = %s,
-            LastUpdated = %s
+        SET Reminder = %s
         WHERE TaskID = %s
         '''
         cursor = db.get_db().cursor()
-        cursor.execute(query, (reminder_date, datetime.now(), task_id))
+        cursor.execute(query, (reminder_date, task_id))
         db.get_db().commit()
 
         return jsonify({
