@@ -4,8 +4,6 @@ from flask import (
     jsonify,
     make_response,
     current_app,
-    redirect,
-    url_for,
 )
 from backend.db_connection import db
 
@@ -49,11 +47,75 @@ def create_app():
     return response
 
 
+@applications.route("/applications/<id>/related_coursework", methods=["POST"])
+def create_related_coursework(id):
+    create_app_addon_helper(id, "related_coursework")
+
+
+@applications.route("/applications/<id>/work_experience", methods=["POST"])
+def create_work_experience(id):
+    create_app_addon_helper(id, "work_experience")
+
+
+@applications.route("/applications/<id>/notable_skills", methods=["POST"])
+def create_notable_skills(id):
+    create_app_addon_helper(id, "notable_skills")
+
+
+def create_app_addon_helper(id, table_name):
+    data = request.get_json()
+    query = f"""
+        INSERT INTO {table_name} (applicationId, name, summary) VALUES
+        (
+            {int(id)}, "{data["name"]}", {data["summary"]}
+        );
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
 @applications.route("/applications/<id>", methods=["GET"])
 def get_app():
     query = f"""
         SELECT * FROM applications a
         WHERE a.id = {int(id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
+@applications.route("/applications/<id>/related_coursework", methods=["GET"])
+def get_related_coursework(id):
+    get_app_addon_helper(id, "related_coursework")
+
+
+@applications.route("/applications/<id>/work_experience", methods=["GET"])
+def get_work_experience(id):
+    get_app_addon_helper(id, "work_experience")
+
+
+@applications.route("/applications/<id>/notable_skills", methods=["GET"])
+def get_notable_skills(id):
+    get_app_addon_helper(id, "notable_skills")
+
+
+def get_app_addon_helper(id, table_name):
+    query = f"""
+        SELECT * FROM {table_name} a
+        WHERE a.applicationId = {int(id)};
     """
 
     cursor = db.get_db().cursor()
@@ -120,6 +182,36 @@ def delete_app(id):
     query = f"""
         DELETE FROM applications
         WHERE id = {int(id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
+@applications.route("/applications/<id>/related_coursework", methods=["DELETE"])
+def delete_related_coursework(id):
+    delete_app_addon_helper(id, "related_coursework")
+
+
+@applications.route("/applications/<id>/work_experience", methods=["DELETE"])
+def delete_work_experience(id):
+    delete_app_addon_helper(id, "work_experience")
+
+
+@applications.route("/applications/<id>/notable_skills", methods=["DELETE"])
+def delete_notable_skills(id):
+    delete_app_addon_helper(id, "notable_skills")
+
+
+def delete_app_addon_helper(id, table_name):
+    query = f"""
+        DELETE FROM {table_name}
+        WHERE applicationId = {int(id)};
     """
 
     cursor = db.get_db().cursor()

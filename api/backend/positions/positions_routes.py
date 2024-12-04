@@ -91,8 +91,22 @@ def get_contact(id):
     return response
 
 
-# Example of a PUT request
-# curl http://127.0.0.1:4000/pos/positions/1/update -X PUT -H 'Content-Type: application/json' -d '{ "id": 1, "summary": "Front end engineer" }'
+@positions.route("/positions/<id>/coursework", methods=["GET"])
+def pos_coursework(id):
+    query = f"""
+        SELECT r.name, r.summary FROM cosint.positions p
+            JOIN cosint.position_application_bookmark pa ON p.id = pa.positionId
+            JOIN cosint.related_coursework r ON pa.applicationId = r.applicationId
+        WHERE p.id = {int(id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
 
 
 @positions.route("/positions/detailed", methods=["GET"])
@@ -117,6 +131,10 @@ def detailed_pos():
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+
+# Example of a PUT request
+# curl http://127.0.0.1:4000/pos/positions/1/update -X PUT -H 'Content-Type: application/json' -d '{ "id": 1, "summary": "Front end engineer" }'
 
 
 @positions.route("/positions/<id>/update", methods=["PUT"])
