@@ -64,3 +64,25 @@ def get_tickets():
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+@admins.route("/stats", methods=["GET"])
+def get_tickets():
+    query = """
+        SELECT
+            MIN(lastLogin) AS intervalStart,
+            DATE_ADD(MIN(lastLogin), INTERVAL 15 MINUTE) AS intervalEnd,
+            COUNT(*) AS loginCount
+        FROM cosint.users u
+        WHERE lastLogin BETWEEN u.lastLogin AND DATE_ADD(u.lastLogin, INTERVAL 15 MINUTE)
+        GROUP BY u.lastLogin
+        ORDER BY loginCount DESC
+        LIMIT 1;
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
