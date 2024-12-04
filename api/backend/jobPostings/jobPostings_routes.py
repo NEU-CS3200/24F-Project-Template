@@ -42,15 +42,31 @@ def get_reviews(selected_job_id):
     the_response.status_code = 200
     return the_response
 
-# gets the number of views and applications for a given job posting
-@jobPostings.route('/jobPostings/statistics/<selected_job_id>', methods=['GET'])
-def get_statistics(selected_job_id):
+# gets the number of applications for a given job posting
+@jobPostings.route('/jobPostings/applications/<selected_job_id>', methods=['GET'])
+def get_app_count(selected_job_id):
     cursor = db.get_db().cursor()
     
-    cursor.execute('''SELECT COUNT(job_views.id) AS num_views, COUNT(job_application.studentId) AS num_apps
-                    FROM job_posting 
-                    LEFT JOIN job_views ON job_posting.id = job_views.jobId 
-                    LEFT JOIN job_application ON job_posting.id = job_application.jobId 
+    cursor.execute('''SELECT COUNT(job_application.studentId) AS num_apps
+                    FROM job_posting  
+                    LEFT JOIN job_application ON job_posting.id = job_application.jobId
+                    WHERE job_posting.id = %s
+                    GROUP BY job_posting.id, job_posting.name''', (selected_job_id,))
+
+    theData = cursor.fetchall()
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
+# gets the average rating for a given job posting
+@jobPostings.route('/jobPostings/rating/<selected_job_id>', methods=['GET'])
+def get_avg_rating(selected_job_id):
+    cursor = db.get_db().cursor()
+    
+    cursor.execute('''SELECT AVG(reviews.rating) AS avg_rating
+                    FROM job_posting  
+                    LEFT JOIN reviews ON job_posting.id = reviews.jobId
                     WHERE job_posting.id = %s
                     GROUP BY job_posting.id, job_posting.name''', (selected_job_id,))
 
