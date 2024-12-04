@@ -12,7 +12,7 @@ SideBarLinks()
 if st.button("Back", key="back_button"):
     st.switch_page('pages/02_recruiter_home.py')
 
-st.title("View or edit job postings from your company.")
+st.title("View or delete job postings from your company.")
 
 # Display all companies, and whichever one they choose, 
 # call the job posting api get using the company id
