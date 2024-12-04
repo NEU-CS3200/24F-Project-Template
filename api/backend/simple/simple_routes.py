@@ -51,3 +51,20 @@ def create_help_ticket():
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+
+@simple_routes.route("/users/<user_id>", methods=["GET"])
+def get_user():
+    query = """
+        SELECT u.id, u.studentId, u.name, u.firstName, u.middleName, u.lastName, u.preferredName, u.pronouns, u.major, u.year, u.birthday, u.profilePic, u.role, u.profile, u.mobile, u.email, u.active, u.advisorId, u.companyId, u.registeredAt, u.updatedAt, u.lastLogin 
+        FROM users u 
+        WHERE u.id = int{int(user_id)}
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
