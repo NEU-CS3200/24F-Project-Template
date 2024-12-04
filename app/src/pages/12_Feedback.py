@@ -1,95 +1,74 @@
 import streamlit as st
 import pandas as pd
 import requests
-
-st.set_page_config(page_title="Unread Notifications", layout="wide")
-
-# Add sidebar navigation
 from modules.nav import SideBarLinks
+
+# Configure Streamlit page
+st.set_page_config(layout='wide')
+st.title("Tasks Dashboard")
 SideBarLinks()
 
-# Page Title
-st.title("🔔 Unread Notifications")
-st.write("Below is a list of notifications regarding your students.")
 
-# Fetch notifications from the API
+# API endpoint for tasks
+api_url = 'http://localhost:4000/api/students/feedback'  # Adjust the URL to match your actual Flask route
+
+# Fetch task data from the API
 try:
-    response = requests.get('http://web-api:4000/api/notifications')  # Replace with your actual API endpoint
+    response = requests.get(api_url)
     if response.status_code == 200:
-        notifications = response.json()
+        # Parse API response JSON
+        data = response.json()
 
-        if notifications:
-            # Convert notifications to DataFrame
-            df_notifications = pd.DataFrame(notifications)
-            
-            # Display unread notifications
-            st.subheader(f"Unread Notifications ({len(df_notifications)})")
+        if data:
+            # Convert to DataFrame
+            df = pd.DataFrame(data)
+
+            # Sidebar Filters
+            st.sidebar.header("Filter Tasks")
+            student_filter = st.sidebar.text_input("Search by Student Name")
+            student_id_filter = st.sidebar.text_input("Search by Student ID")
+            task_status_filter = st.sidebar.text_input("Search by Task Status")
+
+            # Apply filters
+            if student_filter:
+                df = df[df['student_name'].str.contains(student_filter, case=False, na=False)]
+            if student_id_filter:
+                df = df[df['StudentID'].astype(str).str.contains(student_id_filter, case=False, na=False)]
+            if task_status_filter:
+                df = df[df['task_status'].str.contains(task_status_filter, case=False, na=False)]
+
+            # Reorder columns to match SQL query
+            column_order = [
+                "TaskID", "Description", "Reminder", "DueDate", "Status", 
+                "AdvisorID", "StudentID", "student_name"
+            ]
+            df = df[column_order]
+
+            # Display Data
+            st.subheader(f"Showing {len(df)} Task Entries")
             st.dataframe(
-                df_notifications,
+                df,
                 use_container_width=True,
-                column_config={
-                    "student_name": "Student Name",
-                    "notification_type": "Notification Type",
-                    "date": "Date",
-                    "message": "Message"
-                }
+                hide_index=True
             )
-            
-            # Mark notifications as read button
-            if st.button("Mark All as Read"):
-                try:
-                    mark_as_read_response = requests.post(
-                        'http://web-api:4000/api/notifications/mark-as-read'
-                    )  # Replace with your actual endpoint
-                    if mark_as_read_response.status_code == 200:
-                        st.success("All notifications have been marked as read.")
-                        st.experimental_rerun()  # Refresh the page
-                    else:
-                        st.error("Failed to mark notifications as read.")
-                except Exception as e:
-                    st.error(f"Error while marking notifications as read: {e}")
+
+            # Detailed View
+            if st.checkbox("Show Detailed Task View"):
+                for index, row in df.iterrows():
+                    with st.expander(f"Task ID: {row['TaskID']}"):
+                        st.markdown(f"**Student Name:** {row['student_name']}")
+                        st.markdown(f"**Student ID:** {row['StudentID']}")
+                        st.markdown(f"**Task Description:** {row['Description']}")
+                        st.markdown(f"**Reminder Date:** {row['Reminder']}")
+                        st.markdown(f"**Due Date:** {row['DueDate']}")
+                        st.markdown(f"**Task Status:** {row['Status']}")
+                        st.markdown(f"**Advisor ID:** {row['AdvisorID']}")
+                        st.markdown("---")
         else:
-            st.info("You have no unread notifications.")
+            st.warning("No task entries found.")
     else:
-        st.error(f"Failed to fetch notifications (Status code: {response.status_code})")
+        st.error(f"Failed to fetch tasks. API returned status code: {response.status_code}")
 except Exception as e:
-    st.error(f"Error loading notifications: {e}")
+    st.error(f"Error loading tasks: {str(e)}")
 
-# Notification Management Section
-st.write("---")
-st.subheader("Manage Notifications")
-st.write("You can search and filter through your notifications below.")
 
-# Advanced filtering/search options
-filter_col1, filter_col2 = st.columns([1, 1])
-
-with filter_col1:
-    search_term = st.text_input("Search by Student Name or Message")
-
-with filter_col2:
-    notification_type_filter = st.selectbox(
-        "Filter by Notification Type",
-        options=["All", "Form Update", "Housing Request", "Case Update", "Other"]
-    )
-
-# Apply filters
-if notifications:
-    filtered_notifications = df_notifications.copy()
-
-    # Apply search term filter
-    if search_term:
-        filtered_notifications = filtered_notifications[
-            filtered_notifications.apply(lambda row: search_term.lower() in str(row).lower(), axis=1)
-        ]
-
-    # Apply notification type filter
-    if notification_type_filter != "All":
-        filtered_notifications = filtered_notifications[
-            filtered_notifications["notification_type"] == notification_type_filter
-        ]
-
-    st.write(f"Filtered Notifications ({len(filtered_notifications)})")
-    st.dataframe(filtered_notifications, use_container_width=True)
-else:
-    st.info("No notifications to filter.")
-    

@@ -40,8 +40,8 @@ def SysHealthDashNav():
 
 
 def JessicaPageNav():
-    st.sidebar.page_link("pages/11_Student_Tasks.py", label="Student Tasks", icon="🔔")
-    st.sidebar.page_link("pages/12_Form.py", label="Forms", icon="📝")
+    st.sidebar.page_link("pages/11_Student_Tasks.py", label="Student Tasks", icon="📝")
+    st.sidebar.page_link("pages/12_Feedback.py", label="Feedback", icon="🧐")
     st.sidebar.page_link("pages/13_Housing.py", label="Housing", icon="🏘️")
 
 #### ------------------------ Student Housing/Carpool Role ------------------------

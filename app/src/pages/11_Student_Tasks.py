@@ -8,6 +8,7 @@ from modules.nav import SideBarLinks
 # Configure Streamlit page
 st.set_page_config(layout='wide')
 st.title("All Tasks")
+SideBarLinks()
 
 # API endpoint for tasks
 api_url = 'http://localhost:4000/api/advisor'

@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS Student (
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
 );
 
--- Create table for Events
+/*-- Create table for Events
 DROP TABLE IF EXISTS Events;
 CREATE TABLE IF NOT EXISTS Events (
     EventID INT AUTO_INCREMENT PRIMARY KEY,
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS Events (
     Description TEXT,
     FOREIGN KEY (CommunityID) REFERENCES CityCommunity(CommunityID)
 );
-
+*/
 
 -- Create table for Advisor
 DROP TABLE IF EXISTS Advisor;
