@@ -30,7 +30,7 @@ def get_reps():
 @admins.route("/add_company", methods=["POST"])
 def add_company():
     data = request.get_json()
-    comp_name = str(data["name"])
+    comp_name = data["name"]
 
     query = f"""
         INSERT INTO cosint.companies (name) VALUES
@@ -82,6 +82,29 @@ def get_tickets():
     cursor = db.get_db().cursor()
 
     cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+@admins.route("/create_ticket", methods=["POST"])
+def add_tickets():
+    data = request.get_json()
+    user_id = int(data["userId"])
+    helper_id = int(data["helperId"])
+    summary = data["summary"]
+
+    query = f"""
+        INSERT INTO cosint.tickets (userId, helperId, summary, completed) VALUES
+        (
+            {user_id}, {helper_id}, {summary}, 0
+        );
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
     data = cursor.fetchall()
     response = make_response(jsonify(data))
     response.status_code = 200
