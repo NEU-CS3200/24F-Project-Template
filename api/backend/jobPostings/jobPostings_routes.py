@@ -69,13 +69,13 @@ def add_review(job_posting_id):
     the_response.status_code = 200
     return the_response
 
-@jobPostings.route('/jobPostings/reviews/<review_id>', methods=['PUT'])
-def update_review(review_id):
+@jobPostings.route('/jobPostings/reviews/<review_title>', methods=['PUT'])
+def update_review(review_title):
     cursor = db.get_db().cursor()
     cursor.execute('''UPDATE reviews
                       SET content = %s
-                      WHERE id = %s''', 
-                   (request.json['edited_review'], review_id))
+                      WHERE title = %s''', 
+                   (request.json['edited_review'], review_title))
 
     db.get_db().commit()
 
