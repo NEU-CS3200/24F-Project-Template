@@ -57,6 +57,7 @@ if st.button("Act as Joe, a Co-op Adivsor",
     st.session_state['first_name'] = 'Joe'
     # finally, we ask streamlit to switch to another page, in this case, the 
     # landing page for this particular user type
+    st.session_state['id'] = '7'
     logger.info("Logging in as Co-op Advisor Persona")
     st.switch_page('pages/00_Coop_Advisor_Home.py')
 
@@ -66,6 +67,7 @@ if st.button('Act as Peter, a Employer',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'employer'
     st.session_state['first_name'] = 'Mohammad'
+    st.session_state['id'] = '8'
     st.switch_page('pages/10_Employer_Home.py')
 
 if st.button('Act as Mark, a Northeastern Student',
@@ -74,6 +76,7 @@ if st.button('Act as Mark, a Northeastern Student',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'student'
     st.session_state['first_name'] = 'Mark'
+    st.session_state['id'] = '5'
     st.switch_page('pages/30_Student_Home.py')
 
 if st.button('Act as Jordan, a System Administrator', 
@@ -82,4 +85,5 @@ if st.button('Act as Jordan, a System Administrator',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'Jordan'
+    st.session_state['id'] = '6'
     st.switch_page('pages/20_Admin_Home.py')
