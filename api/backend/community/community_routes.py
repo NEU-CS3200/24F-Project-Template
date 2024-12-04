@@ -130,3 +130,27 @@ def update_profile():
     response = make_response({"message": "Profile updated successfully"})
     response.status_code = 200
     return response
+
+# obtain housing resources based on location
+@community.route('/community/<community_id>/housing-resources', methods=['GET'])
+def get_feedback(community_id):
+    query = '''
+    SELECT * FROM
+    CityCommunity c
+    JOIN Housing h
+    ON c.CommunityID=h.CommunityID
+    WHERE c.Location = %s
+    '''
+    # Execute the query
+    cursor = db.get_db().cursor()
+    cursor.execute(query, (community_id, ))  
+    theData = cursor.fetchall()
+    
+    # Format the response
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+# route to provide feedback to advisor
+#@community.route('/feedback', methods=['POST'])
+

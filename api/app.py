@@ -5,15 +5,16 @@ from backend.students.student_routes import students
 from backend.co-op_advisor.co-op_advisor_routes import advisor
 
 
+app = Flask(__name__)
+
+init_app(app)
+
 # Register blueprints
 app.register_blueprint(students, url_prefix='/api/students')
 app.register_blueprint(advisor, url_prefix='/api/advisor')
 
 
-app = Flask(__name__)
-
-# Initialize database
-init_app(app)
+@@ -15,6 +17,7 @@ init_app(app)
 
 # Register blueprints
 app.register_blueprint(students, url_prefix='/api')
