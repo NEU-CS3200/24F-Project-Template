@@ -47,3 +47,20 @@ def add_company():
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+@admins.route("/tickets", methods=["GET"])
+def get_tickets():
+    query = """
+        SELECT u.name AS 'helping', h.name AS 'assignedTo', t.summary, t.completed, t.updatedAt, t.registeredAt FROM cosint.tickets t
+        JOIN cosint.users u ON t.helperId = u.id
+        JOIN cosint.users h ON t.userId = h.id
+        WHERE completed = 0;
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
