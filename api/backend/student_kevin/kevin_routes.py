@@ -113,19 +113,20 @@ def update_profile():
     time = the_data.get('CommuteTime')
     days = the_data.get('CommuteDays')
     bio = the_data.get('Bio')
+    name = the_data.get('Name')
 
     query = '''
     UPDATE Student
     SET Company = %s, Location = %s, HousingStatus = %s,
         CarpoolStatus = %s, Budget = %s, LeaseDuration = %s, 
         Cleanliness = %s, Lifestyle=%s, CommuteTime=%s, CommuteDays=%s, Bio = %s
-    WHERE Name = 'Kevin Chen'
+    WHERE Name = %s
     '''
     
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
-    cursor.execute(query, (company, location, housing_status, carpool_status, budget, lease_duration, cleanliness, lifestyle, time, days, bio))
+    cursor.execute(query, (company, location, housing_status, carpool_status, budget, lease_duration, cleanliness, lifestyle, time, days, bio, name))
     db.get_db().commit()
 
     response = make_response({"message": "Profile updated successfully"})
@@ -162,16 +163,22 @@ def give_feedback():
     date = data['Date']
     rating = data['ProgressRating']
 
-    query = '''
-    INSERT INTO Feedback (Description, Date, ProgressRating)
-    VALUES ('{description}', '{date}', '{rating}')
+    student = st.session_state['first_name']
+
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('SELECT StudentID, AdvisorID FROM Student WHERE Name = %s', (student,))
+    result = cursor.fetchone()
+
+    advisor_id, student_id = result
+
+    insert_query = '''
+    INSERT INTO Feedback (Description, Date, ProgressRating, StudentID, AdvisorID)
+        VALUES (%s, %s, %s, %s, %s)
     '''
 
-    current_app.logger.info(query)
-
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
+    cursor.execute(insert_query, (description, date, rating, student_id, advisor_id))
+    db.commit()
 
     response = make_response("Feedback Submitted")
     response.status_code = 200
