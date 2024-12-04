@@ -22,11 +22,13 @@ def get_positions():
     # Get filter parameters from query string
     # TO DO: Add correct filters
     filters = {
-        'company': request.args.get('company'),
-        'location': request.args.get('location'),
-        'min_salary': request.args.get('min_salary'),
-        'max_salary': request.args.get('max_salary'),
-        'title': request.args.get('title')
+        'Location': request.args.get('Location'),
+        'ExperienceRequired': request.args.get('ExperienceRequired'),
+        'Skills': request.args.get('Skills'),
+        'Industry': request.args.get('Industry'),
+        'SalaryRange': request.args.get('SalaryRange'),
+        'PositionType': request.args.get('PositionType'),
+        'StartUpName': request.args.get('StartUpName'),
     }
     
     # Start with base query
@@ -34,25 +36,33 @@ def get_positions():
     params = []
     
     # Dynamically add filters if they're provided
-    if filters['company']:
-        query += ' AND company LIKE %s'
-        params.append(f'%{filters["company"]}%')
+    if filters['Location']:
+        query += ' AND Location LIKE %s'
+        params.append(f'%{filters["Location"]}%')
         
-    if filters['location']:
-        query += ' AND location LIKE %s'
-        params.append(f'%{filters["location"]}%')
+    if filters['ExperienceRequired']:
+        query += ' AND ExperienceRequired LIKE %s'
+        params.append(f'%{filters["ExperienceRequired"]}%')
         
-    if filters['min_salary']:
+    if filters['Skills']:
         query += ' AND salary >= %s'
         params.append(filters['min_salary'])
         
-    if filters['max_salary']:
-        query += ' AND salary <= %s'
-        params.append(filters['max_salary'])
+    if filters['Industry']:
+        query += ' AND Industry LIKE %s'
+        params.append(f'%{filters["Industry"]}%')
+
+    if filters['SalaryRange']: 
+        query += ' AND SalaryRange LIKE %s'
+        params.append(f'%{filters["SalaryRange"]}%')    
         
-    if filters['title']:
-        query += ' AND title LIKE %s'
-        params.append(f'%{filters["title"]}%')
+    if filters['PositionType']:
+        query += ' AND PositionType LIKE %s'
+        params.append(f'%{filters["PositionType"]}%')
+        
+    if filters['StartUpName']:
+        query += ' AND StartUpName LIKE %s'
+        params.append(f'%{filters["StartUpName"]}%')
     
     # Execute the query with any applied filters
     cursor.execute(query, tuple(params))
@@ -67,30 +77,54 @@ def get_positions():
 # TO DO: Add correct filters
 @positions.route('/positions', methods=['POST'])
 def create_position():
-    # Get the position details from the request body
-    current_app.logger.info('Processing position creation request')
-    position_details = request.json
-    
-    cursor = db.get_db().cursor()
-    cursor.execute('''
-    INSERT INTO positions (
+    try:
+        # Get the position details from the request body
+        current_app.logger.info('Processing position creation request')
+        position_details = request.json
         
-    ) VALUES (
-        %s, %s, %s, %s, %s
-    )''', (
-       ### TO DO
-    ))
-    
-    # Commit the transaction
-    db.get_db().commit()
-    
-    return_value = {
-        'message': 'Position created successfully'
-    }
-    
-    the_response = make_response(jsonify(return_value))
-    the_response.status_code = 201  # 201 means "Created"
-    return the_response
+        cursor = db.get_db().cursor()
+        cursor.execute('''
+        INSERT INTO positions (
+            Location,
+            ExperienceRequired,
+            Skills,
+            Industry,
+            SalaryRange,
+            PositionType,
+            StartUpName
+        ) VALUES (
+            %s, %s, %s, %s, %s, %s, %s
+        )''', (
+            position_details['Location'],
+            position_details['ExperienceRequired'],
+            position_details['Skills'],
+            position_details['Industry'],
+            position_details['SalaryRange'],
+            position_details['PositionType'],
+            position_details['StartUpName']
+        ))
+        
+        # Commit the transaction
+        db.get_db().commit()
+        
+        return_value = {
+            'message': 'Position created successfully'
+        }
+        
+        the_response = make_response(jsonify(return_value))
+        the_response.status_code = 201  # 201 means "Created"
+        return the_response
+        
+    except KeyError as e:
+        return_value = {
+            'error': f'Missing required field: {str(e)}'
+        }
+        return make_response(jsonify(return_value), 400)
+    except Exception as e:
+        return_value = {
+            'error': f'Error creating position: {str(e)}'
+        }
+        return make_response(jsonify(return_value), 500)
 
 # Making a request given the blueprint
 # Deleting a position
