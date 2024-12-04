@@ -109,3 +109,18 @@ def add_tickets():
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+@admins.route("/delete_user", method=["DELETE"])
+def remove_user(user_id):
+    query = f"""
+        DELETE FROM cosint.users u WHERE u.id = 1;
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
