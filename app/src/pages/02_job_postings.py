@@ -2,6 +2,7 @@ import streamlit as st
 from modules.nav import SideBarLinks
 import requests
 import logging
+import json
 logger = logging.getLogger(__name__)
 
 st.set_page_config(layout = 'wide')
@@ -54,15 +55,27 @@ if selected_company:
                 st.error("Failed to job posting statistics.")
                 posting_stats = []
 
-            posting_views = posting_stats['num_views']
-            posting_apps = posting_stats['num_apps']
+            posting_views = posting_stats[0]['num_views']
+            posting_apps = posting_stats[0]['num_apps']
             
-            col_delete = st.columns([4, 1])  # Column for delete button
+            col_info, col_stats = st.columns([3, 1])  # Two columns for edit and delete buttons
 
-            with col_delete:
-                if st.button("Delete", key=f"delete_{posting_id}"):
-                    delete_response = requests.delete(f"http://api:4000/jp/jobPostings/{posting_id}")
-                    if delete_response.status_code == 200:
-                        st.success("Posting deleted successfully!")
-                    else:
-                        st.error(f"Failed to delete job posting: {delete_response.text}")
+            dict1 = json.loads(job_posting)
+            dict2 = json.loads(posting_stats)
+            combined_dict = {**dict1, **dict2}
+            combined_json = json.dumps(combined_dict)
+
+            st.dataframe(combined_json)
+
+            with col_info:
+                st.dataframe(job_posting)
+
+            with col_stats:
+                st.dataframe(posting_stats)
+
+            if st.button("Delete", key=f"delete_{posting_id}"):
+                delete_response = requests.delete(f"http://api:4000/jp/jobPostings/{posting_id}")
+                if delete_response.status_code == 200:
+                    st.success("Posting deleted successfully!")
+                else:
+                    st.error(f"Failed to delete job posting: {delete_response.text}")
