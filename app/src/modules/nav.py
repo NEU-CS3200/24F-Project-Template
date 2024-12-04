@@ -7,6 +7,7 @@ import streamlit as st
 
 #### ------------------------ General ------------------------
 def UserProfileNav():
+    st.session_state['profile_id'] = st.session_state['id']
     st.sidebar.page_link("pages/03_User_Profile.py", label="Profile", icon="🖼️")
 
 def HomeNav():
