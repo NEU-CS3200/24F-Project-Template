@@ -137,7 +137,28 @@ WHERE c.id = %s
     the_response.status_code = 200
     return the_response
 
-                   
-                   
+@companies.route('/companies/avg_rating/<company_id>', methods=['GET'])
+def get_companies_avg_rating(company_id):
 
+    cursor = db.get_db().cursor()
+    cursor.execute('''SELECT 
+                        AVG(r.rating) AS AvgRating
+                    FROM
+                        reviews r
+                    JOIN
+                        job_posting jp ON r.jobId = jp.id
+                    JOIN
+                        companies c ON jp.companyId = c.id
+                    WHERE
+                        c.id = %s   
+                    GROUP BY
+                        c.name
+                    ''', (company_id,))
+    
+    theData = cursor.fetchone()
 
+    avg_rating = theData['AvgRating'] if theData else None
+
+    the_response = make_response(jsonify({'AvgRating': avg_rating}))
+    the_response.status_code = 200
+    return the_response

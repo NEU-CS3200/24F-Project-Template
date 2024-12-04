@@ -83,3 +83,24 @@ def update_review(review_title):
     the_response.status_code = 200
     return the_response
 
+@jobPostings.route('/jobPostings/submit_app/<job_posting_id>', methods=['POST'])
+def submit_application(job_posting_id):
+    cursor = db.get_db().cursor()
+
+    # Check if application already exists for this student
+    cursor.execute('''SELECT * FROM job_application WHERE studentId = 4 AND jobId = %s''', (job_posting_id,))
+    if cursor.fetchone():
+        the_response = make_response(jsonify('Application already submitted'))
+        the_response.status_code = 400
+        return the_response
+
+    # The fourth student is a Guest. For our purposes, 
+    # they are the only one submitting apps (no auth system)
+    cursor.execute('''INSERT INTO job_application (studentId, jobId)
+                      VALUES (4, %s)''', (job_posting_id,))
+
+    db.get_db().commit()
+
+    the_response = make_response(jsonify('Application Submitted'))
+    the_response.status_code = 200
+    return the_response
