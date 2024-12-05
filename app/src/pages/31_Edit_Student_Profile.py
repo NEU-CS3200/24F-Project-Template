@@ -1,12 +1,14 @@
 import logging
 import streamlit as st
 import requests
+from modules.nav import SideBarLinks
 
 # Configure logger
 logger = logging.getLogger(__name__)
 
 # Set the layout for the Streamlit app
 st.set_page_config(layout='wide')
+SideBarLinks()
 
 # Title and subtitle
 st.title('Edit Profile')
