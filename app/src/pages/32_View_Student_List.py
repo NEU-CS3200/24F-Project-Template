@@ -3,6 +3,8 @@ import streamlit as st
 import requests
 from modules.nav import SideBarLinks
 
+logger = logging.getLogger(__name__)
+
 # Configure Streamlit page
 st.set_page_config(layout='wide')
 
@@ -24,5 +26,8 @@ except requests.exceptions.RequestException as e:
     # Handle any request exceptions (e.g., connection errors)
     st.error("An error occurred while fetching student profiles. Please try again later.")
     logger.error(f"RequestException: {e}")
+
+# Debugging Information
+st.write("If the above table is empty, please verify the API connection and response format.")
 
 

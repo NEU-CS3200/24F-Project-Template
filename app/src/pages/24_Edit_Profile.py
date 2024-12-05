@@ -8,7 +8,7 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('My Profile')
+st.title('Edit My Profile')
 
 housing_status = st.selectbox("Housing Status", ["Searching for Housing", "Searching for Roommates", "Complete"])
 carpool_status = st.selectbox("Carpool Status", ["Searching for Carpool", "Has Car", "Complete"])

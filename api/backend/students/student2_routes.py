@@ -19,17 +19,17 @@ student2 = Blueprint('student2', __name__)
 # Get all students from the system
 @student2.route('/student2', methods=['GET'])
 def get_students():
-
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT Name, Major,
-                    Company, Location FROM Student
-    ''')
-    
+    cursor.execute('''SELECT Name, Major, Company, Location
+            FROM Student
+        ''')
     theData = cursor.fetchall()
-    
+
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
+
+
 
 # Route to retrieve student information
 @student2.route('/retrieve_student_info', methods=['GET'])
@@ -60,45 +60,63 @@ def retrieve_student():
     return the_response
 
 
-# Route to update student profile information
 @student2.route('/update_student_profile', methods=['PUT'])
 def update_student_profile():
     try:
         # Parse JSON data from request
         data = request.json
+
+        # Extract fields from the JSON payload
         student_id = data.get('StudentID')
         name = data.get('Name')
         major = data.get('Major')
-        company = data.get('Company')
         location = data.get('Location')
+        company = data.get('Company')
         bio = data.get('Bio')
+        budget = data.get('Budget')
+        lease_duration = data.get('LeaseDuration')
+        cleanliness = data.get('Cleanliness')
+        lifestyle = data.get('Lifestyle')
+        commute_time = data.get('CommuteTime')
+        commute_days = data.get('CommuteDays')
 
-        # Validate that student_id is provided
+        # Validate that StudentID is provided
         if not student_id:
             return make_response(jsonify({"error": "StudentID is required"}), 400)
 
-        # Build the SQL query dynamically based on fields to be updated
+        # Build the SQL query dynamically to update the student record
         query = '''
             UPDATE Student
-            SET 
+            SET
                 Name = %s,
                 Major = %s,
-                Company = %s,
                 Location = %s,
-                Bio = %s
+                Company = %s,
+                Bio = %s,
+                Budget = %s,
+                LeaseDuration = %s,
+                Cleanliness = %s,
+                Lifestyle = %s,
+                CommuteTime = %s,
+                CommuteDays = %s
             WHERE StudentID = %s
         '''
-        values = (name, major, company, location, bio, student_id)
+        values = (
+            name, major, location, company, bio,
+            budget, lease_duration, cleanliness, lifestyle,
+            commute_time, commute_days, student_id
+        )
 
         # Execute the query
         cursor = db.get_db().cursor()
         cursor.execute(query, values)
         db.get_db().commit()
 
+        # Return success response
         return make_response(jsonify({"message": "Student profile updated successfully"}), 200)
 
     except Exception as e:
-        # Handle exceptions and return an error response
+        # Handle exceptions and return error response
         return make_response(jsonify({"error": str(e)}), 500)
 
 # route to provide feedback to advisor
@@ -177,8 +195,16 @@ def del_feedback(student_id, feedback_id):
 def get_events():
 
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT EventID, CommunityID, Date, Name, Description
-    FROM Events
+    cursor.execute('''SELECT 
+            Events.EventID, 
+            CityCommunity.Location, 
+            Events.Date, 
+            Events.Name, 
+            Events.Description
+        FROM 
+            Events
+        JOIN 
+            CityCommunity ON Events.CommunityID = CityCommunity.CommunityID
     ''')
     
     theData = cursor.fetchall()
@@ -203,3 +229,4 @@ def delete_event(event_id):
    
         logger.error(f"Error deleting event with ID {event_id}: {e}")
         return jsonify({"error": "Failed to delete event."}), 500
+

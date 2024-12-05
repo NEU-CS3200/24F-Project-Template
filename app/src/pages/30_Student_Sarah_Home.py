@@ -15,13 +15,12 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
+if st.button('Edit Profile', type='primary', use_container_width=True):
+    st.switch_page('pages/31_Edit_Student_Profile.py')
+
 # View Student List Button
 if st.button('View Student List', type='primary', use_container_width=True):
     st.switch_page('pages/32_View_Student_List.py')
-
-# Manage Student Profile Button
-if st.button('Manage Student Profile', type='primary', use_container_width=True):
-    st.switch_page('pages/31_Manage_Student_Profile.py')
 
 if st.button('View Professional Events', type='primary', use_container_width=True):
     st.switch_page('pages/34_View_Events.py')

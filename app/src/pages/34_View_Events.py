@@ -9,7 +9,7 @@ import requests
 st.set_page_config(layout = 'wide')
 SideBarLinks()
 
-# Logger for debugging
+
 logger = logging.getLogger(__name__)
 
 st.title("Delete Past Events")
@@ -32,10 +32,9 @@ if st.button("Delete Event"):
             logger.error(f"Error deleting event with ID {event_id}: {e}")
             st.error("An error occurred while deleting the event. Please try again later.")
 
-# Page title
+
 st.title("Upcoming Professional Events")
 
-# Fetch events from the API
 try:
     response = requests.get("http://api:4000/s/events")
     if response.status_code == 200:
@@ -43,9 +42,9 @@ try:
         if events:
             for event in events:
                 st.subheader(event["Name"])
-                st.markdown(f"**Date:** {event['Date']}")
-                st.markdown(f"**Community ID:** {event['CommunityID']}")
                 st.markdown(f"**Event ID:** {event['EventID']}")
+                st.markdown(f"**Date:** {event['Date']}")
+                st.markdown(f"**Location:** {event['Location']}")
                 st.markdown(f"**Description:** {event['Description']}")
                 st.write("---")
         else:
