@@ -87,22 +87,37 @@ def display_app(app):
         res = s.get(f"http://api:4000/app/applications/{app['id']}/user_refs")
         user_refs = res.json()
     st.write("##### Work Experience")
-    for exp in work_exp:
-        st.write(f"###### Name: {exp['name']}")
-        st.write(f"###### Summary: {exp['summary']}")
+    if len(work_exp) != 0:
+        for exp in work_exp:
+            st.write(f"###### Name: {exp['name']}")
+            st.write(f"###### Summary: {exp['summary']}")
+    else:
+        st.write("No work experience provided.")
+
     st.write("##### Coursework")
-    for course in related_courses:
-        st.write(f"###### Name: {course['name']}")
-        st.write(f"###### Summary: {course['summary']}")
+    if len(related_courses) != 0:
+        for course in related_courses:
+            st.write(f"###### Name: {course['name']}")
+            st.write(f"###### Summary: {course['summary']}")
+    else:
+        st.write("No related coursework provided.")
+
     st.write("##### Notable Skills")
-    for skill in notable_skills:
-        st.write(f"###### Name: {skill['name']}")
-        st.write(f"###### Summary: {skill['summary']}")
+    if len(notable_skills) != 0:
+        for skill in notable_skills:
+            st.write(f"###### Name: {skill['name']}")
+            st.write(f"###### Summary: {skill['summary']}")
+    else:
+        st.write("No notable skills provided.")
+
     st.write("##### User References")
-    for ref in user_refs:
-        st.write(f"###### Name: {ref['name']}")
-        st.write(f"###### Email: {ref['email']}")
-        st.write(f"###### Referrence: {ref['referral']}")
+    if len(user_refs) != 0:
+        for ref in user_refs:
+            st.write(f"###### Name: {ref['name']}")
+            st.write(f"###### Email: {ref['email']}")
+            st.write(f"###### Referrence: {ref['referral']}")
+    else:
+        st.write("No user references provided.")
 
 
 if data is not None:
