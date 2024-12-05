@@ -32,10 +32,8 @@ def get_feedback(student_id):
 def del_feedback(feedback_id, student_id):
     url = f'http://api:4000/api/students/{student_id}/feedback/{feedback_id}'
     try:
-        # Send the DELETE request to the Flask backend
         response = requests.delete(url)
         
-        # Check if the request was successful
         if response.status_code == 200:
             st.success("Feedback deleted successfully!")
         else:
@@ -64,7 +62,6 @@ with st.expander('Past Reports'):
         st.write(df[['FeedbackID', 'Date', 'Description', 'ProgressRating']])
     feedback_id = st.number_input("Enter Feedback ID", min_value=1, step=1)
     if st.button("Delete Feedback"):
-        # Call the delete_feedback function
         del_feedback(feedback_id, s_id)
 
 st.write('')
