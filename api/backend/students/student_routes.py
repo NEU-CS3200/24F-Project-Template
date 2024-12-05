@@ -94,7 +94,7 @@ def get_all_feedback():
             f.FeedbackID,
             f.Description,
             f.Date,
-            f.ProgressRating,
+            f.ProgressRating
         FROM Feedback f
         JOIN Student s ON f.StudentID = s.StudentID
         JOIN Advisor a ON f.AdvisorID = a.AdvisorID
