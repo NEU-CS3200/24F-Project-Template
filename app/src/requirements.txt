@@ -13,6 +13,3 @@ plotly
 seaborn
 scikit-learn
 shap
-streamlit-aggrid
-mysql-connector-python
-pymysql

@@ -406,29 +406,28 @@ insert into Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedD
 
 
 -- 10. SystemLog Data (depends on Ticket)
-INSERT INTO SystemLog (LogID, TicketID, Timestamp, Activity, MetricType, Privacy, Security)
+INSERT INTO SystemLog (TicketID, Timestamp, Activity, MetricType, Privacy, Security)
 VALUES 
-(1, 10, '2024-02-01 10:30:00', 'User logged in', 'High', 'Privacy Requests', 'Encryption'),
-(2, 15, '2024-03-05 14:15:00', 'User updated profile', 'Medium', 'User Consent', 'Data Integrity'),
-(3, 8, '2024-04-10 18:45:00', 'User logged out', 'Low', 'Anonymity', 'Authentication'),
-(4, 20, '2024-05-01 09:00:00', 'User deleted profile', 'High', 'Privacy Requests', 'Access Control'),
-(5, 12, '2024-06-20 12:00:00', 'User logged in', 'Medium', 'Data Sharing', 'Audit Logs'),
-(6, 18, '2024-07-15 16:30:00', 'User updated profile', 'High', 'Security Events', 'Password Security'),
-(7, 22, '2024-08-08 13:00:00', 'User logged out', 'Low', 'Privacy Requests', 'Encryption'),
-(8, 25, '2024-09-12 17:45:00', 'User added event', 'High', 'Privacy Settings', 'User Reports'),
-(9, 11, '2024-10-05 15:00:00', 'User logged in', 'Medium', 'Security Events', 'Intrusion Detection'),
-(10, 6, '2024-11-15 11:30:00', 'User deleted profile', 'High', 'Anonymity', 'Access Control'),
-(11, 19, '2024-12-02 08:45:00', 'User updated profile', 'Low', 'Data Access', 'Audit Logs'),
-(12, 7, '2025-01-10 14:15:00', 'User logged in', 'Medium', 'User Consent', 'Authentication'),
-(13, 14, '2025-02-05 16:00:00', 'User logged out', 'High', 'Privacy Requests', 'Encryption'),
-(14, 23, '2025-03-12 10:30:00', 'User added event', 'Low', 'Anonymity', 'User Reports'),
-(15, 5, '2025-04-15 12:45:00', 'User deleted profile', 'High', 'Data Sharing', 'Data Integrity'),
-(16, 3, '2025-05-20 15:30:00', 'User logged out', 'Medium', 'Security Events', 'Password Security'),
-(17, 16, '2025-06-25 09:15:00', 'User updated profile', 'High', 'Privacy Requests', 'Audit Logs'),
-(18, 2, '2025-07-01 18:00:00', 'User added event', 'Medium', 'User Consent', 'Encryption'),
-(19, 9, '2025-08-05 11:00:00', 'User logged in', 'Low', 'Privacy Requests', 'Intrusion Detection'),
-(20, 4, '2025-09-15 14:00:00', 'User deleted profile', 'High', 'Security Events', 'Access Control');
-
+(10, '2024-02-01 10:30:00', 'User logged in', 'High', 'Privacy Requests', 'Encryption'),
+(15, '2024-03-05 14:15:00', 'User updated profile', 'Medium', 'User Consent', 'Data Integrity'),
+( 8, '2024-04-10 18:45:00', 'User logged out', 'Low', 'Anonymity', 'Authentication'),
+(20, '2024-05-01 09:00:00', 'User deleted profile', 'High', 'Privacy Requests', 'Access Control'),
+(12, '2024-06-20 12:00:00', 'User logged in', 'Medium', 'Data Sharing', 'Audit Logs'),
+(18, '2024-07-15 16:30:00', 'User updated profile', 'High', 'Security Events', 'Password Security'),
+(22, '2024-08-08 13:00:00', 'User logged out', 'Low', 'Privacy Requests', 'Encryption'),
+(25, '2024-09-12 17:45:00', 'User added event', 'High', 'Privacy Settings', 'User Reports'),
+( 11, '2024-10-05 15:00:00', 'User logged in', 'Medium', 'Security Events', 'Intrusion Detection'),
+( 6, '2024-11-15 11:30:00', 'User deleted profile', 'High', 'Anonymity', 'Access Control'),
+( 19, '2024-12-02 08:45:00', 'User updated profile', 'Low', 'Data Access', 'Audit Logs'),
+( 7, '2025-01-10 14:15:00', 'User logged in', 'Medium', 'User Consent', 'Authentication'),
+( 14, '2025-02-05 16:00:00', 'User logged out', 'High', 'Privacy Requests', 'Encryption'),
+(23, '2025-03-12 10:30:00', 'User added event', 'Low', 'Anonymity', 'User Reports'),
+(5, '2025-04-15 12:45:00', 'User deleted profile', 'High', 'Data Sharing', 'Data Integrity'),
+( 3, '2025-05-20 15:30:00', 'User logged out', 'Medium', 'Security Events', 'Password Security'),
+( 16, '2025-06-25 09:15:00', 'User updated profile', 'High', 'Privacy Requests', 'Audit Logs'),
+( 2, '2025-07-01 18:00:00', 'User added event', 'Medium', 'User Consent', 'Encryption'),
+( 9, '2025-08-05 11:00:00', 'User logged in', 'Low', 'Privacy Requests', 'Intrusion Detection'),
+( 4, '2025-09-15 14:00:00', 'User deleted profile', 'High', 'Security Events', 'Access Control');
 
 
 
