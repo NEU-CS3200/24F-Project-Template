@@ -32,7 +32,7 @@ def api_test():
     return response
 
 
-@simple_routes.route("/create_help_ticket")
+@simple_routes.route("/create_help_ticket", methods=["POST"])
 def create_help_ticket():
     data = request.get_json()
 

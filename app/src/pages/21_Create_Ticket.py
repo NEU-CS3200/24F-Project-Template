@@ -18,6 +18,8 @@ with st.form("ticket_data"):
     submit_button = st.form_submit_button("Submit Ticket")
     if submit_button:
         if not summary_input:
+            st.error("please enter a summary")
+        else:
             req_data = {
                 "summary": summary_input,
                 "userId": st.session_state['id'],
