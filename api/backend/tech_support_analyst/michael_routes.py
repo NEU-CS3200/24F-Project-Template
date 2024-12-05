@@ -26,6 +26,8 @@ def get_SystemLog():
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()
+
+    # test
     
     # Convert the fetched data (list of tuples) to a list of dictionaries
     column_names = ["LogID", "TicketID", "Timestamp", "Activity", "MetricType", "Privacy", "Security"]
