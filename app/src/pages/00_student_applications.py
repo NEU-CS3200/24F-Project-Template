@@ -10,7 +10,7 @@ SideBarLinks()
 if st.button("Back", key="back_button"):
     st.switch_page('pages/00_student_home.py')
 
-st.title("Here you can View Your Job Applications. Rescind them if you'd like.")
+st.title("Here you can View Your Job Applications.")
 
 applications = requests.get('http://api:4000/jp/jobPostings/applications').json()
 application_ids = [application['id'] for application in applications]
