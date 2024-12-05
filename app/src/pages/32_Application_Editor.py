@@ -80,6 +80,10 @@ try:
             sbutton1 = st.form_submit_button("Add Work Experience")
 
             if sbutton1:
+                if not name:
+                    st.error("Please enter a name")
+                if not summary:
+                    st.error("Please enter a summary")
                 with requests.Session() as session:
                     try:
                         response = session.post(
