@@ -30,7 +30,7 @@ def get_feedback(student_id):
         return []
 
 def del_feedback(feedback_id, student_id):
-    url = f'http://api:4000/api/students/{student_id}/feedback/{feedback_id}'
+    url = f'http://api:4000/c/students/{student_id}/feedback/{feedback_id}'
     try:
         response = requests.delete(url)
         
