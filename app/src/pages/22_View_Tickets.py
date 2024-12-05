@@ -14,7 +14,7 @@ st.title(f"Tickets")
 with st.form("ticket_search"):
     ticket_id = student_input = st.text_input(
         "Search Tickets",
-        placeholder="Enter Ticket Id# or nothing for all Tickets",
+        placeholder="Enter Ticket Id#,
     )
     submit_button = st.form_submit_button("Search")
 
@@ -50,7 +50,7 @@ try:
     )
     if response.status_code == 200:
         if len(response.json()) != 0:
-            df = pd.json_normalize(response1.json())
+            df = pd.json_normalize(response.json())
 except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to server: {str(e)}")
 
