@@ -21,8 +21,8 @@ student2 = Blueprint('student2', __name__)
 def get_students():
 
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT StudentId, Name, Major,
-                    Company, Lifestyle FROM Student
+    cursor.execute('''SELECT Name, Major,
+                    Company, Location FROM Student
     ''')
     
     theData = cursor.fetchall()

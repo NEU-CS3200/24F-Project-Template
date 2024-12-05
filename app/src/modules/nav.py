@@ -37,9 +37,9 @@ def KevinPageNav():
     
 def SarahPageNav():
     st.sidebar.page_link("pages/30_Student_Sarah_Home.py", label="Student Home", icon="📖")
-    st.sidebar.page_link("pages/31_Professional_Events.py", label="Events", icon="👤")
-    st.sidebar.page_link("pages/32_Browse_Profiles.py", label="Browse Profiles", icon="🔍")
-    st.sidebar.page_link("pages/33_Advisor_Feedback.py", label="Advisor Feedback", icon="🏫")
+    st.sidebar.page_link("pages/30_4_View_Events.py", label="Events", icon="👤")
+    st.sidebar.page_link("pages/30_2_View_Student_List.py", label="Browse Profiles", icon="🔍")
+    st.sidebar.page_link("pages/30_5_Submit_Feedback.py", label="Advisor Feedback", icon="🏫")
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
