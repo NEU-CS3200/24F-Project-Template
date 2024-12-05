@@ -173,7 +173,7 @@ def get_positions(id):
             FROM cosint.companies c 
             LEFT JOIN cosint.positions p2 
             ON c.id = p2.companyId
-        WHERE p.companyId = {int(id)}
+        WHERE p2.companyId = {int(id)}
         LIMIT 100;
     """
 

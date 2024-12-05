@@ -2,6 +2,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 import streamlit as st
+import requests
+import pandas as pd
+import numpy as np
 from modules.nav import SideBarLinks
 
 st.set_page_config(layout = 'wide')
@@ -10,7 +13,6 @@ SideBarLinks()
 
 st.title("Posted Positions")
 df = None
-
 try:
     test_response = requests.get("http://api:4000/pos/positions")
 
@@ -20,7 +22,7 @@ except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to positions API: {str(e)}")
 try:
     response = requests.get(
-        f"http://api:4000/emp/{st.session_state("company_id")}/positions"
+        f"http://api:4000/emp/{st.session_state['company_id']}/positions"
         )
     if response.status_code == 200:
         if len(response.json()) != 0:

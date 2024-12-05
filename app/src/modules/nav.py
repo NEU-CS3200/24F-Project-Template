@@ -41,8 +41,11 @@ def EmployerAdvHomeNav():
 
 def PositionOpeningsNav():
     st.sidebar.page_link(
-        "pages/12_Postion_Openings.py", label="Position Openings Editor", icon="💼")
+        "pages/12_Position_Openings.py", label="Position Openings", icon="💼")
 
+def PositionOpeningsCreateNav():
+    st.sidebar.page_link(
+        "pages/13_Position_Opening_Creation.py", label="Post Position Opening", icon="➕")
 
 def StudentSearchNav():
     st.sidebar.page_link(
@@ -114,6 +117,7 @@ def SideBarLinks(show_home=False):
             StudentSearchNav()
             PositionOpeningsNav()
             ApplicationReviewNav()
+            PositionOpeningsCreateNav()
             CreateTicketNav()
 
         # If the user role is student, show student home
