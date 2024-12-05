@@ -134,3 +134,87 @@ def update_task_reminder(task_id):
         db.get_db().rollback()
         return jsonify({'error': str(e)}), 500
 
+
+@advisor.route('/advisor/events', methods=['POST'])
+def create_event():
+    try:
+        data = request.get_json()
+        
+        query = '''
+        INSERT INTO Events (
+            CommunityID,
+            Date,
+            Name,
+            Description
+        ) VALUES (%s, %s, %s, %s)
+        '''
+        
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (
+            data.get('community_id'),
+            data.get('date'),
+            data.get('name'),
+            data.get('description')
+        ))
+        db.get_db().commit()
+        
+        return jsonify({
+            'message': 'Event created successfully'
+        }), 201
+
+    except Exception as e:
+        db.get_db().rollback()
+        return jsonify({'error': str(e)}), 500
+
+@advisor.route('/advisor/events/<event_id>', methods=['PUT'])
+def update_event(event_id):
+    try:
+        data = request.get_json()
+        
+        query = '''
+        UPDATE Events 
+        SET CommunityID = %s,
+            Date = %s,
+            Name = %s,
+            Description = %s
+        WHERE EventID = %s
+        '''
+        
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (
+            data.get('community_id'),
+            data.get('date'),
+            data.get('name'),
+            data.get('description'),
+            event_id
+        ))
+        db.get_db().commit()
+        
+        return jsonify({
+            'message': 'Event updated successfully'
+        }), 200
+
+    except Exception as e:
+        db.get_db().rollback()
+        return jsonify({'error': str(e)}), 500
+
+@advisor.route('/advisor/events/<event_id>', methods=['DELETE'])
+def delete_event(event_id):
+    try:
+        query = '''
+        DELETE FROM Event 
+        WHERE EventID = %s
+        '''
+        
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (event_id,))
+        db.get_db().commit()
+        
+        return jsonify({
+            'message': 'Event deleted successfully'
+        }), 200
+
+    except Exception as e:
+        db.get_db().rollback()
+        return jsonify({'error': str(e)}), 500
+

@@ -129,8 +129,7 @@ try:
                         current_reminder.date()
                     )
                     
-                    # Add some vertical space to align with status button
-                    st.write("")
+                
                     
                     if st.button("Update Reminder"):
                         reminder_response = requests.put(

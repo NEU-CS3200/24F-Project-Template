@@ -23,20 +23,21 @@ st.write('### What would you like to do today?')
 col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
 
 with col1:
-    if st.button("📝 Student_tasks\n Student Tasks", key="notification_btn"):
+    if st.button("📝 Student Tasks", key="notification_btn"):
         st.switch_page("pages/11_Student_Tasks.py")
 
 with col2:
-    if st.button("🧐 FEEDBACK\n Student Feedback", key="forms_btn"):
+    if st.button("🧐 Student Feedback", key="forms_btn"):
         st.switch_page("pages/12_Feedback.py")
 
 with col3:
-    if st.button("🏠 HOUSING\n Students Waiting", key="housing_btn"):
+    if st.button("🏠 HOUSING\n...Students Waiting", key="housing_btn"):
         st.switch_page("pages/13_Housing.py")
 
 with col4:
-    if st.button("➕ CREATE NEW\nCase", key="create_btn"):
-        st.switch_page("pages/14_Create_Case.py")
+    if st.button("➕ CREATE NEW\nEvent", key="create_btn"):
+        st.switch_page("pages/14_Create_Event.py")
+
 
 # Load and display student data
 try:
