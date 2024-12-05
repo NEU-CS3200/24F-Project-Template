@@ -14,47 +14,59 @@ def AboutPageNav():
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
-def PolStratAdvHomeNav():
+#### ------------------------ Examples for Role of analyst ------------------------
+def AnalaystHomeNav():
     st.sidebar.page_link(
-        "pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon="👤"
+        "pages/00_Analyst_Home.py", label="Analyst Home", icon="👤"
     )
 
 
-def WorldBankVizNav():
+def CompanyRatingsNav():
     st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
+        "pages/01_Company_Ratings.py", label="Company Ratings", icon="🏦"
     )
 
-
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
-
-
-## ------------------------ Examples for Role of usaid_worker ------------------------
-def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
+def GeneralRatingsNav():
+    st.sidebar.page_link("pages/05_General_Ratings_By_College.py", label="General Ratings", icon="🗺️")
 
 
-def PredictionNav():
-    st.sidebar.page_link(
-        "pages/11_Prediction.py", label="Regression Prediction", icon="📈"
-    )
 
+#### ------------------------ Examples for Role of reviewer ------------------------
+def ReviewerHomeNav():
+    st.sidebar.page_link("pages/10_Reviewer_Home.py", label="Reviewer Home", icon="🏠")
 
-def ClassificationNav():
-    st.sidebar.page_link(
-        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
-    )
+def SeeUserReviewsNav():
+    st.sidebar.page_link("pages/12_See_User_Reviews.py", label="See Your Reviews", icon="📄")
+
+def AddReviewNav():
+    st.sidebar.page_link("pages/11_Add_Review.py", label="Add a Review", icon="➕")
+
+def SeeCompanyReviewsNav():
+    st.sidebar.page_link("pages/13_See_Company_Reviews.py", label="See Company Reviews", icon="🏢")
+
 
 
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
     st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
+        "pages/21_Add_Entity.py", label="Add Entity"
+    )
+    st.sidebar.page_link(
+        "pages/22_Update_Entity.py", label="Update Entity"
+    )
+    st.sidebar.page_link(
+        "pages/23_Remove_Entity.py", label="Remove Entity"
     )
 
+def CoFilters():
+    st.sidebar.page_link("pages/38_Job_Seeker.py", label="Job Seeker")
+    st.sidebar.page_link(
+    "pages/37_See_Questions.py", label="See Questions and Answers", icon="💻"
+    )
+    st.sidebar.page_link(
+        "pages/36_Find_Jobs.py", label="Reviews Feed"
+    )
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
@@ -77,22 +89,28 @@ def SideBarLinks(show_home=False):
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
 
-        # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state["role"] == "pol_strat_advisor":
-            PolStratAdvHomeNav()
-            WorldBankVizNav()
-            MapDemoNav()
+        # Show "Company Ratings" Link and "General Ratings By College" Link if the user is a ANALYST role.
+        if st.session_state["role"] == "analyst":
+            AnalaystHomeNav()
+            CompanyRatingsNav()
+            GeneralRatingsNav()
+            
 
-        # If the user role is usaid worker, show the Api Testing page
-        if st.session_state["role"] == "usaid_worker":
-            PredictionNav()
-            ApiTestNav()
-            ClassificationNav()
+        # If the user role is reviewer, show the Reviewer pages
+        if st.session_state["role"] == "reviewer":
+            ReviewerHomeNav()
+            SeeUserReviewsNav()
+            AddReviewNav()
+            SeeCompanyReviewsNav()
 
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "administrator":
             AdminPageNav()
 
+
+        # If the user is a job seeker, give them access to job seeker links
+        if st.session_state['role'] == 'job_seeker':
+            CoFilters()
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
 
