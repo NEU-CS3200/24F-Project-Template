@@ -79,6 +79,7 @@ def ApplicationCreatorNav():
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
+    st.sidebar.page_link("pages/21/Create_Ticket.py", label="Create Help Ticket", icon="🎫")
 
 def ViewTicketsNav():
     st.sidebar.page_link("pages/22_View_Tickets.py", label="View Tickets", icon="🎫")
