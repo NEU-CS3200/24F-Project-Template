@@ -44,7 +44,6 @@ if st.button('Create Profile'):
 
     if response.status_code == 200:
         st.success("Profile created successfully!")
-        #st.write(response.json())
         st.switch_page('pages/23_My_Profile.py')
     else:
         st.error(f"Failed to create item: {response.text}")

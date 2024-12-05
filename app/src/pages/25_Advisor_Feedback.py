@@ -31,23 +31,20 @@ name = st.session_state['first_name']
 student = get_profile(name)
 
 if student and isinstance(student, list):
-    # Access the first record in the list
     record = student[0]
     s_id = record.get("StudentID", "Not available")
     a_id = record.get("AdvisorID", "Not available")
 
     if st.button("Submit Feedback"):
-        # Prepare data for submission
         feedback_data = {
             "Description": description,
-            "Date": date.isoformat(),  # Convert to ISO format
+            "Date": date.isoformat(),  
             "ProgressRating": progress_rating,
             "StudentID" : s_id,
             "AdvisorID" : a_id,
         }
 
         try:
-            # Make a POST request to the backend API
             response = requests.post(url, json=feedback_data)
 
             if response.status_code == 200:
