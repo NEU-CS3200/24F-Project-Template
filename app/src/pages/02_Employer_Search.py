@@ -43,7 +43,7 @@ with st.form("employer_search"):
 
     if submit_button:
         if not employer_value:
-            st.error("Please enter an employer name or company")
+            st.error("Please enter an employer name, employer id#, or company name")
         else:
             logger.info(f"Employer form submitted with data: {employer_value}")
 
@@ -54,12 +54,18 @@ with st.form("employer_search"):
                 response2 = requests.get(
                     f"http://api:4000/emp/emp_name/{employer_value}"
                 )
-                if response1.status_code == 200:
+                response3 = requests.get(
+                    f"http://api:4000/emp/emp_company/{employer_value}"
+                )
+                 response1.status_code == 200:
                     if len(response1.json()) != 0:
                         df = pd.json_normalize(response1.json())
                 if response2.status_code == 200:
                     if len(response2.json()) != 0:
                         df = pd.json_normalize(response2.json())
+                if response3.status_code == 200:
+                    if len(response3.json()) != 0:
+                        df = pd.json_normalize(response3.json())
             except requests.exceptions.RequestException as e:
                 st.error(f"Error connecting to server: {str(e)}")
 
