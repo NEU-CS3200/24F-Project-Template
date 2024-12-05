@@ -169,7 +169,10 @@ def offer_position(id, pos_id):
 @employers.route("/<id>/positions", methods=["GET"])
 def get_positions(id):
     query = f"""
-        SELECT * FROM positions p
+        SELECT c.name AS compName, p2.registeredAt, p2.applicantQuestions, p2.summary, p2.country, p2.city, p2.address, p2.filled, p2.expectedSalary 
+            FROM cosint.companies c 
+            LEFT JOIN cosint.positions p2 
+            ON c.id = p2.companyId
         WHERE p.companyId = {int(id)}
         LIMIT 100;
     """

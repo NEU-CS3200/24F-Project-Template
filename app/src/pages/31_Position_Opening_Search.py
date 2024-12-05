@@ -21,8 +21,6 @@ try:
 except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to positions API: {str(e)}")
 
-df_2 = None
-
 with st.form("position_value"):
     positon_value = st.text_input(
         "Search Positions",
@@ -78,6 +76,15 @@ if df_1 is not None:
 
 
 st.title("Flagged Positions")
+df_2 = None
+
+try:
+    test_response = requests.get("http://api:4000/pos/positions")
+
+    if not test_response.status_code == 200:
+        st.error("Failed to fetch positions")
+except requests.exceptions.RequestException as e:
+    st.error(f"Error connecting to positions API: {str(e)}")
 
 if df_2 is not None:
     for index, row in df.iterrows():

@@ -112,6 +112,7 @@ def SideBarLinks(show_home=False):
         if st.session_state["role"] == "employer":
             EmployerAdvHomeNav()
             StudentSearchNav()
+            PositionOpeningsNav()
             ApplicationReviewNav()
             CreateTicketNav()
 
