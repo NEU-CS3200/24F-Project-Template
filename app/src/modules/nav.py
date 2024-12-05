@@ -19,7 +19,7 @@ def TechSupportAnalystHomeNav():
     st.sidebar.page_link("pages/00_Tech_Support_Analyst_Home.py", label="Tech Support Analyst Home", icon="👤")
     st.sidebar.page_link("pages/01_Run_System_Logs.py", label="System Logs", icon="⚙️")
     st.sidebar.page_link("pages/02_Ticket_Overview.py", label="Ticket Overview", icon="🎫")
-    st.sidebar.page_link("pages/04_Access_System_Health_Dashboard.py", label="System Health Dashboard", icon="📊")
+    st.sidebar.page_link("pages/03_Access_System_Health_Dashboard.py", label="System Health Dashboard", icon="📊")
 
 
 ## ------------------------ Role of Co-op Advisor ------------------------
