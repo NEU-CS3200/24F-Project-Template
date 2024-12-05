@@ -32,7 +32,7 @@ except Exception as e:
 
 #### CREATING NEW TICKET
 st.title("Create a New Ticket")
-issue = st.text_input("IssueType", placeholder="Describe the activity")
+issue = st.text_input("Issue Type", placeholder="Describe the activity")
 priority = st.selectbox("Priority", ["High", "Medium", "Low"])  
 status = st.selectbox("Status", ['Open', 'Completed', 'Pending', 'Cancelled'])
 received = st.date_input("Date Created")
