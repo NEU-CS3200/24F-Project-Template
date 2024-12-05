@@ -26,15 +26,7 @@ def get_SystemLog():
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()
-
-    # test
-    
-    # Convert the fetched data (list of tuples) to a list of dictionaries
-    column_names = ["LogID", "TicketID", "Timestamp", "Activity", "MetricType", "Privacy", "Security"]
-    formatted_data = [dict(zip(column_names, row)) for row in theData]
-    
-    # Return the formatted data as JSON
-    response = make_response(jsonify(formatted_data))
+    response = make_response(jsonify(theData))
     response.status_code = 200
     return response
 
