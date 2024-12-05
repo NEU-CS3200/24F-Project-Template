@@ -4,7 +4,7 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-st.title("Upcoming Events and Workshops")
+st.title("Upcoming Professional Events")
 
 try:
     response = requests.get("http://your-api-url.com/community/{community_id}/events")
