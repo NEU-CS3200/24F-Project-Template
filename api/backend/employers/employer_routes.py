@@ -124,7 +124,7 @@ def create_pos(id):
     city = data["city"]
     country = data["country"]
     summary = data["summary"]
-    applicant_questions = data["applicatnQuestions"]
+    applicant_questions = data["applicantQuestions"]
     expected_salary = int(data["expectedSalary"])
     company_id = int(id)
 
@@ -169,7 +169,7 @@ def offer_position(id, pos_id):
 @employers.route("/<id>/positions", methods=["GET"])
 def get_positions(id):
     query = f"""
-        SELECT c.name AS compName, p2.registeredAt, p2.applicantQuestions, p2.summary, p2.country, p2.city, p2.address, p2.filled, p2.expectedSalary 
+        SELECT p2.id, c.name AS compName, p2.registeredAt, p2.applicantQuestions, p2.summary, p2.country, p2.city, p2.address, p2.filled, p2.expectedSalary 
             FROM cosint.companies c 
             LEFT JOIN cosint.positions p2 
             ON c.id = p2.companyId
