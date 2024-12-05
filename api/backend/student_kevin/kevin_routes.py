@@ -100,31 +100,31 @@ def update_profile():
     the_data = request.json
     current_app.logger.info(the_data)
 
-    company = the_data.get('Company')
-    location = the_data.get('Location')
+    #company = the_data.get('Company')
+    #location = the_data.get('Location')
     housing_status = the_data.get('HousingStatus')
     carpool_status = the_data.get('CarpoolStatus')
-    lease_duration = the_data.get('LeaseDuration')
+    #lease_duration = the_data.get('LeaseDuration')
     budget = the_data.get('Budget')
     cleanliness = the_data.get('Cleanliness')
     lifestyle = the_data.get('Lifestyle')
     time = the_data.get('CommuteTime')
     days = the_data.get('CommuteDays')
-    bio = the_data.get('Bio')
+    #bio = the_data.get('Bio')
     name = the_data.get('Name')
 
     query = '''
     UPDATE Student
-    SET Company = %s, Location = %s, HousingStatus = %s,
-        CarpoolStatus = %s, Budget = %s, LeaseDuration = %s, 
-        Cleanliness = %s, Lifestyle=%s, CommuteTime=%s, CommuteDays=%s, Bio = %s
+    SET HousingStatus = %s,
+        CarpoolStatus = %s, Budget = %s,
+        Cleanliness = %s, Lifestyle=%s, CommuteTime=%s, CommuteDays=%s
     WHERE Name = %s
     '''
     
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
-    cursor.execute(query, (company, location, housing_status, carpool_status, budget, lease_duration, cleanliness, lifestyle, time, days, bio, name))
+    cursor.execute(query, (housing_status, carpool_status, budget, cleanliness, lifestyle, time, days, name))
     db.get_db().commit()
 
     response = make_response({"message": "Profile updated successfully"})
