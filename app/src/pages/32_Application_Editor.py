@@ -42,6 +42,10 @@ try:
             submit_button = st.form_submit_button("Save changes")
 
             if submit_button:
+                if not question_response:
+                    st.error("Please enter responses to questions")
+                if not gpa:
+                    st.error("Please enter your gpa")
                 data = {
                     "questionResponse": question_response,
                     "GPA": gpa,
