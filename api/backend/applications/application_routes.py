@@ -72,17 +72,17 @@ def add_position(id):
 
 @applications.route("/applications/<id>/related_coursework", methods=["POST"])
 def create_related_coursework(id):
-    create_app_addon_helper(id, "related_coursework")
+    return create_app_addon_helper(id, "related_coursework")
 
 
 @applications.route("/applications/<id>/work_experience", methods=["POST"])
 def create_work_experience(id):
-    create_app_addon_helper(id, "work_experience")
+    return create_app_addon_helper(id, "work_experience")
 
 
 @applications.route("/applications/<id>/notable_skills", methods=["POST"])
 def create_notable_skills(id):
-    create_app_addon_helper(id, "notable_skills")
+    return create_app_addon_helper(id, "notable_skills")
 
 
 def create_app_addon_helper(id, table_name):
@@ -120,19 +120,38 @@ def get_app():
     return response
 
 
+@applications.route("/applications/<id>/user_refs", methods=["GET"])
+def get_user_refs(id):
+    query = f"""
+        SELECT ur.* FROM applications a
+            JOIN application_bookmark ab ON ab.applicationId = a.id
+            JOIN users u ON ab.userId = u.id
+            JOIN user_references ur ON u.id = ur.userId
+        WHERE a.id = {int(id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
 @applications.route("/applications/<id>/related_coursework", methods=["GET"])
 def get_related_coursework(id):
-    get_app_addon_helper(id, "related_coursework")
+    return get_app_addon_helper(id, "related_coursework")
 
 
 @applications.route("/applications/<id>/work_experience", methods=["GET"])
 def get_work_experience(id):
-    get_app_addon_helper(id, "work_experience")
+    return get_app_addon_helper(id, "work_experience")
 
 
 @applications.route("/applications/<id>/notable_skills", methods=["GET"])
 def get_notable_skills(id):
-    get_app_addon_helper(id, "notable_skills")
+    return get_app_addon_helper(id, "notable_skills")
 
 
 def get_app_addon_helper(id, table_name):
@@ -218,17 +237,17 @@ def delete_app(id):
 
 @applications.route("/applications/<id>/related_coursework", methods=["DELETE"])
 def delete_related_coursework(id):
-    delete_app_addon_helper(id, "related_coursework")
+    return delete_app_addon_helper(id, "related_coursework")
 
 
 @applications.route("/applications/<id>/work_experience", methods=["DELETE"])
 def delete_work_experience(id):
-    delete_app_addon_helper(id, "work_experience")
+    return delete_app_addon_helper(id, "work_experience")
 
 
 @applications.route("/applications/<id>/notable_skills", methods=["DELETE"])
 def delete_notable_skills(id):
-    delete_app_addon_helper(id, "notable_skills")
+    return delete_app_addon_helper(id, "notable_skills")
 
 
 def delete_app_addon_helper(id, table_name):

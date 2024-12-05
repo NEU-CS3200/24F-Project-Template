@@ -1,3 +1,5 @@
+USE cosint;
+
 -- mock data for companies
 insert into companies (name) values ('Teklist');
 insert into companies (name) values ('Twinder');
