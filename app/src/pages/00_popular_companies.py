@@ -18,25 +18,6 @@ company_names = [company['id'] for company in companies]
 col1, col2 = st.columns(2)
 
 with col1: 
-    st.subheader('Filter By:')
-    col3, col4, col5 = st.columns(3)
-    with col3:
-        rating = st.number_input('Rating', min_value=0, max_value=5, value=0)
-        # if st.button("Apply Rating Filter"):
-        #     for company in companies: 
-        #         avg_rating = requests.get(f"http://api:4000/co/companies/avg_rating/{company['id']}").json().get('AvgRating', 0)
-        #         try:
-        #             avg_rating = int(avg_rating)
-        #         except (ValueError, TypeError):
-        #             avg_rating = 0
-
-        #         if not rating <= avg_rating < rating + 1:
-        #             companies.remove(company)
-    with col4:
-        courses = st.text_input('Course Name')
-    with col5:
-        degree = st.text_input('Degree')
-
     for company in companies:
         avg_rating = requests.get(f"http://api:4000/co/companies/avg_rating/{company['id']}").json().get('AvgRating', 'N/A')
         st.write(
