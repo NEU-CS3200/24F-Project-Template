@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 st.set_page_config(layout = 'wide')
 
-# Show appropriate sidebar links for the role of the currently logged in user
+# Show sidebar links for the role of the currently logged in user
 SideBarLinks()
 
 if st.button("Back", key="back_button"):
