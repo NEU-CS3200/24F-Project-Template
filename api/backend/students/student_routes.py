@@ -156,11 +156,13 @@ def update_housing_match():
         student_id = data.get('student_id')
         housing_id = data.get('housing_id')
         
+        print(f"Updating housing match - Student: {student_id}, Housing: {housing_id}")  # Debug log
+        
         # Update student's housing status to Complete
         student_query = '''
         UPDATE Student 
         SET HousingStatus = 'Complete',
-            CommunityID = (SELECT Commun¬ityID FROM Housing WHERE HousingID = %s)
+            CommunityID = (SELECT CommunityID FROM Housing WHERE HousingID = %s)
         WHERE StudentID = %s
         '''
         
@@ -172,9 +174,25 @@ def update_housing_match():
         '''
         
         cursor = db.get_db().cursor()
+        
+        # Execute student update
         cursor.execute(student_query, (housing_id, student_id))
+        if cursor.rowcount == 0:
+            db.get_db().rollback()
+            return jsonify({
+                'error': f'No student found with ID {student_id}'
+            }), 404
+            
+        # Execute housing update
         cursor.execute(housing_query, (housing_id,))
+        if cursor.rowcount == 0:
+            db.get_db().rollback()
+            return jsonify({
+                'error': f'No housing found with ID {housing_id}'
+            }), 404
+            
         db.get_db().commit()
+        print(f"Successfully updated housing match")  # Debug log
 
         return jsonify({
             'message': 'Housing match updated successfully',
@@ -183,5 +201,8 @@ def update_housing_match():
         }), 200
 
     except Exception as e:
+        print(f"Error updating housing match: {str(e)}")  # Debug log
         db.get_db().rollback()
         return jsonify({'error': str(e)}), 500
+
+

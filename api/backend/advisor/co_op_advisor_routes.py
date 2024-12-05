@@ -64,36 +64,47 @@ def get_notifications():
 @advisor.route('/advisor/tasks/<task_id>', methods=['PUT'])
 def update_task_status(task_id):
     try:
-        # Get the new status from request body
-        data = request.get_json()
+        # Parse JSON data from request
+        data = request.json
         new_status = data.get('status')
-        
-        # Validate the status
-        valid_statuses = ['Pending', 'In Progress', 'Completed', 'Received']
-        if new_status not in valid_statuses:
-            return jsonify({
-                'error': f'Invalid status. Must be one of: {", ".join(valid_statuses)}'
-            }), 400
 
-        # Update using the correct column name (Status)
+        # Validate that status is provided
+        if not new_status:
+            return make_response(jsonify({"error": "Status is required"}), 400)
+
+        # Build the SQL query to update the task status
         query = '''
-        UPDATE Task 
-        SET Status = %s
-        WHERE TaskID = %s
+            UPDATE Task
+            SET Status = %s
+            WHERE TaskID = %s
         '''
-        cursor = db.get_db().cursor()
-        cursor.execute(query, (new_status, task_id))
-        db.get_db().commit()
+        values = (new_status, task_id)
 
-        return jsonify({
-            'message': 'Task status updated successfully',
-            'task_id': task_id,
-            'new_status': new_status
-        }), 200
+        # Execute the query
+        cursor = db.get_db().cursor()
+        cursor.execute(query, values)
+        
+        # Check if any rows were affected
+        if cursor.rowcount == 0:
+            db.get_db().rollback()
+            return make_response(jsonify({
+                "error": f"No task found with ID {task_id}"
+            }), 404)
+            
+        db.get_db().commit()
+        print(f"Successfully updated status for task {task_id} to {new_status}")  # Debug log
+
+        # Return success response
+        return make_response(jsonify({
+            "message": "Task status updated successfully",
+            "task_id": task_id,
+            "new_status": new_status
+        }), 200)
 
     except Exception as e:
+        print(f"Error updating task status: {str(e)}")  # Debug log
         db.get_db().rollback()
-        return jsonify({'error': str(e)}), 500
+        return make_response(jsonify({"error": str(e)}), 500)
 
 
 @advisor.route('/advisor/tasks/<task_id>/reminder', methods=['PUT'])
@@ -137,6 +148,7 @@ def update_task_reminder(task_id):
 def create_event():
     try:
         data = request.get_json()
+        print("Received data:", data)  # Log the received data
         
         query = '''
         INSERT INTO Events (
@@ -147,7 +159,8 @@ def create_event():
         ) VALUES (%s, %s, %s, %s)
         '''
         
-        cursor = db.get_db().cursor(dictionary=True)
+        cursor = db.get_db().cursor()
+        print("Executing query:", query)  # Log the query
         cursor.execute(query, (
             data.get('community_id'),
             data.get('date'),
@@ -155,14 +168,14 @@ def create_event():
             data.get('description')
         ))
         db.get_db().commit()
-        
+        print("Event created successfully")  # Log success
         
         return jsonify({
             'message': 'Event created successfully'
         }), 201
 
     except Exception as e:
-        print(f"Error creating event: {str(e)}")
+        print(f"Error creating event: {str(e)}")  # Log the error
         db.get_db().rollback()
         return jsonify({'error': str(e)}), 500
 
@@ -252,5 +265,7 @@ def get_event(event_id):
     except Exception as e:
         print(f"Error fetching event: {str(e)}")  # Add debugging
         return jsonify({'error': str(e)}), 500
+
+
 
 

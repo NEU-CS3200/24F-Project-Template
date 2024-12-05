@@ -29,15 +29,18 @@ def create_new_event():
         
         if submitted:
             try:
-                response = requests.post(
-                    create_url,
-                    json={
-                        'name': name,
-                        'description': description,
-                        'date': date.strftime('%Y-%m-%d'),
-                        'community_id': community_id
-                    }
-                )
+                payload = {
+                    'name': name,
+                    'description': description,
+                    'date': date.strftime('%Y-%m-%d'),
+                    'community_id': community_id
+                }
+                st.write("Sending payload:", payload)  # Debug print
+                
+                response = requests.post(create_url, json=payload)
+                
+                st.write("Response status:", response.status_code)  # Debug print
+                st.write("Response content:", response.text)  # Debug print
                 
                 if response.status_code == 201:
                     st.success("Event created successfully!")
@@ -46,7 +49,7 @@ def create_new_event():
                     st.query_params["page"] = "10_Events"
                     st.rerun()
                 else:
-                    st.error("Failed to create event")
+                    st.error(f"Failed to create event: {response.text}")
                     st.toast("Failed to create event", icon="❌")
                     
             except Exception as e:
@@ -149,6 +152,7 @@ operation = st.selectbox(
     "What would you like to do?",
     ["Create New Event", "Edit Event", "Delete Event"]
 )
+
 
 # Display different interfaces based on selection
 if operation == "Create New Event":
