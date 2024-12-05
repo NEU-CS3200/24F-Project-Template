@@ -79,6 +79,6 @@ if st.button('Act as Student - Sarah Lopez',
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'Student2'
-    st.session_state['first_name'] = 'Sarah'
+    st.session_state['first_name'] = 'Sarah Lopez'
     st.switch_page('pages/30_Student_Sarah_Home.py')
 

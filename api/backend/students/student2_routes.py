@@ -100,3 +100,48 @@ def update_student_profile():
     except Exception as e:
         # Handle exceptions and return an error response
         return make_response(jsonify({"error": str(e)}), 500)
+
+# route to provide feedback to advisor
+@student2.route('/feedback', methods=['POST'])
+def give_feedback():
+    data = request.json
+    current_app.logger.info(data)
+
+    description = data['Description']
+    date = data['Date']
+    rating = data['ProgressRating']
+    student_id = data['StudentID']
+    advisor_id = data.get('AdvisorID', None)
+
+    query = '''
+    INSERT INTO Feedback (Description, Date, ProgressRating, StudentID, AdvisorID)
+        VALUES (%s, %s, %s, %s, %s)
+    '''
+
+    current_app.logger.info(query)
+    connection = db.get_db()  
+    cursor = connection.cursor()  
+
+    cursor.execute(query, (description, date, rating, student_id, advisor_id))
+    connection.commit() 
+
+    cursor.close()  
+
+    response = make_response("Successfully added feedback")
+    response.status_code = 200
+    return response
+
+@student2.route('/student/<name>', methods=['GET'])
+def get_profile(name):
+    query = '''
+    SELECT *
+    FROM Student s
+    WHERE Name = %s
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query, (name, ))  
+    theData = cursor.fetchall()
+    
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
