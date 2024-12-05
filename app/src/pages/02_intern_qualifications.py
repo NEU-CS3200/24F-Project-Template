@@ -14,7 +14,7 @@ SideBarLinks()
 if st.button("Back", key="back_button"):
     st.switch_page('pages/02_recruiter_home.py')
 
-st.title("Compare Intern Qualifications Across Companies.")
+st.title("Compare Intern Qualifications.")
 
 # Display all companies
 companies = requests.get('http://web-api:4000/co/companies').json()
@@ -33,7 +33,7 @@ if selected_company:
 
     # Check if the response status is OK (200)
     if comparison_response.status_code == 200:
-        qualifications = comparison_response.json()  # Now safe to call .json() because the response is successful
+        qualifications = comparison_response.json()
 
     else:
         st.error(f"Failed to load qualification comparison data. Status code: {comparison_response.status_code}")
@@ -108,29 +108,3 @@ if st.button("Add Qualification"):
 
     else:
         st.error("Please select a student and enter a qualification.")
-
-#delete individual intern skill
-for qualification in student_qualifications:
-    skill_name = qualification['skillName']
-    skill_id = qualification['id']
-
-    col1, col2 = st.columns([4, 1])
-
-    with col1:
-        st.write(skill_name)
-        
-    with col2:
-        if st.button("Remove", key=f"remove_{skill_id}"):
-            delete_response = requests.delete(f"http://web-api:4000/in/students/{student_id}/qualifications/{skill_id}")
-
-            if delete_response.status_code == 204:
-                st.success(f"Removed qualification '{skill_name}'.")
-
-            else:
-                st.error("Failed to remove qualification.")
-
-"""# Ensure each button has a unique key
-for i, skill_id in enumerate(skill_list):
-    if st.button(f"Remove {skill_id}", key=f"remove_{skill_id}_{i}"):
-        # Handle button click
-"""
