@@ -34,9 +34,10 @@ SideBarLinks(show_home=True)
 
 # set the title of the page and provide a simple prompt. 
 logger.info("Loading the Home page of the app")
-st.title('Welcome to SyncSpace')
+st.title('Welcome to SyncSpace!')
 st.write('\n\n')
 st.write('### Which user would you like to log in as?')
+st.write('')
 
 # For each of the user personas for which we are implementing
 # functionality, we put a button on the screen that the user 
