@@ -16,22 +16,9 @@ def AboutPageNav():
 
 #### ------------------------ Role of Technical Support Analyst ------------------------
 def TechSupportAnalystHomeNav():
-    st.sidebar.page_link(
-        "pages/00_Tech_Support_Analyst_Home.py", label="Tech Support Analyst Home", icon="👤"
-    )
-
-
-def SystemLogsNav():
-    st.sidebar.page_link(
-        "pages/01_Run_System_Logs.py", label="System Logs", icon="⚙️"
-    )
-
-
-def TicketOverviewNav():
+    st.sidebar.page_link("pages/00_Tech_Support_Analyst_Home.py", label="Tech Support Analyst Home", icon="👤")
+    st.sidebar.page_link("pages/01_Run_System_Logs.py", label="System Logs", icon="⚙️")
     st.sidebar.page_link("pages/02_Ticket_Overview.py", label="Ticket Overview", icon="🎫")
-
-
-def SysHealthDashNav():
     st.sidebar.page_link("pages/04_Access_System_Health_Dashboard.py", label="System Health Dashboard", icon="📊")
 
 
