@@ -14,7 +14,7 @@ st.title(f"Tickets")
 with st.form("ticket_search"):
     ticket_id = student_input = st.text_input(
         "Search Tickets",
-        placeholder="Enter Ticket Id#",
+        placeholder="Enter Ticket Id# or nothing for all Tickets",
     )
     submit_button = st.form_submit_button("Search")
 
