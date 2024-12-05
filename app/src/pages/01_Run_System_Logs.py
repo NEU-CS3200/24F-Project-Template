@@ -9,49 +9,52 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-# Page Header
-st.title("Access System Logs")
-st.write("### Monitor system activity and analyze logs in real-time.")
+# Set the URL of your API endpoint for system logs
+url = "http://api:4000/t/SystemLog"
 
-# Backend API URL
-API_URL = "http://api:4000/t/SystemLog" 
+# Title of the Streamlit application
+st.title("System Logs Viewer")
 
-# Fetch System Logs
+# Function to fetch system logs with caching
+@st.cache_data(show_spinner=True)
 def fetch_system_logs():
     """Fetch logs from the Flask API."""
     try:
-        response = requests.get(API_URL)
+        response = requests.get(url)
         response.raise_for_status()  # Raise exception for HTTP errors
-        
-        st.write("Raw API Response:", response.text)  # Print raw response for debugging
-        
-        data = response.json()  # Assuming API returns JSON (list of dictionaries)
-        
-        if not data:
-            st.warning("No data returned from the API.")
-            return pd.DataFrame()  # Return an empty DataFrame if no data is returned
-        
-        # Convert the list of dictionaries directly into a DataFrame
-        logs_df = pd.DataFrame(data)  # Pandas will automatically handle the keys as column headers
-        
-        st.write("Logs DataFrame:", logs_df)  # Debug DataFrame
+        data = response.json()  # Assuming API returns JSON
+        # Convert to DataFrame for better handling
+        logs_df = pd.DataFrame(
+            data, 
+            columns=["LogID", "TicketID", "Timestamp", "Activity", "MetricType", "Privacy", "Security"]
+        )
         return logs_df
     except requests.exceptions.RequestException as e:
         st.error(f"Error fetching system logs: {e}")
-        return pd.DataFrame()  # Return empty DataFrame on error
+        return pd.DataFrame()
 
 # Fetch data
 logs_df = fetch_system_logs()
 
 # Display Logs
 if not logs_df.empty:
+    st.title("System Logs Viewer")
     st.write("### System Logs")
+    
     # Interactive Filters
     col1, col2 = st.columns(2)
     with col1:
-        activity_filter = st.multiselect("Filter by Activity", logs_df["Activity"].unique(), default=logs_df["Activity"].unique())
+        activity_filter = st.multiselect(
+            "Filter by Activity", 
+            logs_df["Activity"].unique(), 
+            default=logs_df["Activity"].unique()
+        )
     with col2:
-        metric_filter = st.multiselect("Filter by Metric Type", logs_df["MetricType"].unique(), default=logs_df["MetricType"].unique())
+        metric_filter = st.multiselect(
+            "Filter by Metric Type", 
+            logs_df["MetricType"].unique(), 
+            default=logs_df["MetricType"].unique()
+        )
 
     # Apply Filters
     filtered_logs = logs_df[
@@ -68,7 +71,7 @@ if not logs_df.empty:
     with col1:
         st.metric("Total Logs", len(filtered_logs))
     with col2:
-        st.metric("High Priority Logs", len(filtered_logs[filtered_logs["MetricType"] == "High"]))
+        st.metric("High Privacy Logs", len(filtered_logs[filtered_logs["Privacy"] == "High"]))
     with col3:
         st.metric("Unique Activities", filtered_logs["Activity"].nunique())
 
