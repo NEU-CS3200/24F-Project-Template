@@ -77,9 +77,9 @@ try:
             name = st.text_input("Name")
             summary = st.text_area("Summary")
 
-            sbutton1 = st.form_submit_button("Add Work Experience")
+            sbutton = st.form_submit_button("Add Work Experience")
 
-            if sbutton1:
+            if sbutton:
                 if not name:
                     st.error("Please enter a name")
                 if not summary:
@@ -113,9 +113,9 @@ try:
             name = st.text_input("Name")
             summary = st.text_area("Summary")
 
-            sbutton1 = st.form_submit_button("Add Relevant Coursework")
+            sbutton = st.form_submit_button("Add Relevant Coursework")
 
-            if sbutton1:
+            if sbutton:
                 if not name:
                     st.error("Please enter a name")
                 if not summary:
@@ -149,9 +149,13 @@ try:
             name = st.text_input("Name")
             summary = st.text_area("Summary")
 
-            sbutton1 = st.form_submit_button("Add Notable Skill")
+            sbutton = st.form_submit_button("Add Notable Skill")
 
-            if sbutton1:
+            if sbutton:
+                if not name:
+                    st.error("Please enter a name")
+                if not summary:
+                    st.error("Please enter a summary")
                 with requests.Session() as session:
                     try:
                         response = session.post(
