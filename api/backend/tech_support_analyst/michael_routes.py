@@ -26,13 +26,7 @@ def get_SystemLog():
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()
-    
-    # Convert the fetched data (list of tuples) to a list of dictionaries
-    column_names = ["LogID", "TicketID", "Timestamp", "Activity", "MetricType", "Privacy", "Security"]
-    formatted_data = [dict(zip(column_names, row)) for row in theData]
-    
-    # Return the formatted data as JSON
-    response = make_response(jsonify(formatted_data))
+    response = make_response(jsonify(theData))
     response.status_code = 200
     return response
 
@@ -44,7 +38,7 @@ def get_SystemHealth():
                 Timestamp, 
                 Status, 
                 MetricType
-        FROM SystemLog
+        FROM SystemHealth
     '''
     
     cursor = db.get_db().cursor()
@@ -111,48 +105,35 @@ def add_new_tickets():
 @tech_support_analyst.route('/tickets', methods = ['PUT'])
 def update_tickets():
     current_app.logger.info('PUT /tickets route')
-    ticket_info = request.json
-    ticket_id = ticket_info['TicketID']
-    timestamp = ticket_info.get('Timestamp')
-    activity = ticket_info.get('Activity')
-    metric_type = ticket_info.get('MetricType')
-    privacy = ticket_info.get('Privacy')
-    security = ticket_info.get('Security')
+    the_data = request.json
+    ticket_id = the_data['TicketID']
+    status = the_data['Status']
+    priority = the_data['Priority']
+    resolved = the_data['ResolvedDate']
 
-    # Build the SQL query
     update_fields = []
     params = []
-    if timestamp:
-        update_fields.append("Timestamp = %s")
-        params.append(timestamp)
-    if activity:
-        update_fields.append("Activity = %s")
-        params.append(activity)
-    if metric_type:
-        update_fields.append("MetricType = %s")
-        params.append(metric_type)
-    if privacy:
-        update_fields.append("Privacy = %s")
-        params.append(privacy)
-    if security:
-        update_fields.append("Security = %s")
-        params.append(security)
+    if status:
+        update_fields.append("Status = %s")
+        params.append(status)
+    if priority:
+        update_fields.append("Priority = %s")
+        params.append(priority)
+    if resolved:
+        update_fields.append("ResolvedDate = %s")
+        params.append(resolved)
 
     if not update_fields:
         return 'No valid fields to update', 400
 
-    # Add TicketID to parameters
     params.append(ticket_id)
 
-    # Prepare the SQL query
-    query = f'UPDATE tickets SET {", ".join(update_fields)} WHERE TicketID = %s'
+    query = f'UPDATE Ticket SET {", ".join(update_fields)} WHERE TicketID = %s'
 
-    # Execute the query
     cursor = db.get_db().cursor()
     cursor.execute(query, params)
     db.get_db().commit()
 
-    # Check if the update was successful
     if cursor.rowcount == 0:
         return 'No ticket found with the given TicketID', 404
 
@@ -161,9 +142,28 @@ def update_tickets():
 # Archive completed tickets
 @tech_support_analyst.route('/tickets/<int:ticket_id>', methods=['DELETE'])
 def archive_ticket(ticket_id):
-    ticket = TicketModel.query.filter_by(id=ticket_id, status="completed").first()
-    if not ticket:
-        return {"error": "Ticket not found or not completed"}, 404
-    db.session.delete(ticket)
-    db.session.commit()
-    return {"message": "Ticket archived successfully"}, 200
+    try:
+        query = '''
+        DELETE FROM Ticket WHERE TicketID = %s
+        '''
+        cursor = db.get_db().cursor()
+        cursor.execute(query, ticket_id)
+        db.get_db().commit()
+
+        if cursor.rowcount == 0:
+                response = make_response(jsonify({
+                    "error": "No feedback entry found for the given student ID and feedback ID."
+                }))
+                response.status_code = 404
+                return response
+        
+        response = make_response(jsonify({"message": "Feedback entry deleted successfully."}))
+        response.status_code = 200
+        return response
+    except Exception as e:
+        response = make_response(jsonify({"error": str(e)}))
+        response.status_code = 500
+        return response
+
+
+

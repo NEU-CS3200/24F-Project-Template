@@ -175,18 +175,11 @@ WHERE TaskID = 5;
 
 
 -- 4.3 
-<<<<<<< HEAD:database-files/SyncSpace.sql
 INSERT INTO Housing (Style, Availability, Location)
 VALUES ('Apartment', 'Available', 'New York City');
-=======
+
 INSERT INTO Housing (Style, Availability)
 VALUES ('Apartment', 'Available');
 
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> b7b4fa75cccf25a91b785f0a2f7cfce53b1a8555:database-files/01_SyncSpace.sql
 
 >>>>>>> 1eed14d6d3f5a36b845857ec00d885b4e4efb85a

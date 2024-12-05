@@ -86,12 +86,10 @@ def get_profile(name):
     ON s.CommunityID = c.CommunityID
     WHERE s.Name = %s
     '''
-    # Execute the query
     cursor = db.get_db().cursor()
     cursor.execute(query, (name, ))  
     theData = cursor.fetchall()
     
-    # Format the response
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
@@ -102,31 +100,31 @@ def update_profile():
     the_data = request.json
     current_app.logger.info(the_data)
 
-    company = the_data.get('Company')
-    location = the_data.get('Location')
+    #company = the_data.get('Company')
+    #location = the_data.get('Location')
     housing_status = the_data.get('HousingStatus')
     carpool_status = the_data.get('CarpoolStatus')
-    lease_duration = the_data.get('LeaseDuration')
+    #lease_duration = the_data.get('LeaseDuration')
     budget = the_data.get('Budget')
     cleanliness = the_data.get('Cleanliness')
     lifestyle = the_data.get('Lifestyle')
     time = the_data.get('CommuteTime')
     days = the_data.get('CommuteDays')
-    bio = the_data.get('Bio')
+    #bio = the_data.get('Bio')
     name = the_data.get('Name')
 
     query = '''
     UPDATE Student
-    SET Company = %s, Location = %s, HousingStatus = %s,
-        CarpoolStatus = %s, Budget = %s, LeaseDuration = %s, 
-        Cleanliness = %s, Lifestyle=%s, CommuteTime=%s, CommuteDays=%s, Bio = %s
+    SET HousingStatus = %s,
+        CarpoolStatus = %s, Budget = %s,
+        Cleanliness = %s, Lifestyle=%s, CommuteTime=%s, CommuteDays=%s
     WHERE Name = %s
     '''
     
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
-    cursor.execute(query, (company, location, housing_status, carpool_status, budget, lease_duration, cleanliness, lifestyle, time, days, bio, name))
+    cursor.execute(query, (housing_status, carpool_status, budget, cleanliness, lifestyle, time, days, name))
     db.get_db().commit()
 
     response = make_response({"message": "Profile updated successfully"})
@@ -143,12 +141,11 @@ def get_resources(community_id):
     ON c.CommunityID=h.CommunityID
     WHERE c.CommunityID = %s
     '''
-    # Execute the query
+
     cursor = db.get_db().cursor()
     cursor.execute(query, (community_id, ))  
     theData = cursor.fetchall()
     
-    # Format the response
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
@@ -171,19 +168,44 @@ def give_feedback():
     '''
 
     current_app.logger.info(query)
-    connection = db.get_db()  # Get the actual database connection
-    cursor = connection.cursor()  # Get a cursor from the connection
+    connection = db.get_db()  
+    cursor = connection.cursor()  
 
     cursor.execute(query, (description, date, rating, student_id, advisor_id))
-    connection.commit()  # Commit the transaction
+    connection.commit() 
 
-    cursor.close()  # Always close the cursor after use
+    cursor.close()  
 
     response = make_response("Successfully added feedback")
     response.status_code = 200
     return response
 
+@kevin.route('/students/<student_id>/feedback/<feedback_id>', methods=['DELETE'])
+def del_feedback(student_id, feedback_id):
+    try:
+        query = '''
+        DELETE FROM Feedback
+        WHERE StudentID = %s AND FeedbackID = %s
+        '''
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (student_id, feedback_id))
+        
+        db.get_db().commit()
 
+        if cursor.rowcount == 0:
+            response = make_response(jsonify({
+                "error": "No feedback entry found for the given student ID and feedback ID."
+            }))
+            response.status_code = 404
+            return response
+        
+        response = make_response(jsonify({"message": "Feedback entry deleted successfully."}))
+        response.status_code = 200
+        return response
+    except Exception as e:
+        response = make_response(jsonify({"error": str(e)}))
+        response.status_code = 500
+        return response
     
     
 

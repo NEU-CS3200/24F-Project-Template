@@ -25,7 +25,6 @@ student = get_profile(name)
 df = pd.DataFrame([student])
 
 if student and isinstance(student, list):
-    # Access the first record in the list
     record = student[0]
     name = record.get("Name", "Not available")
     major = record.get("Major", "Not available")
