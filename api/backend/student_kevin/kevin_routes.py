@@ -86,12 +86,10 @@ def get_profile(name):
     ON s.CommunityID = c.CommunityID
     WHERE s.Name = %s
     '''
-    # Execute the query
     cursor = db.get_db().cursor()
     cursor.execute(query, (name, ))  
     theData = cursor.fetchall()
     
-    # Format the response
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
@@ -143,12 +141,11 @@ def get_resources(community_id):
     ON c.CommunityID=h.CommunityID
     WHERE c.CommunityID = %s
     '''
-    # Execute the query
+
     cursor = db.get_db().cursor()
     cursor.execute(query, (community_id, ))  
     theData = cursor.fetchall()
     
-    # Format the response
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
@@ -171,13 +168,13 @@ def give_feedback():
     '''
 
     current_app.logger.info(query)
-    connection = db.get_db()  # Get the actual database connection
-    cursor = connection.cursor()  # Get a cursor from the connection
+    connection = db.get_db()  
+    cursor = connection.cursor()  
 
     cursor.execute(query, (description, date, rating, student_id, advisor_id))
-    connection.commit()  # Commit the transaction
+    connection.commit() 
 
-    cursor.close()  # Always close the cursor after use
+    cursor.close()  
 
     response = make_response("Successfully added feedback")
     response.status_code = 200
