@@ -45,6 +45,40 @@ def get_reviews(selected_job_id):
     the_response.status_code = 200
     return the_response
 
+# gets the number of applications for a given job posting
+@jobPostings.route('/jobPostings/applications/<selected_job_id>', methods=['GET'])
+def get_app_count(selected_job_id):
+    cursor = db.get_db().cursor()
+    
+    cursor.execute('''SELECT COUNT(job_application.studentId) AS num_apps
+                    FROM job_posting  
+                    LEFT JOIN job_application ON job_posting.id = job_application.jobId
+                    WHERE job_posting.id = %s
+                    GROUP BY job_posting.id, job_posting.name''', (selected_job_id,))
+
+    theData = cursor.fetchall()
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
+# gets the average rating for a given job posting
+@jobPostings.route('/jobPostings/rating/<selected_job_id>', methods=['GET'])
+def get_avg_rating(selected_job_id):
+    cursor = db.get_db().cursor()
+    
+    cursor.execute('''SELECT AVG(reviews.rating) AS avg_rating
+                    FROM job_posting  
+                    LEFT JOIN reviews ON job_posting.id = reviews.jobId
+                    WHERE job_posting.id = %s
+                    GROUP BY job_posting.id, job_posting.name''', (selected_job_id,))
+
+    theData = cursor.fetchall()
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
 @jobPostings.route('/jobPostings/<job_posting_id>', methods=['DELETE'])
 def delete_jobPosting(job_posting_id):
     cursor = db.get_db().cursor()
@@ -84,4 +118,45 @@ def update_review(review_title):
 
     the_response = make_response(jsonify('Review Updated'))
     the_response.status_code = 200
+<<<<<<< HEAD
     return the_response
+=======
+    return the_response
+
+@jobPostings.route('/jobPostings/submit_app/<job_posting_id>', methods=['POST'])
+def submit_application(job_posting_id):
+    cursor = db.get_db().cursor()
+
+    # Check if application already exists for this student
+    cursor.execute('''SELECT * FROM job_application WHERE studentId = 4 AND jobId = %s''', (job_posting_id,))
+    if cursor.fetchone():
+        the_response = make_response(jsonify('Application already submitted'))
+        the_response.status_code = 400
+        return the_response
+
+    # The fourth student is a Guest. For our purposes, 
+    # they are the only one submitting apps (no auth system)
+    cursor.execute('''INSERT INTO job_application (studentId, jobId)
+                      VALUES (4, %s)''', (job_posting_id,))
+
+    db.get_db().commit()
+
+    the_response = make_response(jsonify('Application Submitted'))
+    the_response.status_code = 200
+    return the_response
+
+@jobPostings.route('/jobPostings/applications', methods=['GET'])
+def get_applications():
+    cursor = db.get_db().cursor()
+    cursor.execute('''SELECT jp.id, jp.name, jp.datePosted, c.name AS companyName, ja.studentId AS studentId
+                      FROM job_application ja
+                      JOIN job_posting jp ON ja.jobId = jp.id
+                      JOIN companies c ON jp.companyId = c.id
+                      WHERE ja.studentId = 4''')
+
+    theData = cursor.fetchall()
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+>>>>>>> main

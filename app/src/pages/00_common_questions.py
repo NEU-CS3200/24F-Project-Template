@@ -44,7 +44,7 @@ with col1:
         keyphrase = st.text_input("Filter questions by keyphrase:")
 
         if keyphrase.strip():
-            filtered_response = requests.get(f"http://api:4000/cq/commonQuestions/filterBy/{keyphrase.strip()}")
+            filtered_response = requests.get(f"http://api:4000/cq/commonQuestions/filterBy/{company_id}/{keyphrase.strip()}")
             if filtered_response.status_code == 200:
                 questions = filtered_response.json()
                 if not questions:
@@ -113,5 +113,4 @@ with col2:
                 st.error("Company doesn't exist.")
             else:
                 st.error(f"An error occurred while adding the question: {add_question_response.text}")
-
 

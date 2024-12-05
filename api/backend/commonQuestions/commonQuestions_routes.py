@@ -73,16 +73,16 @@ def delete_commonQuestion(question_id):
     the_response.status_code = 200
     return the_response
 
-@commonQuestions.route('/commonQuestions/filterBy/<keyphrase>', methods=['GET'])
-def search_commonQuestions(keyphrase):
+@commonQuestions.route('/commonQuestions/filterBy/<company_id>/<keyphrase>', methods=['GET'])
+def search_commonQuestions(company_id, keyphrase):
 
     cursor = db.get_db().cursor()
     
     # Necessary due to errors with "Unknown columns _____ in 'where clause'"
     escaped_keyphrase = pymysql.converters.escape_string(keyphrase)
-
     query = f'''SELECT id, commonQuestion FROM common_questions
-                WHERE commonQuestion LIKE '%{escaped_keyphrase}%';'''
+                WHERE company_id = {company_id} AND commonQuestion LIKE '%{escaped_keyphrase}%' '''
+
 
     print(f"Received keyphrase: {keyphrase}")
     print(f"Constructed Query: {query}")
