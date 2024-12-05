@@ -30,13 +30,6 @@ with st.form("employer_search"):
         placeholder="Enter employer or company name",
         key="search")
 
-    # if st.session_state["role"] == "student":
-    #     st.radio(
-    #        "Employer Type",
-    #        key="employer_type",
-    #        options=["All", "Applied", "Flagged",],
-    #    )
-
     submit_button = st.form_submit_button("Search")
 
     df = None
@@ -55,7 +48,7 @@ with st.form("employer_search"):
                     f"http://api:4000/emp/emp_name/{employer_value}"
                 )
                 response3 = requests.get(
-                    f"http://api:4000/emp/emp_company/{employer_value}"
+                    f"http://api:4000/emp/{employer_value}/employees"
                 )
                  response1.status_code == 200:
                     if len(response1.json()) != 0:

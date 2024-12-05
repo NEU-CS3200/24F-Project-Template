@@ -30,6 +30,7 @@ def get_all_employees():
 def get_employees(id):
     query = f"""
         SELECT * FROM users u
+        JOIN companies c ON u.companyId = c.id
         WHERE employerId = {int(id)}
         LIMIT 100;
     """
