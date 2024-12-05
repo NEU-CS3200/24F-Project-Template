@@ -23,9 +23,6 @@ def TechSupportAnalystHomeNav():
 
 
 ## ------------------------ Role of Co-op Advisor ------------------------
-
-
-
 def JessicaPageNav():
     st.sidebar.page_link("pages/11_Student_Tasks.py", label="Student Tasks", icon="📝")
     st.sidebar.page_link("pages/12_Feedback.py", label="Feedback", icon="🧐")
