@@ -14,12 +14,12 @@ SideBarLinks()
 if st.button("Back", key="back_button"):
     st.switch_page('pages/02_recruiter_home.py')
 
-st.title("Compare Intern Qualifications.")
+st.title("Compare Intern Qualifications")
 
 # Display all companies
 companies = requests.get('http://web-api:4000/co/companies').json()
 company_names = [company['name'] for company in companies]
-st.markdown("### **Select a company to view intern qualifications**")
+st.markdown("### **Select a company to view intern qualifications.**")
 selected_company = st.selectbox("", company_names)
 
 if selected_company:
