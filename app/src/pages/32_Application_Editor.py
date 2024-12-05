@@ -44,23 +44,24 @@ try:
             if submit_button:
                 if not question_response:
                     st.error("Please enter responses to questions")
-                if not gpa:
+                elif not gpa:
                     st.error("Please enter your gpa")
-                data = {
-                    "questionResponse": question_response,
-                    "GPA": gpa,
-                }
-                with requests.Session() as session:
-                    try:
-                        session.headers.update({"Content-Type": "application/json"})
-                        response = session.put(
-                            f"http://api:4000/app/applications/{st.session_state['app_id']}",
-                            json=data,
-                        )
-                        if response.status_code == 200:
-                            st.success("Changes saved successfully")
-                    except requests.exceptions.RequestException as e:
-                        st.error(f"Error connecting to server: {str(e)}")
+                else:
+                    data = {
+                        "questionResponse": question_response,
+                        "GPA": gpa,
+                    }
+                    with requests.Session() as session:
+                        try:
+                            session.headers.update({"Content-Type": "application/json"})
+                            response = session.put(
+                                f"http://api:4000/app/applications/{st.session_state['app_id']}",
+                                json=data,
+                            )
+                            if response.status_code == 200:
+                                st.success("Changes saved successfully")
+                        except requests.exceptions.RequestException as e:
+                            st.error(f"Error connecting to server: {str(e)}")
 
         with st.form("add_work_experience"):
             st.write("Previous Work Experience:")
@@ -82,21 +83,22 @@ try:
             if sbutton:
                 if not name:
                     st.error("Please enter a name")
-                if not summary:
+                elif not summary:
                     st.error("Please enter a summary")
-                with requests.Session() as session:
-                    try:
-                        response = session.post(
-                            f"http://api:4000/app/applications/{st.session_state['app_id']}/work_experience",
-                            json={
-                                "name": name,
-                                "summary": str(summary.rstrip().lstrip()),
-                            },
-                        )
-                        if response.status_code == 201:
-                            st.success("Work Experience added successfully")
-                    except requests.exceptions.RequestException as e:
-                        st.error(f"Error connecting to server: {str(e)}")
+                else:
+                    with requests.Session() as session:
+                        try:
+                            response = session.post(
+                                f"http://api:4000/app/applications/{st.session_state['app_id']}/work_experience",
+                                json={
+                                    "name": name,
+                                    "summary": str(summary.rstrip().lstrip()),
+                                },
+                            )
+                            if response.status_code == 201:
+                                st.success("Work Experience added successfully")
+                        except requests.exceptions.RequestException as e:
+                            st.error(f"Error connecting to server: {str(e)}")
 
         with st.form("add_relevant_coursework"):
             st.write("Relevant Coursework:")
@@ -118,21 +120,22 @@ try:
             if sbutton:
                 if not name:
                     st.error("Please enter a name")
-                if not summary:
+                elif not summary:
                     st.error("Please enter a summary")
-                with requests.Session() as session:
-                    try:
-                        response = session.post(
-                            f"http://api:4000/app/applications/{st.session_state['app_id']}/related_coursework",
-                            json={
-                                "name": name,
-                                "summary": str(summary.rstrip().lstrip()),
-                            },
-                        )
-                        if response.status_code == 201:
-                            st.success("Relevant Coursework added successfully")
-                    except requests.exceptions.RequestException as e:
-                        st.error(f"Error connecting to server: {str(e)}")
+                else:
+                    with requests.Session() as session:
+                        try:
+                            response = session.post(
+                                f"http://api:4000/app/applications/{st.session_state['app_id']}/related_coursework",
+                                json={
+                                    "name": name,
+                                    "summary": str(summary.rstrip().lstrip()),
+                                },
+                            )
+                            if response.status_code == 201:
+                                st.success("Relevant Coursework added successfully")
+                        except requests.exceptions.RequestException as e:
+                            st.error(f"Error connecting to server: {str(e)}")
 
         with st.form("add_notable_skills"):
             st.write("Notable Skills:")
@@ -154,21 +157,22 @@ try:
             if sbutton:
                 if not name:
                     st.error("Please enter a name")
-                if not summary:
+                elif not summary:
                     st.error("Please enter a summary")
-                with requests.Session() as session:
-                    try:
-                        response = session.post(
-                            f"http://api:4000/app/applications/{st.session_state['app_id']}/notable_skills",
-                            json={
-                                "name": name,
-                                "summary": str(summary.rstrip().lstrip()),
-                            },
-                        )
-                        if response.status_code == 201:
-                            st.success("Notable skill added successfully")
-                    except requests.exceptions.RequestException as e:
-                        st.error(f"Error connecting to server: {str(e)}")
+                else:
+                    with requests.Session() as session:
+                        try:
+                            response = session.post(
+                                f"http://api:4000/app/applications/{st.session_state['app_id']}/notable_skills",
+                                json={
+                                    "name": name,
+                                    "summary": str(summary.rstrip().lstrip()),
+                                },
+                            )
+                            if response.status_code == 201:
+                                st.success("Notable skill added successfully")
+                        except requests.exceptions.RequestException as e:
+                            st.error(f"Error connecting to server: {str(e)}")
 
 except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to server: {str(e)}")
