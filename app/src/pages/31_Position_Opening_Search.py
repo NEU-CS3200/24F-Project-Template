@@ -14,6 +14,8 @@ SideBarLinks()
 
 st.title("Position Search")
 
+df_1 = None
+
 with st.form("position_value"):
     position_value = st.text_input(
         "Search Positions",
@@ -27,21 +29,26 @@ with st.form("position_value"):
             if not position_value:
                 response = s.get("http://api:4000/pos/positions")
                 if response.status_code == 200:
-                    st.session_state["df_1"] = pd.json_normalize(response.json())
+                    df_1 = response.json()
             else:
-                if type(position_value) is int:
-                    response = s.get(f"http://api:4000/pos/positions/{position_value}")
-                    if response.status_code == 200 and len(response.json()) != 0:
-                        st.session_state["df_1"] = pd.json_normalize(response.json())
-                else:
+                try:
+                    value = int(position_value)
+                    response = s.get(f"http://api:4000/pos/positions/{value}")
+                    if len(response.json()) != 0:
+                        df_1 = response.json()
+                except ValueError:
                     response = s.get(
                         f"http://api:4000/pos/positions_company/{str(position_value)}"
                     )
-                    if response.status_code == 200 and len(response.json()) != 0:
-                        st.session_state["df_1"] = pd.json_normalize(response.json())
-                        logger.info(st.session_state["df_1"])
+                    if len(response.json()) != 0:
+                        df_1 = response.json()
 
-if st.session_state.get("df_1") is not None:
-    for index, row in st.session_state["df_1"].iterrows():
+if df_1 is not None:
+    for row in df_1:
         with st.expander(f"{row['summary']}"):
-            col1, col2, col3, col4 = st.columns(4)
+            col1, col2, col3, col4, col5 = st.columns(5)
+            col1.write(f"Company: {row['compName']}")
+            col2.write(f"Position: {row['summary']}")
+            col3.write(f"Location: {row['city']}")
+            col4.write(f"Salary: {row['expectedSalary']}")
+            col5.write(f"ID: {row['id']}")

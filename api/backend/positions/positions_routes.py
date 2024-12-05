@@ -15,7 +15,7 @@ positions = Blueprint("positions", __name__)
 @positions.route("/positions", methods=["GET"])
 def get_positions():
     query = """
-        SELECT c.name, p.* FROM positions p NATURAL JOIN companies c 
+        SELECT c.name as compName, p.* FROM positions p NATURAL JOIN companies c 
         LIMIT 100;
     """
 
@@ -30,9 +30,9 @@ def get_positions():
 
 @positions.route("/positions_company/<name>", methods=["GET"])
 def get_positions_by_company(name):
-    query = """
-        SELECT c.name, p.* FROM positions p NATURAL JOIN companies c 
-        WHERE INSTR(c.name, "{name}")
+    query = f"""
+        SELECT c.name as compName, p.* FROM positions p JOIN companies c ON p.companyId = c.id
+        WHERE INSTR(c.name, "{str(name)}")
         LIMIT 100;
     """
 
@@ -51,7 +51,7 @@ def get_positions_by_company(name):
 @positions.route("/positions/<id>", methods=["GET"])
 def get_positions_by_id(id):
     query = f"""
-        SELECT c.name, p.* FROM positions p NATURAL JOIN companies c
+        SELECT c.name as compName, p.* FROM positions p JOIN companies c ON p.companyId = c.id
         WHERE p.id = {int(id)};
     """
 
