@@ -22,7 +22,7 @@ except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to positions API: {str(e)}")
 
 with st.form("position_value"):
-    positon_value = st.text_input(
+    position_value = st.text_input(
         "Search Positions",
         placeholder="Enter company name or position id#",
     )
@@ -43,14 +43,14 @@ with st.form("position_value"):
             except requests.exceptions.RequestException as e:
                 st.error(f"Error connecting to server: {str(e)}")
         else:
-            logger.info(f"Employee form submitted with data: {positon_value}")
+            logger.info(f"Employee form submitted with data: {position_value}")
 
             try:
                 response1 = requests.get(
-                    f"http://api:4000/pos/positions_company/{positon_value}"
+                    f"http://api:4000/pos/positions_company/{position_value}"
                 )
                 response2 = requests.get(
-                    f"http://api:4000/pos/positions/{positon_value}"
+                    f"http://api:4000/pos/positions/{position_value}"
                 )
                 if response1.status_code == 200:
                     if len(response1.json()) != 0:
