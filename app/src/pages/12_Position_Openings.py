@@ -19,7 +19,7 @@ except requests.exceptions.RequestException as e:
 df_2 = None
 
 with st.form("position_search"):
-    positon_value = student_input = st.text_input(
+    positon_value = st.text_input(
         "Search Positions",
         placeholder="Enter student name or Id#",
     )

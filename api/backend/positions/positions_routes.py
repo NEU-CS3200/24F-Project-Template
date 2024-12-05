@@ -27,11 +27,11 @@ def get_positions():
     response.status_code = 200
     return response
 
-@positions.route("/positions/<company_name>", methods=["GET"])
-def get_positions_by_company(company_name):
+@positions.route("/positions/<name>", methods=["GET"])
+def get_positions_by_company(name):
     query = """
         SELECT c.name, p.* FROM positions p NATURAL JOIN companies c 
-        WHERE c.name = {str(company_name)}
+        WHERE INSTR(c.name, "{name}")
         LIMIT 100;
     """
 
