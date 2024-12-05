@@ -73,30 +73,3 @@ if df_1 is not None:
             col3.write(f"{row['year']}")
             col4.write("##### Contact:")
             col4.write(f"{row['email']} | {row['mobile']}")
-
-
-st.title("Flagged Positions")
-df_2 = None
-
-try:
-    test_response = requests.get("http://api:4000/pos/positions")
-
-    if not test_response.status_code == 200:
-        st.error("Failed to fetch positions")
-except requests.exceptions.RequestException as e:
-    st.error(f"Error connecting to positions API: {str(e)}")
-
-if df_2 is not None:
-    for index, row in df.iterrows():
-        with st.expander(f"{row['firstName']} {row['lastName']}"):
-            col1, col2, col3, col4 = st.columns(4)
-            col1.write("##### Name:")
-            col1.write(f"{row['name']}")
-            col2.write("##### Major:")
-            col2.write(f"{row['major']}")
-            col3.write("##### Year:")
-            col3.write(f"{row['year']}")
-            col4.write("##### Contact:")
-            col4.write(f"{row['email']} | {row['mobile']}")
-else:
-    st.title("None")
