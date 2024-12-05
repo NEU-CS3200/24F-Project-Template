@@ -138,3 +138,18 @@ def submit_application(job_posting_id):
     the_response = make_response(jsonify('Application Submitted'))
     the_response.status_code = 200
     return the_response
+
+@jobPostings.route('/jobPostings/applications', methods=['GET'])
+def get_applications():
+    cursor = db.get_db().cursor()
+    cursor.execute('''SELECT jp.id, jp.name, jp.datePosted, c.name AS companyName, ja.studentId AS studentId
+                      FROM job_application ja
+                      JOIN job_posting jp ON ja.jobId = jp.id
+                      JOIN companies c ON jp.companyId = c.id
+                      WHERE ja.studentId = 4''')
+
+    theData = cursor.fetchall()
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
