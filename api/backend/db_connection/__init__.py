@@ -32,3 +32,5 @@ def init_app(app):
     # Initialize the MySQL connection
     db.init_app(app)
     print("Database connection initialized")
+
+

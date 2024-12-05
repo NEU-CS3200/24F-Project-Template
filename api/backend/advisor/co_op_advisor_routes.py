@@ -9,7 +9,6 @@ from backend.db_connection import db
 advisor = Blueprint('advisor', __name__)
 
 
-
 @advisor.route('/advisor/tasks', methods=['GET'])
 def get_all_tasks():
     query = '''
@@ -59,7 +58,6 @@ def get_notifications():
     except Exception as e:
         print(f"Database error: {str(e)}")
         return jsonify({'error': 'Failed to fetch notifications'}), 500
-
 
 
 
