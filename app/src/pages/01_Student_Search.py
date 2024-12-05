@@ -23,7 +23,7 @@ except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to students API: {str(e)}")
 
 with st.form("student_search"):
-    student_value = student_input = st.text_input(
+    student_value = st.text_input(
         "Search Students",
         placeholder="Enter student name or Id#",
     )

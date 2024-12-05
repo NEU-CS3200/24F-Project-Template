@@ -1,6 +1,7 @@
 import logging
 
 import requests
+
 logger = logging.getLogger(__name__)
 
 import streamlit as st
@@ -10,7 +11,7 @@ import numpy as np
 from modules.nav import SideBarLinks
 
 
-st.set_page_config(layout = 'wide')
+st.set_page_config(layout="wide")
 
 SideBarLinks()
 
@@ -26,22 +27,16 @@ except requests.exceptions.RequestException as e:
 
 with st.form("employer_search"):
     employer_value = st.text_input(
-        "Search Employers",
-        placeholder="Enter employer or company name",
-        key="search")
-
-    # if st.session_state["role"] == "student":
-    #     st.radio(
-    #        "Employer Type",
-    #        key="employer_type",
-    #        options=["All", "Applied", "Flagged",],
-    #    )
+        "Search Employers", placeholder="Enter employer or company name", key="search"
+    )
 
     submit_button = st.form_submit_button("Search")
 
+    df = None
+
     if submit_button:
         if not employer_value:
-            st.error("Please enter an employer name or company")
+            st.error("Please enter an employer name, employer id#, or company name")
         else:
             logger.info(f"Employer form submitted with data: {employer_value}")
 
@@ -52,13 +47,30 @@ with st.form("employer_search"):
                 response2 = requests.get(
                     f"http://api:4000/emp/emp_name/{employer_value}"
                 )
+                response3 = requests.get(
+                    f"http://api:4000/emp/{employer_value}/employees"
+                )
                 if response1.status_code == 200:
                     if len(response1.json()) != 0:
                         df = pd.json_normalize(response1.json())
-                        st.write(df)
                 if response2.status_code == 200:
                     if len(response2.json()) != 0:
                         df = pd.json_normalize(response2.json())
-                        st.write(df)
+                if response3.status_code == 200:
+                    if len(response3.json()) != 0:
+                        df = pd.json_normalize(response3.json())
             except requests.exceptions.RequestException as e:
                 st.error(f"Error connecting to server: {str(e)}")
+
+if df is not None:
+    for index, row in df.iterrows():
+        with st.expander(f"{row['firstName']} {row['lastName']}"):
+            col1, col2, col3, col4 = st.columns(4)
+            col1.write("##### Name:")
+            col1.write(f"{row['name']}")
+            col2.write("##### Job:")
+            col2.write(f"{row['role']}")
+            col3.write("##### Company:")
+            col3.write(f"{row['compName']}")
+            col4.write("##### Contact:")
+            col4.write(f"{row['email']} | {row['mobile']}")

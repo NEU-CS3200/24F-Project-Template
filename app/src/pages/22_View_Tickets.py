@@ -11,15 +11,6 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 st.title(f"Tickets")
-
-try:
-    test_response = requests.get("http://api:4000/adm/tickets")
-
-    if not test_response.status_code == 200:
-        st.error("Failed to fetch students")
-except requests.exceptions.RequestException as e:
-    st.error(f"Error connecting to API: {str(e)}")
-
 with st.form("ticket_search"):
     ticket_id = student_input = st.text_input(
         "Search Tickets",
@@ -52,4 +43,27 @@ with st.form("ticket_search"):
                         st.write(df)
             except requests.exceptions.RequestException as e:
                 st.error(f"Error connecting to server: {str(e)}")
+
+try:
+    response = requests.get(
+        "http://api:4000/adm/tickets"
+    )
+    if response.status_code == 200:
+        if len(response.json()) != 0:
+            df = pd.json_normalize(response1.json())
+except requests.exceptions.RequestException as e:
+    st.error(f"Error connecting to server: {str(e)}")
+
+if df is not None:
+    for index, row in df.iterrows():
+        with st.expander(f"{row['user']} {row['lastName']}"):
+            col1, col2, col3, col4 = st.columns(4)
+            col1.write("##### Helping:")
+            col1.write(f"{row['helping']}")
+            col2.write("##### Admin Assigned:")
+            col2.write(f"{row['assignedTo']}")
+            col3.write("##### Issue Summary:")
+            col3.write(f"{row['summary']}")
+            col4.write("##### Completed:")
+            col4.write(f"{row['email']} | {row['mobile']}")
     

@@ -68,6 +68,7 @@ if st.button('Act as Peter, a Employer',
     st.session_state['role'] = 'employer'
     st.session_state['first_name'] = 'Mohammad'
     st.session_state['id'] = '8'
+    st.session_state['company_id'] = '6'
     st.switch_page('pages/10_Employer_Home.py')
 
 if st.button('Act as Mark, a Northeastern Student',
@@ -86,4 +87,5 @@ if st.button('Act as Jordan, a System Administrator',
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'Jordan'
     st.session_state['id'] = '6'
+    st.session_state['company_id'] = '5'
     st.switch_page('pages/20_Admin_Home.py')

@@ -26,11 +26,13 @@ def get_all_employees():
     response.status_code = 200
     return response
 
+
 @employers.route("/<id>/employees", methods=["GET"])
 def get_employees(id):
     query = f"""
-        SELECT * FROM users u
-        WHERE employerId = {int(id)}
+        SELECT u.*, c.name AS compName, c.id FROM users u
+        JOIN companies c ON u.companyId = c.id
+        WHERE c.id = {int(id)}
         LIMIT 100;
     """
 
@@ -43,10 +45,11 @@ def get_employees(id):
     response.status_code = 200
     return response
 
+
 @employers.route("/emp_company/<name>", methods=["GET"])
 def get_employees_by_company(name):
     query = f"""
-        SELECT * FROM users u
+        SELECT u.*, c.name AS compName, c.id FROM users u
         JOIN companies c ON u.companyId = c.id
         WHERE INSTR(c.name, "{name}")
         LIMIT 100;
@@ -61,11 +64,13 @@ def get_employees_by_company(name):
     response.status_code = 200
     return response
 
+
 @employers.route("/emp_name/<name>", methods=["GET"])
 def get_employee_by_name(name):
     query = f"""
-        SELECT * FROM users u
-        WHERE INSTR(u.name, "{name}") AND companyId IS NOT NULL
+        SELECT u.*, c.name AS compName, c.id FROM users u 
+        JOIN companies c ON u.companyId = c.id
+        WHERE INSTR(u.name, "{name}")
         LIMIT 100;
     """
 
