@@ -34,9 +34,10 @@ SideBarLinks(show_home=True)
 
 # set the title of the page and provide a simple prompt. 
 logger.info("Loading the Home page of the app")
-st.title('SyncSpace')
+st.title('Welcome to SyncSpace!')
 st.write('\n\n')
-st.write('### Hi there! As which user would you like to log in?')
+st.write('### Which user would you like to log in as?')
+st.write('')
 
 # For each of the user personas for which we are implementing
 # functionality, we put a button on the screen that the user 
@@ -48,7 +49,7 @@ if st.button("Act as System Administrator - Michael Ortega",
     # when user clicks the button, they are now considered authenticated
     st.session_state['authenticated'] = True
     # we set the role of the current user
-    st.session_state['role'] = 'SysAdmin'
+    st.session_state['role'] = 'TechnicalSupportAnalyst'
     # we add the first name of the user (so it can be displayed on 
     # subsequent pages). 
     st.session_state['first_name'] = 'Michael'
@@ -74,10 +75,10 @@ if st.button('Act as Student - Kevin Chen',
     st.switch_page('pages/20_Student_Kevin_Home.py')
 
 if st.button('Act as Student - Sarah Lopez', 
-            type = 'secondary', 
+            type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'Student2'
-    st.session_state['first_name'] = 'Sarah'
+    st.session_state['first_name'] = 'Sarah Lopez'
     st.switch_page('pages/30_Student_Sarah_Home.py')
 

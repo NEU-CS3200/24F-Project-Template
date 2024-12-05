@@ -8,7 +8,7 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('My Profile')
+st.title('Edit My Profile')
 
 housing_status = st.selectbox("Housing Status", ["Searching for Housing", "Searching for Roommates", "Complete"])
 carpool_status = st.selectbox("Carpool Status", ["Searching for Carpool", "Has Car", "Complete"])
@@ -23,7 +23,7 @@ name = st.session_state['first_name']
 
 url = 'http://api:4000/c/profile'
 
-if st.button('Create Profile'):
+if st.button('Update Profile'):
     data = {
         "HousingStatus" : housing_status,
         "CarpoolStatus" :carpool_status,

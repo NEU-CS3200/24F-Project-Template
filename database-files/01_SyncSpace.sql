@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS Student (
 
 
 
+-- Create table for Events
 DROP TABLE IF EXISTS Events;
 CREATE TABLE IF NOT EXISTS Events (
     EventID INT AUTO_INCREMENT PRIMARY KEY,
@@ -172,7 +173,6 @@ SET Status = 'Completed'
 WHERE TaskID = 5;
 
 -- 3.2 
-
 
 -- 4.3
 

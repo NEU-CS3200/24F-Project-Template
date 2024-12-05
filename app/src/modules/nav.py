@@ -14,29 +14,13 @@ def HomeNav():
 
 #### ------------------------ Role of Technical Support Analyst ------------------------
 def TechSupportAnalystHomeNav():
-    st.sidebar.page_link(
-        "pages/00_Tech_Support_Analyst_Home.py", label="Tech Support Analyst Home", icon="👤"
-    )
-
-
-def SystemLogsNav():
-    st.sidebar.page_link(
-        "pages/01_Run_System_Logs.py", label="System Logs", icon="⚙️"
-    )
-
-
-def TicketOverviewNav():
+    st.sidebar.page_link("pages/00_Tech_Support_Analyst_Home.py", label="Tech Support Analyst Home", icon="👤")
+    st.sidebar.page_link("pages/01_Run_System_Logs.py", label="System Logs", icon="⚙️")
     st.sidebar.page_link("pages/02_Ticket_Overview.py", label="Ticket Overview", icon="🎫")
-
-
-def SysHealthDashNav():
-    st.sidebar.page_link("pages/04_Access_System_Health_Dashboard.py", label="System Health Dashboard", icon="📊")
+    st.sidebar.page_link("pages/03_Access_System_Health_Dashboard.py", label="System Health Dashboard", icon="📊")
 
 
 ## ------------------------ Role of Co-op Advisor ------------------------
-
-
-
 def JessicaPageNav():
     st.sidebar.page_link("pages/11_Student_Tasks.py", label="Student Tasks", icon="📝")
     st.sidebar.page_link("pages/12_Feedback.py", label="Feedback", icon="🧐")
@@ -46,14 +30,14 @@ def JessicaPageNav():
 def KevinPageNav():
     st.sidebar.page_link("pages/20_Student_Kevin_Home.py", label="Student Home", icon="📖")
     st.sidebar.page_link("pages/23_My_Profile.py", label="My Profile", icon="👤")
-    st.sidebar.page_link("pages/22_Housing_Carpool.py", label="Housing & Transit", icon="🏘️")
+    st.sidebar.page_link("pages/22_Housing_Carpool.py", label="Housing & Transit", icon="🔍")
     st.sidebar.page_link("pages/21_Advisor_Rec.py", label="Advisor Communications", icon="🏫")
     
 def SarahPageNav():
     st.sidebar.page_link("pages/30_Student_Sarah_Home.py", label="Student Home", icon="📖")
-    st.sidebar.page_link("pages/31_Professional_Events.py", label="Events", icon="👤")
-    st.sidebar.page_link("pages/32_Browse_Profiles.py", label="Browse Profiles", icon="🔍")
-    st.sidebar.page_link("pages/33_Advisor_Feedback.py", label="Advisor Feedback", icon="🏫")
+    st.sidebar.page_link("pages/34_View_Events.py", label="Events", icon="👤")
+    st.sidebar.page_link("pages/32_View_Student_List.py", label="Browse Profiles", icon="🔍")
+    st.sidebar.page_link("pages/37_Delete_Feedback.py", label="Advisor Feedback", icon="🏫")
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
@@ -63,6 +47,7 @@ def SideBarLinks(show_home=False):
 
     # add a logo to the sidebar always
     st.sidebar.image("assets/image.png", width=150)
+    st.sidebar.title("SyncSpace")
 
     # If there is no logged in user, redirect to the Home (Landing) page
     if "authenticated" not in st.session_state:
@@ -79,8 +64,8 @@ def SideBarLinks(show_home=False):
         # Show System Logs, Ticket Overview, and System Health Dashboard if the user is in a technical support analyst role.
         if st.session_state["role"] == "TechnicalSupportAnalyst":
             TechSupportAnalystHomeNav()
-            SystemLogsNav()
-            TicketOverviewNav()
+            #SystemLogsNav()
+            #TicketOverviewNav()
 
         # If the user role is usaid worker, show the Api Testing page
         if st.session_state["role"] == "Advisor":
