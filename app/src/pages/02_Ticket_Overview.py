@@ -9,72 +9,51 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-# Page Header
-st.title("Real-Time App Diagnostics")
-st.write("### Monitor system activity and analyze logs in real-time.")
+url = "http://api:4000/t/tickets" 
 
-# Backend API URL
-API_URL = "http://api:4000/t/SystemLog" 
+st.title("Ticket Management System")
 
-# Fetch System Logs
-@st.cache_data(show_spinner=True)
-def fetch_system_logs():
-    """Fetch logs from the Flask API."""
-    try:
-        response = requests.get(API_URL)
-        response.raise_for_status()  # Raise exception for HTTP errors
-        data = response.json()  # Assuming API returns JSON
-        logs_df = pd.DataFrame(data, columns=["LogID", "TicketID", "Timestamp", "Activity", "MetricType", "Privacy", "Security"])
-        return logs_df
-    except requests.exceptions.RequestException as e:
-        st.error(f"Error fetching system logs: {e}")
-        return pd.DataFrame()  # Return empty DataFrame on error
+### DISPLAYING TICKET DATA IN DF
+try:
+    response = requests.get(url)
+    if response.status_code == 200:
+        tickets_data = response.json()
+        df = pd.DataFrame(tickets_data, columns=[
+            "TicketID", "IssueType", 
+            "Status", "Priority", "ReceivedDate", 
+            "ResolvedDate"
+        ])
+        with st.expander("Ticket Data"):
+            st.dataframe(df)
+    else:
+        st.error(f"Error: {response.status_code} - {response.reason}")
+except Exception as e:
+    st.error(f"An error occurred: {str(e)}")
 
-# Fetch data
-logs_df = fetch_system_logs()
+#### CREATING NEW TICKET
+st.title("Create a New Ticket")
+issue = st.text_input("Issue Type", placeholder="Describe the activity")
+priority = st.selectbox("Priority", ["High", "Medium", "Low"])  
+status = st.selectbox("Status", ['Open', 'Completed', 'Pending', 'Cancelled'])
+received = st.date_input("Date Created")
+resolved = st.date_input("Date Resolved (optional)")
 
-# Display Logs
-if not logs_df.empty:
-    st.write("### System Logs")
-    # Interactive Filters
-    col1, col2 = st.columns(2)
-    with col1:
-        activity_filter = st.multiselect("Filter by Activity", logs_df["Activity"].unique(), default=logs_df["Activity"].unique())
-    with col2:
-        metric_filter = st.multiselect("Filter by Metric Type", logs_df["MetricType"].unique(), default=logs_df["MetricType"].unique())
+if st.button("Submit Ticket"):
+    # Prepare data payload for the API request
+    payload = {
+        "IssueType": issue,
+        "Status": status,
+        "Priority": priority,
+        "ReceivedDate": received.isoformat(),  # Format the date as string
+        "ResolvedDate": resolved.isoformat() if resolved else None,  # Format if provided, else None
+    }
 
-    # Apply Filters
-    filtered_logs = logs_df[
-        (logs_df["Activity"].isin(activity_filter)) &
-        (logs_df["MetricType"].isin(metric_filter))
-    ]
+    # Sending POST request to Flask backend
+    response = requests.post(url, json=payload)
 
-    # Display Filtered Logs
-    st.dataframe(filtered_logs, use_container_width=True)
+    if response.status_code == 200:
+        st.success("Ticket successfully created!")
+    else:
+        st.error(f"Failed to create ticket. Error: {response.text}")
 
-    # Summary Metrics
-    st.write("### Summary Metrics")
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric("Total Logs", len(filtered_logs))
-    with col2:
-        st.metric("High Priority Logs", len(filtered_logs[filtered_logs["MetricType"] == "High"]))
-    with col3:
-        st.metric("Unique Activities", filtered_logs["Activity"].nunique())
 
-    # Download Filtered Logs
-    st.write("### Export Data")
-    csv_data = filtered_logs.to_csv(index=False)
-    st.download_button(
-        label="Download Logs as CSV",
-        data=csv_data,
-        file_name="filtered_system_logs.csv",
-        mime="text/csv",
-    )
-else:
-    st.warning("No logs available to display.")
-
-# Footer
-st.write("---")
-st.write("#### Notes")
-st.text("Data fetched directly from the system logs API in real time.")

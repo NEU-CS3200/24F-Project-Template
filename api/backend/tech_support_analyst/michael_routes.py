@@ -3,6 +3,7 @@ from flask import request
 from flask import jsonify
 from flask import make_response
 from flask import current_app
+from datetime import datetime
 from backend.db_connection import db
 
 
@@ -64,7 +65,7 @@ def get_tickets():
                 Priority,
                 ReceivedDate,
                 ResolvedDate 
-        FROM ticket
+        FROM Ticket
     '''
     
     cursor = db.get_db().cursor()
@@ -84,20 +85,19 @@ def add_new_tickets():
     current_app.logger.info(the_data)
 
     # Extracting the variables
-    ticket_id = the_data['TicketID']
-    timestamp = the_data['Timestamp']
-    activity = the_data['Activity']
-    metric_type = the_data['MetricType']
-    privacy = the_data['Privacy']
-    security = the_data['Security']
+    user_id = 1
+    issue = the_data['IssueType']
+    status = the_data['Status']
+    priority = the_data['Priority']
+    received = the_data['ReceivedDate']
+    resolved = the_data.get('ResolvedDate', None)
 
     query = '''
-        INSERT INTO tickets (TicketID, Timestamp, Activity, MetricType, Privacy, Security)
+        INSERT INTO Ticket (UserID, IssueType, Status, Priority, ReceivedDate, ResolvedDate)
         VALUES (%s, %s, %s, %s, %s, %s)
     '''
-    data = (ticket_id, timestamp, activity, metric_type, privacy, security)
+    data = (user_id, issue, status, priority, received, resolved)
 
-    # Executing and committing the insert statement 
     cursor = db.get_db().cursor()
     cursor.execute(query, data)
     db.get_db().commit()

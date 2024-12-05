@@ -95,6 +95,7 @@ SELECT
             f.Description,
             f.Date,
             f.ProgressRating
+            f.ProgressRating
 
         FROM Feedback f
         JOIN Student s ON f.StudentID = s.StudentID
