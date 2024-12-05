@@ -4,6 +4,11 @@ from backend.db_connection import db
 from backend.customers.customer_routes import customers
 from backend.products.products_routes import products
 from backend.simple.simple_routes import simple_routes
+from backend.companies.company_routes import companies
+from backend.commonQuestions.commonQuestions_routes import commonQuestions
+from backend.interns.interns import interns_bp
+from backend.jobPostings.jobPostings_routes import jobPostings
+
 import os
 from dotenv import load_dotenv
 
@@ -29,7 +34,7 @@ def create_app():
     app.config['MYSQL_DATABASE_PASSWORD'] = os.getenv('MYSQL_ROOT_PASSWORD').strip()
     app.config['MYSQL_DATABASE_HOST'] = os.getenv('DB_HOST').strip()
     app.config['MYSQL_DATABASE_PORT'] = int(os.getenv('DB_PORT').strip())
-    app.config['MYSQL_DATABASE_DB'] = os.getenv('DB_NAME').strip()  # Change this to your DB name
+    app.config['MYSQL_DATABASE_DB'] = os.getenv('DB_NAME').strip()
 
     # Initialize the database object with the settings above. 
     app.logger.info('current_app(): starting the database connection')
@@ -40,9 +45,12 @@ def create_app():
     # and give a url prefix to each
     app.logger.info('current_app(): registering blueprints with Flask app object.')   
     app.register_blueprint(simple_routes)
-    app.register_blueprint(customers,   url_prefix='/c')
-    app.register_blueprint(products,    url_prefix='/p')
+    app.register_blueprint(companies,   url_prefix='/co')
+    app.register_blueprint(commonQuestions, url_prefix='/cq')
+    app.register_blueprint(interns_bp, url_prefix='/in')
+    app.register_blueprint(jobPostings, url_prefix='/jp')
 
+    
     # Don't forget to return the app object
     return app
 
