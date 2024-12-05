@@ -3,8 +3,6 @@ import streamlit as st
 import requests
 from modules.nav import SideBarLinks
 
-logger = logging.getLogger(__name__)
-
 # Configure Streamlit page
 st.set_page_config(layout='wide')
 

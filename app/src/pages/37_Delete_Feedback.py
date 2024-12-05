@@ -43,6 +43,9 @@ def del_feedback(feedback_id, student_id):
 name = st.session_state['first_name']
 student = get_profile(name)
 
+st.title("Past Feedback Forms")
+st.write('')
+
 if student and isinstance(student, list):
     record = student[0]
     reminders = record.get('Reminder')
@@ -51,11 +54,17 @@ if student and isinstance(student, list):
     feedback = get_feedback(s_id)
     df = pd.DataFrame(feedback)
 
-    with st.expander('Past Reports'):
-        if df.empty:
-            st.write("No forms found.")
-        else:
-            st.write(df[['FeedbackID', 'Date', 'Description', 'ProgressRating']])
+    feedback_id = st.number_input("Enter Feedback ID", min_value=1, step=1)
+    if st.button("Delete Feedback"):
+        del_feedback(feedback_id, s_id)
+
+    if df.empty:
+        st.write("No forms found.")
+    else:
+        st.write(df[['FeedbackID', 'Date', 'Description', 'ProgressRating']])
+
+if st.button('Submit Feedback Form'):
+    st.switch_page('pages/35_Submit_Feedback.py')
             
 
 

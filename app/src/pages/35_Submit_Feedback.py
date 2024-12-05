@@ -46,7 +46,7 @@ if student and isinstance(student, list):
 
             if response.status_code == 200:
                 st.success("Feedback submitted successfully!")
-                st.switch_page('pages/37_Delete_Feedack.py')
+                st.switch_page('pages/37_Delete_Feedback.py')
             else:
                 st.error(f"Failed to submit feedback: {response.text}")
 

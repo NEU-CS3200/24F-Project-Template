@@ -12,6 +12,26 @@ SideBarLinks()
 # Logger for debugging
 logger = logging.getLogger(__name__)
 
+st.title("Delete Past Events")
+
+event_id = st.text_input("Enter the Event ID of the event to delete:", placeholder="e.g., 101")
+
+
+if st.button("Delete Event"):
+    if event_id.strip() == "":
+        st.error("Event ID cannot be empty. Please enter a valid Event ID.")
+    else:
+        try:
+
+            response = requests.delete(f"http://api:4000/s/events/{event_id}")
+            if response.status_code == 200:
+                st.success(response.json().get("message", "Event deleted successfully."))
+            else:
+                st.error(f"Failed to delete event. Error: {response.status_code} - {response.text}")
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Error deleting event with ID {event_id}: {e}")
+            st.error("An error occurred while deleting the event. Please try again later.")
+
 # Page title
 st.title("Upcoming Professional Events")
 
@@ -25,6 +45,7 @@ try:
                 st.subheader(event["Name"])
                 st.markdown(f"**Date:** {event['Date']}")
                 st.markdown(f"**Community ID:** {event['CommunityID']}")
+                st.markdown(f"**Event ID:** {event['EventID']}")
                 st.markdown(f"**Description:** {event['Description']}")
                 st.write("---")
         else:

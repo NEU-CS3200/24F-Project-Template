@@ -186,3 +186,20 @@ def get_events():
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
+
+@student2.route('/events/<int:event_id>', methods=['DELETE'])
+def delete_event(event_id):
+ 
+    try:
+        cursor = db.get_db().cursor()
+
+        query = "DELETE FROM Events WHERE EventID = %s"
+        cursor.execute(query, (event_id,))
+
+        db.get_db().commit()
+
+        return jsonify({"message": f"Event with ID {event_id} deleted successfully."}), 200
+    except Exception as e:
+   
+        logger.error(f"Error deleting event with ID {event_id}: {e}")
+        return jsonify({"error": "Failed to delete event."}), 500
