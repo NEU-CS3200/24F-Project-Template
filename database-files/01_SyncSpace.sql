@@ -174,12 +174,11 @@ WHERE TaskID = 5;
 -- 3.2 
 
 
--- 4.3 
+-- 4.3
+
 INSERT INTO Housing (Style, Availability, Location)
 VALUES ('Apartment', 'Available', 'New York City');
 
 INSERT INTO Housing (Style, Availability)
 VALUES ('Apartment', 'Available');
 
-
->>>>>>> 1eed14d6d3f5a36b845857ec00d885b4e4efb85a

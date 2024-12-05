@@ -142,15 +142,17 @@ def create_event():
         
         query = '''
         INSERT INTO Events (
+            EventID,
             CommunityID,
             Date,
             Name,
             Description
-        ) VALUES (%s, %s, %s, %s)
+        ) VALUES (%s, %s, %s, %s, %s)
         '''
         
         cursor = db.get_db().cursor()
         cursor.execute(query, (
+            data.get('event_id'),
             data.get('community_id'),
             data.get('date'),
             data.get('name'),
@@ -202,7 +204,7 @@ def update_event(event_id):
 def delete_event(event_id):
     try:
         query = '''
-        DELETE FROM Event 
+        DELETE FROM Events 
         WHERE EventID = %s
         '''
         
@@ -217,4 +219,40 @@ def delete_event(event_id):
     except Exception as e:
         db.get_db().rollback()
         return jsonify({'error': str(e)}), 500
+
+@advisor.route('/advisor/events/<event_id>', methods=['GET'])
+def get_event(event_id):
+    try:
+        query = '''
+        SELECT 
+            EventID,
+            CommunityID,
+            Date,
+            Name,
+            Description
+        FROM Events 
+        WHERE EventID = %s
+        '''
+        
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (event_id,))
+        event = cursor.fetchone()
+        
+        if event:
+            # Convert the result to a dictionary with proper keys
+            event_dict = {
+                'EventID': event['EventID'],
+                'CommunityID': event['CommunityID'],
+                'Date': event['Date'].strftime('%Y-%m-%d') if event['Date'] else None,
+                'Name': event['Name'],
+                'Description': event['Description']
+            }
+            return jsonify(event_dict), 200
+        else:
+            return jsonify({'error': 'Event not found'}), 404
+
+    except Exception as e:
+        print(f"Error fetching event: {str(e)}")  # Add debugging
+        return jsonify({'error': str(e)}), 500
+
 

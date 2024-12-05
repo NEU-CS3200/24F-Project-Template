@@ -1,3 +1,8 @@
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
+
+
 from flask import Flask
 
 from backend.db_connection import db

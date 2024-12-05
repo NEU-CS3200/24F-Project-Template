@@ -1,10 +1,13 @@
 import streamlit as st
 import requests
 from datetime import datetime
+from modules.nav import SideBarLinks
 
 # Configure Streamlit page
 st.set_page_config(layout='wide')
 st.title("Event Management")
+SideBarLinks()
+
 
 # API endpoints
 create_url = 'http://api:4000/api/advisor/events'
@@ -16,6 +19,7 @@ def create_new_event():
     
     # Event form
     with st.form("event_form"):
+        event_id = st.number_input("Event ID", min_value=1, step=1)
         name = st.text_input("Event Name")
         description = st.text_area("Description")
         date = st.date_input("Date")
@@ -29,6 +33,7 @@ def create_new_event():
                 response = requests.post(
                     create_url,
                     json={
+                        'event_id': event_id,
                         'name': name,
                         'description': description,
                         'date': date.strftime('%Y-%m-%d'),
@@ -37,12 +42,9 @@ def create_new_event():
                 )
                 
                 if response.status_code == 201:
-                    # Success message and toast notification
                     st.success("Event created successfully!")
                     st.toast("New event created: " + name, icon="✅")
-                    # Wait a moment to show the notification
                     st.balloons()
-                    # Redirect after a brief pause
                     st.query_params["page"] = "10_Events"
                     st.rerun()
                 else:
@@ -53,6 +55,8 @@ def create_new_event():
                 st.error(f"Error: {str(e)}")
                 st.toast("Error creating event", icon="⚠️")
 
+
+
 def update_event(event_id):
     st.subheader("Update Event")
     
@@ -61,13 +65,28 @@ def update_event(event_id):
     if response.status_code == 200:
         event_data = response.json()
         
+        # Display current event details
+        st.write("Current Event Details:")
+        st.write(f"Name: {event_data.get('Name')}")
+        st.write(f"Description: {event_data.get('Description')}")
+        st.write(f"Date: {event_data.get('Date')}")
+        st.write(f"Community ID: {event_data.get('CommunityID')}")
+        
+        st.divider()
+        st.write("Update Event Details:")
+        
+
         # Event update form
         with st.form("update_event_form"):
-            name = st.text_input("Event Name", value=event_data['Name'])
-            description = st.text_area("Description", value=event_data['Description'])
-            date = st.date_input("Date", value=datetime.strptime(event_data['Date'], '%Y-%m-%d'))
+            name = st.text_input("Event Name", value=event_data.get('Name', ''))
+            description = st.text_area("Description", value=event_data.get('Description', ''))
+            try:
+                current_date = datetime.strptime(event_data.get('Date'), '%Y-%m-%d')
+            except (ValueError, TypeError):
+                current_date = datetime.now()
+            date = st.date_input("Date", value=current_date)
             community_id = st.number_input("Community ID", 
-                                         value=event_data['CommunityID'],
+                                         value=int(event_data.get('CommunityID', 1)),
                                          min_value=1, 
                                          step=1)
             
@@ -98,6 +117,8 @@ def update_event(event_id):
                 except Exception as e:
                     st.error(f"Error: {str(e)}")
                     st.toast("Error updating event", icon="⚠️")
+    else:
+        st.error(f"Could not find event with ID: {event_id}")
 
 def delete_event(event_id):
     with st.form("delete_event_form"):
@@ -122,15 +143,25 @@ def delete_event(event_id):
                 st.toast("Error deleting event", icon="⚠️")
 
 # Main page logic
-event_id = st.query_params.get("event_id")
+st.title("Event Management")
 
-if event_id:
-    # Show update/delete interface
-    col1, col2 = st.columns(2)
-    with col1:
+# Dropdown for operation selection
+operation = st.selectbox(
+    "What would you like to do?",
+    ["Create New Event", "Edit Event", "Delete Event"]
+)
+
+# Display different interfaces based on selection
+if operation == "Create New Event":
+    create_new_event()
+    
+    
+elif operation == "Edit Event":
+    event_id = st.number_input("Enter Event ID to Edit", min_value=1, step=1)
+    if event_id:
         update_event(event_id)
-    with col2:
-        delete_event(event_id)
-else:
-    # Show create interface
-    create_new_event() 
+        
+else:  # Delete Event
+    event_id = st.number_input("Enter Event ID to Delete", min_value=1, step=1)
+    if event_id:
+        delete_event(event_id) 

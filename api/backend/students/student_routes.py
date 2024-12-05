@@ -56,19 +56,45 @@ def get_student_feedback(student_id):
     response.status_code = 200
     return response
 
+@students.route('/students/<student_id>/feedback/<feedback_id>', methods=['DELETE'])
+def del_feedback(feedback_id, student_id):
+    try:
+        query = '''
+        DELETE FROM Feedback
+        WHERE StudentID = %s AND FeedbackID = %s
+        '''
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (student_id, feedback_id))
+        
+        db.get_db().commit()
+
+        if cursor.rowcount == 0:
+            response = make_response(jsonify({
+                "error": "No feedback entry found for the given student ID and feedback ID."
+            }))
+            response.status_code = 404
+            return response
+        
+        response = make_response(jsonify({"message": "Feedback entry deleted successfully."}))
+        response.status_code = 200
+        return response
+    except Exception as e:
+        response = make_response(jsonify({"error": str(e)}))
+        response.status_code = 500
+        return response
+
+
 
 @students.route('/students/feedback', methods=['GET'])
 def get_all_feedback():
     query = '''
-SELECT
-    s.StudentID,
-    s.Name AS student_name,
-    f.FeedbackID,
-            f.Description,
-            f.Date,
-            f.ProgressRating
-            f.ProgressRating
-
+    SELECT
+        s.StudentID,
+        s.Name AS student_name,
+        f.FeedbackID,
+        f.Description,
+        f.Date,
+        f.ProgressRating
         FROM Feedback f
         JOIN Student s ON f.StudentID = s.StudentID
         ORDER BY f.Date DESC;
@@ -134,7 +160,7 @@ def update_housing_match():
         student_query = '''
         UPDATE Student 
         SET HousingStatus = 'Complete',
-            CommunityID = (SELECT CommunityID FROM Housing WHERE HousingID = %s)
+            CommunityID = (SELECT Commun¬ityID FROM Housing WHERE HousingID = %s)
         WHERE StudentID = %s
         '''
         
