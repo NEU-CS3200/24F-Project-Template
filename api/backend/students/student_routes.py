@@ -260,8 +260,6 @@ def update_student(student_id):
 
     query = query[:-2] + f" WHERE studentId = {int(student_id)};"
 
-    current_app.logger.error(query)
-
     cursor = db.get_db().cursor()
 
     cursor.execute(query)
