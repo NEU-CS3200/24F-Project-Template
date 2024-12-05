@@ -10,6 +10,9 @@ Our app SyncSpace is a data-driven virtual community that aims to connect studen
 
 Designed for students and co-op advisors, SyncSpace offers real-time data insights that help students connect with each other and thrive professionally. With personalized interest-based groups, housing and transportation forums, and a hub for professional events, students can access networking, guidance, and new friendships anytime they need it. Co-op advisors and system admin staff can effortlessly organize and track engagement, while gaining valuable data on student satisfaction, activity trends, and engagement levels. By building a vibrant, supportive community, we hope to empower students to make meaningful connections and maximize their co-op and internship experiences. 
 
+## Link to our demo
+https://youtu.be/8xzt0m0avSg 
+
 ## Prerequisites
 
 - A GitHub Account
