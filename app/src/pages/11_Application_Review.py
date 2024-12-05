@@ -107,6 +107,9 @@ def display_app(app):
 
 if data is not None:
     if st.session_state["role"] == "student":
+        button = st.button("Create New Application")
+        if button:
+            st.switch_page("pages/33_Application_Creator.py")
         if "button_states" not in st.session_state:
             st.session_state.button_states = {}
         for app in data:
@@ -120,6 +123,7 @@ if data is not None:
                 ] = not st.session_state.button_states[button_key]
                 st.session_state["app_id"] = app["id"]
                 st.switch_page("pages/32_Application_Editor.py")
+
     elif st.session_state["role"] == "employer":
         for key in data:
             st.write(f"### Applications for {key}:")

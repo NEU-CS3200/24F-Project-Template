@@ -41,8 +41,8 @@ def create_app():
 
     cursor.execute(query)
     db.get_db().commit()
-    data = cursor.fetchall()
-    response = make_response(jsonify(data))
+
+    response = make_response(jsonify({"applicationId": application_id}))
     response.status_code = 200
     return response
 
@@ -66,7 +66,7 @@ def add_position(id):
     db.get_db().commit()
     data = cursor.fetchall()
     response = make_response(jsonify(data))
-    response.status_code = 200
+    response.status_code = 201
     return response
 
 
@@ -90,7 +90,7 @@ def create_app_addon_helper(id, table_name):
     query = f"""
         INSERT INTO {table_name} (applicationId, name, summary) VALUES
         (
-            {int(id)}, "{data["name"]}", {data["summary"]}
+            {int(id)}, "{data["name"]}", "{data["summary"]}"
         );
     """
 
@@ -100,7 +100,7 @@ def create_app_addon_helper(id, table_name):
     db.get_db().commit()
     data = cursor.fetchall()
     response = make_response(jsonify(data))
-    response.status_code = 200
+    response.status_code = 201
     return response
 
 

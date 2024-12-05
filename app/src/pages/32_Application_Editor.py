@@ -25,7 +25,9 @@ try:
             try:
                 questions = requests.get(
                     f"http://api:4000/app/applications/{st.session_state['app_id']}/questions"
-                ).json()[0]
+                )
+                if questions.status_code == 200:
+                    questions = questions.json()[0]
                 st.write(
                     f"Please answer the following questions: {questions['applicantQuestions']}"
                 )
@@ -55,5 +57,102 @@ try:
                             st.success("Changes saved successfully")
                     except requests.exceptions.RequestException as e:
                         st.error(f"Error connecting to server: {str(e)}")
+
+        with st.form("add_work_experience"):
+            st.write("Previous Work Experience:")
+            with requests.Session() as session:
+                res = session.get(
+                    f"http://api:4000/app/applications/{st.session_state['app_id']}/work_experience"
+                )
+                if res.status_code == 200:
+                    we = res.json()
+                    for i, work in enumerate(we):
+                        st.write(f"{i+1}. {work['name']}")
+
+            st.write("Add Work Experience:")
+            name = st.text_input("Name")
+            summary = st.text_area("Summary")
+
+            sbutton1 = st.form_submit_button("Add Work Experience")
+
+            if sbutton1:
+                with requests.Session() as session:
+                    try:
+                        response = session.post(
+                            f"http://api:4000/app/applications/{st.session_state['app_id']}/work_experience",
+                            json={
+                                "name": name,
+                                "summary": str(summary.rstrip().lstrip()),
+                            },
+                        )
+                        if response.status_code == 201:
+                            st.success("Work Experience added successfully")
+                    except requests.exceptions.RequestException as e:
+                        st.error(f"Error connecting to server: {str(e)}")
+
+        with st.form("add_relevant_coursework"):
+            st.write("Relevant Coursework:")
+            with requests.Session() as session:
+                res = session.get(
+                    f"http://api:4000/app/applications/{st.session_state['app_id']}/related_coursework"
+                )
+                if res.status_code == 200:
+                    we = res.json()
+                    for i, work in enumerate(we):
+                        st.write(f"{i+1}. {work['name']}")
+
+            st.write("Add Relevant Coursework:")
+            name = st.text_input("Name")
+            summary = st.text_area("Summary")
+
+            sbutton1 = st.form_submit_button("Add Relevant Coursework")
+
+            if sbutton1:
+                with requests.Session() as session:
+                    try:
+                        response = session.post(
+                            f"http://api:4000/app/applications/{st.session_state['app_id']}/related_coursework",
+                            json={
+                                "name": name,
+                                "summary": str(summary.rstrip().lstrip()),
+                            },
+                        )
+                        if response.status_code == 201:
+                            st.success("Relevant Coursework added successfully")
+                    except requests.exceptions.RequestException as e:
+                        st.error(f"Error connecting to server: {str(e)}")
+
+        with st.form("add_notable_skills"):
+            st.write("Notable Skills:")
+            with requests.Session() as session:
+                res = session.get(
+                    f"http://api:4000/app/applications/{st.session_state['app_id']}/notable_skills"
+                )
+                if res.status_code == 200:
+                    we = res.json()
+                    for i, work in enumerate(we):
+                        st.write(f"{i+1}. {work['name']}")
+
+            st.write("Add Notable Skill:")
+            name = st.text_input("Name")
+            summary = st.text_area("Summary")
+
+            sbutton1 = st.form_submit_button("Add Notable Skill")
+
+            if sbutton1:
+                with requests.Session() as session:
+                    try:
+                        response = session.post(
+                            f"http://api:4000/app/applications/{st.session_state['app_id']}/notable_skills",
+                            json={
+                                "name": name,
+                                "summary": str(summary.rstrip().lstrip()),
+                            },
+                        )
+                        if response.status_code == 201:
+                            st.success("Notable skill added successfully")
+                    except requests.exceptions.RequestException as e:
+                        st.error(f"Error connecting to server: {str(e)}")
+
 except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to server: {str(e)}")
