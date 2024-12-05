@@ -64,8 +64,9 @@ def get_employees_by_company(name):
 @employers.route("/emp_name/<name>", methods=["GET"])
 def get_employee_by_name(name):
     query = f"""
-        SELECT * FROM users u
-        WHERE INSTR(u.name, "{name}") AND companyId IS NOT NULL
+        SELECT * FROM users u 
+        JOIN companies c ON u.companyId = c.id
+        WHERE INSTR(u.name, "{name}")
         LIMIT 100;
     """
 

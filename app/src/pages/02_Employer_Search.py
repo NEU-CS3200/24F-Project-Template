@@ -39,6 +39,8 @@ with st.form("employer_search"):
 
     submit_button = st.form_submit_button("Search")
 
+    df = None
+
     if submit_button:
         if not employer_value:
             st.error("Please enter an employer name or company")
@@ -55,10 +57,21 @@ with st.form("employer_search"):
                 if response1.status_code == 200:
                     if len(response1.json()) != 0:
                         df = pd.json_normalize(response1.json())
-                        st.write(df)
                 if response2.status_code == 200:
                     if len(response2.json()) != 0:
                         df = pd.json_normalize(response2.json())
-                        st.write(df)
             except requests.exceptions.RequestException as e:
                 st.error(f"Error connecting to server: {str(e)}")
+
+if df is not None:
+    for index, row in df.iterrows():
+        with st.expander(f"{row['firstName']} {row['lastName']}"):
+            col1, col2, col3, col4 = st.columns(4)
+            col1.write("##### Name:")
+            col1.write(f"{row['u.name']}")
+            col2.write("##### Job:")
+            col2.write(f"{row['role']}")
+            col3.write("##### Company:")
+            col3.write(f"{row['c.name']}")
+            col4.write("##### Contact:")
+            col4.write(f"{row['email']} | {row['mobile']}")
