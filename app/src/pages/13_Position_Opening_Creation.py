@@ -14,12 +14,12 @@ try:
     if response.status_code == 200:
         data = response.json()[0]
         with st.form("edit_profile"):
-            address = st.text_input("First Name:", value=str(data["firstName"]))
-            city = st.text_input("First Name:", value=str(data["firstName"]))
-            country = st.text_input("Middle Name:", value=str(data["middleName"]))
-            summary = st.text_input("Last Name:", value=str(data["lastName"]))
-            applicant_questions = st.text_input("Preferred Name:", value=str(data["preferredName"]))
-            expected_salary = st.text_input("Pronouns:", value=str(data["pronouns"]))
+            address = st.text_input("Street Address:")
+            city = st.text_input("City:")
+            country = st.text_input("Country:")
+            summary = st.text_input("Summary:")
+            applicant_questions = st.text_input("Applicant Questions:")
+            expected_salary = st.number_input("Expected_Salary:", min_value=0.00, max_value=1000000.00, placeholder=0.00)
             company_id = st.session_state("company_id")
             
 
@@ -39,17 +39,13 @@ try:
                     try:
                         session.headers.update({"Content-Type": "application/json"})
                         response = session.put(
-                            f"http://api:4000/users/{st.session_state['profile_id']}",
+                            f"http://api:4000/emp/{company_id}/create_position",
                             json=req_data,
                         )
                         logger.info(response.json())
                     except requests.exceptions.RequestException as e:
                         st.error(f"Error connecting to server: {str(e)}")
-                    st.success("Profile updated successfully")
-
-        if st.button("Go back", type="primary", use_container_width=True):
-            st.switch_page("pages/03_User_Profile.py")
-
+                    st.success("Position Opening Submitted Successfully")
 
 except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to server: {str(e)}")
