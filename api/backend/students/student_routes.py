@@ -57,7 +57,7 @@ def get_student_feedback(student_id):
     return response
 
 @students.route('/students/<student_id>/feedback/<feedback_id>', methods=['DELETE'])
-def del_feedback(feedback_id, student_id):
+def del_feedback(student_id, feedback_id):
     try:
         query = '''
         DELETE FROM Feedback
