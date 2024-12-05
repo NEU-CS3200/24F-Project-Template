@@ -153,7 +153,7 @@ def stats():
         WHERE lastLogin BETWEEN u.lastLogin AND DATE_ADD(u.lastLogin, INTERVAL 15 MINUTE)
         GROUP BY u.lastLogin
         ORDER BY loginCount DESC
-        LIMIT 1;
+        LIMIT 5;
     """
 
     cursor = db.get_db().cursor()
