@@ -35,11 +35,13 @@ def api_test():
 @simple_routes.route("/create_help_ticket", methods=["POST"])
 def create_help_ticket():
     data = request.get_json()
+    user_id = str(data["userId"])
+    summary = str(data["summary"])
 
     query = f"""
-        INSERT INTO help_tickets (userId, summary, completed) VALUES
+        INSERT INTO tickets (userId, summary, completed) VALUES
         (
-            {int(data['userId'])}, "{data['summary']}", 0
+            {user_id}, "{summary}", 0
         );
     """
 

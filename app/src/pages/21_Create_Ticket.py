@@ -27,7 +27,7 @@ with st.form("ticket_data"):
             with requests.Session() as session:
                 try:
                     session.headers.update({"Content-Type": "application/json"})
-                    response = session.put(
+                    response = session.post(
                         f"http://api:4000/create_help_ticket",
                         json=req_data,
                     )
