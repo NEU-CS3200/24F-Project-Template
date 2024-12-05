@@ -19,7 +19,6 @@ def create_new_event():
     
     # Event form
     with st.form("event_form"):
-        event_id = st.number_input("Event ID", min_value=1, step=1)
         name = st.text_input("Event Name")
         description = st.text_area("Description")
         date = st.date_input("Date")
@@ -33,7 +32,6 @@ def create_new_event():
                 response = requests.post(
                     create_url,
                     json={
-                        'event_id': event_id,
                         'name': name,
                         'description': description,
                         'date': date.strftime('%Y-%m-%d'),
@@ -141,6 +139,7 @@ def delete_event(event_id):
             except Exception as e:
                 st.error(f"Error: {str(e)}")
                 st.toast("Error deleting event", icon="⚠️")
+
 
 # Main page logic
 st.title("Event Management")

@@ -140,17 +140,15 @@ def create_event():
         
         query = '''
         INSERT INTO Events (
-            EventID,
             CommunityID,
             Date,
             Name,
             Description
-        ) VALUES (%s, %s, %s, %s, %s)
+        ) VALUES (%s, %s, %s, %s)
         '''
         
-        cursor = db.get_db().cursor()
+        cursor = db.get_db().cursor(dictionary=True)
         cursor.execute(query, (
-            data.get('event_id'),
             data.get('community_id'),
             data.get('date'),
             data.get('name'),
@@ -158,11 +156,13 @@ def create_event():
         ))
         db.get_db().commit()
         
+        
         return jsonify({
             'message': 'Event created successfully'
         }), 201
 
     except Exception as e:
+        print(f"Error creating event: {str(e)}")
         db.get_db().rollback()
         return jsonify({'error': str(e)}), 500
 
