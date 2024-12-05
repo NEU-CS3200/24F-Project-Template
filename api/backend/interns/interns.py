@@ -18,6 +18,7 @@ def get_students():
     the_response.status_code = 200
     return the_response
 
+#get all job postings
 @interns_bp.route('/job_postings', methods=['GET'])
 def get_job_postings():
     cursor = db.get_db().cursor()
@@ -79,25 +80,7 @@ def delete_student_skill(student_id, skill_id):
     the_response.status_code = 204
     return the_response
 
-"""#aggregate student skills across companies
-@interns_bp.route('/qualifications/comparison', methods=['GET'])
-def compare_intern_qualifications():
-    cursor = db.get_db().cursor()
-    cursor.execute('''SELECT c.name AS companyName, sk.skillName, COUNT(DISTINCT s.id) AS numInternsWithSkill
-        FROM companies c
-        JOIN job_posting jp ON c.id = jp.companyId
-        JOIN student_skills ss ON jp.studentId = ss.studentId
-        JOIN skills sk ON ss.skillId = sk.id
-        JOIN students s ON ss.studentId = s.id
-        GROUP BY c.name, sk.skillName
-        ORDER BY c.name, sk.skillName''')
-    comparison_data = cursor.fetchall()
-
-    the_response = make_response(jsonify(comparison_data))
-    the_response.status_code = 200
-    return the_response"""
-
-#get all job postings
+#compare student qualifications by company
 @interns_bp.route('/qualifications/comparison', methods=['GET'])
 def compare_intern_qualifications():
     try:
