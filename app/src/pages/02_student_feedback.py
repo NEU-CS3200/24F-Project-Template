@@ -29,14 +29,22 @@ if selected_company:
         if company['name'] == selected_company:
             company_id = company['id']
             break
-    
+
     #get student feedback for selected company
-    feedback_response = requests.get('http://web-api:4000/jobPostings/reviews/{company_id}')
+    feedback_response = requests.get(f'http://web-api:4000/jp/jobPostings/reviews/{company_id}')
 
-    # Check if the response status is OK (200)
     if feedback_response.status_code == 200:
-        feedback = feedback_response.json()  
-
+        feedback = feedback_response.json()
+        st.markdown("### Student Feedback:")
+        
+        if feedback:
+            for review in feedback:
+                st.markdown(f"**{review['title']}**")
+                st.markdown(f"Rating: {review['rating']}")
+                st.markdown(f"Date Posted: {review['datePosted']}")
+                st.markdown(f"Content: {review['content']}")
+                st.markdown("---")
+        else:
+            st.info("No feedback available for this company.")
     else:
         st.error(f"Failed to load student feedback data. Status code: {feedback_response.status_code}")
-        feedback = []
