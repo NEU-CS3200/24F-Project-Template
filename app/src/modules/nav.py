@@ -66,8 +66,8 @@ def SideBarLinks(show_home=False):
         # Show System Logs, Ticket Overview, and System Health Dashboard if the user is in a technical support analyst role.
         if st.session_state["role"] == "TechnicalSupportAnalyst":
             TechSupportAnalystHomeNav()
-            SystemLogsNav()
-            TicketOverviewNav()
+            #SystemLogsNav()
+            #TicketOverviewNav()
 
         # If the user role is usaid worker, show the Api Testing page
         if st.session_state["role"] == "Advisor":

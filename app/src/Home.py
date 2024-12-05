@@ -49,7 +49,7 @@ if st.button("Act as System Administrator - Michael Ortega",
     # when user clicks the button, they are now considered authenticated
     st.session_state['authenticated'] = True
     # we set the role of the current user
-    st.session_state['role'] = 'SysAdmin'
+    st.session_state['role'] = 'TechnicalSupportAnalyst'
     # we add the first name of the user (so it can be displayed on 
     # subsequent pages). 
     st.session_state['first_name'] = 'Michael'
