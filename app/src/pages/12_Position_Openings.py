@@ -25,6 +25,7 @@ try:
         f"http://api:4000/emp/{st.session_state['company_id']}/positions"
         )
     if response.status_code == 200:
+        logger.info(response.json())
         if len(response.json()) != 0:
             df = pd.json_normalize(response.json())
 except requests.exceptions.RequestException as e:
