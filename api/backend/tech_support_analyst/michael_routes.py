@@ -119,7 +119,6 @@ def update_tickets():
     priority = the_data['Priority']
     resolved = the_data['ResolvedDate']
 
-    # Build the SQL query
     update_fields = []
     params = []
     if status:
@@ -135,18 +134,14 @@ def update_tickets():
     if not update_fields:
         return 'No valid fields to update', 400
 
-    # Add TicketID to parameters
     params.append(ticket_id)
 
-    # Prepare the SQL query
     query = f'UPDATE Ticket SET {", ".join(update_fields)} WHERE TicketID = %s'
 
-    # Execute the query
     cursor = db.get_db().cursor()
     cursor.execute(query, params)
     db.get_db().commit()
 
-    # Check if the update was successful
     if cursor.rowcount == 0:
         return 'No ticket found with the given TicketID', 404
 
