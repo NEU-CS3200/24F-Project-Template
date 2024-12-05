@@ -10,10 +10,8 @@ SideBarLinks()
 
 st.title('My Profile')
 
-#company=st.text_input('Company')
-#location=st.text_input('Location')
-housing_status=st.text_input('Housing Status', placeholder='e.g. Searching for Housing')
-carpool_status=st.text_input('Carpool Status', placeholder='e.g. Has Car')
+housing_status = st.selectbox("Housing Status", ["Searching for Housing", "Searching for Roommates", "Complete"])
+carpool_status = st.selectbox("Carpool Status", ["Searching for Carpool", "Has Car", "Complete"])
 budget= st.number_input('Budget', min_value=1000, max_value=3000, step=50)
 #lease_duration=st.text_input('Lease Duration', placeholder='e.g. 1 year, 6 months')
 cleanliness = st.number_input('Cleanliness', min_value=1, max_value=5, step=1)
