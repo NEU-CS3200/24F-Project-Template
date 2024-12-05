@@ -1,6 +1,7 @@
 import logging
 
 import requests
+
 logger = logging.getLogger(__name__)
 
 import streamlit as st
@@ -10,7 +11,7 @@ import numpy as np
 from modules.nav import SideBarLinks
 
 
-st.set_page_config(layout = 'wide')
+st.set_page_config(layout="wide")
 
 SideBarLinks()
 
@@ -26,9 +27,8 @@ except requests.exceptions.RequestException as e:
 
 with st.form("employer_search"):
     employer_value = st.text_input(
-        "Search Employers",
-        placeholder="Enter employer or company name",
-        key="search")
+        "Search Employers", placeholder="Enter employer or company name", key="search"
+    )
 
     submit_button = st.form_submit_button("Search")
 
@@ -50,7 +50,7 @@ with st.form("employer_search"):
                 response3 = requests.get(
                     f"http://api:4000/emp/{employer_value}/employees"
                 )
-                 response1.status_code == 200:
+                if response1.status_code == 200:
                     if len(response1.json()) != 0:
                         df = pd.json_normalize(response1.json())
                 if response2.status_code == 200:
@@ -67,10 +67,10 @@ if df is not None:
         with st.expander(f"{row['firstName']} {row['lastName']}"):
             col1, col2, col3, col4 = st.columns(4)
             col1.write("##### Name:")
-            col1.write(f"{row['u.name']}")
+            col1.write(f"{row['name']}")
             col2.write("##### Job:")
             col2.write(f"{row['role']}")
             col3.write("##### Company:")
-            col3.write(f"{row['c.name']}")
+            col3.write(f"{row['compName']}")
             col4.write("##### Contact:")
             col4.write(f"{row['email']} | {row['mobile']}")
