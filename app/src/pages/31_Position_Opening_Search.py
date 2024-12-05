@@ -2,6 +2,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 import streamlit as st
+import requests
+import pandas as pd
+import numpy as np
 from modules.nav import SideBarLinks
 
 st.set_page_config(layout = 'wide')
@@ -20,7 +23,7 @@ except requests.exceptions.RequestException as e:
 
 df_2 = None
 
-with st.form("position_search"):
+with st.form("position_value"):
     positon_value = st.text_input(
         "Search Positions",
         placeholder="Enter company name or position id#",
@@ -31,6 +34,17 @@ with st.form("position_search"):
     df_1 = None
 
     if submit_button:
+        if (position_value == None):
+            try:
+                response = requests.get(
+                    f"http://api:4000/pos/positions"
+                )
+                if response.status_code == 200:
+                    if len(response.json()) != 0:
+                        df_1 = pd.json_normalize(response.json())
+            except requests.exceptions.RequestException as e:
+                st.error(f"Error connecting to server: {str(e)}")
+        else:
             logger.info(f"Employee form submitted with data: {positon_value}")
 
             try:
