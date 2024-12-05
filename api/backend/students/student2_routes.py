@@ -172,3 +172,17 @@ def del_feedback(student_id, feedback_id):
         response = make_response(jsonify({"error": str(e)}))
         response.status_code = 500
         return response
+
+@student2.route('/events', methods=['GET'])
+def get_events():
+
+    cursor = db.get_db().cursor()
+    cursor.execute('''SELECT EventID, CommunityID, Date, Name, Description
+    FROM Events
+    ''')
+    
+    theData = cursor.fetchall()
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
