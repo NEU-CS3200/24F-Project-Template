@@ -616,3 +616,6 @@ insert into positions (companyId, applicationQuestions, summary, country, city, 
 insert into positions (companyId, applicationQuestions, summary, country, city, address, expectedSalary) values (32, 'What is your experience in backend development?', 'Administrative Assistant II', 'China', 'Shang Boingor', '5317 Express Place', 52322);
 insert into positions (companyId, applicationQuestions, summary, country, city, address, expectedSalary) values (48, 'What is your experience with databases?', 'Financial Analyst', 'Indonesia', 'Talambung Laok', '2406 Ohio Plaza', 93899);
 insert into positions (companyId, applicationQuestions, summary, country, city, address, expectedSalary) values (2, 'How many years have you worked with Python?', 'Human Resources Assistant I', 'Libya', 'Sirte', '6796 Blackbird Center', 75773);
+
+
+-- mock data for applications
