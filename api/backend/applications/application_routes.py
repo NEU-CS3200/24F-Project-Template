@@ -105,7 +105,7 @@ def create_app_addon_helper(id, table_name):
 
 
 @applications.route("/applications/<id>", methods=["GET"])
-def get_app():
+def get_app(id):
     query = f"""
         SELECT * FROM applications a
         WHERE a.id = {int(id)};
@@ -127,6 +127,24 @@ def get_user_refs(id):
             JOIN application_bookmark ab ON ab.applicationId = a.id
             JOIN users u ON ab.userId = u.id
             JOIN user_references ur ON u.id = ur.userId
+        WHERE a.id = {int(id)};
+    """
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
+@applications.route("/applications/<id>/questions", methods=["GET"])
+def get_app_questions(id):
+    query = f"""
+        SELECT p.applicantQuestions FROM applications a
+            JOIN position_application_bookmark pab ON pab.applicationId = a.id
+            JOIN positions p ON pab.positionId = p.id
         WHERE a.id = {int(id)};
     """
 
@@ -172,12 +190,6 @@ def get_app_addon_helper(id, table_name):
 @applications.route("/applications/<id>", methods=["PUT"])
 def update_app(id):
     data = request.get_json()
-    if int(id) != int(data["studentId"]):
-        response = make_response(
-            jsonify({"message": "id in URL does not match id in body"})
-        )
-        response.status_code = 400
-        return response
 
     query = f"""
         SELECT * FROM applications
@@ -206,8 +218,6 @@ def update_app(id):
                 query = query + f'{key} = "{data[key]}", '
 
     query = query[:-2] + f" WHERE id = {int(id)};"
-
-    current_app.logger.error(query)
 
     cursor = db.get_db().cursor()
 
