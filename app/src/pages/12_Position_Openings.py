@@ -8,6 +8,8 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
+st.title("Position Search")
+
 try:
     test_response = requests.get("http://api:4000/pos/positions")
 
@@ -21,7 +23,7 @@ df_2 = None
 with st.form("position_search"):
     positon_value = st.text_input(
         "Search Positions",
-        placeholder="Enter student name or Id#",
+        placeholder="Enter company name or position id#",
     )
 
     submit_button = st.form_submit_button("Search")
@@ -29,17 +31,14 @@ with st.form("position_search"):
     df_1 = None
 
     if submit_button:
-        if not student_value:
-            st.error("Please enter a student name or id")
-        else:
-            logger.info(f"Employee form submitted with data: {student_value}")
+            logger.info(f"Employee form submitted with data: {positon_value}")
 
             try:
                 response1 = requests.get(
-                    f"http://api:4000/stu/students/search/{student_value}"
+                    f"http://api:4000/pos/positions_company/{positon_value}"
                 )
                 response2 = requests.get(
-                    f"http://api:4000/stu/students/{student_value}"
+                    f"http://api:4000/pos/positions/{positon_value}"
                 )
                 if response1.status_code == 200:
                     if len(response1.json()) != 0:
@@ -64,6 +63,8 @@ if df_1 is not None:
             col4.write(f"{row['email']} | {row['mobile']}")
 
 
+st.title("Flagged Positions")
+
 if df_2 is not None:
     for index, row in df.iterrows():
         with st.expander(f"{row['firstName']} {row['lastName']}"):
@@ -76,3 +77,5 @@ if df_2 is not None:
             col3.write(f"{row['year']}")
             col4.write("##### Contact:")
             col4.write(f"{row['email']} | {row['mobile']}")
+else:
+    st.title("None")

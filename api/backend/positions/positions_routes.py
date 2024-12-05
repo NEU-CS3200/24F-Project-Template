@@ -27,7 +27,7 @@ def get_positions():
     response.status_code = 200
     return response
 
-@positions.route("/positions/<name>", methods=["GET"])
+@positions.route("/positions_company/<name>", methods=["GET"])
 def get_positions_by_company(name):
     query = """
         SELECT c.name, p.* FROM positions p NATURAL JOIN companies c 
