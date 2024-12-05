@@ -28,3 +28,8 @@ if st.button('View and Filter Most Popular Companies',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/00_popular_companies.py')
+
+if st.button('View Your Applications', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/00_student_applications.py')
