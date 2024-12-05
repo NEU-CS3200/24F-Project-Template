@@ -1,3 +1,5 @@
+USE cosint;
+
 -- mock data for company user bookmark
 insert into company_user_bookmark (companyId, userId) values (28, 152);
 insert into company_user_bookmark (companyId, userId) values (45, 160);

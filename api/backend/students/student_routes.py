@@ -143,8 +143,8 @@ def get_student_by_id(student_id):
 def get_student_applications(student_id):
     query = f"""
         SELECT a.* FROM applications a 
-            NATURAL JOIN application_bookmark o 
-            NATURAL JOIN users u
+            JOIN application_bookmark o ON a.id = o.applicationId
+            JOIN users u ON o.userId = u.id
         WHERE u.studentId = {int(student_id)};
     """
 

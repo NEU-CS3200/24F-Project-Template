@@ -1,10 +1,14 @@
 import logging
+
 logger = logging.getLogger(__name__)
 
 import streamlit as st
+import requests
+import pandas as pd
+import numpy as np
 from modules.nav import SideBarLinks
 
-st.set_page_config(layout = 'wide')
+st.set_page_config(layout="wide")
 
 SideBarLinks()
 
@@ -19,11 +23,15 @@ try:
             country = st.text_input("Country:")
             summary = st.text_input("Summary:")
             applicant_questions = st.text_input("Applicant Questions:")
-            expected_salary = st.number_input("Expected_Salary:", min_value=0.00, max_value=1000000.00, placeholder=0.00)
-            company_id = st.session_state("company_id")
-            
+            expected_salary = st.number_input(
+                "Expected_Salary:",
+                min_value=0.00,
+                max_value=1000000.00,
+                placeholder=0.00,
+            )
+            company_id = st.session_state["company_id"]
 
-            submit_button = st.form_submit_button("Save changes")
+            submit_button = st.form_submit_button("Submit")
 
             if submit_button:
                 req_data = {
@@ -31,21 +39,19 @@ try:
                     "city": city,
                     "country": country,
                     "summary": summary,
-                    "applicant_questions": applicant_questions,
-                    "expected_salary": expected_salary,
-                    "company_id": company_id,
+                    "applicantQuestions": applicant_questions,
+                    "expectedSalary": expected_salary,
                 }
                 with requests.Session() as session:
                     try:
                         session.headers.update({"Content-Type": "application/json"})
-                        response = session.put(
+                        response = session.post(
                             f"http://api:4000/emp/{company_id}/create_position",
                             json=req_data,
                         )
-                        logger.info(response.json())
+                        if response.status_code == 200:
+                            st.success("Position Opening Submitted Successfully")
                     except requests.exceptions.RequestException as e:
                         st.error(f"Error connecting to server: {str(e)}")
-                    st.success("Position Opening Submitted Successfully")
-
 except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to server: {str(e)}")

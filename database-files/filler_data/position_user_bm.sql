@@ -1,3 +1,5 @@
+USE cosint;
+
 -- mock data for position user bookmark
 insert into position_user_bookmark (positionId, userId) values (136, 178);
 insert into position_user_bookmark (positionId, userId) values (153, 132);

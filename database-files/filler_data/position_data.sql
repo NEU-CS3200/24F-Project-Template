@@ -1,3 +1,5 @@
+USE cosint;
+
 -- mock data for positions
 insert into positions (companyId, applicationQuestions, summary, country, city, address, expectedSalary) values (40, 'What is your experience with databases?', 'Pharmacist', 'France', 'Besançon', '9244 Stephen Drive', 87629);
 insert into positions (companyId, applicationQuestions, summary, country, city, address, expectedSalary) values (13, 'What is your experience with databases?', 'Recruiting Manager', 'Thailand', 'Kut Rang', '6 Brown Terrace', 72527);

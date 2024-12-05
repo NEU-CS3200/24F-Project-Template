@@ -1,3 +1,5 @@
+USE cosint;
+
 -- mock data for related coursework
 insert into related_coursework (applicationId, name, summary) values (231, 'Logic and Computation', 'Focus on database management and design');
 insert into related_coursework (applicationId, name, summary) values (337, 'Human Computer Interactions', 'Focused on the development pipeline of applications');

@@ -1,3 +1,5 @@
+USE cosint;
+
 -- mock data for notable skills
 insert into notable_skills (applicationId, name, summary) values (397, 'Volunteer Training', 'Developed a new algorithm to predict bitcoin prices');
 insert into notable_skills (applicationId, name, summary) values (162, 'jQuery UI', 'Developed a new algorithm to predict bitcoin prices');

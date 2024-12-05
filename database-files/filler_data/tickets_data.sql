@@ -1,3 +1,5 @@
+USE cosint;
+
 -- mock data for tickets
 insert into tickets (userId, helperId, summary, completed, viewedAt) values (205, 2, 'Can''t send application', 1, 'NOW()');
 insert into tickets (userId, helperId, summary, completed, viewedAt) values (105, 2, 'Can''t send application', 0, 'NOW()');

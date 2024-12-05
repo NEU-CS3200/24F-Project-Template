@@ -1,3 +1,5 @@
+USE cosint;
+
 -- mock data for employers
 insert into users (name, firstName, middleName, lastName, mobile, email, passwordHash, profile, companyId, lastLogin, preferredName, pronouns, major, year, birthday, profilePic, role) values ('Rab Vedntyev', 'Rab', 'M', 'Vedntyev', 5357923235, 'rvedntyev0@npr.org', '043e9fce63e48e40344999f57ab4bf2a', 'Legal Assistant', 'NULL', 'NOW()', 'Perla', 'They/Them', 'NULL', 'NULL', '1992-12-30', 'https://accuweather.com/sem/sed/sagittis.html', 'Employer');
 insert into users (name, firstName, middleName, lastName, mobile, email, passwordHash, profile, companyId, lastLogin, preferredName, pronouns, major, year, birthday, profilePic, role) values ('Grady Coppock.', 'Grady', 'V', 'Coppock.', 6216410221, 'gcoppock1@china.com.cn', 'e2852ec1d856b0d9d2bad9fdb41f05dd', 'Clinical Specialist', 'NULL', 'NOW()', 'Bonnie', 'He/Him', 'NULL', 'NULL', '1993-10-29', 'http://umich.edu/velit/nec/nisi/vulputate.html', 'Employer');

@@ -1,3 +1,5 @@
+USE cosint;
+
 -- mock data work experience
 insert into work_experience (applicationId, name, summary) values (382, 'Geologist III', 'Created a web application that tracks the user''s daily caloric intake');
 insert into work_experience (applicationId, name, summary) values (21, 'Librarian', 'Developed a new algorithm to predict bitcoin prices');

@@ -1,3 +1,5 @@
+USE cosint;
+
 -- mock data for applications
 insert into applications (questionResponse, summary, GPA, submittedAt) values ('I interned at Google last summer', 'Application for backend engineer', 2.7, 'NOW()');
 insert into applications (questionResponse, summary, GPA, submittedAt) values ('I interned at Google last summer', 'Application for Software Engineer Intern', 2.9, 'NOW()');

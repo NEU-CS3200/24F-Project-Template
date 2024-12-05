@@ -17,18 +17,21 @@ with st.form("ticket_data"):
         placeholder="State the issue and it's details",)
     submit_button = st.form_submit_button("Submit Ticket")
     if submit_button:
-        req_data = {
-            "summary": summary_input,
-            "userId": st.session_state['id'],
-        }
-        with requests.Session() as session:
-            try:
-                session.headers.update({"Content-Type": "application/json"})
-                response = session.put(
-                    f"http://api:4000/create_help_ticket",
-                    json=req_data,
-                )
-                logger.info(response.json())
-            except requests.exceptions.RequestException as e:
-                st.error(f"Error connecting to server: {str(e)}")
-            st.success("Ticket submitted successfully")
+        if not summary_input:
+            st.error("please enter a summary")
+        else:
+            req_data = {
+                "summary": summary_input,
+                "userId": st.session_state['id'],
+            }
+            with requests.Session() as session:
+                try:
+                    session.headers.update({"Content-Type": "application/json"})
+                    response = session.put(
+                        f"http://api:4000/create_help_ticket",
+                        json=req_data,
+                    )
+                    logger.info(response.json())
+                except requests.exceptions.RequestException as e:
+                    st.error(f"Error connecting to server: {str(e)}")
+                st.success("Ticket submitted successfully")

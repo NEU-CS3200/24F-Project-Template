@@ -1,3 +1,5 @@
+USE cosint;
+
 -- mock data for application bookmark
 insert into application_bookmark (applicationId, userId) values (103, 12);
 insert into application_bookmark (applicationId, userId) values (311, 17);

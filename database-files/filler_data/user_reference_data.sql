@@ -1,3 +1,5 @@
+USE cosint;
+
 -- mock data for user references
 insert into user_references (name, firstName, middleName, lastName, mobile, email, referral, userId) values ('Verne Varvell', 'Verne', 'C', 'Varvell', 8455504015, 'vvarvell0@joomla.org', 'Referred for database role', 105);
 insert into user_references (name, firstName, middleName, lastName, mobile, email, referral, userId) values ('Lew Smolan', 'Lew', 'U', 'Smolan', 7082234366, 'lsmolan1@mysql.com', 'Referred for database role', 152);

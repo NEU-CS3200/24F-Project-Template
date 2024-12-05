@@ -12,7 +12,7 @@ st.set_page_config(layout="wide")
 
 SideBarLinks()
 
-st.title(f"Student Search")
+st.title("Student Search")
 
 try:
     test_response = requests.get("http://api:4000/stu/students")

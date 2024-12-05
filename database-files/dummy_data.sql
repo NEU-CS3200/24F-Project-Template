@@ -22,11 +22,13 @@ VALUES
     ('Joe Montana', 'Joe', 'P', 'Montana', '1234567896', 'jmontana@example.com', MD5('hannah'), 'Advisor at NEU', NULL, NOW(), 'Joe', 'He/Him', NULL, NULL, '1985-02-28', 'https://example.com/hmontana.jpg', 'Advisor'),
     ('Peter Burke', 'Peter', 'S', 'Burke', '1234567897', 'peterb@example.com', MD5('whitecollar'), 'CEO at Greip', 6, NOW(), 'Pete', 'He/Him', NULL, NULL, '1987-05-11', 'https://example.com/peterb.jpg', 'Employer');
 
+UPDATE users SET studentId = 12345678, advisorId = 7 WHERE id = 5;
+
 -- Insert into user_references
 INSERT INTO user_references (name, firstName, middleName, lastName, mobile, email, referral, userId) 
 VALUES
     ('Mark Taylor', 'Mark', 'E', 'Taylor', '1234567894', 'marktaylor@example.com', 'Referred for engineering role', 1),
-    ('Lucy Brown', 'Lucy', 'F', 'Brown', '1234567895', 'lucybrown@example.com', 'Recommended for a data position', 3);
+    ('Lucy Brown', 'Lucy', 'F', 'Brown', '1234567895', 'lucybrown@example.com', 'Recommended for a data position', 5);
 
 -- Insert into tickets
 INSERT INTO tickets (userId, helperId, summary, completed, viewedAt)
@@ -38,7 +40,7 @@ VALUES
 INSERT INTO positions (companyId, applicantQuestions, summary, country, city, address, expectedSalary)
 VALUES
     (1, 'What is your experience in backend development?', 'Backend Developer Role', 'USA', 'New York', '123 Tech Street', 75000),
-    (1, 'Describe your approach to team management.', 'Team Manager Role', 'Canada', 'Toronto', '456 Innovate Lane', 85000);
+    (6, 'Describe your approach to team management.', 'Team Manager Role', 'Canada', 'Toronto', '456 Innovate Lane', 85000);
 
 -- Insert into applications
 INSERT INTO applications (questionResponse, summary, GPA, submittedAt)
@@ -82,7 +84,7 @@ VALUES
 INSERT INTO application_bookmark (applicationId, userId)
 VALUES
     (1, 2),
-    (2, 3);
+    (2, 5);
 
 -- Insert into company_user_bookmark
 INSERT INTO company_user_bookmark (companyId, userId)

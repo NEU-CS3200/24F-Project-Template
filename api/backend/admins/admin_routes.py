@@ -43,6 +43,21 @@ def add_company():
     return response
 
 
+@admins.route("/rawsql", methods=["GET"])
+def rawsql():
+    data = request.get_json()
+    query = data["query"]
+
+    cursor = db.get_db().cursor()
+
+    cursor.execute(query)
+    db.get_db().commit()
+    data = cursor.fetchall()
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
+
 @admins.route("/tickets", methods=["GET"])
 def get_tickets():
     query = """
@@ -138,7 +153,7 @@ def stats():
         WHERE lastLogin BETWEEN u.lastLogin AND DATE_ADD(u.lastLogin, INTERVAL 15 MINUTE)
         GROUP BY u.lastLogin
         ORDER BY loginCount DESC
-        LIMIT 1;
+        LIMIT 5;
     """
 
     cursor = db.get_db().cursor()
