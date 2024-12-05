@@ -38,7 +38,7 @@ def get_SystemHealth():
                 Timestamp, 
                 Status, 
                 MetricType
-        FROM SystemLog
+        FROM SystemHealth
     '''
     
     cursor = db.get_db().cursor()
