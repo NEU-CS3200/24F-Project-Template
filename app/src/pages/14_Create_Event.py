@@ -145,7 +145,7 @@ def delete_event(event_id):
 
 
 # Main page logic
-st.title("Event Management")
+#st.title("Event Management")
 
 # Dropdown for operation selection
 operation = st.selectbox(
