@@ -74,7 +74,7 @@ def ApplicationEditorNav():
         "pages/11_Application_Review.py", label="Applications", icon="📝")
 def ApplicationCreatorNav():
     st.sidebar.page_link( 
-        "pages/32_Application_Creator.py", label="Create Application", icon="➕")
+        "pages/33_Application_Creator.py", label="Create Application", icon="➕")
 
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
