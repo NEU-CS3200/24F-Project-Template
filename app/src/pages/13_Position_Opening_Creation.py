@@ -2,6 +2,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 import streamlit as st
+import requests
+import pandas as pd
+import numpy as np
 from modules.nav import SideBarLinks
 
 st.set_page_config(layout = 'wide')
@@ -20,10 +23,9 @@ try:
             summary = st.text_input("Summary:")
             applicant_questions = st.text_input("Applicant Questions:")
             expected_salary = st.number_input("Expected_Salary:", min_value=0.00, max_value=1000000.00, placeholder=0.00)
-            company_id = st.session_state("company_id")
+            company_id = st.session_state['company_id']
             
-
-            submit_button = st.form_submit_button("Save changes")
+            submit_button = st.form_submit_button("Submit")
 
             if submit_button:
                 req_data = {
@@ -46,6 +48,5 @@ try:
                     except requests.exceptions.RequestException as e:
                         st.error(f"Error connecting to server: {str(e)}")
                     st.success("Position Opening Submitted Successfully")
-
 except requests.exceptions.RequestException as e:
     st.error(f"Error connecting to server: {str(e)}")
