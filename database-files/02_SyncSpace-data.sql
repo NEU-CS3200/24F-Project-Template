@@ -212,7 +212,7 @@ insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatu
 insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, AdvisorID, Reminder) values ('Caddric Skin', 'Art', 'Shell', 'D.C.', 'Searching for Housing', 'Searching for Carpool', 2200, '6 months', 2, 'Cozy', 20, 1, 'Is passionate about environmental conservation and volunteers for clean-up projects', 7, 3, 4);
 insert into Student (Name, Major, Company, Location, HousingStatus, CarpoolStatus, Budget, LeaseDuration, Cleanliness, Lifestyle, CommuteTime, CommuteDays, Bio, CommunityID, AdvisorID, Reminder) values ('Kalina Whitham', 'Public Health', 'General Motors', 'Atlanta', 'Searching for Housing', 'Complete', 1700, '4 months', 4, 'Healthy', 20, 1, 'Loves to read mystery novels and solve puzzles', 1, 9, 3);
 insert into Student(Name, Major, Location, HousingStatus, CarpoolStatus, LeaseDuration, CommunityID) values ('Kevin Chen', 'Data Science', 'San Jose', 'Searching for Housing', 'Searching for Carpool', '6 months', 2);
-insert into Student(Name, Major, Location, Bio, CommunityID, Reminder) values ('Sarah Lopez', 'Business', 'New York City', 'Interested in the intersection between finance and data science!', 6, 2)
+insert into Student(Name, Major, Location, Bio, CommunityID, Reminder) values ('Sarah Lopez', 'Business', 'New York City', 'Interested in the intersection between finance and data science!', 6, 2);
 
 
 -- 6. Events Data (depends on CityCommunity)
