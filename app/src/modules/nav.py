@@ -10,30 +10,26 @@ def HomeNav():
     st.sidebar.page_link("Home.py", label="Home", icon="🏠")
 
 
+
 def AboutPageNav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+    st.sidebar.page_link("pages/30_About.py", label="About NU.Compass", icon="🧠")
 
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
-def PolStratAdvHomeNav():
+#### ------------------------ Examples for Role of mentee_student ------------------------
+
+def menteeHomeNav():
     st.sidebar.page_link(
-        "pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon="👤"
-    )
+        "pages/00_Mentee_Home.py", label="Mentee Student Home", icon="👤")
+    if st.session_state['program'] != -1:
+        st.sidebar.page_link("pages/05_Programs.py", label="Back to Search", icon="🔍")
 
 
-def WorldBankVizNav():
-    st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
-    )
 
-
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
-
-
-## ------------------------ Examples for Role of usaid_worker ------------------------
-def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
+## ------------------------ Examples for Role of mentor_student ------------------------
+def mentor_student_home():
+    st.sidebar.page_link("pages/10_Mentor.py", label="Mentor Student Home", icon="👤")
+    if st.session_state['program'] != -1:
+        st.sidebar.page_link("pages/05_Programs.py", label="Back to Search", icon="🔍")
 
 
 def PredictionNav():
@@ -48,12 +44,10 @@ def ClassificationNav():
     )
 
 
-#### ------------------------ System Admin Role ------------------------
+#### ------------------------ Global Experience Staff Member ------------------------
 def AdminPageNav():
-    st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
-    )
+
+    st.sidebar.page_link("pages/20_IT_Admin_Home.py", label="System Admin", icon="🖥️")
 
 
 # --------------------------------Links Function -----------------------------------------------
@@ -63,7 +57,7 @@ def SideBarLinks(show_home=False):
     """
 
     # add a logo to the sidebar always
-    st.sidebar.image("assets/logo.png", width=150)
+    st.sidebar.image("assets/compass.png", width=150)
 
     # If there is no logged in user, redirect to the Home (Landing) page
     if "authenticated" not in st.session_state:
@@ -77,20 +71,21 @@ def SideBarLinks(show_home=False):
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
 
-        # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state["role"] == "pol_strat_advisor":
-            PolStratAdvHomeNav()
-            WorldBankVizNav()
-            MapDemoNav()
+        # If the user role is a mentee_student
+        if st.session_state["role"] == "mentee_student":
+            menteeHomeNav()
 
-        # If the user role is usaid worker, show the Api Testing page
-        if st.session_state["role"] == "usaid_worker":
-            PredictionNav()
-            ApiTestNav()
-            ClassificationNav()
+        # If the user role is mentor student 
+        if st.session_state["role"] == "mentor_student":
+            mentor_student_home()
 
-        # If the user is an administrator, give them access to the administrator pages
+
+        # If the user is an IT administrator
         if st.session_state["role"] == "administrator":
+            AdminPageNav()
+
+        # If the user is a Global Experience Staff Member
+        if st.session_state["role"] == "GESM":
             AdminPageNav()
 
     # Always show the About page at the bottom of the list of links
