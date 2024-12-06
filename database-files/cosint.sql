@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS users
   major varchar(50),
   year varchar(15),
   birthday date,
-  profilePic varchar(150),
+  profilePic varchar(1000),
   role varchar(50),
   studentId varchar(15) UNIQUE,
   mobile varchar(50),
