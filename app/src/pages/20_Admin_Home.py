@@ -11,7 +11,24 @@ SideBarLinks()
 
 st.title('System Admin Home Page')
 
-if st.button('Update ML Models', 
+st.write(f"### Welcome, {st.session_state['first_name']}!")
+st.write('')
+st.write('')
+st.write('### What would you like to do today?')
+
+if st.button('See Tickets', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/21_ML_Model_Mgmt.py')
+  st.switch_page('pages/43_See_Tickets.py')
+
+if st.button('See All Users', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/44_See_All_Users.py')
+
+if st.button('Admin Profile', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/42_Admin_Profile.py')
+
+st.write('\n\n')
